@@ -2,25 +2,21 @@ import java.util.Arrays;
 import java.util.Set;
 import java.util.HashSet;
 import java.util.Collections;
-import java.io.File;
+
 
 void settings() {
     fullScreen();
     // size(1024, 1024);
 }
 
-// !! IMPLEMENT DUMMY/ILLEGAL NODES
+// !! IMPLEMENT BETTER PATHFINDING
+// !! IMPLEMENT COMPARABLE CLASS (REPLACEMENT FOR PVECTOR)
+// * the above goals are way too difficult for me to implement here, so i'll move on to GDScript now.
 
-final int HEIGHT_LIMIT = height;
-// Integer[] x_points = new Integer[]{ 30, 30, 30, 50, 50, 50, 70, 70, 70, 90, 90, 90, 110, 110, 110};
-// Integer[] y_points = new Integer[]{ 20, 40, 60, 20, 40, 60, 20, 40, 60, 20, 40, 60, 20, 40, 60};
-// Integer[] x_points = new Integer[]{ 30, 30, 30, 30, 50, 50, 50, 50, 50, 70, 70, 70, 70, 70, 90, 90, 90, 90, 90, 110, 110, 110, 110, 110, 130, 120, 130, 130, 150, 150};
-// Integer[] y_points = new Integer[]{ 40, 60, 80, 100, 20, 40, 60, 80, 100, 20, 40, 60, 80, 100, 20, 40, 60, 80, 100, 40, 60, 120, 80, 100, 60, 100, 120, 80, 80, 60};
-// Integer[] x_points = new Integer[]{ 100, 120, 120, 140, 140, 120, 120, 100, 100, 80, 80, 100};
-// Integer[] y_points = new Integer[]{ 10, 10, 30, 30, 50, 50, 70, 70, 50, 50, 30, 30};
-Integer[] x_points = new Integer[]{ };
-Integer[] y_points = new Integer[]{ };
-ArrayList<PVector> points = new ArrayList<>();
+
+
+ArrayList<PVector> points = new ArrayList<>(); // points on grid
+HashMap<PVector, ArrayList<PVector>> edges = new HashMap<>(); // edges in grid, with a from and to vector
 ArrayList<PVector> op = new ArrayList<>(); // outer points
 ArrayList<PVector> closest = new ArrayList<>(); // points closer to target
 ArrayList<PVector> dummy = new ArrayList<>(); // points not allowed to be drawn on or connected to
@@ -30,9 +26,8 @@ Set<PVector> tba = new HashSet<>(); // points To Be Added (for drawing)
 ArrayList<PVector> tbr = new ArrayList<>(); // points To Be Removed (for eraser)
 Set<PVector> tbad = new HashSet<>(); // points To Be Added (Dummy points)
 ArrayList<PVector> tbrd = new ArrayList<>(); // points To Be Removed (Dummy points)
-int gap = 20; // grid size
+int gap = 32; // grid size
 int tx, ty;
-int highest = Integer.MIN_VALUE, lowest = Integer.MAX_VALUE;
 color mColour_E = color(255, 100, 0); // eraser colour
 color mColour_D = color(0, 100, 255); // drawing colour
 color mColour = color(0, 100, 255); // current colour (defaults to drawing)
@@ -46,106 +41,53 @@ PImage infection;
 PVector target = new PVector();
 boolean targetFollow = false;
 boolean debug = false; // show debug info
+boolean ctrl = false; // is CTRL being pressed?
 int rLowerBound = 5, rMiddleBound = 10, rUpperBound = 100; // probability boundaries
 int maxClosestPoints = 64; // max points allowed to spread
+int grid_interval = 1; // choose which points are allowed to spread along this interval
+int pgi = 1; // previous grid interval
 
 void setup() {
-    frameRate(240);
-    infection = loadImage("Infection.png");
-    for (int i = 0; i < x_points.length; i++) {
-        points.add(new PVector(x_points[i], y_points[i]));
-    }
+    // frameRate(240);
     
     // spawn point. all other points spawn from here.
-    points.add(new PVector(roundToN((int)width / 2, gap), roundToN((int)2 * height / 3, gap)));
-    op.add(new PVector(roundToN((int)width / 2, gap), roundToN((int)2 * height / 3, gap)));
+    // points.add(new PVector(roundToN((int)width / 2, gap), roundToN((int)2 * height / 3, gap)));
     
     // target point. all points will prefer heading towards this point over others
-    target = new PVector(roundToN((int)width / 5, gap), roundToN((int)height / 5, gap));
-    // target = new PVector(roundToN(mouseX, gap), roundToN(mouseY, gap));
+    target = new PVector(roundToN((int)width / 10, gap), roundToN((int)height / 3, gap));
 }
 
 void draw() {
     background(0);
     if (targetFollow) target = new PVector(roundToN(mouseX, gap), roundToN(mouseY, gap));
-    // else target = target;
     
     strokeWeight(3);
     fill(255,255,255);
     stroke(255);
-
     
     // boundary checks
     checkBoundary(points, op, gap);
-    // ArrayList<PVector> tpoints = new ArrayList<>(points);
-    // for (PVector p : tpoints) {
-    //     if (op.size() >= maxClosestPoints && !op.contains(p) && filled.size() > 0 && !filled.containsKey(p)) points.remove(p);
-    // }
-    
-    // PVector tpv = new PVector(10+gap*round(random(0, 200)/5), gap*round(random(0, 200)/5));
-    // if (!points.contains(tpv)) points.add(tpv);
     
     // Spread controller.
     // Picks a random vector and creates a new point adjacent to it, pathfinding towards the target.
     if (!points.isEmpty()) {
-        // if (!true) {
-        PVector tpv = new PVector();
-        if (!closest.isEmpty()) tpv = closest.get((int)random(0, closest.size()));
-        else tpv = points.get((int)random(0, points.size()));
-        int rnd_dir_x = (int)random(0, rUpperBound);
-        int rnd_dir_y = (int)random(0, rUpperBound);
-        int amnt_x = 0, amnt_y = 0;
-        
-        if (rnd_dir_x <= rLowerBound) {
-            if (rnd_dir_x % 2 == 0) amnt_x = gap;
-            else amnt_x = 0;
-        } else if (rnd_dir_x <= rMiddleBound) {
-            amnt_x = -gap;
-        } else {
-            if (target.x >= tpv.x) amnt_x = gap;
-            else amnt_x = -gap;
-        }
-        
-        if (rnd_dir_y <= rLowerBound) {
-            if (rnd_dir_y % 2 == 0) amnt_y = gap;
-            else amnt_y = 0;
-        } else if (rnd_dir_y <= rMiddleBound) {
-            amnt_y = -gap;
-        } else {
-            if (target.y >= tpv.y) amnt_y = gap;
-            else amnt_y = -gap;
-        }
-        
-        
-        PVector npv = new PVector(roundToN((int)(tpv.x + amnt_x), gap), roundToN((int)(tpv.y + amnt_y), gap));
-        // println("npv: "+npv);
-        if (!points.contains(npv)) {
-            // println("npv: "+npv);
-            highest = (int)max(highest, npv.y);
-            lowest = (int)min(lowest, npv.y);
-            // println("highest: " + highest);
-            // println("lowest: " + lowest);
-            // op.add(npv);
-            // op.remove(tpv);
-            points.add(npv);
-        }
+        // if (op.isEmpty()) points = new ArrayList<>(pathfind(points, closest, target));
+        // else {
+        //     points = new ArrayList<>(bfsfull(edges, points, target));
+        // }
+        points = new ArrayList<>(pathfind(points, closest, target));
     }    
+
+    if (points.contains(target)) grid_interval = min(grid_interval * 16, 512); // slow down if target is found
+    else grid_interval = pgi;
     
     // recalculate the k nearest points to the target
     closest = findClosestPoints(op, target, maxClosestPoints);
-    
     
     // draw the points to the screen
     fill(255,255,255);
     stroke(255,255,255);
     strokeWeight(1);
-    // for (int i = 0; i < points.size(); i++) {
-    //     ellipse(points.get(i).x, points.get(i).y, 5, 5);
-    // }
-    // for (int i = 0; i < op.size(); i++) {
-    //     ellipse(op.get(i).x, op.get(i).y, 5, 5);
-// }
-    
     
     // draw the squares at points in the array points to the screen
     noStroke();
@@ -158,6 +100,9 @@ void draw() {
             points.contains(new PVector(pv.x + gap, pv.y + gap)) && 
             points.contains(new PVector(pv.x + gap, pv.y)) && 
             points.contains(new PVector(pv.x, pv.y + gap)) && 
+            // dummy.contains(new PVector(pv.x + gap, pv.y + gap)) && 
+            // dummy.contains(new PVector(pv.x + gap, pv.y)) && 
+            // dummy.contains(new PVector(pv.x, pv.y + gap)) && 
             !filled.containsKey(pv)
            ){
             // rect(pv.x, pv.y, gap, gap);
@@ -169,43 +114,63 @@ void draw() {
         }
     }
     
-    // points = new ArrayList<>(fill_nec);
-    
     for (PVector p : filled.keySet()) {
-        fill(filled.get(p).x, filled.get(p).y, filled.get(p).z, 200);
-        image(infection, p.x, p.y, gap, gap);
-        rect(p.x, p.y, gap, gap);
+        if (p.x <= width - gap && p.x >= 0 && p.y <= height - gap && p.y >= 0) {
+            fill(filled.get(p).x, filled.get(p).y, filled.get(p).z, 200 * int(!debug));
+            // image(infection, p.x, p.y, gap, gap);
+            rect(p.x, p.y, gap, gap);
+        }
     }
     
+    // for (PVector p : points) {
+    //     if (p.x <= width - gap && p.x >= 0 && p.y <= height - gap && p.y >= 0) {
+    //         fill(255,0,0);
+    //         if (debug) ellipse(p.x, p.y, 10, 10);
+    //     }
+    // }
+    
     for (PVector p : op) {
-        fill(255,0,0);
-        // ellipse(p.x, p.y, 10, 10);
+        if (p.x <= width - gap && p.x >= 0 && p.y <= height - gap && p.y >= 0) {
+            fill(255,0,0);
+            if (debug) ellipse(p.x, p.y, 10, 10);
+        }
     }
     
     for (PVector p : closest) {
-        fill(0,0,255);
-        // ellipse(p.x, p.y, 11, 11);
+        if (p.x <= width - gap && p.x >= 0 && p.y <= height - gap && p.y >= 0) {
+            fill(0,0,255);
+            if (debug) ellipse(p.x, p.y, 11, 11);
+        }
     }
     
     for (PVector p : dummy) {
-        fill(255,160,0);
-        ellipse(p.x, p.y, 11, 11);
+        if (p.x <= width - gap && p.x >= 0 && p.y <= height - gap && p.y >= 0) {
+            fill(255,160,0);
+            ellipse(p.x, p.y, 11, 11);
+        }
     }
     
     // target point
     fill(0,255,0);
     ellipse(target.x, target.y, 30, 30);
-
+    
     // temporarily draw all points using the mColour_D colour
     for (PVector p : tba) {
         fill(mColour);
         ellipse(p.x, p.y, 5, 5);
     }
-
+    
     // temporarily draw all dummy points 
     for (PVector p : tbad) {
         fill(180, 0, 0);
         ellipse(p.x, p.y, 5, 5);
+    }
+    
+    for (PVector from : edges.keySet()) {
+        for (PVector to : edges.get(from)) {
+            stroke(10, 255, 40);
+            line(from.x, from.y, to.x, to.y);
+        }
     }
     
     if (tbr.size() > eraserThreshold) tbr.clear();
@@ -214,11 +179,15 @@ void draw() {
     if (eraserMode) {
         mColour = mColour_E;
         promptText = "Press 'C' to switch to drawing mode.";
-    }
-    else {
+    } else {
         mColour = mColour_D;
         promptText = "Press 'C' to switch to eraser mode.";
     }
+    
+    noStroke();
+    float txtsz = sqrt((width * width) + (height * height)) / 150;
+    float debug_start_x = width - width / 12;
+    float debug_start_y = (height / 60) + 5;
     
     // mouse indicator
     fill(mColour, mOpacity);
@@ -226,28 +195,44 @@ void draw() {
     
     // textboxes
     fill(128, 0, 0);
-    rect(0, height - height / 16, width / 5, height);
-    rect(0, 0, width / 8, height / 20);
+    rect(0, height - height / 10, width / 5, height);
     
     // text
     fill(255);
-    textSize(sqrt((width * width) + (height * height)) / 150);
-    text(promptText, width / 25, height - height / 35); // prompt text - pen/eraser mode
-    text("Press 'Q' to toggle target follow: " + (targetFollow ? "ON" : "OFF"), width / 25, height - height / 70); // prompt text - target follow
-    text("Press 'D' to toggle dummy mode: " + (dummyMode ? "ON" : "OFF"), width / 25, height - height / 23); // prompt text - dummy mode
-
+    textSize(txtsz);
+    text("Press 'Q' to toggle target follow: " + (targetFollow ? "ON" : "OFF"), 
+        width  - debug_start_x - txtsz * 10, height - debug_start_y - txtsz * 5); // prompt text - target follow
+    text("Press 'D' to toggle dummy mode: " + (dummyMode ? "ON" : "OFF"), 
+        width  - debug_start_x - txtsz * 10, height - debug_start_y - txtsz * 4); // prompt text - dummy mode
+    text("Press 'A' to increase search range and 'S' to decrease.", 
+        width  - debug_start_x - txtsz * 10, height - debug_start_y - txtsz * 3); // prompt text - maxClosestPoints
+    text("Press 'K' to increase search speed and 'L' to decrease.", 
+        width  - debug_start_x - txtsz * 10, height - debug_start_y - txtsz * 2); // prompt text - grid_interval
+    text(promptText, width  - debug_start_x - txtsz * 10, height - debug_start_y - txtsz); // prompt text - pen/eraser mode
+    
     if (debug) {
-        text("FPS: " + round(frameRate), width / 25, height / 35); // fps
-        text("Points: " + points.size(), width - width / 15, height / 60); // points
-        text("Edge Points: " + op.size(), width - width / 15, height / 35); // bounding points
-        text("Seeking Points: " + closest.size(), width - width / 15, height / 25); // (bounding) points that can spread
-        text("Mouse: ", width - width / 15, height / 18.5); // mouse coordinates   
-        text("X: " + roundToN(mouseX, gap) + "    Y: " + roundToN(mouseY, gap), width - width / 19, height / 15); // mouse coordinates   
-        text("Target: ", width - width / 15, height / 12); // target coordinates   
-        text("X: " + roundToN((int)target.x, gap) + "    Y: " + roundToN((int)target.y, gap), width - width / 19, height / 10); // target coordinates 
+        text("Points: " + points.size(), debug_start_x, debug_start_y); // points
+        text("Edge Points: " + op.size(), debug_start_x, debug_start_y + txtsz); // bounding points
+        text("Seeking Points: " + closest.size(), debug_start_x, debug_start_y + txtsz * 2); // (bounding) points that can spread
+        text("Mouse: ", debug_start_x, debug_start_y + txtsz * 3); // mouse coordinates   
+        text("X: " + roundToN(mouseX, gap) + "    Y: " + roundToN(mouseY, gap), debug_start_x + txtsz, debug_start_y + txtsz * 4); // mouse coordinates   
+        text("Target: ", debug_start_x, debug_start_y + txtsz * 5); // target coordinates   
+        // target coordinates 
+        text("X: " + roundToN((int)target.x, gap) + "    Y: " + roundToN((int)target.y, gap), debug_start_x + txtsz, debug_start_y + txtsz * 6); 
+        text("FPS: " + round(frameRate), debug_start_x, debug_start_y + txtsz * 7); // fps
+        text("Seek Speed: " + (int)(100 * (1.0 / grid_interval)) + "%", debug_start_x, debug_start_y + txtsz * 8); // seeking speed
+        text("Eraser Mode: " + eraserMode, debug_start_x, debug_start_y + txtsz * 9); // eraser mode
+        text("Dummy Mode: " + dummyMode, debug_start_x, debug_start_y + txtsz * 10); // dummy mode
+        text("Target Follow: " + targetFollow, debug_start_x, debug_start_y + txtsz * 11); // target follow
+        text("Edges: " + edges.size(), debug_start_x, debug_start_y + txtsz * 12); // target follow
     }
-
-    op.clear(); // reset outer edges and points to be recalculated on every loop  
+    
+    // points = new ArrayList<>(op);
+    // points.removeAll(op);
+    
+    // reset outer edges and points to be recalculated on every loop  
+    edges.clear(); 
+    op.clear(); 
 }
 
 boolean findVectorInArray(ArrayList<PVector> arr, PVector target) {
@@ -278,7 +263,7 @@ int roundToN(int x, int n) {
 
 void mouseDragged() {
     // println("mouseX: " + mouseX + "\nmouseY: " + mouseY);
-    println("points " + points.size() + "\nouter points: " + op.size() + "\nfilled squares: " + filled.size());
+    // println("points " + points.size() + "\nouter points: " + op.size() + "\nfilled squares: " + filled.size());
     mOpacity = 255;
     
     if (eraserMode) {
@@ -299,17 +284,18 @@ void mouseDragged() {
             
             points.removeAll(tbr);
             op.removeAll(tbr);
-            for (PVector p : tbr) {
-                filled.remove(p);
-            }
+            filled.keySet().removeAll(tbr);
+            edges.keySet().removeAll(tbr);
+            // for (PVector p : tbr) {
+            //     filled.remove(p);
+        // }
         }
     } else {
         if (dummyMode) tbad.add(new PVector(roundToN(mouseX, gap), roundToN(mouseY, gap)));
-        else tba.add(new PVector(roundToN(mouseX, gap), roundToN(mouseY, gap)));
-    }
-    
-    
-    
+        else {
+            tba.add(new PVector(roundToN(mouseX, gap), roundToN(mouseY, gap)));
+        }
+    }   
 }
 
 void mouseReleased() {
@@ -320,6 +306,9 @@ void mouseReleased() {
     tbrd.clear();
     dummy.addAll(tbad);
     tbad.clear();
+    for (PVector p : points) {
+        if (filled.containsKey(p)) filled.remove(p);
+    }
 }
 
 
@@ -329,18 +318,28 @@ void keyPressed() {
     } else if (key == 'd' || key == 'D') {
         dummyMode = !dummyMode;
     } else if (key == 'q' || key == 'Q') {
-        targetFollow = ! targetFollow;
+        targetFollow = !targetFollow;
     } else if (key == 'a' || key == 'A') {
-        maxClosestPoints = min(maxClosestPoints*2, 256);
+        maxClosestPoints = min(maxClosestPoints * 2, 1024); // increase
     } else if (key == 's' || key == 'S') {
-        maxClosestPoints = max(maxClosestPoints/2, 2);
+        maxClosestPoints = max(maxClosestPoints / 2, 2); // decrease
+    } else if (key == 'l' || key == 'L') {
+        grid_interval = min(grid_interval * 2, 256); // slow down
+        pgi = grid_interval;
+    } else if (key == 'k' || key == 'K') {
+        grid_interval = max(grid_interval / 2, 1); // speed up
+        pgi = grid_interval;
+    } else if (keyCode == CONTROL) {
+        ctrl = true;
     } else if (keyCode == DELETE) {
+        if (ctrl) {
+            dummy.clear();
+        }
         points.clear();
         op.clear();
         filled.clear();
         closest.clear();
         fill_nec.clear();
-        dummy.clear();
         // tbrd.clear();
         // tbad.clear();
     } else if (keyCode == ENTER || keyCode == RETURN) {
@@ -372,6 +371,10 @@ void keyPressed() {
     }
 }
 
+void keyReleased() {
+    if (keyCode == CONTROL) ctrl = false;
+}
+
 
 // given a group of points and a target point, find the k closest points to the target
 ArrayList<PVector> findClosestPoints(ArrayList<PVector> pts, PVector target, int k) {
@@ -384,11 +387,8 @@ ArrayList<PVector> findClosestPoints(ArrayList<PVector> pts, PVector target, int
         if (entered >= k) {
             // if array is full
             float m = Collections.max(dists);
-            // println("m: "+m);
             if (p.dist(target) < m) {
-                // println("m: "+m);
                 int ti = dists.indexOf(m);
-                // println("ti: "+ti);
                 dists.remove(m);
                 tp.remove(ti);
                 entered = k - 1;
@@ -398,16 +398,29 @@ ArrayList<PVector> findClosestPoints(ArrayList<PVector> pts, PVector target, int
         dists.add(p.dist(target));
         entered += 1;
     }
-    // println("entered: "+entered);
-    // println("size: "+tp.size());
+    
     return tp;
+}
+
+void refreshPointsOnRelease(ArrayList<PVector> pts) {
+    for (PVector p : pts) {
+        if (filled.containsKey(p)) filled.remove(p);
+    }
+}
+
+
+// all adjacent points as dictated by the map of edges
+ArrayList<PVector> adj(PVector v, HashMap<PVector, ArrayList<PVector>> e) {
+    return e.get(v);
 }
 
 
 void checkBoundary(ArrayList<PVector> pts, ArrayList<PVector> bp, int grid_distance) {
     for (int i = 0; i < pts.size(); i++) {
-        int tx = (int)pts.get(i).x;
-        int ty = (int)pts.get(i).y;
+        PVector tpv = pts.get(i);
+        int tx = (int)tpv.x;
+        int ty = (int)tpv.y;
+        ArrayList<PVector> tos;
         
         if (
             // +hor and +ver line check
@@ -420,9 +433,21 @@ void checkBoundary(ArrayList<PVector> pts, ArrayList<PVector> bp, int grid_dista
            (findVectorInArray(pts, new PVector(tx - grid_distance, ty - grid_distance))) && 
            (findVectorInArray(pts, new PVector(tx - grid_distance, ty + grid_distance)))
            ) {
-            // line(tx, ty, tx, ty + grid_distance); // down
-            // line(tx, ty, tx + grid_distance, ty); // right
-            if (!bp.contains(new PVector(tx, ty))) bp.add(new PVector(tx, ty));
+            if (tx <= width - gap && tx >= 0 && ty <= height - gap && ty >= 0) {
+                if (debug) {
+                    line(tx, ty, tx, ty + grid_distance); // down
+                    line(tx, ty, tx + grid_distance, ty); // right
+                }
+                if (!bp.contains(tpv)) bp.add(tpv);
+                if (!edges.containsKey(tpv)) {
+                    tos = new ArrayList<>();
+                } else {
+                    tos = edges.get(tpv);
+                }
+                tos.add(new PVector(tx, ty + grid_distance));
+                tos.add(new PVector(tx + grid_distance, ty));
+                edges.put(tpv, tos);
+            }
         }
         if (
             // +hor and -ver line check
@@ -435,9 +460,21 @@ void checkBoundary(ArrayList<PVector> pts, ArrayList<PVector> bp, int grid_dista
            (findVectorInArray(pts, new PVector(tx - grid_distance, ty - grid_distance))) && 
            (findVectorInArray(pts, new PVector(tx - grid_distance, ty + grid_distance)))
            ) {
-            // line(tx, ty, tx, ty - grid_distance); // up
-            // line(tx, ty, tx + grid_distance, ty); // right
-            if (!bp.contains(new PVector(tx, ty))) bp.add(new PVector(tx, ty));
+            if (tx <= width - gap && tx >= 0 && ty <= height - gap && ty >= 0) {
+                if (debug) {
+                    line(tx, ty, tx, ty - grid_distance); // up
+                    line(tx, ty, tx + grid_distance, ty); // right
+                }
+                if (!bp.contains(tpv)) bp.add(tpv);
+                if (!edges.containsKey(tpv)) {
+                    tos = new ArrayList<>();
+                } else {
+                    tos = edges.get(tpv);
+                }
+                tos.add(new PVector(tx, ty - grid_distance));
+                tos.add(new PVector(tx + grid_distance, ty));
+                edges.put(tpv, tos);
+            }
         }
         if (
             // -hor and +ver line check
@@ -450,9 +487,21 @@ void checkBoundary(ArrayList<PVector> pts, ArrayList<PVector> bp, int grid_dista
            (findVectorInArray(pts, new PVector(tx - grid_distance, ty - grid_distance))) && 
            (findVectorInArray(pts, new PVector(tx + grid_distance, ty - grid_distance)))
            ) {
-            // line(tx, ty, tx, ty + grid_distance); // down
-            // line(tx, ty, tx - grid_distance, ty); // left
-            if (!bp.contains(new PVector(tx, ty))) bp.add(new PVector(tx, ty));
+            if (tx <= width - gap && tx >= 0 && ty <= height - gap && ty >= 0) {
+                if (debug) {
+                    line(tx, ty, tx, ty + grid_distance); // down
+                    line(tx, ty, tx - grid_distance, ty); // left
+                }
+                if (!bp.contains(tpv)) bp.add(tpv);
+                if (!edges.containsKey(tpv)) {
+                    tos = new ArrayList<>();
+                } else {
+                    tos = edges.get(tpv);
+                }
+                tos.add(new PVector(tx, ty + grid_distance));
+                tos.add(new PVector(tx - grid_distance, ty));
+                edges.put(tpv, tos);
+            }
         }
         if (
             // -hor and -ver line check
@@ -465,24 +514,48 @@ void checkBoundary(ArrayList<PVector> pts, ArrayList<PVector> bp, int grid_dista
            (findVectorInArray(pts, new PVector(tx - grid_distance, ty + grid_distance))) && 
            (findVectorInArray(pts, new PVector(tx + grid_distance, ty - grid_distance)))
            ) {
-            // line(tx, ty, tx, ty - grid_distance); // up
-            // line(tx, ty, tx - grid_distance, ty); // left
-            if (!bp.contains(new PVector(tx, ty))) bp.add(new PVector(tx, ty));
+            if (tx <= width - gap && tx >= 0 && ty <= height - gap && ty >= 0) {
+                if (debug) {
+                    line(tx, ty, tx, ty - grid_distance); // up
+                    line(tx, ty, tx - grid_distance, ty); // left
+                }
+                if (!bp.contains(tpv)) bp.add(tpv);
+                if (!edges.containsKey(tpv)) {
+                    tos = new ArrayList<>();
+                } else {
+                    tos = edges.get(tpv);
+                }
+                tos.add(new PVector(tx, ty - grid_distance));
+                tos.add(new PVector(tx - grid_distance, ty));
+                edges.put(tpv, tos);
+            }
         }
         if (
             // extra check
            (findVectorInArray(pts, new PVector(tx - grid_distance, ty - grid_distance))) && 
            (findVectorInArray(pts, new PVector(tx - grid_distance, ty))) && 
            (findVectorInArray(pts, new PVector(tx, ty - grid_distance))) && 
-           (findVectorInArray(pts, new PVector(tx + grid_distance, ty-grid_distance))) && 
-           (findVectorInArray(pts, new PVector(tx - grid_distance, ty+grid_distance))) &&
+           (findVectorInArray(pts, new PVector(tx + grid_distance, ty - grid_distance))) && 
+           (findVectorInArray(pts, new PVector(tx - grid_distance, ty + grid_distance))) && 
            (!findVectorInArray(pts, new PVector(tx + grid_distance, ty))) && 
-           (!findVectorInArray(pts, new PVector(tx + grid_distance, ty+grid_distance))) && 
-           (!findVectorInArray(pts, new PVector(tx, ty+grid_distance))) 
+           (!findVectorInArray(pts, new PVector(tx + grid_distance, ty + grid_distance))) && 
+           (!findVectorInArray(pts, new PVector(tx, ty + grid_distance))) 
            ) {
-            // line(tx, ty, tx, ty - grid_distance); // up
-            // line(tx, ty, tx - grid_distance, ty); // left
-            if (!bp.contains(new PVector(tx, ty))) bp.add(new PVector(tx, ty));
+            if (tx <= width - gap && tx >= 0 && ty <= height - gap && ty >= 0) {
+                if (debug) {
+                    line(tx, ty, tx, ty - grid_distance); // up
+                    line(tx, ty, tx - grid_distance, ty); // left
+                }
+                if (!bp.contains(tpv)) bp.add(tpv);
+                if (!edges.containsKey(tpv)) {
+                    tos = new ArrayList<>();
+                } else {
+                    tos = edges.get(tpv);
+                }
+                tos.add(new PVector(tx, ty - grid_distance));
+                tos.add(new PVector(tx - grid_distance, ty));
+                edges.put(tpv, tos);
+            } 
         }
         if (
             // verticals check
@@ -490,9 +563,18 @@ void checkBoundary(ArrayList<PVector> pts, ArrayList<PVector> bp, int grid_dista
            (findVectorInArray(pts, new PVector(tx + grid_distance, ty)) ^
             findVectorInArray(pts, new PVector(tx - grid_distance, ty)))
            ) {
-            // line(tx, ty, tx, ty + grid_distance); // down
-            if (!bp.contains(new PVector(tx, ty))) bp.add(new PVector(tx, ty));
-            if (!bp.contains(new PVector(tx, ty + grid_distance))) bp.add(new PVector(tx, ty + grid_distance));
+            if (tx <= width - gap && tx >= 0 && ty <= height - gap && ty >= 0) {
+                if (debug) line(tx, ty, tx, ty + grid_distance); // down
+                if (!bp.contains(tpv)) bp.add(tpv);
+                if (!bp.contains(new PVector(tx, ty + grid_distance))) bp.add(new PVector(tx, ty + grid_distance));
+                if (!edges.containsKey(tpv)) {
+                    tos = new ArrayList<>();
+                } else {
+                    tos = edges.get(tpv);
+                }
+                tos.add(new PVector(tx, ty + grid_distance));
+                edges.put(tpv, tos);
+            }
         }
         if (
             // horiontals check
@@ -500,9 +582,65 @@ void checkBoundary(ArrayList<PVector> pts, ArrayList<PVector> bp, int grid_dista
            (findVectorInArray(pts, new PVector(tx, ty + grid_distance)) ^
             findVectorInArray(pts, new PVector(tx, ty - grid_distance)))
            ) {
-            // line(tx, ty, tx + grid_distance, ty); // right
-            if (!bp.contains(new PVector(tx, ty))) bp.add(new PVector(tx, ty));
-            if (!bp.contains(new PVector(tx + grid_distance, ty))) bp.add(new PVector(tx + grid_distance, ty));
-        }   
+            if (tx <= width - gap && tx >= 0 && ty <= height - gap && ty >= 0) {
+                if (debug) line(tx, ty, tx + grid_distance, ty); // right
+                if (!bp.contains(tpv)) bp.add(tpv);
+                if (!bp.contains(new PVector(tx + grid_distance, ty))) bp.add(new PVector(tx + grid_distance, ty));
+                if (!edges.containsKey(tpv)) {
+                    tos = new ArrayList<>();
+                } else {
+                    tos = edges.get(tpv);
+                }
+                tos.add(new PVector(tx + grid_distance, ty));
+                edges.put(tpv, tos);
+            }   
+        }
     }
 }
+
+
+// givenan array of points and preferred points, create a path towards a given target
+ArrayList<PVector> pathfind(ArrayList<PVector> pts, ArrayList<PVector> pref, PVector tgt) {
+    ArrayList<PVector> tpvs, npt;
+    if (!pref.isEmpty()) tpvs = new ArrayList<>(pref);
+    else tpvs = new ArrayList<>(pts);
+    int tpvi = 0;
+    for (PVector tpv : tpvs) {
+        if (grid_interval > 0 && tpvi % min(grid_interval, tpvs.size()) == 0) {
+            int rnd_dir_x = (int)random(0, rUpperBound);
+            int rnd_dir_y = (int)random(0, rUpperBound);
+            int amnt_x = 0, amnt_y = 0;
+            
+            if (rnd_dir_x <= rLowerBound) {
+                if (rnd_dir_x % 2 == 0) amnt_x = gap;
+                else amnt_x = 0;
+            } else if (rnd_dir_x <= rMiddleBound) {
+                amnt_x =-  gap;
+            } else {
+                if (tgt.x >= tpv.x) amnt_x = gap;
+                else amnt_x = -gap;
+            }
+            
+            if (rnd_dir_y <= rLowerBound) {
+                if (rnd_dir_y % 2 == 0) amnt_y = gap;
+                else amnt_y = 0;
+            } else if (rnd_dir_y <= rMiddleBound) {
+                amnt_y =-  gap;
+            } else {
+                if (tgt.y >= tpv.y) amnt_y = gap;
+                else amnt_y = -gap;
+            }
+
+            
+            PVector npv = new PVector(roundToN((int)(tpv.x + amnt_x), gap), roundToN((int)(tpv.y + amnt_y), gap));
+            // if (!pts.contains(npv) && dummy.contains(npv)) {
+            if (!pts.contains(npv) && !dummy.contains(npv)) {
+                pts.add(npv);
+            }
+        }
+        tpvi++;
+    }
+    return pts;
+}
+
+
