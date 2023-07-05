@@ -1,0 +1,186 @@
+[gd_scene load_steps=21 format=2]
+
+[ext_resource path="res://Assets/Chess Board/chessboard_1024.png" type="Texture" id=1]
+[ext_resource path="res://Scripts/Board.gd" type="Script" id=2]
+[ext_resource path="res://Assets/Chess Board/hoverbox.png" type="Texture" id=3]
+[ext_resource path="res://Assets/Chess Board/chessboard_1024_labels.png" type="Texture" id=4]
+[ext_resource path="res://Assets/Fonts/Futura Extra Black font.ttf" type="DynamicFontData" id=5]
+[ext_resource path="res://Assets/bitmap.png" type="Texture" id=6]
+[ext_resource path="res://Assets/Fonts/futura light bt.ttf" type="DynamicFontData" id=7]
+[ext_resource path="res://Assets/blank.png" type="Texture" id=8]
+[ext_resource path="res://Assets/Chess Board/quit_button_normal.png" type="Texture" id=9]
+[ext_resource path="res://Assets/Chess Board/quit_button_pressed.png" type="Texture" id=10]
+[ext_resource path="res://Assets/Chess Board/restart_button_normal.png" type="Texture" id=11]
+[ext_resource path="res://Assets/Chess Board/restart_button_pressed.png" type="Texture" id=12]
+[ext_resource path="res://Assets/Fonts/futur.ttf" type="DynamicFontData" id=13]
+
+[sub_resource type="DynamicFont" id=7]
+size = 24
+font_data = ExtResource( 13 )
+
+[sub_resource type="DynamicFont" id=1]
+size = 59
+use_mipmaps = true
+font_data = ExtResource( 5 )
+
+[sub_resource type="DynamicFont" id=2]
+size = 50
+use_mipmaps = true
+font_data = ExtResource( 7 )
+
+[sub_resource type="DynamicFont" id=3]
+size = 30
+font_data = ExtResource( 5 )
+
+[sub_resource type="DynamicFont" id=5]
+size = 40
+font_data = ExtResource( 5 )
+
+[sub_resource type="DynamicFont" id=6]
+size = 35
+font_data = ExtResource( 7 )
+
+[sub_resource type="DynamicFont" id=4]
+size = 200
+font_data = ExtResource( 5 )
+
+[node name="Board" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 2 )
+
+[node name="Background" type="TextureRect" parent="."]
+margin_left = 600.0
+margin_top = 116.0
+margin_right = 1688.0
+margin_bottom = 1204.0
+texture = ExtResource( 6 )
+expand = true
+
+[node name="ChessBoard" type="TextureRect" parent="."]
+margin_left = 640.0
+margin_top = 160.0
+margin_right = 1920.0
+margin_bottom = 1440.0
+texture = ExtResource( 1 )
+expand = true
+
+[node name="ChessBoardLabels" type="TextureRect" parent="."]
+margin_left = 640.0
+margin_top = 160.0
+margin_right = 1920.0
+margin_bottom = 1440.0
+texture = ExtResource( 4 )
+expand = true
+
+[node name="HoverBox" type="TextureRect" parent="."]
+visible = false
+margin_right = 40.0
+margin_bottom = 40.0
+texture = ExtResource( 3 )
+
+[node name="MovingPiece" type="CanvasLayer" parent="."]
+layer = 2
+
+[node name="Pieces" type="CanvasLayer" parent="."]
+
+[node name="GUIBanner" type="CanvasLayer" parent="."]
+layer = 3
+visible = false
+
+[node name="Label" type="RichTextLabel" parent="GUIBanner"]
+margin_left = 32.0
+margin_top = 604.0
+margin_right = 578.0
+margin_bottom = 1523.0
+focus_mode = 2
+custom_fonts/normal_font = SubResource( 7 )
+bbcode_enabled = true
+scroll_following = true
+selection_enabled = true
+
+[node name="Turn" type="RichTextLabel" parent="GUIBanner"]
+margin_left = 76.0
+margin_top = 185.0
+margin_right = 422.0
+margin_bottom = 362.0
+focus_mode = 2
+custom_fonts/normal_font = SubResource( 1 )
+bbcode_enabled = true
+scroll_active = false
+selection_enabled = true
+
+[node name="Turn2" type="RichTextLabel" parent="GUIBanner"]
+margin_left = 76.0
+margin_top = 250.0
+margin_right = 267.0
+margin_bottom = 345.0
+custom_fonts/normal_font = SubResource( 2 )
+text = "to move"
+
+[node name="KingCheck" type="RichTextLabel" parent="GUIBanner"]
+margin_left = 2044.0
+margin_top = 341.0
+margin_right = 2480.0
+margin_bottom = 498.0
+custom_fonts/normal_font = SubResource( 3 )
+
+[node name="MovesLabel" type="RichTextLabel" parent="GUIBanner"]
+margin_left = 2000.0
+margin_top = 700.0
+margin_right = 2446.0
+margin_bottom = 1421.0
+custom_fonts/normal_font = SubResource( 5 )
+bbcode_enabled = true
+
+[node name="MovesLabel2" type="RichTextLabel" parent="GUIBanner"]
+margin_left = 2000.0
+margin_top = 640.0
+margin_right = 2123.0
+margin_bottom = 694.0
+custom_fonts/normal_font = SubResource( 6 )
+text = "Moves:"
+
+[node name="MetaBanner" type="CanvasLayer" parent="."]
+layer = 4
+visible = false
+
+[node name="WinBanner" type="TextureRect" parent="MetaBanner"]
+visible = false
+margin_left = -239.0
+margin_top = 563.0
+margin_right = 2924.0
+margin_bottom = 924.0
+texture = ExtResource( 8 )
+expand = true
+
+[node name="Win" type="RichTextLabel" parent="MetaBanner/WinBanner"]
+margin_left = 823.0
+margin_top = 50.0
+margin_right = 2216.0
+margin_bottom = 308.0
+custom_fonts/normal_font = SubResource( 4 )
+bbcode_enabled = true
+scroll_active = false
+
+[node name="RestartButton" type="TextureButton" parent="MetaBanner/WinBanner"]
+margin_left = 1215.0
+margin_top = 280.0
+margin_right = 1343.0
+margin_bottom = 344.0
+disabled = true
+texture_normal = ExtResource( 11 )
+texture_pressed = ExtResource( 12 )
+expand = true
+
+[node name="QuitButton" type="TextureButton" parent="MetaBanner/WinBanner"]
+margin_left = 1516.0
+margin_top = 283.0
+margin_right = 1644.0
+margin_bottom = 347.0
+disabled = true
+texture_normal = ExtResource( 9 )
+texture_pressed = ExtResource( 10 )
+
+[connection signal="pressed" from="MetaBanner/WinBanner/RestartButton" to="." method="_on_RestartButton_pressed"]
+[connection signal="pressed" from="MetaBanner/WinBanner/QuitButton" to="." method="_on_QuitButton_pressed"]

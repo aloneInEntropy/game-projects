@@ -1,0 +1,4 @@
+- [ ] en passant (holy hell)
+- [ ] check check
+- [ ] read full fen string
+- [ ] board to fen string
