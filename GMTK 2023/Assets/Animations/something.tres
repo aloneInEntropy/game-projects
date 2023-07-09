@@ -1,0 +1,121 @@
+[gd_resource type="Animation" format=2]
+
+[resource]
+resource_name = "something"
+length = 2.4
+loop = true
+step = 0.05
+tracks/0/type = "method"
+tracks/0/path = NodePath("TileMap")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.4 ),
+"transitions": PoolRealArray( 1, 1 ),
+"values": [ {
+"args": [ 18, 15, 0, false, false, false, Vector2( 0, 0 ) ],
+"method": "set_cell"
+}, {
+"args": [ 18, 15, 1, false, false, false, Vector2( 0, 0 ) ],
+"method": "set_cell"
+} ]
+}
+tracks/1/type = "method"
+tracks/1/path = NodePath("TileMap")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.4, 0.8 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"values": [ {
+"args": [ 18, 16, 1, false, false, false, Vector2( 0, 0 ) ],
+"method": "set_cell"
+}, {
+"args": [ 18, 16, 0, false, false, false, Vector2( 0, 0 ) ],
+"method": "set_cell"
+}, {
+"args": [ 18, 16, 1, false, false, false, Vector2( 0, 0 ) ],
+"method": "set_cell"
+} ]
+}
+tracks/2/type = "method"
+tracks/2/path = NodePath("TileMap")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.8, 1.2 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"values": [ {
+"args": [ 18, 17, 1, false, false, false, Vector2( 0, 0 ) ],
+"method": "set_cell"
+}, {
+"args": [ 18, 17, 0, false, false, false, Vector2( 0, 0 ) ],
+"method": "set_cell"
+}, {
+"args": [ 18, 17, 1, false, false, false, Vector2( 0, 0 ) ],
+"method": "set_cell"
+} ]
+}
+tracks/3/type = "method"
+tracks/3/path = NodePath("TileMap")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0, 1.2, 1.6 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"values": [ {
+"args": [ 18, 18, 1, false, false, false, Vector2( 0, 0 ) ],
+"method": "set_cell"
+}, {
+"args": [ 18, 18, 0, false, false, false, Vector2( 0, 0 ) ],
+"method": "set_cell"
+}, {
+"args": [ 18, 18, 1, false, false, false, Vector2( 0, 0 ) ],
+"method": "set_cell"
+} ]
+}
+tracks/4/type = "method"
+tracks/4/path = NodePath("TileMap")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0, 1.6, 2 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"values": [ {
+"args": [ 18, 19, 1, false, false, false, Vector2( 0, 0 ) ],
+"method": "set_cell"
+}, {
+"args": [ 18, 19, 0, false, false, false, Vector2( 0, 0 ) ],
+"method": "set_cell"
+}, {
+"args": [ 18, 19, 1, false, false, false, Vector2( 0, 0 ) ],
+"method": "set_cell"
+} ]
+}
+tracks/5/type = "method"
+tracks/5/path = NodePath("TileMap")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0, 2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"values": [ {
+"args": [ 18, 20, 1, false, false, false, Vector2( 0, 0 ) ],
+"method": "set_cell"
+}, {
+"args": [ 18, 20, 0, false, false, false, Vector2( 0, 0 ) ],
+"method": "set_cell"
+} ]
+}
