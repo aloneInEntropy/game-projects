@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://chiqrcav1pe3g"]
+
+[ext_resource type="PackedScene" uid="uid://cp8831bvwwy6t" path="res://Scenes/NPC.tscn" id="1_jh0v3"]
+[ext_resource type="Script" path="res://Scripts/Olivia.cs" id="2_31r4v"]
+
+[node name="Olivia" instance=ExtResource("1_jh0v3")]
+script = ExtResource("2_31r4v")
+
+[node name="CollisionShape2D" parent="InteractBox" index="0"]
+debug_color = Color(0, 0.8, 0.054902, 0.356863)

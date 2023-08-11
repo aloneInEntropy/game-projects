@@ -1,0 +1,84 @@
+[gd_scene load_steps=6 format=3 uid="uid://cqpj6a45n36qi"]
+
+[ext_resource type="Script" path="res://Scripts/DialogueBox.cs" id="1_880yw"]
+[ext_resource type="Texture2D" uid="uid://dm4sql31gsih4" path="res://quad_128.png" id="1_rpggg"]
+[ext_resource type="FontFile" uid="uid://cy02rq8ibiqx8" path="res://Assets/Fonts/futur.ttf" id="2_t8gjk"]
+[ext_resource type="FontFile" uid="uid://brtoretp4o0u6" path="res://Assets/Fonts/Futura Extra Black font.ttf" id="3_1rhln"]
+[ext_resource type="Texture2D" uid="uid://bbm0tycsfjcl" path="res://icon.svg" id="5_f5aep"]
+
+[node name="DialogueBox" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_880yw")
+
+[node name="DBBG" type="TextureRect" parent="."]
+layout_mode = 0
+offset_left = 241.0
+offset_top = 458.0
+offset_right = 719.0
+offset_bottom = 628.0
+texture = ExtResource("1_rpggg")
+expand_mode = 1
+
+[node name="TxtLabel" type="RichTextLabel" parent="."]
+layout_mode = 0
+offset_left = 255.0
+offset_top = 464.0
+offset_right = 706.0
+offset_bottom = 620.0
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+theme_override_fonts/normal_font = ExtResource("2_t8gjk")
+theme_override_fonts/bold_font = ExtResource("3_1rhln")
+theme_override_font_sizes/normal_font_size = 20
+theme_override_font_sizes/bold_font_size = 20
+bbcode_enabled = true
+text = "Hello world"
+fit_content = true
+scroll_active = false
+
+[node name="ChoiceControl" type="Control" parent="."]
+anchors_preset = 0
+offset_left = 777.0
+offset_top = 469.0
+offset_right = 1138.0
+offset_bottom = 644.0
+
+[node name="CBBG" type="TextureRect" parent="ChoiceControl"]
+modulate = Color(0.266667, 0.305882, 0, 1)
+layout_mode = 0
+offset_left = -2.0
+offset_top = -5.0
+offset_right = 224.0
+offset_bottom = 156.0
+texture = ExtResource("1_rpggg")
+expand_mode = 1
+
+[node name="ChoiceLabel" type="RichTextLabel" parent="ChoiceControl"]
+layout_mode = 0
+offset_left = 12.0
+offset_top = 11.0
+offset_right = 191.0
+offset_bottom = 141.0
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+theme_override_fonts/normal_font = ExtResource("2_t8gjk")
+theme_override_fonts/bold_font = ExtResource("3_1rhln")
+theme_override_font_sizes/normal_font_size = 20
+theme_override_font_sizes/bold_font_size = 20
+bbcode_enabled = true
+text = "Hello world"
+fit_content = true
+scroll_active = false
+
+[node name="FinishedMarker" type="TextureRect" parent="."]
+visible = false
+layout_mode = 0
+offset_left = 705.0
+offset_top = 613.0
+offset_right = 716.0
+offset_bottom = 625.0
+texture = ExtResource("5_f5aep")
+expand_mode = 1

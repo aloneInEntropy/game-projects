@@ -1,0 +1,34 @@
+[gd_scene load_steps=5 format=3 uid="uid://cp8831bvwwy6t"]
+
+[ext_resource type="Texture2D" uid="uid://bbm0tycsfjcl" path="res://icon.svg" id="1_3318d"]
+[ext_resource type="Script" path="res://Scripts/NPC.cs" id="1_nkwdv"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_56f24"]
+radius = 50.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_gk8vp"]
+radius = 32.0
+
+[node name="NPC" type="StaticBody2D"]
+modulate = Color(0.709804, 0, 0.270588, 1)
+script = ExtResource("1_nkwdv")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("1_3318d")
+
+[node name="InteractBox" type="Area2D" parent="."]
+collision_layer = 4
+collision_mask = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="InteractBox"]
+shape = SubResource("CircleShape2D_56f24")
+debug_color = Color(0.803922, 0.403922, 0.266667, 0.419608)
+
+[node name="Hitbox" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_gk8vp")
+
+[connection signal="area_entered" from="InteractBox" to="." method="_on_interact_box_area_entered"]
+[connection signal="area_exited" from="InteractBox" to="." method="_on_interact_box_area_exited"]
+[connection signal="body_entered" from="InteractBox" to="." method="_on_interact_box_body_entered"]
+[connection signal="body_exited" from="InteractBox" to="." method="_on_interact_box_body_exited"]

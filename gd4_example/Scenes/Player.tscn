@@ -1,0 +1,37 @@
+[gd_scene load_steps=5 format=3 uid="uid://5tsv2gddtllt"]
+
+[ext_resource type="Script" path="res://Scripts/Player.cs" id="1_1vb4r"]
+[ext_resource type="Texture2D" uid="uid://bbm0tycsfjcl" path="res://icon.svg" id="1_cfy0m"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_yu7id"]
+radius = 32.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_rkrly"]
+radius = 24.0
+
+[node name="Player" type="CharacterBody2D"]
+motion_mode = 1
+script = ExtResource("1_1vb4r")
+_friction = 800.0
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("1_cfy0m")
+
+[node name="InteractBox" type="Area2D" parent="."]
+collision_layer = 4
+collision_mask = 4
+
+[node name="IBColShape" type="CollisionShape2D" parent="InteractBox"]
+shape = SubResource("CircleShape2D_yu7id")
+debug_color = Color(0.905882, 0.294118, 0.231373, 0.419608)
+
+[node name="Hitbox" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_rkrly")
+
+[node name="RayCast2D" type="RayCast2D" parent="."]
+target_position = Vector2(32, 32)
+collision_mask = 5
+
+[connection signal="area_entered" from="InteractBox" to="." method="_on_interact_box_area_entered"]
+[connection signal="area_exited" from="InteractBox" to="." method="_on_interact_box_area_exited"]

@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=3 uid="uid://6wwwvpsqguwa"]
+
+[ext_resource type="Script" path="res://Scripts/GUI.cs" id="1_h7svq"]
+[ext_resource type="PackedScene" uid="uid://cqpj6a45n36qi" path="res://Scenes/DialogueBox.tscn" id="2_5syqh"]
+
+[node name="GUI" type="CanvasLayer"]
+script = ExtResource("1_h7svq")
+
+[node name="MissionText" type="RichTextLabel" parent="."]
+offset_right = 170.0
+offset_bottom = 40.0
+text = "qwerdserf"
+fit_content = true
+scroll_active = false
+
+[node name="DialogueBox" parent="." instance=ExtResource("2_5syqh")]
