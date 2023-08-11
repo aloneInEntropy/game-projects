@@ -16,8 +16,8 @@ Please note that **ALL NUMBERS ARE *ZERO-INDEXED***. Assume that not following t
 `... ||f [function name] [parameter1] [parameter2]`: call function during dialogue\
 `... ||s [signal name] [parameter1] [parameter2]`: call signal during dialogue\
 `... ||f/s [function/signal name] [parameter1] [parameter2]|[function/signal name] [parameter1]`: call multiple functions/signals during dialogue\
-`... ||l [file name] [dialogue number]`: shorthand to load a dialogue file at a specified dialogue number\
-`... ||e`: shorthand to end dialogue after current dialogue is finished
+`... ||l [file name] [dialogue number]`: shorthand to load a dialogue file at a specified dialogue number (can be omitted to default to 0)\
+`... ||e`: shorthand to end dialogue after current dialogue is finished\
 `... |||`: shorthand to end dialogue immediately
 
 
@@ -65,22 +65,22 @@ Choices are dictated using two hashtags (`##`) followed by the number of choices
 
 To run a function during the dialogue, append the choice text with `||f` followed by a space and the name of the function. Separate parameters with spaces and further functions with another bar (`|`).
 To call a signal during the dialogue, append the choice text with `||s` followed by a space and the name of the signal. Separate parameters with spaces and further signals with another bar (`|`).
-To end the dialogue immediately, add three bars `|||` after the dialogue. This is shorthand for `||f endDialogue()`.
+To end the dialogue immediately, add three bars `|||` after the dialogue. This is shorthand for `||f endDialogueB`.
 
 So, for example,
 ```
 // ...
 ~##5
-~@0
-Pasta.
-~@1
-Pizza. ||s updateHunger 30
-~@2
-Pie. ||s updateHunger 15|updateHealth -15 9
-~@3
-Quiche. ||f shakeScreen 4|darkenScreen 0.5|updateSpeechSpeed 20
-~@4
-I'm not hungry, thank you. |||
+	~@0
+		Pasta.
+	~@1
+		Pizza. ||s updateHunger 30
+	~@2
+		Pie. ||s updateHunger 15|updateHealth -15 9
+	~@3
+		Quiche. ||f shakeScreen 4|darkenScreen 0.5|updateSpeechSpeed 20
+	~@4
+		I'm not hungry, thank you. |||
 ~##.
 ```
 
@@ -90,24 +90,25 @@ After choices have been made, there may be dialogue following each choice. This 
 So, for example.
 ```
 // ...
-~@0
-Pasta.
-~#@0
-Pasta, huh! My favourite! Quick and easy to make, and such great taste!
-~@1
-Pizza. ||s updateHunger 30
-~#@1
-...Pizza, huh? Who's gonna pay for that, d'ya think? I... what, you can't possibly be *that* hungry! God, you're bleedin' me dry.
-~@2
-Pie. ||s updateHunger 15|updateHealth -15 9
-~#@2
-Pie? I think, we have some in the fridge... don't think it's gonna fill ya up all that much, though.
-~@3
-Quiche. ||f shakeScreen 4|darkenScreen 0.5|updateSpeechSpeed 20
-~#@3
-Quiche? QUICHE? YOU ACTUALLY LIKE THAT STUFF?! EWW! It's in the fridge.
-~@4
-I'm not hungry, thank you. |||
+~##5
+	~@0
+		Pasta.
+		~#@0
+			Pasta, huh! My favourite! Quick and easy to make, and such great taste!
+	~@1
+		Pizza. ||s updateHunger 30
+		~#@1
+			...Pizza, huh? Who's gonna pay for that, d'ya think? I... what, you can't possibly be *that* hungry! God, you're bleedin' me dry.
+	~@2
+		Pie. ||s updateHunger 15|updateHealth -15 9
+		~#@2
+			Pie? I think, we have some in the fridge... don't think it's gonna fill ya up all that much, though.
+	~@3
+		Quiche. ||f shakeScreen 4|darkenScreen 0.5|updateSpeechSpeed 20
+		~#@3
+			Quiche? QUICHE? YOU ACTUALLY LIKE THAT STUFF?! EWW! It's in the fridge.
+	~@4
+		I'm not hungry, thank you. |||
 ~##.
 ```
 
@@ -148,34 +149,34 @@ All in all, the dialogue for choices will look like this:
 
 A dialogue file detailing a series of choices the user can choose from. \
 \
-Dialogue line 1\
-	Hello world! This is the first sentence. \
-Dialogue line 2, choices incoming\
-	What would you like for dinner?\
+`Dialogue line 1`\
+Hello world! This is the first sentence. \
+`Dialogue line 2, choices incoming`\
+What would you like for dinner?\
 5 choices for dialogue line 2\
-Choice 1\
-				Pasta.\
-Response to Choice 1\
-					Pasta, huh! My favourite! Quick and easy to make, and such great taste!\
-Choice 2\
-				Pizza. call signal update Hunger param 30\
-Response to Choice 2\
-					...Pizza, huh? Who's gonna pay for that, d'ya think? I... what, you can't possibly be *that* hungry! God, you're bleedin' me dry.\
-Choice 3\
-				Pie. call signal update Hunger param 15 call signal update Health param -15 param 9\
-response to choice 3\
-					Pie? I think, we have some in the fridge... don't think it's gonna fill ya up all that much, though.\
-choice 4\
-				Quiche. run function shake Screen param 4 run function darken Screen param 0.5 run function update Speech Speed param 20\
-response to choice 4\
-					Quiche? QUICHE? YOU ACTUALLY LIKE THAT STUFF?! EWW! It's in the fridge.\
-Choice 5\
-				I'm not hungry, thank you. run function end dialogue\
-end choices\
-end dialogue line 2 and choice section\
-dialogue line 3\
-	Well, that was nice, I suppose. I'm headin' to bed. See ya in tha mornin'.\
-end dialogue
+`Choice 1`\
+Pasta.\
+`Response to Choice 1`\
+Pasta, huh! My favourite! Quick and easy to make, and such great taste!\
+`Choice 2`\
+Pizza. call signal update Hunger param 30\
+`Response to Choice 2`\
+...Pizza, huh? Who's gonna pay for that, d'ya think? I... what, you can't possibly be *that* hungry! God, you're bleedin' me dry.\
+`Choice 3`\
+Pie. call signal update Hunger param 15 call signal update Health param -15 param 9\
+`response to choice 3`\
+Pie? I think, we have some in the fridge... don't think it's gonna fill ya up all that much, though.\
+`choice 4`\
+Quiche. run function shake Screen param 4 run function darken Screen param 0.5 run function update Speech Speed param 20\
+`response to choice 4`\
+Quiche? QUICHE? YOU ACTUALLY LIKE THAT STUFF?! EWW! It's in the fridge.\
+`Choice 5`\
+I'm not hungry, thank you. run function end dialogue\
+`end choices`\
+`end dialogue line 2 and choice section`\
+`dialogue line 3`\
+Well, that was nice, I suppose. I'm headin' to bed. See ya in tha mornin'.\
+`end dialogue`
 
 ## Comments
 You can comment out (ignore) any line beginning with double forward slashes `//`.
