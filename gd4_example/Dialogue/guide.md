@@ -17,6 +17,7 @@ Please note that **ALL NUMBERS ARE *ZERO-INDEXED***. Assume that not following t
 `... ||s [signal name] [parameter1] [parameter2]`: call signal during dialogue\
 `... ||f/s [function/signal name] [parameter1] [parameter2]|[function/signal name] [parameter1]`: call multiple functions/signals during dialogue\
 `... ||l [file name] [dialogue number]`: shorthand to load a dialogue file at a specified dialogue number\
+`... ||e`: shorthand to end dialogue after current dialogue is finished
 `... |||`: shorthand to end dialogue immediately
 
 

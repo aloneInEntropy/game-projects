@@ -1,0 +1,4 @@
+// branch to this dialogue file to end AFTER dialogue
+~0
+	|||
+~.

@@ -17,7 +17,7 @@ public partial class DialogueBox : Control
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
-		GD.Print(GetParent().Name);
+		// GD.Print(GetParent().Name);
 		// gui = (GUI)GetParent();
 		txt = (RichTextLabel)GetNode("TxtLabel");
 		txtbg = (TextureRect)GetNode("DBBG");
@@ -40,26 +40,36 @@ public partial class DialogueBox : Control
 		dialogue = d;
 	}
 
-	// Write custom dialogue and user choices in the dialogue box
+	/// <summary>
+	/// Write custom dialogue and user choices in the dialogue box
+	/// </summary>
+	/// <param name="d"></param>
 	public void Write(string d) {
 		WriteDialogue(d);
 		WriteChoices();
 	}
 
-	// Write dialogue and user choices in the dialogue box
+	/// <summary>
+	/// Write dialogue and user choices in the dialogue box
+	/// </summary>
 	public void Write() {
 		WriteDialogue();
 		WriteChoices();
 	}
 
-	// Write the dialogue in the dialogue object this dialogue box has loaded.
+	/// <summary>
+	/// Write the dialogue in the dialogue object this dialogue box has loaded.
+	/// </summary>
 	public void WriteDialogue() {
 		txt.Text = string.Join('\n', dialogue.dialogue);
 		txt.VisibleCharacters = 0;
 		DialogueManager.SetDialogueToUpdate(this, 3);
 	}
 	
-	// Write custom dialogue in the dialogue box
+	/// <summary>
+	/// Write custom dialogue in the dialogue box
+	/// </summary>
+	/// <param name="d"></param>
 	public void WriteDialogue(string d) {
 		txt.Text = string.Join('\n', d);
 		txt.VisibleCharacters = 0;
@@ -83,7 +93,7 @@ public partial class DialogueBox : Control
             };
 			// some lambda thing. 
 			// https://ask.godotengine.org/147861/there-way-provide-additional-arguments-for-pressed-event-c%23
-			nb.Pressed += () => GetResponse(c); 
+			nb.Pressed += () => DisplayChoiceResponse(c); 
             nbpos += new Vector2(0, 32); // move each successive button down 32 pixels
 			choiceButtons.Add(nb);
             choiceControl.AddChild(nb);
@@ -92,8 +102,29 @@ public partial class DialogueBox : Control
 		chcs.Visible = dialogue.choices.Count > 0;
 	}
 
-	// Get the response from a choice `s` and run any functions the choice had if they exist.
-	public void GetResponse(Variant s) {
+	/// <summary>
+	/// Run all dialogue functions for the DialogueObject stored in this DialogueBox.
+	/// </summary>
+	public void DisplayDialogueResult() {
+		GetParent<GUI>().canProgressDialogue = true;
+		dialogue.CallDialogueFunctions();
+		if (dialogue.parseResult is not null) {
+			/* 
+				If the dialogue scene was told to switch dialogues, update all dialogue tools
+				parseResult[0] = List<DialogueObject> -> the list of dialogue objects to load in
+				parseResult[1] = int -> the dialogue number to start the above list from
+			 */
+			GetParent<GUI>().talkingNPC.LoadDialogue((List<DialogueObject>)dialogue.parseResult[0]); // update dialogue scene
+			GetParent<GUI>().talkingNPC.SetDialogueNumber((int)dialogue.parseResult[1]); // Start the dialogue at the specified number
+			LoadDialogue(((List<DialogueObject>)dialogue.parseResult[0])[(int)dialogue.parseResult[1]]); // update this dialogue from the dialogue number (MUST BE LAST TO AVOID DESTORYING CURRENT DIALOGUE)
+		}
+		if (dialogue.functionResult is not null) GD.Print(dialogue.functionResult);
+	}
+
+	/// <summary>
+	/// Get the response from a choice `s` and run any functions the choice had if they exist.
+	/// </summary>
+	public void DisplayChoiceResponse(Variant s) {
 		GetParent<GUI>().canProgressDialogue = true;
 		dialogue.CallChoiceFunctions(dialogue.choices.IndexOf((string)s));
 		if (dialogue.parseResult is not null) {
@@ -108,9 +139,7 @@ public partial class DialogueBox : Control
 			LoadDialogue(((List<DialogueObject>)dialogue.parseResult[0])[(int)dialogue.parseResult[1]]); // update this dialogue from the dialogue number (MUST BE LAST TO AVOID DESTORYING CURRENT DIALOGUE)
 			WriteDialogue();
 		}
-		if (dialogue.functionResult is not null) GD.Print(dialogue.functionResult);
-		// GD.Print(dialogue.responses[(int)s]);
-		// if (dialogue.choiceResponses.ContainsKey((string)s)) GD.Print(dialogue.choiceResponses[(string)s]);
+		if (dialogue.functionResult is not null) GD.Print(dialogue.functionResult); // choice function results (discarded for now)
 		if (dialogue.choiceResponses.ContainsKey((string)s)) {
 			WriteDialogue(dialogue.choiceResponses[(string)s]);
 			choiceControl.Visible = false;

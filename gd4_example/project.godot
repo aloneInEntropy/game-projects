@@ -11,6 +11,7 @@ config_version=5
 [application]
 
 config/name="Godot 4.1.1 Example"
+config/tags=PackedStringArray("has_git_repo")
 run/main_scene="res://Scenes/World.tscn"
 config/features=PackedStringArray("4.1", "C#", "GL Compatibility")
 config/icon="res://icon.svg"

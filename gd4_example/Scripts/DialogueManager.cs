@@ -2,6 +2,9 @@ using Godot;
 using System;
 using System.Collections.Generic;
 
+/// <summary>
+/// The global DialogueManager class. Handles dialogue events.
+/// </summary>
 public partial class DialogueManager : Node
 {
 	public static List<DialogueObject> dialogue_objs = new(); // the order of dialogue as it is presented
@@ -22,12 +25,19 @@ public partial class DialogueManager : Node
 		if (IsInstanceValid(activeDialogueBox)) activeDialogueBox.finishedMarker.Visible = !isDialogueActive;
 	}
 
-	// 
-	// Parse the text file at `txt_path` as dialogue.
-	// 
-	public static List<DialogueObject> Parse(string txt_path) {
+	/// <summary>
+	/// Parse the text file at <paramref name="txtPath"/> as dialogue.
+	/// </summary>
+	/// <param name="txtPath">description</param>
+	/// 
+	/// <returns>
+	/// 	<p>
+	///		A <c>List</c> of <c>DialogueObject</c>s for the dialogue read from
+	/// 	</p>
+	/// </returns>
+	public static List<DialogueObject> Parse(string txtPath) {
 		List<DialogueObject> dobjs = new();
-		FileAccess file = FileAccess.Open(txt_path, FileAccess.ModeFlags.Read);
+		FileAccess file = FileAccess.Open(txtPath, FileAccess.ModeFlags.Read);
 		bool adding_reg_dialogue = false; // are you adding regular dialogue? (~x marker)
 		int reg_dialogue_marker = 0; // which regular dialogue are you currently parsing?
 		bool adding_choice_dialogue = false; // are you adding choice dialogue? (~~x marker)
@@ -84,13 +94,16 @@ public partial class DialogueManager : Node
 						string fnc = line[fnc_find + 2].ToString();
 						switch (fnc) {
 							case "|":
-								tdo.AddDialogueFunction("EndDialogueB", choice_dialogue_marker);
+								tdo.AddDialogueFunction("EndDialogueB", 0); // end dialogue immediately
+								break;
+                            case "e":
+								tdo.AddDialogueFunction("ParseB res://Dialogue/end.txt", 0); // end dialogue scene after displaying current dialogue
 								break;
                             case "l":
-								tdo.AddDialogueFunction("ParseB res://Dialogue/" + line[(fnc_find + 4)..], choice_dialogue_marker);
+								tdo.AddDialogueFunction("ParseB res://Dialogue/" + line[(fnc_find + 4)..], 0); // load dialogue file
 								break;
                             case "f":
-								tdo.AddDialogueFunction(line[(fnc_find + 4)..], choice_dialogue_marker);
+								tdo.AddDialogueFunction(line[(fnc_find + 4)..], 0); // call function
 								break;
 							case "s":
 								// tdo.AddChoiceSignal(line[(fnc_find + 4)..], choice_dialogue_marker);

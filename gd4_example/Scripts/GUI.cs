@@ -29,8 +29,10 @@ public partial class GUI : CanvasLayer
 			if (d is null) {
 				CloseDialogue();
 			} else {
+				// GD.Print(npc.currentDiag);
 				SetDialogue(d);
 				OpenDialogue();
+				db.DisplayDialogueResult();
 			}
 		}
 	}

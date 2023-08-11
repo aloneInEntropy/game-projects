@@ -40,8 +40,9 @@ public partial class NPC : StaticBody2D
 		// if dialogue has finished being typed out
 		// currentDiag = Mathf.Clamp(currentDiag, 0, dialogue.Count);
 		if (currentDiag < dialogue.Count) {
-			var d = dialogue[currentDiag++];
-			d.CallDialogueFunctions(0);
+			var d = dialogue[currentDiag];
+			// d.CallDialogueFunctions(0);
+			currentDiag++;
 			return d;
 		} else {
 			RestartDialogue();

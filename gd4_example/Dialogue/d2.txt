@@ -5,14 +5,14 @@ Hello world! This is the first sentence.
 
 
 
-Third one now. ||f SayHello
+Third one now.
 ~~1
     What would you like for dinner?
         ~##5
             ~@0
                 Pasta.
                 ~#@0
-                    Pasta, huh! My favourite! Quick and easy to make, and such great taste!
+                    Pasta, huh! My favourite! Quick and easy to make, and such great taste! ||
             ~@1
                 Pizza. 
                 ~#@1

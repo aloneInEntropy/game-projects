@@ -21,9 +21,9 @@ centered = false
 position = Vector2(213, 211)
 
 [node name="Olivia" parent="." instance=ExtResource("5_blx77")]
-position = Vector2(102, 364)
+position = Vector2(100, 302)
 
 [node name="Mark" parent="." instance=ExtResource("6_rviol")]
-position = Vector2(478, 220)
+position = Vector2(361, 211)
 
 [node name="GUI" parent="." instance=ExtResource("4_xfdgx")]

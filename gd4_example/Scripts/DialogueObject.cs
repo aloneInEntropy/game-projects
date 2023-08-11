@@ -3,7 +3,9 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-// sewrefd
+/// <summary>
+/// The DialogueObject class. Contains information about a dialogue scene, which has dialogue, choices, responses, and functions to run alongside aforementioned fields.
+/// </summary>
 public partial class DialogueObject
 {
 	public List<string> dialogue = new(); // NPC dialogue, which may be spoken to the player
@@ -49,8 +51,13 @@ public partial class DialogueObject
 		return choices[v];
 	}
 	
-	/// Add a bar-separated (`|`) list of functions and space-separated list of parameters `ch` to be called when the dialogue `d` is loaded.
-	/// For example, `ch` == "shakeScreen 4|darkenScreen 0.5 3 6|updateSpeechSpeed 20" and `d` == 3
+	
+	/// <summary>
+	/// Add a bar separated (`|`) list of functions and space separated list of parameters <c>ch</c> to be called when the dialogue <c>d</c> is loaded.<br/>
+	/// For example, <c>ch</c> == "shakeScreen 4|darkenScreen 0.5 3 6|updateSpeechSpeed 20" and <c>d</c> == 3
+	/// </summary>
+	/// <param name="ch"></param>
+	/// <param name="d"></param>
 	public void AddDialogueFunction(string ch, int d) {
 		dialogueFunctions[d] = ch;
 	}
@@ -87,37 +94,71 @@ public partial class DialogueObject
 				// GD.Print(paras);
 			}
 		} else {
-			GD.Print("No available functions for this choice.");
+			// GD.Print("No available functions for this choice.");
 		}
 	}
 	
-	/// Call all functions specified for the `choice`.
-	public void CallDialogueFunctions(int d) {
-		if (dialogueFunctions[d] != "") {
-			var fns = dialogueFunctions[d].Split("|");
-			foreach (string fn in fns) {
-				string tfn = fn.StripEdges();
-				Godot.Collections.Array tps = new();
-				string[] paras = tfn.Split(" ");
-				if (paras[0] == "ParseB") {
-					// If a dialogue start position is not specified, default to 0.
-					var dpos = paras.Length < 3 ? 
-						0 : 
-						paras[2].ToInt()
-					;
-					parseResult = new List<object>{
-						DialogueManager.Parse(paras[1]),
-						dpos
-					};
-				} else {
-					DialogueManager dm = new();
-					tps.AddRange(paras[1..]);
-					functionResult = dm.Callv(paras[0], tps);
+	/// Call all functions specified for the dialogue `d`.
+	// public void CallDialogueFunctions(int d) {
+	// 	// GD.Print(d);
+	// 	if (dialogueFunctions[d] != "") {
+	// 		var fns = dialogueFunctions[d].Split("|");
+	// 		foreach (string fn in fns) {
+	// 			string tfn = fn.StripEdges();
+	// 			Godot.Collections.Array tps = new();
+	// 			string[] paras = tfn.Split(" ");
+	// 			if (paras[0] == "ParseB") {
+	// 				// If a dialogue start position is not specified, default to 0.
+	// 				var dpos = paras.Length < 3 ? 
+	// 					0 : 
+	// 					paras[2].ToInt()
+	// 				;
+	// 				parseResult = new List<object>{
+	// 					DialogueManager.Parse(paras[1]),
+	// 					dpos
+	// 				};
+	// 			} else {
+	// 				DialogueManager dm = new();
+	// 				tps.AddRange(paras[1..]);
+	// 				functionResult = dm.Callv(paras[0], tps);
+	// 			}
+	// 			// GD.Print(paras);
+	// 		}
+	// 	} else {
+	// 		GD.Print("No available functions for this line.");
+	// 	}
+	// }
+
+	/// Call all functions specified for the dialogue `d`.
+	public void CallDialogueFunctions() {
+		// GD.Print(d);
+		foreach (var d in dialogueFunctions) {
+			if (d != "") {
+				var fns = d.Split("|");
+				foreach (string fn in fns) {
+					string tfn = fn.StripEdges();
+					Godot.Collections.Array tps = new();
+					string[] paras = tfn.Split(" ");
+					if (paras[0] == "ParseB") {
+						// If a dialogue start position is not specified, default to 0.
+						var dpos = paras.Length < 3 ? 
+							0 : 
+							paras[2].ToInt()
+						;
+						parseResult = new List<object>{
+							DialogueManager.Parse(paras[1]),
+							dpos
+						};
+					} else {
+						DialogueManager dm = new();
+						tps.AddRange(paras[1..]);
+						functionResult = dm.Callv(paras[0], tps);
+					}
+					// GD.Print(paras);
 				}
-				// GD.Print(paras);
+			} else {
+				// GD.Print("No available functions for this line.");
 			}
-		} else {
-			GD.Print("No available functions for this line.");
 		}
 	}
 
