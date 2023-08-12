@@ -5,10 +5,11 @@
         - [x] run functions/signals in dialogue
     - [x] response dialogue
         - [ ] run functions/signals in dialogue
-        - [ ] show response and exit
+        - [ ] show response and exit (part of above goal)
     - [x] dialogue branching
         - [x] load dialogue in specified files at specified indices
-        - [ ] branching without loading in files (optional update (bool) parameter to NPC.LoadDialogue? it'll be 5 at that point)
+        - [ ] branching without permanantly loading in files (temporary branching). possibly an optional update (bool) parameter to NPC.LoadDialogue (it'll be 5 at that point)
+        - [ ] stopping `||e` command from saving into dialogue path (part of above goal)
 
 - [ ] missions
     - [ ] let NPCs track which dialogue "scenes" they've already gone through
