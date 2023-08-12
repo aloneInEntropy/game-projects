@@ -1,0 +1,14 @@
+- [x] dialogue parser
+    - [x] regular dialogue
+        - [x] run functions/signals in dialogue
+    - [x] choice dialogue
+        - [x] run functions/signals in dialogue
+    - [x] response dialogue
+        - [ ] run functions/signals in dialogue
+        - [ ] show response and exit
+    - [x] dialogue branching
+        - [x] load dialogue in specified files at specified indices
+        - [ ] branching without loading in files (optional update (bool) parameter to NPC.LoadDialogue? it'll be 5 at that point)
+
+- [ ] missions
+    - [ ] let NPCs track which dialogue "scenes" they've already gone through

@@ -9,6 +9,6 @@ public partial class Olivia : NPC
 	}
 
 	public override void _Process(double delta) {
-		if (diagPath != "res://Dialogue/d1.txt") diagPath = "res://Dialogue/d1.txt";
+		// if (diagPath != "res://Dialogue/d1.txt") diagPath = "res://Dialogue/d1.txt";
 	}
 }

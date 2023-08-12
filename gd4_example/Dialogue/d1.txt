@@ -6,15 +6,15 @@
 	There are plenty of things to discover in Orast. Where would you like to begin?
 		~##4
 			~@0
-				The farm. ||f Test1 Mark | Test2 AAAA BBBBB
+				The farm.
 				~#@0
 					Well, the farm's just down the road to the east! I hear their milk is to die for.
 			~@1
-				The lake. ||f Test2 Lucy Thalia
+				The lake.
 				~#@1
 					Oh, that's fun! You can certainly relax yourself by the water there after your long travels! It's just to the west.
 			~@2
-				The market. ||f SayHello
+				The market.
 				~#@2
 					Ah, I suppose you might be hungry after your journey! Or maybe just eager to make some money? Regardless, it's up here to the north.
 			~@3
@@ -44,5 +44,5 @@
 		~##.
 	~~.
 ~5
-Well, that's all from me. I'll let you roam the area yourself. Enjoy yourself, and good luck traveller!
+Well, that's all from me. I'll let you roam the area yourself. Enjoy yourself, and good luck traveller! ||l d1_re.txt false
 ~.

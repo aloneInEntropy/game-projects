@@ -21,6 +21,10 @@ config/icon="res://icon.svg"
 DialogueManager="*res://Scenes/DialogueManager.tscn"
 GameManager="*res://Scenes/GameManager.tscn"
 
+[display]
+
+window/stretch/mode="viewport"
+
 [dotnet]
 
 project/assembly_name="Godot 4.1.1 Example"

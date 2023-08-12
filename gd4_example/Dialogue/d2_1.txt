@@ -16,5 +16,5 @@
         ~##.
     ~~.
 ~1
-whatever lols
+whatever lols ||l d2.txt 2
 ~.

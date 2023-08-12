@@ -8,18 +8,55 @@ using System.Linq;
 /// </summary>
 public partial class DialogueObject
 {
-	public List<string> dialogue = new(); // NPC dialogue, which may be spoken to the player
-	public List<string> dialogueFunctions = new(); // Functions to run when this dialogue plays. The index of each list corresponds to the dialogue number.
-	public List<string> choices = new(); // NPC choices, offered to the player 
-	public List<string> choiceFunctions = new(); // Functions to run for a given choice. The index of each list corresponds to the choice number.
-	public List<string> choiceSignals = new(); // Signals to call for a given choice. The index of each list corresponds to the choice number.
-	public List<string> responses = new(); // NPC responses to the choices given. If there are no choices, there are no responses.
+	/// <summary> 
+	/// NPC dialogue, which may be spoken to the player
+	/// </summary>
+	public List<string> dialogue = new(); 
+
+	/// <summary> 
+	/// Functions to run when this dialogue plays. The index of each list corresponds to the dialogue number.
+	/// </summary>
+	public List<string> dialogueFunctions = new(); 
+
+	/// <summary> 
+	/// NPC choices, offered to the player 
+	/// </summary>
+	public List<string> choices = new(); 
+
+	/// <summary> 
+	/// Functions to run for a given choice. The index of each list corresponds to the choice number.
+	/// </summary>
+	public List<string> choiceFunctions = new(); 
+
+	/// <summary> 
+	/// Signals to call for a given choice. The index of each list corresponds to the choice number.
+	/// </summary>
+	public List<string> choiceSignals = new(); 
+
+	/// <summary> 
+	/// NPC responses to the choices given. If there are no choices, there are no responses.
+	/// </summary>
+	public List<string> responses = new(); 
+
+	/// <summary>
+	/// The DialogueObjects obtained from the function <c>DialogueManager.Parse</c> from this object's functions.<br/>
+	/// parseResult[0] = <c>[DialogueObject]</c> : the list of dialogue objects to load in<br/>
+	///	parseResult[1] = <c>bool</c>: choose whether or not to immediately load parseResult[0]<br/>
+	///	parseResult[2] = <c>int</c>: the dialogue number to start the above list from<br/>
+	/// </summary>
+	public List<object> parseResult;
+	/// <summary>
+	/// The result of the functions ran by this object.
+	/// </summary>
+	public object functionResult;
+
+	/// <summary>
+	/// The file path to this dialogue object.
+	/// </summary>
+	public string originFilePath = "INVALID"; 
+	
 	public readonly Dictionary<string, string> dialogueChoices = new(); // Dictionary using NPC dialogue as keys and NPC choices as values
 	public readonly Dictionary<string, string> choiceResponses = new(); // Dictionary using NPC choices as keys and NPC responses as values
-	public List<object> parseResult;
-	public object functionResult;
-	// public readonly Dictionary<string, string> choiceFunctions = new(); // Dictionary using NPC choices as keys and calfunctions as values
-	// public string[] vchoices;
 	
 
 	public void AddDialogue(string ch) {
@@ -77,13 +114,27 @@ public partial class DialogueObject
 				Godot.Collections.Array tps = new();
 				string[] paras = tfn.Split(" ");
 				if (paras[0] == "ParseB") {
-					// If a dialogue start position is not specified, default to 0.
-					var dpos = paras.Length < 3 ? 
-						0 : 
-						paras[2].ToInt()
-					;
+					/* 
+						arg 1 = string -> the file path of the dialogue scene
+						arg 2 = bool -> choose whether or not to immediately load arg 0 (optional)
+						arg 3 = int -> the dialogue number to start arg 0 from (optional)
+					*/
+					var dload = true; // Immediately display loaded dialogue if specified, otherwise only load.
+					var dpos = 0; // If a dialogue start position is not specified, default to 0.
+					if (paras.Length == 3) {
+						if (paras[2].IsValidInt()) {
+							dpos = paras[2].ToInt();
+						} else {
+							dload = bool.Parse(paras[2]);
+						}
+					} else if (paras.Length == 4) {
+						dload = bool.Parse(paras[2]);
+						dpos = paras[3].ToInt();
+					}
+
 					parseResult = new List<object>{
 						DialogueManager.Parse(paras[1]),
+						dload,
 						dpos
 					};
 				} else {
@@ -98,38 +149,10 @@ public partial class DialogueObject
 		}
 	}
 	
-	/// Call all functions specified for the dialogue `d`.
-	// public void CallDialogueFunctions(int d) {
-	// 	// GD.Print(d);
-	// 	if (dialogueFunctions[d] != "") {
-	// 		var fns = dialogueFunctions[d].Split("|");
-	// 		foreach (string fn in fns) {
-	// 			string tfn = fn.StripEdges();
-	// 			Godot.Collections.Array tps = new();
-	// 			string[] paras = tfn.Split(" ");
-	// 			if (paras[0] == "ParseB") {
-	// 				// If a dialogue start position is not specified, default to 0.
-	// 				var dpos = paras.Length < 3 ? 
-	// 					0 : 
-	// 					paras[2].ToInt()
-	// 				;
-	// 				parseResult = new List<object>{
-	// 					DialogueManager.Parse(paras[1]),
-	// 					dpos
-	// 				};
-	// 			} else {
-	// 				DialogueManager dm = new();
-	// 				tps.AddRange(paras[1..]);
-	// 				functionResult = dm.Callv(paras[0], tps);
-	// 			}
-	// 			// GD.Print(paras);
-	// 		}
-	// 	} else {
-	// 		GD.Print("No available functions for this line.");
-	// 	}
-	// }
 
-	/// Call all functions specified for the dialogue `d`.
+	/// <summary>
+	/// Call all dialogue functions specified for this DialogueObject.
+	/// </summary>
 	public void CallDialogueFunctions() {
 		// GD.Print(d);
 		foreach (var d in dialogueFunctions) {
@@ -140,13 +163,27 @@ public partial class DialogueObject
 					Godot.Collections.Array tps = new();
 					string[] paras = tfn.Split(" ");
 					if (paras[0] == "ParseB") {
-						// If a dialogue start position is not specified, default to 0.
-						var dpos = paras.Length < 3 ? 
-							0 : 
-							paras[2].ToInt()
-						;
+						/* 
+							arg 1 = string -> the file path of the dialogue scene
+							arg 2 = bool -> choose whether or not to immediately load arg 0 (optional)
+							arg 3 = int -> the dialogue number to start arg 0 from (optional)
+						*/
+						var dload = true; // Immediately display loaded dialogue if specified, otherwise only load.
+						var dpos = 0; // If a dialogue start position is not specified, default to 0.
+						if (paras.Length == 3) {
+							if (paras[2].IsValidInt()) {
+								dpos = paras[2].ToInt();
+							} else {
+								dload = bool.Parse(paras[2]);
+							}
+						} else if (paras.Length == 4) {
+							dload = bool.Parse(paras[2]);
+							dpos = paras[3].ToInt();
+						}
+
 						parseResult = new List<object>{
 							DialogueManager.Parse(paras[1]),
+							dload,
 							dpos
 						};
 					} else {

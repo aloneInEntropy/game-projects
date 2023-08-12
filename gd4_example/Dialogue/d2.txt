@@ -12,7 +12,7 @@ Third one now.
             ~@0
                 Pasta.
                 ~#@0
-                    Pasta, huh! My favourite! Quick and easy to make, and such great taste! ||
+                    Pasta, huh! My favourite! Quick and easy to make, and such great taste!
             ~@1
                 Pizza. 
                 ~#@1
@@ -28,5 +28,5 @@ Third one now.
         ~##.
     ~~.
 ~2
-Well, that was nice, I suppose. I'm headin' to bed. See ya in tha mornin'.
+Well, that was nice, I suppose. I'm headin' to bed. See ya in tha mornin'. ||l d1.txt false 4
 ~.

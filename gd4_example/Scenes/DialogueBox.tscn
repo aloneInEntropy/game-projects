@@ -40,6 +40,20 @@ text = "Hello world"
 fit_content = true
 scroll_active = false
 
+[node name="NameLabel" type="RichTextLabel" parent="."]
+layout_mode = 0
+offset_left = 242.0
+offset_top = 417.0
+offset_right = 579.0
+offset_bottom = 458.0
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+theme_override_fonts/normal_font = ExtResource("3_1rhln")
+theme_override_font_sizes/normal_font_size = 30
+bbcode_enabled = true
+text = "Hello world"
+fit_content = true
+scroll_active = false
+
 [node name="ChoiceControl" type="Control" parent="."]
 anchors_preset = 0
 offset_left = 777.0

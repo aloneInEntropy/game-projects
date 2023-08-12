@@ -55,7 +55,7 @@ public partial class Player : CharacterBody2D
 			
 			if (facingObj is not null && facingObj.GetType().IsSubclassOf(typeof(NPC))) {
 				// GD.Print(facingObj.Name);
-				if (DialogueManager.isDialogueActive) {
+				if (DialogueManager.isDialogueReading) {
 					// if dialogue is currently being typed out
 					DialogueManager.UpdateVisibleText(true);
 				} else {

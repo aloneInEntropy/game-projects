@@ -11,7 +11,7 @@ public partial class DialogueManager : Node
 	public static DialogueBox activeDialogueBox = new();
 	public static int framesBeforeUpdating = 20;
 	public static float updateSpeechSpeed = 1;
-	public static bool isDialogueActive = false; // is dialogue currently being read?
+	public static bool isDialogueReading = false; // is dialogue currently being read?
 	public static DialogueObject activeDialogue = new(); // dialogue currently being read
 
 	public override void _Ready()
@@ -21,15 +21,16 @@ public partial class DialogueManager : Node
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
 	public override void _Process(double delta)
 	{
-		if (isDialogueActive) UpdateVisibleText();
-		if (IsInstanceValid(activeDialogueBox)) activeDialogueBox.finishedMarker.Visible = !isDialogueActive;
+		if (isDialogueReading) UpdateVisibleText();
+		if (IsInstanceValid(activeDialogueBox)) activeDialogueBox.finishedMarker.Visible = !isDialogueReading;
 	}
 
 	/// <summary>
 	/// Parse the text file at <paramref name="txtPath"/> as dialogue.
 	/// </summary>
-	/// <param name="txtPath">description</param>
-	/// 
+	/// <param name="txtPath">
+	/// description
+	/// </param>
 	/// <returns>
 	/// 	<p>
 	///		A <c>List</c> of <c>DialogueObject</c>s for the dialogue read from
@@ -85,6 +86,7 @@ public partial class DialogueManager : Node
 					new DialogueObject() : 
 					dobjs[reg_dialogue_marker]
 				;
+				tdo.originFilePath = txtPath;
 				if (!dobjs.Contains(tdo)) dobjs.Add(tdo);
 
 				if (adding_reg_dialogue) {
@@ -124,6 +126,9 @@ public partial class DialogueManager : Node
 							case "|":
 								tdo.AddChoiceFunction("EndDialogueB", choice_dialogue_marker);
 								break;
+							case "e":
+								tdo.AddChoiceFunction("ParseB res://Dialogue/end.txt", choice_dialogue_marker); // end dialogue scene after displaying current dialogue
+								break;
                             case "l":
 								tdo.AddChoiceFunction("ParseB res://Dialogue/" + line[(fnc_find + 4)..], choice_dialogue_marker);
 								break;
@@ -149,6 +154,11 @@ public partial class DialogueManager : Node
 		return dobjs;
 	}
 	
+	/// <summary>
+	/// Non-static version of <c>Parse</c>
+	/// </summary>
+	/// <param name="txt_path"></param>
+	/// <returns></returns>
 	public List<DialogueObject> ParseB(string txt_path) {
 		return Parse(txt_path);
 	}
@@ -162,14 +172,14 @@ public partial class DialogueManager : Node
 				activeDialogueBox.txt.VisibleCharacters = (int)Mathf.Clamp(activeDialogueBox.txt.VisibleCharacters + updateSpeechSpeed, 0, activeDialogueBox.txt.Text.Length);
 			}
 		}
-		isDialogueActive = activeDialogueBox.txt.VisibleRatio != 1;
+		isDialogueReading = activeDialogueBox.txt.VisibleRatio != 1;
 	}
 
 	public static void SetDialogueToUpdate(DialogueBox diagBox, int frames_before_updating = 20, float update_speech_speed = 1) {
 		framesBeforeUpdating = frames_before_updating;
 		updateSpeechSpeed = update_speech_speed;
 		activeDialogueBox = diagBox;
-		isDialogueActive = true;
+		isDialogueReading = true;
 	}
 
 	public void SayHello() {
@@ -186,14 +196,15 @@ public partial class DialogueManager : Node
 
 	// Close and end the dialogue session.
 	public static void EndDialogue() {
-		isDialogueActive = false;
+		isDialogueReading = false;
 		activeDialogue = null;
+		GUI g = (GUI)activeDialogueBox.Owner;
+        g.CloseDialogue();
 	}
 	
 	// Close and end the dialogue session (non-static).
 	public void EndDialogueB() {
-        GUI g = (GUI)activeDialogueBox.Owner;
-        g.CloseDialogue();
+		EndDialogue();
 		// isDialogueActive = false;
 		// activeDialogue = null;
 	}

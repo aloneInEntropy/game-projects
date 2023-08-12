@@ -7,8 +7,8 @@
 script = ExtResource("1_h7svq")
 
 [node name="MissionText" type="RichTextLabel" parent="."]
-offset_right = 170.0
-offset_bottom = 40.0
+offset_right = 236.0
+offset_bottom = 70.0
 text = "qwerdserf"
 fit_content = true
 scroll_active = false
