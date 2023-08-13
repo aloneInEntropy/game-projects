@@ -113,24 +113,28 @@ public partial class DialogueBox : Control
 	/// Run all dialogue functions for the DialogueObject stored in this DialogueBox.
 	/// </summary>
 	public void DisplayDialogueResult() {
+		// If dialogue file set to end, IMMEDIATELY DISCARD DIALOGUE FILE to prevent dialogue cancel loop.
+		if (dialogue.originFilePath[15..] == "end.txt") {
+			GetParent<GUI>().talkingNPC.LoadWaitingDialogue();
+		}
+
 		dialogue.CallDialogueFunctions(); // Call all dialogue functions for this DialogueObject
-		if (dialogue.parseResult is not null) {
+		if (dialogue.parseResult is not null && dialogue.parseResult.Count != 0) {
 			/* 
-				If the dialogue scene was told to switch dialogues, update all dialogue tools
+				If the dialogue scene was told to switch dialogues, update all dialogue tools.
+
 				parseResult[0] = List<DialogueObject> -> the list of dialogue objects to load in
 				parseResult[1] = bool -> choose whether or not to immediately load parseResult[0]
 				parseResult[2] = int -> the dialogue number to start the above list from
+				parseResult[3] = bool -> choose whether or not to save parseResult[0] to the NPC
 			 */
-			// GD.Print((bool)dialogue.parseResult[1]);
-			// GD.Print(dialogue.originFilePath);
-			// var td = dialogue;
-			// GetParent<GUI>().talkingNPC.LoadDialogue((List<DialogueObject>)dialogue.parseResult[0]); // update dialogue scene
-			// GetParent<GUI>().talkingNPC.SetDialogueNumber((int)dialogue.parseResult[2]); // Start the dialogue at the specified number
+			GD.Print(dialogue.parseResult.Count);
 			if ((bool)dialogue.parseResult[1]) {
 				// update dialogue scene
 				GetParent<GUI>().talkingNPC.LoadDialogue(
 					((List<DialogueObject>)dialogue.parseResult[0])[(int)dialogue.parseResult[2]].originFilePath, 
-					(int)dialogue.parseResult[2]
+					(int)dialogue.parseResult[2],
+					(bool)dialogue.parseResult[3]
 				); 
 				// update this dialogue from the dialogue number (MUST BE LAST TO AVOID DESTORYING CURRENT DIALOGUE)
 				LoadDialogue(((List<DialogueObject>)dialogue.parseResult[0])[(int)dialogue.parseResult[2]]); 
@@ -148,14 +152,27 @@ public partial class DialogueBox : Control
 	/// Get the response from a choice `s` and run any functions the choice had if they exist.
 	/// </summary>
 	public void DisplayChoiceResponse(Variant s) {
-		GetParent<GUI>().canProgressDialogue = true; // Allow progression after making a choice)
+		GetParent<GUI>().canProgressDialogue = true; // Allow progression after making a choice.
+		// If dialogue file set to end, IMMEDIATELY DISCARD DIALOGUE FILE to prevent dialogue cancel loop.
+		if (dialogue.originFilePath[15..] == "end.txt") {
+			GetParent<GUI>().talkingNPC.LoadWaitingDialogue();
+		}
 		dialogue.CallChoiceFunctions(dialogue.choices.IndexOf((string)s));
 		if (dialogue.parseResult is not null) {
+			/* 
+				If the dialogue scene was told to switch dialogues, update all dialogue tools.
+
+				parseResult[0] = List<DialogueObject> -> the list of dialogue objects to load in
+				parseResult[1] = bool -> choose whether or not to immediately load parseResult[0]
+				parseResult[2] = int -> the dialogue number to start the above list from
+				parseResult[3] = bool -> choose whether or not to save parseResult[0] to the NPC
+			 */
 			if ((bool)dialogue.parseResult[1]) {
 				// update dialogue scene
 				GetParent<GUI>().talkingNPC.LoadDialogue(
 					((List<DialogueObject>)dialogue.parseResult[0])[(int)dialogue.parseResult[2]].originFilePath, 
-					(int)dialogue.parseResult[2]
+					(int)dialogue.parseResult[2],
+					(bool)dialogue.parseResult[3]
 				); 
 				// update this dialogue from the dialogue number (MUST BE LAST TO AVOID DESTORYING CURRENT DIALOGUE)
 				LoadDialogue(((List<DialogueObject>)dialogue.parseResult[0])[(int)dialogue.parseResult[2]]); 

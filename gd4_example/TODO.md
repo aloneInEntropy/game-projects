@@ -8,8 +8,9 @@
         - [ ] show response and exit (part of above goal)
     - [x] dialogue branching
         - [x] load dialogue in specified files at specified indices
-        - [ ] branching without permanantly loading in files (temporary branching). possibly an optional update (bool) parameter to NPC.LoadDialogue (it'll be 5 at that point)
-        - [ ] stopping `||e` command from saving into dialogue path (part of above goal)
+        - [x] branching without permanantly loading in files (temporary branching). possibly an optional update (bool) parameter to NPC.LoadDialogue (it'll be 5 at that point)
+        - [x] stopping `||e` command from saving into dialogue path (part of above goal). Main problem is the command being saved, causing a loop where the dialogue box is closed immediately upon opening, preventing any other functions from being run.
+    - [ ] specify shorthand command parameters (e.g., `||l f=d1_re.txt l=false p=0 s=true`)
 
 - [ ] missions
     - [ ] let NPCs track which dialogue "scenes" they've already gone through

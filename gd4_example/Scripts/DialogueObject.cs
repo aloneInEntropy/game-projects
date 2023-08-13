@@ -48,7 +48,7 @@ public partial class DialogueObject
 	/// <summary>
 	/// The result of the functions ran by this object.
 	/// </summary>
-	public object functionResult;
+	public List<object> functionResult;
 
 	/// <summary>
 	/// The file path to this dialogue object.
@@ -96,54 +96,23 @@ public partial class DialogueObject
 	/// <param name="ch"></param>
 	/// <param name="d"></param>
 	public void AddDialogueFunction(string ch, int d) {
+		// GD.Print(ch);
 		dialogueFunctions[d] = ch;
 	}
 
 	/// Add a bar-separated (`|`) list of functions and space-separated list of parameters `ch` to be called when the `choice` is selected.
 	/// For example, `ch` == "shakeScreen 4|darkenScreen 0.5 3 6|updateSpeechSpeed 20" and `choice` == 2
 	public void AddChoiceFunction(string ch, int choice) {
+		GD.Print(ch);
 		choiceFunctions[choice] = ch;
 	}
 	
 	/// Call all functions specified for the `choice`.
 	public void CallChoiceFunctions(int choice) {
 		if (choiceFunctions[choice] != "") {
-			var fns = choiceFunctions[choice].Split("|");
-			foreach (string fn in fns) {
-				string tfn = fn.StripEdges();
-				Godot.Collections.Array tps = new();
-				string[] paras = tfn.Split(" ");
-				if (paras[0] == "ParseB") {
-					/* 
-						arg 1 = string -> the file path of the dialogue scene
-						arg 2 = bool -> choose whether or not to immediately load arg 0 (optional)
-						arg 3 = int -> the dialogue number to start arg 0 from (optional)
-					*/
-					var dload = true; // Immediately display loaded dialogue if specified, otherwise only load.
-					var dpos = 0; // If a dialogue start position is not specified, default to 0.
-					if (paras.Length == 3) {
-						if (paras[2].IsValidInt()) {
-							dpos = paras[2].ToInt();
-						} else {
-							dload = bool.Parse(paras[2]);
-						}
-					} else if (paras.Length == 4) {
-						dload = bool.Parse(paras[2]);
-						dpos = paras[3].ToInt();
-					}
-
-					parseResult = new List<object>{
-						DialogueManager.Parse(paras[1]),
-						dload,
-						dpos
-					};
-				} else {
-					DialogueManager dm = new();
-					tps.AddRange(paras[1..]);
-					functionResult = dm.Callv(paras[0], tps);
-				}
-				// GD.Print(paras);
-			}
+			var ress = CallFunctions(choiceFunctions[choice]);
+			parseResult = ress.parseRes;
+			functionResult = ress.funcRes;
 		} else {
 			// GD.Print("No available functions for this choice.");
 		}
@@ -157,46 +126,69 @@ public partial class DialogueObject
 		// GD.Print(d);
 		foreach (var d in dialogueFunctions) {
 			if (d != "") {
-				var fns = d.Split("|");
-				foreach (string fn in fns) {
-					string tfn = fn.StripEdges();
-					Godot.Collections.Array tps = new();
-					string[] paras = tfn.Split(" ");
-					if (paras[0] == "ParseB") {
-						/* 
-							arg 1 = string -> the file path of the dialogue scene
-							arg 2 = bool -> choose whether or not to immediately load arg 0 (optional)
-							arg 3 = int -> the dialogue number to start arg 0 from (optional)
-						*/
-						var dload = true; // Immediately display loaded dialogue if specified, otherwise only load.
-						var dpos = 0; // If a dialogue start position is not specified, default to 0.
-						if (paras.Length == 3) {
-							if (paras[2].IsValidInt()) {
-								dpos = paras[2].ToInt();
-							} else {
-								dload = bool.Parse(paras[2]);
-							}
-						} else if (paras.Length == 4) {
-							dload = bool.Parse(paras[2]);
-							dpos = paras[3].ToInt();
-						}
-
-						parseResult = new List<object>{
-							DialogueManager.Parse(paras[1]),
-							dload,
-							dpos
-						};
-					} else {
-						DialogueManager dm = new();
-						tps.AddRange(paras[1..]);
-						functionResult = dm.Callv(paras[0], tps);
-					}
-					// GD.Print(paras);
-				}
+				var ress = CallFunctions(d);
+				parseResult = ress.parseRes;
+				functionResult = ress.funcRes;
 			} else {
 				// GD.Print("No available functions for this line.");
 			}
 		}
+	}
+
+	/// <summary>
+	/// Calls all the functions given by the bar-separated (|) string <c>funcString</c>.
+	/// </summary>
+	/// <param name="funcString"></param>
+	/// <returns>The tuple containing the results of all functions ran, and the result of any file parsing in the first slot of the tuple. </returns>
+	public (List<object> parseRes, List<object> funcRes) CallFunctions(string funcString) {
+		List<object> funcRes = new(), parseRes = new();
+		var fns = funcString.Split("|");
+		parseResult = null;
+		functionResult = null;
+		foreach (string fn in fns) {
+			string tfn = fn.StripEdges();
+			Godot.Collections.Array tps = new();
+			string[] paras = tfn.Split(" ");
+			if (paras[0] == "ParseB") {
+				/* 
+					arg 1 = string -> the file path of the dialogue scene
+					arg 2 = bool -> choose whether or not to immediately load arg 0 (optional)
+					arg 3 = int -> the dialogue number to start arg 0 from (optional)
+					arg 4 = bool -> choose whether or not to save arg 1 to the NPC (if present, all arguments must be present)
+				*/
+				bool dload = true; // Immediately display loaded dialogue if specified, otherwise only load.
+				int dpos = 0; // If a dialogue start position is not specified, default to 0.
+				bool dsave = true; // Save a dialogue path to the talking NPC when loading.
+				if (paras.Length == 3) {
+					if (paras[2].IsValidInt()) {
+						dpos = paras[2].ToInt();
+					} else {
+						dload = bool.Parse(paras[2]);
+					}
+				} else if (paras.Length == 4) {
+					dload = bool.Parse(paras[2]);
+					dpos = paras[3].ToInt();
+				} else if (paras.Length == 5) {
+					dload = bool.Parse(paras[2]);
+					dpos = paras[3].ToInt();
+					dsave = bool.Parse(paras[4]);
+				}
+				GD.Print(paras);
+
+				parseRes = new List<object> {
+					DialogueManager.Parse(paras[1]),
+					dload,
+					dpos,
+					dsave
+				};
+			} else {
+				DialogueManager dm = new();
+				tps.AddRange(paras[1..]);
+				funcRes.Add(dm.Callv(paras[0], tps));
+			}
+			// GD.Print(paras);
+		}
+		return (parseRes, funcRes);
 	}
 
 	// Add a bar-separated (`|`) list of functions and space-separated list of parameters `ch` to be called when the `choice` is selected.

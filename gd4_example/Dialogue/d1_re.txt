@@ -16,10 +16,10 @@
                 ~#@2
                     The market is up here to the north. It's very close by, and as I said, you can buy and sell items there. Maybe bring back some flowers for me?
             ~@3
-                No, nevermind.
-                // No, nevermind. ||l end.txt false
-                // ~#@3
-                //     Well, then, go on your way! I'm not that interesting, I promise!
+                //No, nevermind.
+                No, nevermind. ||j d1.txt true 3
+                ~#@3
+                    Well, then, go on your way! I'm not that interesting, I promise!
 ~2
     On you go, then! I'll be seeing you!
 ~.

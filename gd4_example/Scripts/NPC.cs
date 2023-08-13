@@ -1,14 +1,31 @@
 using Godot;
+using System;
 using System.Collections.Generic;
 
 public partial class NPC : StaticBody2D
 {
 	public List<string> missions = new();
 	public List<DialogueObject> dialogue = new();
+	[Export]
+	/// <summary>
+	/// Path to dialogue.
+	/// </summary>
 	public string diagPath;
+	[Export]
+	/// <summary>
+	/// Dialogue section to display.
+	/// </summary>
 	public int currentDiag = 0;
+	/// <summary>
+	/// Path to dialogue to show when main dialogue has finished.
+	/// </summary>
 	public string secondaryDiagPath = null;
-	public int secondaryDiagStart = 0;
+	public int secondaryDiagStart = 0; // point to start secondary dialogue from
+	/// <summary>
+	/// Path to store temporary dialogue in. Will be resumed when current dialogue is finished. Takes priority over secondary dialogue.
+	/// </summary>
+	public string tempDiagPath = null; 
+	public int tempDiagStart = 0;
 	public bool isTalking = false;
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
@@ -29,47 +46,80 @@ public partial class NPC : StaticBody2D
 	/// Load the DialogueObjects for this NPC from the list of DialogueObjects <c>d</c>. By default, the NPC's dialogue number is set to 0.
 	/// </summary>
 	/// <param name="d"></param>
-	public void LoadDialogue(List<DialogueObject> d, int diagStart = 0) {
+	public void LoadDialogue(List<DialogueObject> d, int diagStart = 0, bool savePath = true) {
+		if (!savePath) {
+			SetTemporaryDialogue(diagPath, currentDiag);
+		}
 		dialogue = d;
 		diagPath = d[0].originFilePath; // pick any dialogue object and get its dialogue file
 		currentDiag = diagStart;
 	}
 	
 	/// <summary>
-	/// Load the DialogueObjects for this NPC from the dialogue file at <c>strPath</c>. By default, the NPC's dialogue number is set to 0.
+	/// Load the DialogueObjects for this NPC from the dialogue file at <c>strPath</c>. <br/>
+	/// By default, the NPC's dialogue number is set to 0 and the path given is saved into memory.
 	/// </summary>
 	/// <param name="strPath"></param>
 	/// <param name="diagStart"></param>
-	public void LoadDialogue(string strPath, int diagStart = 0) {
+	/// <param name="savePath"></param>
+	public void LoadDialogue(string strPath, int diagStart = 0, bool savePath = true) {
+		if (strPath[15..] != "end.txt") {
+		}
+		if (!savePath) {
+			SetTemporaryDialogue(diagPath, currentDiag);
+		}
+		// GD.Print(strPath);
 		dialogue = DialogueManager.Parse(strPath);
 		diagPath = strPath;
 		currentDiag = diagStart;
 	}
 
 	/// <summary>
-	/// Set the dialogue that will be used when this NPC has finished their current dialogue.
+	/// Set the temporary dialogue that will be used when this NPC has finished their current dialogue. Is prioritised over secondary dialogue.
+	/// </summary>
+	/// <param name="sp"></param>
+	public void SetTemporaryDialogue(string sp, int sds = 0) {
+		if (tempDiagPath is not null) {
+			GD.Print("WARNING: Erasing previous temporary dialogue!!");
+		}
+		tempDiagPath = sp;
+		tempDiagStart = sds;
+	}
+
+	/// <summary>
+	/// Set the dialogue that will be used when this NPC has finished their current dialogue. Is not prioritised.
 	/// </summary>
 	/// <param name="sp"></param>
 	public void SetSecondaryDialogue(string sp, int sds = 0) {
+		if (secondaryDiagPath is not null) {
+			GD.Print("WARNING: Erasing previous secondary dialogue!!");
+		}
 		secondaryDiagPath = sp;
 		secondaryDiagStart = sds;
 	}
 
 	/// <summary>
-	/// Load the dialogue to be used when the primary dialogue has finished.
+	/// Load the dialogue to be used when the primary dialogue has finished. Prioritises loading temporary dialogue over secondary dialogue.
 	/// </summary>
-	public void LoadSecondaryDialogue(int diagNum = -1) {
+	public void LoadWaitingDialogue(int diagNum = -1) {
 		if (diagNum == -1) diagNum = currentDiag;
-		if (secondaryDiagPath != null) {
+		// GD.Print("1111111111111111111111111111111");
+		// GD.Print(diagPath);
+		if (tempDiagPath != null) {
+			isTalking = true;
+			LoadDialogue(tempDiagPath, tempDiagStart);
+			tempDiagPath = null;
+			tempDiagStart = 0;
+		} else if (secondaryDiagPath != null) {
 		// if (secondaryDiagPath != null && isTalking == false) {
 		// if (secondaryDiagPath != null && diagNum == dialogue.Count) {
 			LoadDialogue(secondaryDiagPath, secondaryDiagStart);
-			GD.Print(currentDiag);
+			// GD.Print(currentDiag);
 			secondaryDiagPath = null;
 			secondaryDiagStart = 0;
 		}
 	}
-	
+
 	public void AddDialogue(DialogueObject d) {
 		dialogue.Add(d);
 	}
@@ -82,12 +132,13 @@ public partial class NPC : StaticBody2D
 	public DialogueObject GetNextDialogue() {
 		// if dialogue has finished being typed out
 		if (currentDiag < dialogue.Count) {
-			LoadSecondaryDialogue();
+			// LoadWaitingDialogue();
 			var d = dialogue[currentDiag++];
 			isTalking = true;
 			return d;
 		} else {
 			RestartDialogue();
+			LoadWaitingDialogue();
 			isTalking = false;
 			return null;
 		}
@@ -109,7 +160,7 @@ public partial class NPC : StaticBody2D
 	}
 	
 	/// <summary>
-	/// Reset the dialogue to a specified dialogue scene
+	/// Reset the dialogue to a specified dialogue scene from the first dialogue scene.
 	/// </summary>
 	/// <param name="str_path"></param>
 	public void ResetDialogue(string str_path) {
@@ -127,8 +178,7 @@ public partial class NPC : StaticBody2D
 	void _on_interact_box_area_exited(Area2D area) {
 		// GD.Print(area.GetType().Name);
 		if (area.GetParent().GetType() == typeof(Player)) {
-			RestartDialogue();
-			LoadDialogue(diagPath);
+			ResetDialogue(diagPath);
 			// if (overlapping.Contains(body)) overlapping.Remove(body);
 			// GD.Print(String.Format("{0} entered {1}", Name, body.Name));
 		}

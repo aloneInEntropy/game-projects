@@ -66,7 +66,7 @@ public partial class GUI : CanvasLayer
 			db = null;
 		}
 		if (IsInstanceValid(talkingNPC)) {
-			talkingNPC.RestartDialogue();
+			talkingNPC.ResetDialogue(talkingNPC.diagPath);
 			talkingNPC = null;
 		}
 		isDialogueActive = false;
