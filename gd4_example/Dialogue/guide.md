@@ -13,18 +13,20 @@ Please note that **ALL NUMBERS ARE *ZERO-INDEXED***. Assume that not following t
 `~~.`: End of choice dialogue\
 `~.`: End of dialogue
 
+For the following commands, anything involving parsing a file (i.e., `||l`, `||j`) will require parameter signifiers for each parameter. File paths will require extensions as well (e.g., `||l f=first.txt`).
+
 `... ||f [function name] [parameter1] [parameter2]`: call function during dialogue\
 `... ||s [signal name] [parameter1] [parameter2]`: call signal during dialogue\
 `... ||f/s [function/signal name] [parameter1] [parameter2]|[function/signal name] [parameter1]`: call multiple functions/signals during dialogue\
-`... ||e`: shorthand to end dialogue after current dialogue is finished\
-`... ||j [file name] [dialogue number]`: shorthand to jump to dialogue line without saving path\
-`... ||l [file name] [load immediately?] [dialogue number] [save path?]`: 
+`... ||j f=[file path]] p=[dialogue number]`: shorthand to jump to dialogue line without saving path\
+`... ||l f=[file path]] l=[load immediately?] p=[dialogue number] s=[save path?]`: 
 >	`file path` (`str`) - path to file from `"res://Dialogue/"`\
 	`load immediately?` (`bool`) - should the new dialogue be read immediately or after the current DialogueObject's dialogue is finished? (defaults to `true`)\
 	`dialogue number` (`int`) - the position in the `file path` to load dialogue from (defaults to `0`)\
 	`save path?`  (`bool`) -  should the new path be saved to the NPC's current dialogue or switch back afterwards? (defaults to `true`)\
 
-`... |||`: shorthand to end dialogue immediately\
+`... ||e`: shorthand to end dialogue after current dialogue is finished
+`... |||`: shorthand to end dialogue immediately
 
 
 

@@ -158,7 +158,7 @@ public partial class DialogueBox : Control
 			GetParent<GUI>().talkingNPC.LoadWaitingDialogue();
 		}
 		dialogue.CallChoiceFunctions(dialogue.choices.IndexOf((string)s));
-		if (dialogue.parseResult is not null) {
+		if (dialogue.parseResult is not null && dialogue.parseResult.Count != 0) {
 			/* 
 				If the dialogue scene was told to switch dialogues, update all dialogue tools.
 
@@ -186,10 +186,50 @@ public partial class DialogueBox : Control
 		if (dialogue.functionResult is not null) GD.Print(dialogue.functionResult); // choice function results (discarded for now)
 		if (dialogue.choiceResponses.ContainsKey((string)s)) {
 			WriteDialogue(dialogue.choiceResponses[(string)s]);
+			DisplayResponseResult(dialogue.choiceResponses[(string)s]);
 			choiceControl.Visible = false;
 		} else {
 			// progress to next dialogue object if the dialogue progresses any further
 			if (!dialogue.choiceFunctions.Contains("EndDialogueB")) GetParent<GUI>().ProgressDialogue(GetParent<GUI>().talkingNPC); 
 		}
+	}
+
+	/// <summary>
+	/// Run all dialogue functions for the DialogueObject stored in this DialogueBox.
+	/// </summary>
+	public void DisplayResponseResult(Variant s) {
+		// If dialogue file set to end, IMMEDIATELY DISCARD DIALOGUE FILE to prevent dialogue cancel loop.
+		if (dialogue.originFilePath[15..] == "end.txt") {
+			GetParent<GUI>().talkingNPC.LoadWaitingDialogue();
+		}
+
+		dialogue.CallResponseFunctions(dialogue.responses.IndexOf((string)s)); // Call all dialogue functions for this DialogueObject
+		if (dialogue.parseResult is not null && dialogue.parseResult.Count != 0) {
+			/* 
+				If the dialogue scene was told to switch dialogues, update all dialogue tools.
+
+				parseResult[0] = List<DialogueObject> -> the list of dialogue objects to load in
+				parseResult[1] = bool -> choose whether or not to immediately load parseResult[0]
+				parseResult[2] = int -> the dialogue number to start the above list from
+				parseResult[3] = bool -> choose whether or not to save parseResult[0] to the NPC
+			 */
+			GD.Print(dialogue.parseResult.Count);
+			if ((bool)dialogue.parseResult[1]) {
+				// update dialogue scene
+				GetParent<GUI>().talkingNPC.LoadDialogue(
+					((List<DialogueObject>)dialogue.parseResult[0])[(int)dialogue.parseResult[2]].originFilePath, 
+					(int)dialogue.parseResult[2],
+					(bool)dialogue.parseResult[3]
+				); 
+				// update this dialogue from the dialogue number (MUST BE LAST TO AVOID DESTORYING CURRENT DIALOGUE)
+				LoadDialogue(((List<DialogueObject>)dialogue.parseResult[0])[(int)dialogue.parseResult[2]]); 
+			} else {
+				GetParent<GUI>().talkingNPC.SetSecondaryDialogue(
+					((List<DialogueObject>)dialogue.parseResult[0])[(int)dialogue.parseResult[2]].originFilePath, 
+					(int)dialogue.parseResult[2]
+				);
+			}
+		}
+		if (dialogue.functionResult is not null) GD.Print(string.Format("DIALOGUE FUNCTION RESULT: {0}", dialogue.functionResult));
 	}
 }

@@ -100,11 +100,11 @@ public partial class DialogueManager : Node
 								break;
                             case "j":
 								// end dialogue scene after displaying current dialogue
-								tdo.AddDialogueFunction("ParseB res://Dialogue/" + line[(fnc_find + 4)..] + " false", 0);
+								tdo.AddDialogueFunction("ParseB res://Dialogue/" + line[(fnc_find + 4)..] + " s=false", 0);
 								break;
                             case "e":
 								// end dialogue scene after displaying current dialogue
-								tdo.AddDialogueFunction("ParseB res://Dialogue/end.txt true 0 false", 0); 
+								tdo.AddDialogueFunction("ParseB res://Dialogue/end.txt l=true p=0 s=false", 0); 
 								break;
                             case "l":
 								tdo.AddDialogueFunction("ParseB res://Dialogue/" + line[(fnc_find + 4)..], 0); // load dialogue file
@@ -131,13 +131,13 @@ public partial class DialogueManager : Node
 							case "|":
 								tdo.AddChoiceFunction("EndDialogueB", choice_dialogue_marker);
 								break;
-							case "e":
-								// end dialogue scene after displaying current dialogue
-								tdo.AddChoiceFunction("ParseB res://Dialogue/end.txt true 0 false", choice_dialogue_marker); 
-								break;
 							case "j":
 								// jump to dialogue scene immediately without saving file
-								tdo.AddChoiceFunction("ParseB res://Dialogue/" + line[(fnc_find + 4)..] + " false", choice_dialogue_marker); 
+								tdo.AddChoiceFunction("ParseB res://Dialogue/" + line[(fnc_find + 4)..] + " s=false", choice_dialogue_marker); 
+								break;
+							case "e":
+								// end dialogue scene after displaying current dialogue
+								tdo.AddChoiceFunction("ParseB res://Dialogue/end.txt l=true p=0 s=false", choice_dialogue_marker); 
 								break;
                             case "l":
 								tdo.AddChoiceFunction("ParseB res://Dialogue/" + line[(fnc_find + 4)..], choice_dialogue_marker);
@@ -156,7 +156,40 @@ public partial class DialogueManager : Node
 						tdo.AddChoice(line, reg_dialogue_marker);
 					}
 				} else if (adding_response_dialogue) {
-					tdo.AddResponse(line, response_dialogue_marker);
+					// If there are extra functions or signals to call during dialogue, parse them here.
+					if (fnc_find != -1) {
+						tdo.AddResponse(line[..fnc_find], response_dialogue_marker);
+						string fnc = line[fnc_find + 2].ToString();
+						switch (fnc) {
+							case "|":
+								tdo.AddResponseFunction("EndDialogueB", response_dialogue_marker);
+								break;
+							case "j":
+								// jump to dialogue scene immediately without saving file
+								tdo.AddResponseFunction("ParseB res://Dialogue/" + line[(fnc_find + 4)..] + " s=false", response_dialogue_marker); 
+								break;
+							case "e":
+								// end dialogue scene after displaying current dialogue
+								tdo.AddResponseFunction("ParseB res://Dialogue/end.txt l=true p=0 s=false", response_dialogue_marker); 
+								break;
+                            case "l":
+								tdo.AddResponseFunction("ParseB res://Dialogue/" + line[(fnc_find + 4)..], response_dialogue_marker);
+								break;
+                            case "f":
+								tdo.AddResponseFunction(line[(fnc_find + 4)..], response_dialogue_marker);
+								break;
+							case "s":
+								// tdo.AddChoiceSignal(line[(fnc_find + 4)..], response_dialogue_marker);
+								GD.Print("Response signal" + line[(fnc_find + 4)..]);
+								break;
+							default:
+								break;
+						}
+						// GD.Print(fnc);
+					} else {
+						tdo.AddResponse(line, response_dialogue_marker);
+					}
+					// tdo.AddResponse(line, response_dialogue_marker);
 				}
 			}
 		}

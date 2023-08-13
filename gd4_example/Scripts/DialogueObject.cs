@@ -38,6 +38,11 @@ public partial class DialogueObject
 	/// </summary>
 	public List<string> responses = new(); 
 
+	/// <summary> 
+	/// Functions to run for a given choice. The index of each list corresponds to the choice number.
+	/// </summary>
+	public List<string> responseFunctions = new(); 
+
 	/// <summary>
 	/// The DialogueObjects obtained from the function <c>DialogueManager.Parse</c> from this object's functions.<br/>
 	/// parseResult[0] = <c>[DialogueObject]</c> : the list of dialogue objects to load in<br/>
@@ -68,14 +73,6 @@ public partial class DialogueObject
 		return dialogue[v];
 	}
 
-	// public void SetChoiceAmount(int v) {
-	// 	vchoices = new string[v];
-	// }
-
-	// public void AddChoiceV(string ch, int pos) {
-	// 	vchoices[pos] = ch;
-	// }
-
 	public void AddChoice(string ch, int addto) {
 		// GD.Print(addto);
 		// dialogueChoices[dialogue[addto]] = ch;
@@ -87,24 +84,48 @@ public partial class DialogueObject
 	public string GetChoice(int v) {
 		return choices[v];
 	}
+
+	// Add a response `ch` to the choice `addto`.
+	public void AddResponse(string ch, int addto) {
+		responses.Add(ch);
+		responseFunctions.Add("");
+		choiceResponses[choices[addto]] = ch;
+	}
 	
+	public string GetResponse(int v) {
+		return responses[v];
+	}
 	
 	/// <summary>
 	/// Add a bar separated (`|`) list of functions and space separated list of parameters <c>ch</c> to be called when the dialogue <c>d</c> is loaded.<br/>
 	/// For example, <c>ch</c> == "shakeScreen 4|darkenScreen 0.5 3 6|updateSpeechSpeed 20" and <c>d</c> == 3
 	/// </summary>
-	/// <param name="ch"></param>
-	/// <param name="d"></param>
 	public void AddDialogueFunction(string ch, int d) {
 		// GD.Print(ch);
 		dialogueFunctions[d] = ch;
 	}
 
-	/// Add a bar-separated (`|`) list of functions and space-separated list of parameters `ch` to be called when the `choice` is selected.
+	/// <summary>
+	/// Add a bar-separated (`|`) list of functions and space separated list of parameters `ch` to be called when the <c>choice</c> is selected.
 	/// For example, `ch` == "shakeScreen 4|darkenScreen 0.5 3 6|updateSpeechSpeed 20" and `choice` == 2
+	/// </summary>
 	public void AddChoiceFunction(string ch, int choice) {
-		GD.Print(ch);
+		// GD.Print(ch);
 		choiceFunctions[choice] = ch;
+	}
+	
+	/// <summary>
+	/// Add a bar-separated (`|`) list of functions and space separated list of parameters `ch` to be called when the response <c>resp</c> is selected.
+	/// For example, `ch` == "shakeScreen 4|darkenScreen 0.5 3 6|updateSpeechSpeed 20" and `choice` == 2
+	/// </summary>
+	public void AddResponseFunction(string ch, int resp) {
+		// GD.Print(ch);
+		responseFunctions[resp] = ch;
+	}
+
+	// Add a bar-separated (`|`) list of functions and space-separated list of parameters `ch` to be called when the `choice` is selected.
+	public void AddChoiceSignal(string ch, int choice) {
+		choiceSignals[choice] = ch;
 	}
 	
 	/// Call all functions specified for the `choice`.
@@ -118,7 +139,6 @@ public partial class DialogueObject
 		}
 	}
 	
-
 	/// <summary>
 	/// Call all dialogue functions specified for this DialogueObject.
 	/// </summary>
@@ -132,6 +152,20 @@ public partial class DialogueObject
 			} else {
 				// GD.Print("No available functions for this line.");
 			}
+		}
+	}
+	
+	/// <summary>
+	/// Call all response functions specified for this DialogueObject.
+	/// </summary>
+	public void CallResponseFunctions(int resp) {
+		// GD.Print(d);
+		if (responseFunctions[resp] != "") {
+			var ress = CallFunctions(responseFunctions[resp]);
+			parseResult = ress.parseRes;
+			functionResult = ress.funcRes;
+		} else {
+			// GD.Print("No available functions for this line.");
 		}
 	}
 
@@ -156,27 +190,46 @@ public partial class DialogueObject
 					arg 3 = int -> the dialogue number to start arg 0 from (optional)
 					arg 4 = bool -> choose whether or not to save arg 1 to the NPC (if present, all arguments must be present)
 				*/
+				string dfile = paras[1]; // Choose which file to load in. (Required; here only for readability.)
 				bool dload = true; // Immediately display loaded dialogue if specified, otherwise only load.
 				int dpos = 0; // If a dialogue start position is not specified, default to 0.
 				bool dsave = true; // Save a dialogue path to the talking NPC when loading.
-				if (paras.Length == 3) {
-					if (paras[2].IsValidInt()) {
-						dpos = paras[2].ToInt();
-					} else {
-						dload = bool.Parse(paras[2]);
+
+				foreach (var p in paras[1..]) {
+					var pr = p.Split("=");
+					switch (pr[0]) {
+						case "f":
+							dfile = pr[1];
+							break;
+						case "l":
+							dload = bool.Parse(pr[1]);
+							break;
+						case "p":
+							dpos = pr[1].ToInt();
+							break;
+						case "s":
+							dsave = bool.Parse(pr[1]);
+							break;
 					}
-				} else if (paras.Length == 4) {
-					dload = bool.Parse(paras[2]);
-					dpos = paras[3].ToInt();
-				} else if (paras.Length == 5) {
-					dload = bool.Parse(paras[2]);
-					dpos = paras[3].ToInt();
-					dsave = bool.Parse(paras[4]);
 				}
-				GD.Print(paras);
+				// if (paras.Length == 3) {
+				// 	if (paras[2].IsValidInt()) {
+				// 		dpos = paras[2].ToInt();
+				// 	} else {
+				// 		dload = bool.Parse(paras[2]);
+				// 	}
+				// } else if (paras.Length == 4) {
+				// 	dload = bool.Parse(paras[2]);
+				// 	dpos = paras[3].ToInt();
+				// } else if (paras.Length == 5) {
+				// 	dload = bool.Parse(paras[2]);
+				// 	dpos = paras[3].ToInt();
+				// 	dsave = bool.Parse(paras[4]);
+				// }
+				// GD.Print(paras);
 
 				parseRes = new List<object> {
-					DialogueManager.Parse(paras[1]),
+					DialogueManager.Parse(dfile),
 					dload,
 					dpos,
 					dsave
@@ -189,22 +242,5 @@ public partial class DialogueObject
 			// GD.Print(paras);
 		}
 		return (parseRes, funcRes);
-	}
-
-	// Add a bar-separated (`|`) list of functions and space-separated list of parameters `ch` to be called when the `choice` is selected.
-	public void AddChoiceSignal(string ch, int choice) {
-		choiceSignals[choice] = ch;
-	}
-	
-	// Add a response `ch` to the choice `addto`.
-	public void AddResponse(string ch, int addto) {
-		responses.Add(ch);
-		// GD.Print(choices.Count);
-		// GD.Print(addto);
-		choiceResponses[choices[addto]] = ch;
-	}
-	
-	public string GetResponse(int v) {
-		return responses[v];
 	}
 }

@@ -44,5 +44,5 @@
 		~##.
 	~~.
 ~5
-Well, that's all from me. I'll let you roam the area yourself. Enjoy yourself, and good luck traveller! ||l d1_re.txt false
+Well, that's all from me. I'll let you roam the area yourself. Enjoy yourself, and good luck traveller! ||l d1_re.txt l=false
 ~.
