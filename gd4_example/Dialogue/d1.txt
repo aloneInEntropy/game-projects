@@ -4,7 +4,7 @@
 	In case you forgot, you can always leave this place again by entering the portal behind you. It will never close, so you can come and leave as you like. 
 ~~2
 	There are plenty of things to discover in Orast. Where would you like to begin?
-		~##4
+		~##5
 			~@0
 				The farm.
 				~#@0
@@ -18,11 +18,15 @@
 				~#@2
 					Ah, I suppose you might be hungry after your journey! Or maybe just eager to make some money? Regardless, it's up here to the north.
 			~@3
+				Nowhere in particular.
+				~#@3
+					That's fair, I suppose. No need to rush yourself after arriving at our wonderful village!
+			~@4
 				That's all, thank you. |||
 		~##.
 	~~.
 ~3
-	Safe travels, traveller! Come back whenever you have any questions. I'm the mayor of this village, after all.
+	Safe travels! Come back whenever you have any questions. I'm the mayor of this village, after all.
 ~~4
 	Oh, one more thing. What's your favourite type of pie?
 		~##4
@@ -31,12 +35,14 @@
 				~#@0 
 					Ah, wonderful. We have plenty of apple trees growing in the area. I'll make sure to pick a few for your welcoming party!
 			~@1
-				//Strawberry. ||f ParseB res://Dialogue/d2_1.txt 1
+				//Strawberry. ||j res://Dialogue/d2_1.txt p=1
 				Strawberry.
 				~#@1
 					Ah, that's my favourite too! Maybe you could come with me to pick a few this afternoon? They're ripening soon.
 			~@2
 				I don't have a preference.
+				~#@2
+					A mystery, then! I wonder if that's a lack of preference or if you just don't like pie. Wow, someone who doesn't like pie. That's certainly a thought, huh?
 			~@3
 				Cinnamon.
 				~#@3

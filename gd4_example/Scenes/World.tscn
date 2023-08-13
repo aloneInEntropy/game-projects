@@ -22,7 +22,6 @@ position = Vector2(213, 211)
 
 [node name="Olivia" parent="." instance=ExtResource("5_blx77")]
 position = Vector2(100, 302)
-diagPath = "d1_re.txt"
 
 [node name="Mark" parent="." instance=ExtResource("6_rviol")]
 position = Vector2(361, 211)

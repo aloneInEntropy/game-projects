@@ -3,6 +3,7 @@ The text parser is still under construction, but the basics work like below. All
 Please note that **ALL NUMBERS ARE *ZERO-INDEXED***. Assume that not following this **exact structure** will crash the dialogue parser.
 
 ## Cheat Sheet
+### Syntax
 `// ...`: Comment the whole line\
 `~[dialogue number]`: Regular dialogue\
 `~~[dialogue number]`: Choice dialogue\
@@ -13,20 +14,27 @@ Please note that **ALL NUMBERS ARE *ZERO-INDEXED***. Assume that not following t
 `~~.`: End of choice dialogue\
 `~.`: End of dialogue
 
+### Commands
 For the following commands, anything involving parsing a file (i.e., `||l`, `||j`) will require parameter signifiers for each parameter. File paths will require extensions as well (e.g., `||l f=first.txt`).
 
 `... ||f [function name] [parameter1] [parameter2]`: call function during dialogue\
 `... ||s [signal name] [parameter1] [parameter2]`: call signal during dialogue\
 `... ||f/s [function/signal name] [parameter1] [parameter2]|[function/signal name] [parameter1]`: call multiple functions/signals during dialogue\
-`... ||j f=[file path]] p=[dialogue number]`: shorthand to jump to dialogue line without saving path\
-`... ||l f=[file path]] l=[load immediately?] p=[dialogue number] s=[save path?]`: 
->	`file path` (`str`) - path to file from `"res://Dialogue/"`\
-	`load immediately?` (`bool`) - should the new dialogue be read immediately or after the current DialogueObject's dialogue is finished? (defaults to `true`)\
-	`dialogue number` (`int`) - the position in the `file path` to load dialogue from (defaults to `0`)\
-	`save path?`  (`bool`) -  should the new path be saved to the NPC's current dialogue or switch back afterwards? (defaults to `true`)\
 
-`... ||e`: shorthand to end dialogue after current dialogue is finished
-`... |||`: shorthand to end dialogue immediately
+`... ||l f=[file path] l=[load immediately?] p=[dialogue number] s=[save path?]`\
+`file path` (`str`) - path to file from `"res://Dialogue/"`\
+`load immediately?` (`bool`) - should the new dialogue be read immediately or after the current DialogueObject's dialogue is finished? (defaults to `true`)\
+`dialogue number` (`int`) - the position in the `file path` to load dialogue from (defaults to `0`)\
+`save path?`  (`bool`) -  should the new path be saved to the NPC's current dialogue or switch back afterwards? (defaults to `true`)\
+
+`... ||j f=[file path] l=[load immediately?] p=[dialogue number]`\
+Command to jump to dialogue line without saving path. Shorthand for `||l f=[file path] l=[load immediately?] p=[dialogue number] s=false`
+
+`... ||e`\
+Command to end dialogue after current dialogue is finished. Shorthand for `||l f=end.txt l=false p=0 s=false`
+
+`... |||`\
+Command to end dialogue immediately. Shorthand for `||f EndDialogueB`
 
 
 

@@ -1,0 +1,11 @@
+{
+    "missionCount": 3,
+    "missions": [
+        {
+            "name": "Get Olivia flowers",
+            "description": "Buy Olivia flowers from the market.",
+            "winCondition": "Olivia gets at least 1 flower from the Player",
+            "completed": false
+        }
+    ]
+}

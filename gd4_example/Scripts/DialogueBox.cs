@@ -90,7 +90,7 @@ public partial class DialogueBox : Control
 		}
 		choiceButtons.Clear();
 
-		var nbpos = new Vector2(0, 0);
+		var nbpos = new Vector2(0, 8);
 		for (int i = 0; i < dialogue.choices.Count; i++) {
 			GetParent<GUI>().canProgressDialogue = false;
 			string c = dialogue.choices[i];

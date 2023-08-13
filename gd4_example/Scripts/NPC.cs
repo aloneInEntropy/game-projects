@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 public partial class NPC : StaticBody2D
 {
-	public List<string> missions = new();
+	public Dictionary<string, bool> missions = new();
 	public List<DialogueObject> dialogue = new();
 	[Export]
 	/// <summary>
@@ -38,8 +38,12 @@ public partial class NPC : StaticBody2D
 	{
 	}
 
-	public void AddMission(string parameter) {
-		missions.Add(parameter);
+	public void AddMission(string parameter, bool completed = false) {
+		missions.Add(parameter, completed);
+	}
+	
+	public void CompleteMission(string parameter) {
+		missions[parameter] = true;
 	}
 
 	/// <summary>

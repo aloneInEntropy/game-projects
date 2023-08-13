@@ -12,5 +12,13 @@
         - [x] stopping `||e` command from saving into dialogue path (part of above goal). Main problem is the command being saved, causing a loop where the dialogue box is closed immediately upon opening, preventing any other functions from being run.
     - [x] specify shorthand command parameters (e.g., `||l f=d1_re.txt l=false p=0 s=true`)
 
+- [ ] inventory
+    - [ ] give NPCs items from the inventory
+    - [ ] give NPCs an inventory stock
+
 - [ ] missions
     - [ ] let NPCs track which dialogue "scenes" they've already gone through
+
+- [ ] bartering
+    - [ ] buy items from NPCs
+    - [ ] sell items to NPCs
