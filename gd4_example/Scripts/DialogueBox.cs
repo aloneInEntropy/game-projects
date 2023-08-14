@@ -70,7 +70,7 @@ public partial class DialogueBox : Control
 	public void WriteDialogue() {
 		txt.Text = string.Join('\n', dialogue.dialogue);
 		txt.VisibleCharacters = 0;
-		DialogueManager.SetDialogueToUpdate(this, 3);
+		DialogueManager.SetDialogueToUpdate(this, frames_before_updating:2);
 	}
 	
 	/// <summary>
@@ -80,7 +80,7 @@ public partial class DialogueBox : Control
 	public void WriteDialogue(string d) {
 		txt.Text = string.Join('\n', d);
 		txt.VisibleCharacters = 0;
-		DialogueManager.SetDialogueToUpdate(this, 3);
+		DialogueManager.SetDialogueToUpdate(this, frames_before_updating:2);
 	}
 	
 	public void WriteChoices() {

@@ -7,6 +7,8 @@ public partial class Mark : NPC
 		diagPath = "res://Dialogue/d3.txt";
 		// diagPath = "res://Dialogue/d2.txt";
 		LoadDialogue(diagPath);
+		voicePath = "res://Assets/Audio/Voices/Mark.wav";
+		voice = (AudioStreamWav)GD.Load(voicePath);
 	}
 
 	public override void _Process(double delta) {

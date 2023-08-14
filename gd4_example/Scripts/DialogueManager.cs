@@ -8,11 +8,45 @@ using System.Collections.Generic;
 public partial class DialogueManager : Node
 {
 	public static List<DialogueObject> dialogue_objs = new(); // the order of dialogue as it is presented
+	/// <summary>
+	/// The DialogueBox object displayed when dialogue is active.
+	/// </summary>
 	public static DialogueBox activeDialogueBox = new();
+
+	/// <summary>
+	/// The DialogueObject currently displayed in the dialogue box.
+	/// </summary>
+	public static DialogueObject activeDialogue = new();
+
+	/// <summary>
+	/// How long to wait in frames before the next dialogue character update occurs.
+	/// </summary>
 	public static int framesBeforeUpdating = 20;
+
+	/// <summary>
+	/// How many characters are shown on each dialogue character update.
+	/// </summary>
 	public static float updateSpeechSpeed = 1;
-	public static bool isDialogueReading = false; // is dialogue currently being read?
-	public static DialogueObject activeDialogue = new(); // dialogue currently being read
+
+	/// <summary>
+	/// Is dialogue currently being read out to the dialogue box (i.e., typed out character by character or fully displayed?).
+	/// </summary>
+	public static bool isDialogueReading = false;
+	
+	/// <summary>
+	/// How long in frames to stop dialogue from updating when at the end of a sentence (i.e., finds the characters '!', '?', or '.').
+	/// </summary>
+	int sentenceEndPause = 10;
+	int sentenceEndPauseRate = 0;
+
+	/// <summary>
+	/// How long in frames to stop dialogue from updating when at a sentence break (i.e., finds the characters ',', ';', ':').
+	/// </summary>
+	int sentenceBreakPause = 5;
+	int sentenceBreakPauseRate = 0;
+
+	string[] sentenceEnds = { ".", "!", "?" };
+	string[] sentencePauses = { ",", ":", ";" };
 
 	public override void _Ready()
 	{
@@ -21,19 +55,42 @@ public partial class DialogueManager : Node
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
 	public override void _Process(double delta)
 	{
-		if (isDialogueReading) UpdateVisibleText();
+		// GD.Print(Engine.GetFramesPerSecond());
+		if (isDialogueReading) {
+			// GD.Print(activeDialogueBox.txt.Text.Length);
+			if (activeDialogueBox.txt.VisibleRatio != 1 && Array.Exists(sentenceEnds, element => element == activeDialogueBox.txt.Text[activeDialogueBox.txt.VisibleCharacters].ToString())) {
+				// GD.Print("pause here");
+				sentenceEndPauseRate = sentenceEndPause;
+				UpdateVisibleText(); // display text one more time to flush character and avoid loop
+			}
+			if (activeDialogueBox.txt.VisibleRatio != 1 && Array.Exists(sentencePauses, element => element == activeDialogueBox.txt.Text[activeDialogueBox.txt.VisibleCharacters].ToString())) {
+				// GD.Print("break here");
+				sentenceBreakPauseRate = sentenceBreakPause;
+				UpdateVisibleText(); // display text one more time to flush character and avoid loop
+			}
+			sentenceEndPauseRate = Mathf.Clamp(sentenceEndPauseRate - 1, 0, sentenceEndPause);
+			sentenceBreakPauseRate = Mathf.Clamp(sentenceBreakPauseRate - 1, 0, sentenceBreakPause);
+			if (sentenceEndPauseRate <= 0 && sentenceBreakPauseRate <= 0) {
+				UpdateVisibleText(); // only update visible text when there are no pauses.
+			}
+		} 
+		// else {
+		// 	if (GameManager.frame - d == 20) {
+		// 		isDialogueReading = true;
+		// 	}
+		// }
 		if (IsInstanceValid(activeDialogueBox)) activeDialogueBox.finishedMarker.Visible = !isDialogueReading;
 	}
 
 	/// <summary>
-	/// Parse the text file at <paramref name="txtPath"/> as dialogue.
+	/// Parse the text file at <c>txtPath</c> as dialogue.
 	/// </summary>
 	/// <param name="txtPath">
 	/// description
 	/// </param>
 	/// <returns>
 	/// 	<p>
-	///		A <c>List</c> of <c>DialogueObject</c>s for the dialogue read from
+	///		A <c>List</c> of <c>DialogueObject</c>s for the dialogue file that was parsed.
 	/// 	</p>
 	/// </returns>
 	public static List<DialogueObject> Parse(string txtPath) {
@@ -198,15 +255,25 @@ public partial class DialogueManager : Node
 	}
 	
 	/// <summary>
-	/// Non-static version of <c>Parse</c>
+	/// Parse the text file at <c>txtPath</c> as dialogue.
+	/// Non-static version of <c>Parse</c>.
 	/// </summary>
-	/// <param name="txt_path"></param>
-	/// <returns></returns>
+	/// <param name="txtPath">
+	/// description
+	/// </param>
+	/// <returns>
+	/// 	<p>
+	///		A <c>List</c> of <c>DialogueObject</c>s for the dialogue file that was parsed.
+	/// 	</p>
+	/// </returns>
 	public List<DialogueObject> ParseB(string txt_path) {
 		return Parse(txt_path);
 	}
 
-
+	/// <summary>
+	/// Update the amount of visible text displayed in the dialogue box. If <c>finish</c> is true, display all the text immediately.
+	/// </summary>
+	/// <param name="finish"></param>
 	public static void UpdateVisibleText(bool finish = false) {
 		if (finish) {
 			activeDialogueBox.txt.VisibleRatio = 1;
@@ -214,13 +281,24 @@ public partial class DialogueManager : Node
 			if (GameManager.frame % framesBeforeUpdating == 0) {
 				activeDialogueBox.txt.VisibleCharacters = (int)Mathf.Clamp(activeDialogueBox.txt.VisibleCharacters + updateSpeechSpeed, 0, activeDialogueBox.txt.Text.Length);
 			}
+			if (GameManager.frame % AudioManager.updateVoiceSpeed == 0) {
+				AudioManager.PlayVoice(((GUI)activeDialogueBox.Owner).talkingNPC.voice);
+			}
 		}
 		isDialogueReading = activeDialogueBox.txt.VisibleRatio != 1;
 	}
 
-	public static void SetDialogueToUpdate(DialogueBox diagBox, int frames_before_updating = 20, float update_speech_speed = 1) {
+	/// <summary>
+	/// Set the dialogue to display and update in the dialogue box <c>diagBox</c>. 
+	/// </summary>
+	/// <param name="diagBox"></param>
+	/// <param name="frames_before_updating"></param>
+	/// <param name="update_speech_speed"></param>
+	/// <param name="update_voice_speed"></param>
+	public static void SetDialogueToUpdate(DialogueBox diagBox, int frames_before_updating = 20, float update_speech_speed = 1, float update_voice_speed = 4) {
 		framesBeforeUpdating = frames_before_updating;
 		updateSpeechSpeed = update_speech_speed;
+		AudioManager.SetUpdateVoiceSpeed(update_voice_speed);
 		activeDialogueBox = diagBox;
 		isDialogueReading = true;
 	}
@@ -237,7 +315,9 @@ public partial class DialogueManager : Node
 		GD.Print(string.Format("HELLO {0} and {1}!", out1, out2));
 	}
 
-	// Close and end the dialogue session.
+	/// <summary>
+	/// Close and end the dialogue session.
+	/// </summary>
 	public static void EndDialogue() {
 		isDialogueReading = false;
 		activeDialogue = null;
@@ -245,10 +325,17 @@ public partial class DialogueManager : Node
         g.CloseDialogue();
 	}
 	
-	// Close and end the dialogue session (non-static).
+	/// <summary>
+	/// Close and end the dialogue session.
+	/// Non-static version of <c>EndDialogue</c>.
+	/// </summary>
 	public void EndDialogueB() {
 		EndDialogue();
 		// isDialogueActive = false;
 		// activeDialogue = null;
+	}
+
+	public void OnTimerTimeout() {
+		
 	}
 }

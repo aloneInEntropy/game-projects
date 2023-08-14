@@ -4,6 +4,8 @@ using System.Collections.Generic;
 
 public partial class NPC : StaticBody2D
 {
+	public string voicePath = "";
+	public AudioStreamWav voice = new();
 	public Dictionary<string, bool> missions = new();
 	public List<DialogueObject> dialogue = new();
 	[Export]
