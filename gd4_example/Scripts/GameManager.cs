@@ -1,7 +1,10 @@
 using Godot;
 using System;
+using System.Text.RegularExpressions;
 
-// The Game Manager script.
+/// <summary>
+/// The Game Manager script. Handles all general/auxillary functions and variables.
+/// </summary>
 public partial class GameManager : Node
 {
 	public static int frame = 0;
@@ -24,5 +27,14 @@ public partial class GameManager : Node
 
 	public static bool Inherits(Type potential, Type basec) {
 		return potential.IsSubclassOf(basec);
+	}
+
+	/// <summary>
+	/// Remove any BBCode tags from the string <c>s</c>.
+	/// </summary>
+	/// <param name="s"></param>
+	/// <returns>The string with all BBCode tags removed.</returns>
+	public static string RemoveBBCTags(string s) {
+		return Regex.Replace(s, "\\[.*?\\]", "");
 	}
 }

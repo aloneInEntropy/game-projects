@@ -13,7 +13,7 @@
     - [x] specify shorthand command parameters (e.g., `||l f=d1_re.txt l=false p=0 s=true`)
     - [x] dialogue "voices"
     - [x] pause dialogue reading at sentence breaks (full stops, commas, etc.).
-        - [ ] Godot's bbcode system does not display the special characters used for inline functions (e.g., [b]Olivia[/b] will not display the tags `b` and `/b` and will instead bold the text, as expected). This causes a minor problem where the NPC's voice appears delayed at random moments, when it otherwise should type out normally. A possible solution is to remove bbcode text entirely and bold, italicise, and colour text through my own inline functions, but that would take time and be more complicated than necessary. The alternative is removing any special text effects, which would be much easier but also kinda lame :(
+        - [x] ~~Godot's bbcode system does not display the special characters used for inline functions (e.g., [b]Olivia[/b] will not display the tags `b` and `/b` and will instead bold the text, as expected). This causes a minor problem where the NPC's voice appears delayed at random moments, when it otherwise should type out normally. A possible solution is to remove bbcode text entirely and bold, italicise, and colour text through my own inline functions, but that would take time and be more complicated than necessary. The alternative is removing any special text effects, which would be much easier but also kinda lame :(~~ lol nvm just use regex
 
 
 - [ ] inventory

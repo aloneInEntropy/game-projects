@@ -68,7 +68,7 @@ public partial class DialogueBox : Control
 	/// Write the dialogue in the dialogue object this dialogue box has loaded.
 	/// </summary>
 	public void WriteDialogue() {
-		txt.Text = string.Join('\n', dialogue.dialogue);
+		txt.Text = GameManager.RemoveBBCTags(string.Join('\n', dialogue.dialogue));
 		txt.VisibleCharacters = 0;
 		DialogueManager.SetDialogueToUpdate(this, frames_before_updating:2);
 	}
@@ -78,7 +78,7 @@ public partial class DialogueBox : Control
 	/// </summary>
 	/// <param name="d"></param>
 	public void WriteDialogue(string d) {
-		txt.Text = string.Join('\n', d);
+		txt.Text = GameManager.RemoveBBCTags(string.Join('\n', d));
 		txt.VisibleCharacters = 0;
 		DialogueManager.SetDialogueToUpdate(this, frames_before_updating:2);
 	}

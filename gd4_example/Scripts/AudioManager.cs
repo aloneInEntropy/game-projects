@@ -1,6 +1,9 @@
 using Godot;
 using System;
 
+/// <summary>
+/// The Audio Manager. Handles all audio events.
+/// </summary>
 public partial class AudioManager : Node
 {
 	public static AudioStreamPlayer voicePlayer = new();
