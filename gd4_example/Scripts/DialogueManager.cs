@@ -1,4 +1,4 @@
-using Godot;
+	using Godot;
 using System;
 using System.Collections.Generic;
 
@@ -282,7 +282,7 @@ public partial class DialogueManager : Node
 				activeDialogueBox.txt.VisibleCharacters = (int)Mathf.Clamp(activeDialogueBox.txt.VisibleCharacters + updateSpeechSpeed, 0, activeDialogueBox.txt.Text.Length);
 			}
 			if (GameManager.frame % AudioManager.updateVoiceSpeed == 0) {
-				AudioManager.PlayVoice(((GUI)activeDialogueBox.Owner).talkingNPC.voice);
+				AudioManager.PlayVoice(Globals.talkingNPC.voice);
 			}
 		}
 		isDialogueReading = activeDialogueBox.txt.VisibleRatio != 1;

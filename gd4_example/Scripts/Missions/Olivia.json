@@ -1,11 +1,23 @@
-{
-    "missionCount": 3,
-    "missions": [
-        {
-            "name": "Get Olivia flowers",
-            "description": "Buy Olivia flowers from the market.",
-            "winCondition": "Olivia gets at least 1 flower from the Player",
-            "completed": false
-        }
-    ]
-}
+[
+    {
+        "Name": "Talk to Olivia.",
+        "Description": "Talk to Olivia for the first time.",
+        "WinConditionDescription": "The Player speaks to Olivia.",
+        "Active": false,
+        "Completed": true
+    },
+    {
+        "Name": "Give Olivia a flower.",
+        "Description": "Give Olivia a flower from the market or the forest.",
+        "WinConditionDescription": "Olivia gets at least 1 flower from the Player.",
+        "Active": false,
+        "Completed": false
+    },
+    {
+        "Name": "Ask Olivia about Khana.",
+        "Description": "Ask Olivia about Khana and about the one you saw.",
+        "WinConditionDescription": "The correct dialogue option is selected.",
+        "Active": false,
+        "Completed": false
+    }
+]

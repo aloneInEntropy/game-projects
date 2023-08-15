@@ -1,14 +1,17 @@
-[gd_scene load_steps=3 format=3 uid="uid://6wwwvpsqguwa"]
+[gd_scene load_steps=4 format=3 uid="uid://6wwwvpsqguwa"]
 
 [ext_resource type="Script" path="res://Scripts/GUI.cs" id="1_h7svq"]
 [ext_resource type="PackedScene" uid="uid://cqpj6a45n36qi" path="res://Scenes/DialogueBox.tscn" id="2_5syqh"]
+[ext_resource type="FontFile" uid="uid://bhtiplwjrbpc7" path="res://Assets/Fonts/futura light bt.ttf" id="2_ck4dy"]
 
 [node name="GUI" type="CanvasLayer"]
 script = ExtResource("1_h7svq")
 
 [node name="MissionText" type="RichTextLabel" parent="."]
-offset_right = 236.0
+offset_right = 445.0
 offset_bottom = 70.0
+theme_override_fonts/normal_font = ExtResource("2_ck4dy")
+theme_override_font_sizes/normal_font_size = 20
 text = "qwerdserf"
 fit_content = true
 scroll_active = false

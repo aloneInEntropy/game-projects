@@ -36,7 +36,7 @@ public partial class DialogueBox : Control
 	public override void _Process(double delta) {
 		txtbg.Visible = txt.Visible;
 		chcsbg.Visible = chcs.Visible;
-		if (GetParent<GUI>().isDialogueActive) nameLabel.Text = GetParent<GUI>().talkingNPC.Name;
+		if (Globals.gui.isDialogueActive) nameLabel.Text = Globals.talkingNPC.Name;
 	}
 
 	/// <summary>
@@ -115,7 +115,7 @@ public partial class DialogueBox : Control
 	public void DisplayDialogueResult() {
 		// If dialogue file set to end, IMMEDIATELY DISCARD DIALOGUE FILE to prevent dialogue cancel loop.
 		if (dialogue.originFilePath[15..] == "end.txt") {
-			GetParent<GUI>().talkingNPC.LoadWaitingDialogue();
+			Globals.talkingNPC.LoadWaitingDialogue();
 		}
 
 		dialogue.CallDialogueFunctions(); // Call all dialogue functions for this DialogueObject
@@ -131,7 +131,7 @@ public partial class DialogueBox : Control
 			GD.Print(dialogue.parseResult.Count);
 			if ((bool)dialogue.parseResult[1]) {
 				// update dialogue scene
-				GetParent<GUI>().talkingNPC.LoadDialogue(
+				Globals.talkingNPC.LoadDialogue(
 					((List<DialogueObject>)dialogue.parseResult[0])[(int)dialogue.parseResult[2]].originFilePath, 
 					(int)dialogue.parseResult[2],
 					(bool)dialogue.parseResult[3]
@@ -139,7 +139,7 @@ public partial class DialogueBox : Control
 				// update this dialogue from the dialogue number (MUST BE LAST TO AVOID DESTORYING CURRENT DIALOGUE)
 				LoadDialogue(((List<DialogueObject>)dialogue.parseResult[0])[(int)dialogue.parseResult[2]]); 
 			} else {
-				GetParent<GUI>().talkingNPC.SetSecondaryDialogue(
+				Globals.talkingNPC.SetSecondaryDialogue(
 					((List<DialogueObject>)dialogue.parseResult[0])[(int)dialogue.parseResult[2]].originFilePath, 
 					(int)dialogue.parseResult[2]
 				);
@@ -155,7 +155,7 @@ public partial class DialogueBox : Control
 		GetParent<GUI>().canProgressDialogue = true; // Allow progression after making a choice.
 		// If dialogue file set to end, IMMEDIATELY DISCARD DIALOGUE FILE to prevent dialogue cancel loop.
 		if (dialogue.originFilePath[15..] == "end.txt") {
-			GetParent<GUI>().talkingNPC.LoadWaitingDialogue();
+			Globals.talkingNPC.LoadWaitingDialogue();
 		}
 		dialogue.CallChoiceFunctions(dialogue.choices.IndexOf((string)s));
 		if (dialogue.parseResult is not null && dialogue.parseResult.Count != 0) {
@@ -169,7 +169,7 @@ public partial class DialogueBox : Control
 			 */
 			if ((bool)dialogue.parseResult[1]) {
 				// update dialogue scene
-				GetParent<GUI>().talkingNPC.LoadDialogue(
+				Globals.talkingNPC.LoadDialogue(
 					((List<DialogueObject>)dialogue.parseResult[0])[(int)dialogue.parseResult[2]].originFilePath, 
 					(int)dialogue.parseResult[2],
 					(bool)dialogue.parseResult[3]
@@ -177,7 +177,7 @@ public partial class DialogueBox : Control
 				// update this dialogue from the dialogue number (MUST BE LAST TO AVOID DESTORYING CURRENT DIALOGUE)
 				LoadDialogue(((List<DialogueObject>)dialogue.parseResult[0])[(int)dialogue.parseResult[2]]); 
 			} else {
-				GetParent<GUI>().talkingNPC.SetSecondaryDialogue(
+				Globals.talkingNPC.SetSecondaryDialogue(
 					((List<DialogueObject>)dialogue.parseResult[0])[(int)dialogue.parseResult[2]].originFilePath, 
 					(int)dialogue.parseResult[2]
 				);
@@ -190,7 +190,7 @@ public partial class DialogueBox : Control
 			choiceControl.Visible = false;
 		} else {
 			// progress to next dialogue object if the dialogue progresses any further
-			if (!dialogue.choiceFunctions.Contains("EndDialogueB")) GetParent<GUI>().ProgressDialogue(GetParent<GUI>().talkingNPC); 
+			if (!dialogue.choiceFunctions.Contains("EndDialogueB")) GetParent<GUI>().ProgressDialogue(Globals.talkingNPC); 
 		}
 	}
 
@@ -200,7 +200,7 @@ public partial class DialogueBox : Control
 	public void DisplayResponseResult(Variant s) {
 		// If dialogue file set to end, IMMEDIATELY DISCARD DIALOGUE FILE to prevent dialogue cancel loop.
 		if (dialogue.originFilePath[15..] == "end.txt") {
-			GetParent<GUI>().talkingNPC.LoadWaitingDialogue();
+			Globals.talkingNPC.LoadWaitingDialogue();
 		}
 
 		dialogue.CallResponseFunctions(dialogue.responses.IndexOf((string)s)); // Call all dialogue functions for this DialogueObject
@@ -216,7 +216,7 @@ public partial class DialogueBox : Control
 			GD.Print(dialogue.parseResult.Count);
 			if ((bool)dialogue.parseResult[1]) {
 				// update dialogue scene
-				GetParent<GUI>().talkingNPC.LoadDialogue(
+				Globals.talkingNPC.LoadDialogue(
 					((List<DialogueObject>)dialogue.parseResult[0])[(int)dialogue.parseResult[2]].originFilePath, 
 					(int)dialogue.parseResult[2],
 					(bool)dialogue.parseResult[3]
@@ -224,7 +224,7 @@ public partial class DialogueBox : Control
 				// update this dialogue from the dialogue number (MUST BE LAST TO AVOID DESTORYING CURRENT DIALOGUE)
 				LoadDialogue(((List<DialogueObject>)dialogue.parseResult[0])[(int)dialogue.parseResult[2]]); 
 			} else {
-				GetParent<GUI>().talkingNPC.SetSecondaryDialogue(
+				Globals.talkingNPC.SetSecondaryDialogue(
 					((List<DialogueObject>)dialogue.parseResult[0])[(int)dialogue.parseResult[2]].originFilePath, 
 					(int)dialogue.parseResult[2]
 				);

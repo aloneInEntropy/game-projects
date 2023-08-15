@@ -1,13 +1,38 @@
 using Godot;
-using System;
+using System.Text.Json;
 using System.Collections.Generic;
+using System.Dynamic;
+// using System.IO;
+
+
 
 public partial class NPC : StaticBody2D
 {
+	/// <summary>
+	/// The path to the voice sound file used by this NPC.
+	/// </summary>
 	public string voicePath = "";
+
+	/// <summary>
+	/// The voice used by this NPC.
+	/// </summary>
 	public AudioStreamWav voice = new();
-	public Dictionary<string, bool> missions = new();
+
+	/// <summary>
+	/// The path to the JSON file used to load missions for this NPC.
+	/// </summary>
+	public string missionJSONPath = "";
+
+	/// <summary>
+	/// The list of missions given to the Player by this NPC.
+	/// </summary>
+	public List<Mission> Missions { set;  get; }
+
+	/// <summary>
+	/// The list of dialogue spoken by this NPC.
+	/// </summary>
 	public List<DialogueObject> dialogue = new();
+
 	[Export]
 	/// <summary>
 	/// Path to dialogue.
@@ -18,34 +43,75 @@ public partial class NPC : StaticBody2D
 	/// Dialogue section to display.
 	/// </summary>
 	public int currentDiag = 0;
+
 	/// <summary>
 	/// Path to dialogue to show when main dialogue has finished.
 	/// </summary>
 	public string secondaryDiagPath = null;
 	public int secondaryDiagStart = 0; // point to start secondary dialogue from
+
 	/// <summary>
 	/// Path to store temporary dialogue in. Will be resumed when current dialogue is finished. Takes priority over secondary dialogue.
 	/// </summary>
 	public string tempDiagPath = null; 
 	public int tempDiagStart = 0;
+
+	/// <summary>
+	/// Boolean checking if this NPC is talking (active in the dialogue box).
+	/// </summary>
 	public bool isTalking = false;
-	// Called when the node enters the scene tree for the first time.
-	public override void _Ready()
-	{
-		LoadDialogue(diagPath);
+	
+
+	/// <summary>
+	/// Set the voice of this NPC from the path <c>vPath</c> to a .wav file.
+	/// </summary>
+	/// <param name="vPath"></param>
+	public void SetVoice(string vPath) {
+		voice = (AudioStreamWav)GD.Load(vPath);
 	}
 
-	// Called every frame. 'delta' is the elapsed time since the previous frame.
-	public override void _Process(double delta)
-	{
+	/// <summary>
+	/// Set the missions of the NPC using the path <c>missionPath</c> to a JSON file.
+	/// </summary>
+	/// <param name="missionPath"></param>
+	public void SetMissionsJSON(string missionPath) {
+		FileAccess file = FileAccess.Open(missionPath, FileAccess.ModeFlags.Read);
+		string jsonString = file.GetAsText();
+		Missions = JsonSerializer.Deserialize<List<Mission>>(jsonString);
+		file.Close();
 	}
 
-	public void AddMission(string parameter, bool completed = false) {
-		missions.Add(parameter, completed);
+	/// <summary>
+	/// Get a mission given its name <c>n</c>.
+	/// </summary>
+	/// <param name="n"></param>
+	/// <returns>The mission with the name <c>n</c>.</returns>
+	public Mission GetMission(string n) {
+		foreach (var m in Missions) {
+			if (m.Name == n) return m;
+		}
+		return null;
 	}
 	
-	public void CompleteMission(string parameter) {
-		missions[parameter] = true;
+	/// <summary>
+	/// Get a mission at position <c>n</c> in the stored list of missions.
+	/// </summary>
+	/// <param name="n"></param>
+	/// <returns>The mission at position <c>n</c>.</returns>
+	public Mission GetMission(int n) {
+		return Missions[n];
+	}
+	
+	/// <summary>
+	/// Get all missions not yet completed.
+	/// </summary>
+	/// <returns>The list of missions that aren't completed.</returns>
+	public List<Mission> GetUncompletedMissions() {
+		List<Mission> ucm = new();
+		foreach (var m in Missions) {
+			if (!m.Completed) ucm.Add(m);
+		}
+		return ucm;
 	}
 
 	/// <summary>

@@ -23,22 +23,15 @@ public partial class Player : CharacterBody2D
 	Vector2 lastDirection;
 
 	public override void _Ready() {
-        // GetTree().GetChild("");
-		gui = GetParent().GetNodeOrNull<GUI>("GUI");
+		Globals.player = this;
         rayCast = GetNodeOrNull<RayCast2D>("RayCast2D");
-		gui.missionText.Text = "#######################################";
+		gui = GetParent().GetNodeOrNull<GUI>("GUI");
 	}
 
 
     public override void _Process(double delta)
     {
-		gui.missionText.Text = facingObj is null ? 
-			"null" : 
-			facingObj.Name
-		;
 		rayCast.TargetPosition = lastDirection * 32;
-		// GD.Print(rayCast.TargetPosition);
-		// GD.Print(rayCast.GetCollider());
     }
 
     public override void _Input(InputEvent @event)
@@ -54,6 +47,7 @@ public partial class Player : CharacterBody2D
 			// GD.Print(GameManager.IsSameOrSubclass(typeof(NPC), facingObj.GetType()));
 			
 			if (facingObj is not null && facingObj.GetType().IsSubclassOf(typeof(NPC))) {
+				Globals.talkingNPC = (NPC)facingObj;
 				// GD.Print(facingObj.Name);
 				if (DialogueManager.isDialogueReading) {
 					// if dialogue is currently being typed out
@@ -61,12 +55,6 @@ public partial class Player : CharacterBody2D
 				} else {
 					// if dialogue has finished being typed out
 					gui.ProgressDialogue((NPC)facingObj);
-					// if (gui.canProgressDialogue) gui.ShowDialogue(((NPC)facingObj).GetNextDialogue());
-					// if (currentDiag < dobj.Count) {
-					// 	// diags.RemoveAt(0);
-					// } else {
-					// 	gui.CloseDialogue();
-					// }
 				}
 			}
 		}
@@ -101,7 +89,7 @@ public partial class Player : CharacterBody2D
 			// if the node is an NPC, start it's dialogue from the beginning
 			// var p = (NPC)area.GetParent();
 			// p.ResetDialogue();
-			if (!overlapping.Contains(area.GetParent<Node2D>())) overlapping.Add(area.GetParent<Node2D>());
+			if (!overlapping.Contains(area.GetParent<NPC>())) overlapping.Add(area.GetParent<NPC>());
 			// GD.Print(string.Format("{0} entered {1}", Name, area.GetParent<Node2D>().Name));
 		}
 	}
@@ -115,7 +103,7 @@ public partial class Player : CharacterBody2D
 		if (area.GetParent().GetType().IsSubclassOf(typeof(NPC))) {
 			// if the node is an NPC
 			gui.CloseDialogue();
-			if (overlapping.Contains(area.GetParent<Node2D>())) overlapping.Remove(area.GetParent<Node2D>());
+			if (overlapping.Contains(area.GetParent<NPC>())) overlapping.Remove(area.GetParent<NPC>());
 			// GD.Print(string.Format("{0} entered {1}", Name, area.GetParent<Node2D>().Name));
 		}
 	}
