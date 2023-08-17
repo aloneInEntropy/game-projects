@@ -114,8 +114,9 @@ public partial class DialogueBox : Control
 	/// </summary>
 	public void DisplayDialogueResult() {
 		// If dialogue file set to end, IMMEDIATELY DISCARD DIALOGUE FILE to prevent dialogue cancel loop.
+		// Since this will end the dialogue, do NOT save the previous dialogue position and restart it instead.
 		if (dialogue.originFilePath[15..] == "end.txt") {
-			Globals.talkingNPC.LoadWaitingDialogue();
+			Globals.talkingNPC.LoadWaitingDialogue(0);
 		}
 
 		dialogue.CallDialogueFunctions(); // Call all dialogue functions for this DialogueObject
@@ -154,8 +155,9 @@ public partial class DialogueBox : Control
 	public void DisplayChoiceResponse(Variant s) {
 		GetParent<GUI>().canProgressDialogue = true; // Allow progression after making a choice.
 		// If dialogue file set to end, IMMEDIATELY DISCARD DIALOGUE FILE to prevent dialogue cancel loop.
+		// Since this will end the dialogue, do NOT save the previous dialogue position and restart it instead.
 		if (dialogue.originFilePath[15..] == "end.txt") {
-			Globals.talkingNPC.LoadWaitingDialogue();
+			Globals.talkingNPC.LoadWaitingDialogue(0);
 		}
 
 		// Call all functions for the choice at `s`
@@ -202,8 +204,9 @@ public partial class DialogueBox : Control
 	/// </summary>
 	public void DisplayResponseResult(Variant s) {
 		// If dialogue file set to end, IMMEDIATELY DISCARD DIALOGUE FILE to prevent dialogue cancel loop.
+		// Since this will end the dialogue, do NOT save the previous dialogue position and restart it instead.
 		if (dialogue.originFilePath[15..] == "end.txt") {
-			Globals.talkingNPC.LoadWaitingDialogue();
+			Globals.talkingNPC.LoadWaitingDialogue(0);
 		}
 
 		dialogue.CallResponseFunctions(dialogue.responses.IndexOf((string)s)); // Call all dialogue functions for this DialogueObject

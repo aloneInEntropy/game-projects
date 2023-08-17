@@ -51,13 +51,15 @@ public partial class NPC : Interactable
 	public int currentDiag = 0;
 
 	/// <summary>
-	/// Path to dialogue to show when main dialogue has finished.
+	/// Path to dialogue to show when main dialogue has finished. Will be resumed when current dialogue is finished.<br/>
+	/// This dialogue will be saved to the NPC.
 	/// </summary>
 	public string secondaryDiagPath = null;
 	public int secondaryDiagStart = 0; // point to start secondary dialogue from
 
 	/// <summary>
-	/// Path to store temporary dialogue in. Will be resumed when current dialogue is finished. Takes priority over secondary dialogue.
+	/// Path to store temporary dialogue in. Will be resumed when current dialogue is finished.<br/>
+	/// This dialogue will not be saved to th NPC. Takes priority over secondary dialogue.
 	/// </summary>
 	public string tempDiagPath = null; 
 	public int tempDiagStart = 0;
@@ -67,6 +69,16 @@ public partial class NPC : Interactable
 	/// </summary>
 	public bool isTalking = false;
 	
+	/// <summary>
+	/// Boolean that checks if there was queued dialogue to be shown.
+	/// </summary>
+	public bool wasRecentWaiting = false;
+
+	/// <summary>
+	/// The position of the queued dialogue to be shown, if any.
+	/// </summary>
+	public int recentWaitingStart = 0;
+
 
 	/// <summary>
 	/// Set the voice of this NPC from the path <c>vPath</c> to a .wav file.
@@ -180,22 +192,21 @@ public partial class NPC : Interactable
 	}
 
 	/// <summary>
-	/// Load the dialogue to be used when the primary dialogue has finished. Prioritises loading temporary dialogue over secondary dialogue.
+	/// Load the dialogue to be used when the primary dialogue has finished. <br/>
+	/// If <c>diagNum</c> is not -1, load in the dialogue at the position specified, regardless of the position previously saved. <br/>
+	/// Prioritises loading temporary dialogue over secondary dialogue.
 	/// </summary>
 	public void LoadWaitingDialogue(int diagNum = -1) {
-		if (diagNum == -1) diagNum = currentDiag;
-		// GD.Print("1111111111111111111111111111111");
-		// GD.Print(diagPath);
+		wasRecentWaiting = true;
 		if (tempDiagPath != null) {
+			recentWaitingStart = diagNum == -1 ? tempDiagStart : diagNum;
 			isTalking = true;
-			LoadDialogue(tempDiagPath, tempDiagStart);
+			LoadDialogue(tempDiagPath, recentWaitingStart);
 			tempDiagPath = null;
 			tempDiagStart = 0;
 		} else if (secondaryDiagPath != null) {
-		// if (secondaryDiagPath != null && isTalking == false) {
-		// if (secondaryDiagPath != null && diagNum == dialogue.Count) {
-			LoadDialogue(secondaryDiagPath, secondaryDiagStart);
-			// GD.Print(currentDiag);
+			recentWaitingStart = diagNum == -1 ? secondaryDiagStart : diagNum;
+			LoadDialogue(secondaryDiagPath, recentWaitingStart);
 			secondaryDiagPath = null;
 			secondaryDiagStart = 0;
 		}
@@ -245,8 +256,14 @@ public partial class NPC : Interactable
 	/// </summary>
 	/// <param name="str_path"></param>
 	public void ResetDialogue(string str_path) {
-		LoadDialogue(str_path);
-		currentDiag = 0;
+		if (wasRecentWaiting) {
+			LoadDialogue(str_path, diagStart:recentWaitingStart);
+			wasRecentWaiting = false;
+			recentWaitingStart = 0;
+		} else {
+			LoadDialogue(str_path);
+			currentDiag = 0;
+		}
 	}
 
 	void _on_interact_box_area_entered(Area2D area) {

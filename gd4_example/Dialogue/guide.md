@@ -23,7 +23,7 @@ For the following commands, anything involving parsing a file (i.e., `||l`, `||j
 
 `... ||l f=[file path] l=[load immediately?] p=[dialogue number] s=[save path?]`\
 `file path` (`str`) - path to file from `"res://Dialogue/"`\
-`load immediately?` (`bool`) - should the new dialogue be read immediately or after the current DialogueObject's dialogue is finished? (defaults to `true`)\
+`load immediately?` (`bool`) - should the new dialogue be read immediately next or after the current DialogueObject's dialogue is finished? When used at the end of a dialogue file, setting this to `false` waits for the dialogue box to close before loading it in. Otherwise, it is loaded in as the next dialogue object. (defaults to `true`)\
 `dialogue number` (`int`) - the position in the `file path` to load dialogue from (defaults to `0`)\
 `save path?`  (`bool`) -  should the new path be saved to the NPC's current dialogue or switch back afterwards? (defaults to `true`)\
 

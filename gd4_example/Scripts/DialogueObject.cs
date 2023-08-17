@@ -60,8 +60,8 @@ public partial class DialogueObject
 	/// </summary>
 	public string originFilePath = "INVALID"; 
 	
-	public Dictionary<string, string> dialogueChoices { set; get; } // Dictionary using NPC dialogue as keys and NPC choices as values
-	public Dictionary<string, string> choiceResponses { set; get; } // Dictionary using NPC choices as keys and NPC responses as values
+	public Dictionary<string, string> dialogueChoices = new(); // Dictionary using NPC dialogue as keys and NPC choices as values
+	public Dictionary<string, string> choiceResponses = new(); // Dictionary using NPC choices as keys and NPC responses as values
 	
 
 	public void AddDialogue(string ch) {
