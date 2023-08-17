@@ -200,9 +200,9 @@ You can comment out (ignore) any line beginning with double forward slashes `//`
 For example,
 ```
 ~0
-Hello world.
-//I don't want this line to show up.
-Hello world 2.
+	Hello world.
+	//I don't want this line to show up.
+	Hello world 2.
 ~.
 ```
 

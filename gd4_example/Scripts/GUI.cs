@@ -1,6 +1,9 @@
 using Godot;
-using System.Collections.Generic;
 
+
+/// <summary>
+/// The GUI class. Contains information and methods relating to the on-screen grephical user interface.
+/// </summary>
 public partial class GUI : CanvasLayer
 {
 	public RichTextLabel missionText = new();
@@ -33,12 +36,6 @@ public partial class GUI : CanvasLayer
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
 	public override void _Process(double delta)
 	{
-		missionText.Text = "";
-		if (isDialogueActive) {
-			foreach (var m in talkingNPC.GetUncompletedMissions()) {
-				missionText.Text += m.Name + "\n";
-			}
-		}
 	}
 
 	public void ProgressDialogue(NPC npc) {
@@ -65,12 +62,17 @@ public partial class GUI : CanvasLayer
 	}
 
 	public void OpenDialogue() {
+		missionText.Text = "";
+		foreach (var m in talkingNPC.GetUncompletedMissions()) {
+			missionText.Text += $"{m.Name} ({m.MType.Name} to {m.MType.TargetNPC.trueName})" + "\n";
+		}
 		isDialogueActive = true;
 		db.Visible = true;
 		db.Write();
 	}
 
 	public void CloseDialogue() {
+		missionText.Text = "";
 		if (IsInstanceValid(db)) {
 			db.QueueFree();
 			db = null;

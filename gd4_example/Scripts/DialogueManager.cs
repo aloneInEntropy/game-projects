@@ -1,13 +1,13 @@
-	using Godot;
+using Godot;
 using System;
 using System.Collections.Generic;
+
 
 /// <summary>
 /// The global DialogueManager class. Handles dialogue events.
 /// </summary>
 public partial class DialogueManager : Node
 {
-	public static List<DialogueObject> dialogue_objs = new(); // the order of dialogue as it is presented
 	/// <summary>
 	/// The DialogueBox object displayed when dialogue is active.
 	/// </summary>

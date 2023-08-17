@@ -1,10 +1,10 @@
 using Godot;
-using System;
 using System.Collections.Generic;
-using System.Linq;
+
 
 /// <summary>
-/// The DialogueObject class. Contains information about a dialogue scene, which has dialogue, choices, responses, and functions to run alongside aforementioned fields.
+/// The DialogueObject class. <br/>
+/// Contains information about a dialogue scene, which has dialogue, choices, responses, and functions to run alongside aforementioned fields.
 /// </summary>
 public partial class DialogueObject
 {
@@ -60,8 +60,8 @@ public partial class DialogueObject
 	/// </summary>
 	public string originFilePath = "INVALID"; 
 	
-	public readonly Dictionary<string, string> dialogueChoices = new(); // Dictionary using NPC dialogue as keys and NPC choices as values
-	public readonly Dictionary<string, string> choiceResponses = new(); // Dictionary using NPC choices as keys and NPC responses as values
+	public Dictionary<string, string> dialogueChoices { set; get; } // Dictionary using NPC dialogue as keys and NPC choices as values
+	public Dictionary<string, string> choiceResponses { set; get; } // Dictionary using NPC choices as keys and NPC responses as values
 	
 
 	public void AddDialogue(string ch) {
@@ -212,21 +212,6 @@ public partial class DialogueObject
 							break;
 					}
 				}
-				// if (paras.Length == 3) {
-				// 	if (paras[2].IsValidInt()) {
-				// 		dpos = paras[2].ToInt();
-				// 	} else {
-				// 		dload = bool.Parse(paras[2]);
-				// 	}
-				// } else if (paras.Length == 4) {
-				// 	dload = bool.Parse(paras[2]);
-				// 	dpos = paras[3].ToInt();
-				// } else if (paras.Length == 5) {
-				// 	dload = bool.Parse(paras[2]);
-				// 	dpos = paras[3].ToInt();
-				// 	dsave = bool.Parse(paras[4]);
-				// }
-				// GD.Print(paras);
 
 				parseRes = new List<object> {
 					DialogueManager.Parse(dfile),

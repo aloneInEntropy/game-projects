@@ -4,6 +4,9 @@ using System;
 public partial class Olivia : NPC
 {
 	public override void _Ready() {
+		trueName = "Olivia";
+		Globals.AddNPC(this);
+
 		diagPath = "res://Dialogue/d1.txt";
 		LoadDialogue(diagPath);
 

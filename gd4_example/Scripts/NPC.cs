@@ -1,13 +1,18 @@
 using Godot;
 using System.Text.Json;
 using System.Collections.Generic;
-using System.Dynamic;
-// using System.IO;
 
 
-
-public partial class NPC : StaticBody2D
+/// <summary>
+/// The NPC class. Contains information and methods relation to any non-player character.
+/// </summary>
+public partial class NPC : Interactable
 {
+	/// <summary>
+	/// The true name of this NPC.
+	/// </summary>
+	public string trueName = "Generic";
+
 	/// <summary>
 	/// The path to the voice sound file used by this NPC.
 	/// </summary>
@@ -38,6 +43,7 @@ public partial class NPC : StaticBody2D
 	/// Path to dialogue.
 	/// </summary>
 	public string diagPath;
+
 	[Export]
 	/// <summary>
 	/// Dialogue section to display.
@@ -77,7 +83,8 @@ public partial class NPC : StaticBody2D
 	public void SetMissionsJSON(string missionPath) {
 		FileAccess file = FileAccess.Open(missionPath, FileAccess.ModeFlags.Read);
 		string jsonString = file.GetAsText();
-		Missions = JsonSerializer.Deserialize<List<Mission>>(jsonString);
+		Missions = JsonSerializer.Deserialize<List<Mission>>(jsonString, Mission.options);
+		foreach (Mission m in Missions) m.MType.Init();
 		file.Close();
 	}
 
@@ -107,11 +114,15 @@ public partial class NPC : StaticBody2D
 	/// </summary>
 	/// <returns>The list of missions that aren't completed.</returns>
 	public List<Mission> GetUncompletedMissions() {
-		List<Mission> ucm = new();
-		foreach (var m in Missions) {
-			if (!m.Completed) ucm.Add(m);
-		}
-		return ucm;
+		return Missions.FindAll(m => !m.Completed);
+	}
+	
+	/// <summary>
+	/// Get all missions currently tracking completion.
+	/// </summary>
+	/// <returns>The list of missions tracking completion.</returns>
+	public List<Mission> GetActiveMissions() {
+		return Missions.FindAll(m => m.Active);
 	}
 
 	/// <summary>
@@ -135,8 +146,6 @@ public partial class NPC : StaticBody2D
 	/// <param name="diagStart"></param>
 	/// <param name="savePath"></param>
 	public void LoadDialogue(string strPath, int diagStart = 0, bool savePath = true) {
-		if (strPath[15..] != "end.txt") {
-		}
 		if (!savePath) {
 			SetTemporaryDialogue(diagPath, currentDiag);
 		}

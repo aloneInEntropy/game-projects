@@ -2,6 +2,7 @@ using Godot;
 using System;
 using System.Text.RegularExpressions;
 
+
 /// <summary>
 /// The Game Manager script. Handles all general/auxillary functions and variables.
 /// </summary>

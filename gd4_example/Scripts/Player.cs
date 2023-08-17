@@ -1,8 +1,10 @@
 using Godot;
 using Godot.Collections;
-using System;
-using System.Collections.Generic;
 
+
+/// <summary>
+/// The Player class. Contains references and methods relating to the Player character.
+/// </summary>
 public partial class Player : CharacterBody2D
 {
 	[ExportGroup("Movement")]
@@ -36,6 +38,8 @@ public partial class Player : CharacterBody2D
 
     public override void _Input(InputEvent @event)
     {
+		if (@event.IsActionPressed("RestartLevel")) GetTree().ReloadCurrentScene();
+
         if (@event.IsActionPressed("ui_accept") || @event.IsActionPressed("next")) {
 			// if the player is overlapping multiple objects, choose the one it is looking at.
 			// otherwise, pick the overlapping object.
@@ -101,8 +105,8 @@ public partial class Player : CharacterBody2D
 		#pragma warning restore IDE1006
 		// GD.Print(area.GetParent<Node2D>().Name);
 		if (area.GetParent().GetType().IsSubclassOf(typeof(NPC))) {
-			// if the node is an NPC
 			gui.CloseDialogue();
+			// if the node is an NPC
 			if (overlapping.Contains(area.GetParent<NPC>())) overlapping.Remove(area.GetParent<NPC>());
 			// GD.Print(string.Format("{0} entered {1}", Name, area.GetParent<Node2D>().Name));
 		}

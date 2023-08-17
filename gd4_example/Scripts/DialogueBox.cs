@@ -157,7 +157,10 @@ public partial class DialogueBox : Control
 		if (dialogue.originFilePath[15..] == "end.txt") {
 			Globals.talkingNPC.LoadWaitingDialogue();
 		}
+
+		// Call all functions for the choice at `s`
 		dialogue.CallChoiceFunctions(dialogue.choices.IndexOf((string)s));
+
 		if (dialogue.parseResult is not null && dialogue.parseResult.Count != 0) {
 			/* 
 				If the dialogue scene was told to switch dialogues, update all dialogue tools.

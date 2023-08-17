@@ -8,8 +8,10 @@
 script = ExtResource("1_h7svq")
 
 [node name="MissionText" type="RichTextLabel" parent="."]
-offset_right = 445.0
-offset_bottom = 70.0
+offset_left = 36.0
+offset_top = 48.0
+offset_right = 481.0
+offset_bottom = 118.0
 theme_override_fonts/normal_font = ExtResource("2_ck4dy")
 theme_override_font_sizes/normal_font_size = 20
 text = "qwerdserf"
@@ -17,3 +19,4 @@ fit_content = true
 scroll_active = false
 
 [node name="DialogueBox" parent="." instance=ExtResource("2_5syqh")]
+metadata/_edit_lock_ = true
