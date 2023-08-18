@@ -276,7 +276,7 @@ public partial class NPC : Interactable
 	void _on_interact_box_area_exited(Area2D area) {
 		// GD.Print(area.GetType().Name);
 		if (area.GetParent().GetType() == typeof(Player)) {
-			ResetDialogue(diagPath);
+			// ResetDialogue(diagPath);
 			// if (overlapping.Contains(body)) overlapping.Remove(body);
 			// GD.Print(String.Format("{0} entered {1}", Name, body.Name));
 		}

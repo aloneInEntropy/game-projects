@@ -23,7 +23,7 @@ public partial class DialogueBox : Control
 		txt = (RichTextLabel)GetNode("TxtLabel");
 		nameLabel = (RichTextLabel)GetNode("NameLabel");
 		txtbg = (TextureRect)GetNode("DBBG");
-		finishedMarker = (TextureRect)GetNode("FinishedMarker");
+		finishedMarker = (TextureRect)GetNode("DBBG/FinishedMarker");
 		choiceControl = (Control)GetNode("ChoiceControl");
 		chcs = (RichTextLabel)GetNode("ChoiceControl/ChoiceLabel");
 		chcsbg = (TextureRect)GetNode("ChoiceControl/CBBG");

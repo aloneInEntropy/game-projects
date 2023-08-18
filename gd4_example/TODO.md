@@ -17,6 +17,11 @@
 - [] interactable class?
     - it would be a class of objects the player is able to interact with by being near, such as a chest or NPC. the NPC class would inherit it.
 
+- [ ] player
+    - [x] player sprites + animations
+    - [x] player attacks
+    - [ ] player weapons + damage (part of inventory)
+
 - [ ] missions
     - [x] MissionType class
     - [ ] let NPCs track which dialogue "scenes" they've already gone through

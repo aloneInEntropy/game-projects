@@ -17,19 +17,28 @@ script = ExtResource("1_880yw")
 
 [node name="DBBG" type="TextureRect" parent="."]
 layout_mode = 0
-offset_left = 241.0
-offset_top = 458.0
-offset_right = 719.0
-offset_bottom = 628.0
+offset_left = 142.0
+offset_top = 421.0
+offset_right = 620.0
+offset_bottom = 591.0
 texture = ExtResource("1_rpggg")
+expand_mode = 1
+
+[node name="FinishedMarker" type="TextureRect" parent="DBBG"]
+layout_mode = 0
+offset_left = 464.0
+offset_top = 155.0
+offset_right = 475.0
+offset_bottom = 167.0
+texture = ExtResource("5_f5aep")
 expand_mode = 1
 
 [node name="TxtLabel" type="RichTextLabel" parent="."]
 layout_mode = 0
-offset_left = 255.0
-offset_top = 464.0
-offset_right = 706.0
-offset_bottom = 620.0
+offset_left = 156.0
+offset_top = 427.0
+offset_right = 607.0
+offset_bottom = 583.0
 theme_override_colors/default_color = Color(0, 0, 0, 1)
 theme_override_fonts/normal_font = ExtResource("2_t8gjk")
 theme_override_fonts/bold_font = ExtResource("3_1rhln")
@@ -42,10 +51,10 @@ scroll_active = false
 
 [node name="NameLabel" type="RichTextLabel" parent="."]
 layout_mode = 0
-offset_left = 242.0
-offset_top = 417.0
-offset_right = 579.0
-offset_bottom = 458.0
+offset_left = 143.0
+offset_top = 380.0
+offset_right = 480.0
+offset_bottom = 421.0
 theme_override_colors/default_color = Color(0, 0, 0, 1)
 theme_override_fonts/normal_font = ExtResource("3_1rhln")
 theme_override_font_sizes/normal_font_size = 30
@@ -56,14 +65,14 @@ scroll_active = false
 
 [node name="ChoiceControl" type="Control" parent="."]
 layout_mode = 1
-anchor_left = 0.659
-anchor_top = 0.699
-anchor_right = 0.659
-anchor_bottom = 0.699
-offset_left = -0.168091
-offset_top = 0.0479736
-offset_right = -0.168091
-offset_bottom = 0.0479736
+anchor_left = 0.661
+anchor_top = 0.688
+anchor_right = 0.661
+anchor_bottom = 0.688
+offset_left = 0.440063
+offset_top = 0.200012
+offset_right = 0.440063
+offset_bottom = 0.200012
 metadata/_edit_group_ = true
 
 [node name="CBBG" type="TextureRect" parent="ChoiceControl"]
@@ -92,13 +101,3 @@ bbcode_enabled = true
 text = "Hello world"
 fit_content = true
 scroll_active = false
-
-[node name="FinishedMarker" type="TextureRect" parent="."]
-visible = false
-layout_mode = 0
-offset_left = 705.0
-offset_top = 613.0
-offset_right = 716.0
-offset_bottom = 625.0
-texture = ExtResource("5_f5aep")
-expand_mode = 1
