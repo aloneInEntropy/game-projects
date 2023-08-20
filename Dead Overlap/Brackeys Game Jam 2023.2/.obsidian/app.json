@@ -1,0 +1,18 @@
+{
+  "promptDelete": false,
+  "spellcheck": true,
+  "alwaysUpdateLinks": true,
+  "showFrontmatter": true,
+  "showLineNumber": false,
+  "pdfExportSettings": {
+    "includeName": true,
+    "pageSize": "A4",
+    "landscape": false,
+    "margin": "0",
+    "downscalePercent": 100
+  },
+  "newFileLocation": "current",
+  "showIndentGuide": false,
+  "useTab": true,
+  "readableLineLength": false
+}
