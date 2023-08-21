@@ -1,6 +1,6 @@
 
 # Plot
-The year is 1989. A cold case has recently received new evidence in the form of a death of a prior suspect. In 1984, a man named Makoto Bourdain died under mysterious circumstances. You play as the great detective, Marceline Ren, as you try to figure out which of eight suspects murdered Makoto. 
+The year is 1989. In the small town of Shune, a cold case has recently received new evidence in the form of a death of a prior suspect. In 1984, a man named Makoto Bourdain died under mysterious circumstances. You play as the great detective, Marceline Ren, as you try to figure out which of eight suspects murdered Makoto. 
 
 You have the ability to dive into people's memories, with restraint applied by group you work with, the Patchwork Collective. From there, you can talk to different suspects in the past and gather clues. Find out who murdered Makoto.
 
@@ -81,37 +81,67 @@ The German Shepard of Farah's cousin, Juno, had gone missing a on September 5th.
 
 # Characters
 ### Makoto Bourdain
-**Skin/Race**: Japanese/French (White-Asian)
+**Skin/Ethnicity: Japanese/French (White-Asian)
 **Hair**: Brown
 **Age**: 48 (deceased)
 **Pronouns**: He/him
 **Description**: Makoto was a very public figure. He was known by many people in the town, and as the resident neurosurgeon, he was one of the richest in the area. His hands saved several lives, including that of the mayor's child, [[#Jordan Cuno]]. On one occasion, he was voted to become the next mayor, but he graciously turned the offer down, notably saying that "\[he\] wouldn't want to upstage old guys". The mayor, [[#Patrick Cuno]], took it in stride, but was reported to be "filled with divine rage" over the slight. He was married to Adora Aga. It was rumoured that he had a secret drug problem, but this was never proven. 
 
-
-
 ---
-### Johnny Lawn
-**Skin**: White
-**Hair**: Blond
-**Age**: 55
-**Pronouns**: He/him
-**Description**: Johnny Lawn was a close friend of Makoto. Having grown up with him in a small community, the two went to college together, taking different course
-
 ### Patrick Cuno
-An asshole politician.
+**Skin/Ethnicity**: White
+**Hair**: Blond
+**D.O.B.**: 1926/04/29
+**Pronouns**: He/him
+**Description**: Patrick Cuno is the mayor of Shune, a small town on the outskirts of Dublin. He was voted into power nearly a decade ago, and everyone regrets their decision. Cuno's awful ruling has caused poverty, destruction, and corruption to plague the town, and yet he keeps getting voted into power by people who fear change. 
 
-### Jordan Cuno
-The non-binary child of [[#Patrick Cuno]].
+A joke entry by an unknown person resulted in Makoto Bourdain being entered into the upcoming election, and he received 48% of all votes without campaigning. He reportedly didn't even know he was running. Cuno took a very bold stance on the matter, pulling out show after show to get the public back on his side. However, nothing he did was working, and he seemed set to lose to Makoto in the next election until his sudden death. The results showed Makoto was leading at 64% to Cuno's 33%. The date of the election was September 10th.
 
-### Marie Bornstein
-The burnt-out overachiever working as a cashier.
+It should be noted that Cuno's then-wife, Alice Cuno, divorced him on September 22nd. Rumours of his affairs seemed to spread everywhere, but the most prevalent of them all was a picture taken of what looked like Cuno and Marie Bornstein, a cashier, walking out of a hotel together.
 
-### Adora Aga
-The wife of the deceased Makoto Bourdain.
+### Johnny Lawn
+**Skin/Ethnicity**: White
+**Hair**: Blond
+**D.O.B.**: 1934/03/11
+**Pronouns**: He/him
+**Description**: Johnny Lawn was a close friend of Makoto. Makoto was frequently bullied due to his skinny stature. Johnny, whose father was a police officer, took it upon himself to protect him, though he still sometimes asked for bits of Makoto's lunch in return. The two grew up in a small community, going to the same primary and secondary schools.
+
+After Makoto went abroad for his doctorate, Johnny began to miss the feelings of power he got. He thought becoming a police officer would satisfy that itch, and it did to an extent, but actual power, *real power* had left his grasp along with Makoto. Upon his arrival, his expertise was widely sought after and he made a tremendous amount of money. Johnny saw this as Makoto upstaging him, and his resentment only grew.
 
 ### Ignacio Pascal
-An old, long-corrupt cop.
+**Skin/Ethnicity**: Latino
+**Hair**: White
+**D.O.B.**: 1922/11/29
+**Pronouns**: He/him
+**Description**: An old, long-corrupt cop.
+
+### Adora Aga
+**Skin/Ethnicity**: Black
+**Hair**: Black
+**D.O.B.**: 1952/08/08
+**Pronouns**: She/her
+**Description**: The wife of the deceased Makoto Bourdain. They met while Makoto returned to his father's village in France to get his doctorate there and promptly began dating. They married a few years later and returned from France with plans to have children. Makoto's job prospects were massive, so Adora had no need to find a job and prepared to become a stay at home mom. However, Makoto ended up changing his mind about having children, seemingly on a whim. Adora resented him for this but stayed by his side regardless, just in case he changed his mind.
+
+She had called several lawyers to initiate divorce proceedings, but stopped short every time. The last time she called a divorce lawyer was on September 2nd, six days before Makoto's death.
+
+### Jordan Cuno
+**Skin/Ethnicity**: Black/white (mixed)
+**Hair**: Brown
+**D.O.B.**: 1963/01/05
+**Pronouns**: They/them
+**Description**: The non-binary child of [[#Patrick Cuno]].
 
 ### Farah Sal-Cuno
-The wife of [[#Jordan Cuno]].
+**Skin/Ethnicity**: Brown (Indian)
+**Hair**: Brown
+**D.O.B.**: 1947/19/06
+**Pronouns**: She/her
+**Description**: The wife of [[#Jordan Cuno]].
+
+### Marie Bornstein
+**Skin/Ethnicity**: Jewish
+**Hair**: Black
+**D.O.B.**: 1947/19/06
+**Pronouns**: She/her
+**Description**: The burnt-out overachiever working as a cashier.
 

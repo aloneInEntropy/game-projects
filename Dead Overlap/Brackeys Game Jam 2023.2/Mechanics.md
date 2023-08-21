@@ -9,3 +9,8 @@ If the `target speaker name` is "Player", it's the Player's (Marceline Ren's) tu
 
 ## ``||c [target speaker name] | [target speaker name] | [target speaker name] | ...` 
 A command at the start of a file. The bars separate the names of the NPCs who speak.
+If the `target speaker name` is "Player", it's the Player's (Marceline Ren's) turn to speak. 
+If the `target speaker name` is otherwise not the name of an NPC, continue with the text as if it was off-screen or a narrator.
+If the `target speaker name` is "null", hide the name and picture label.
+
+

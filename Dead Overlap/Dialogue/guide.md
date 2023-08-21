@@ -12,7 +12,7 @@ Please note that **ALL NUMBERS ARE *ZERO-INDEXED***. Assume that not following t
 `~##.`: End of choice section\
 `~#@[choice number]`: Response to choice number\
 `~~.`: End of choice dialogue\
-`~.`: End of dialogue
+`~.`: End of dialogue\
 
 ### Commands
 For the following commands, anything involving parsing a file (i.e., `||l`, `||j`) will require parameter signifiers for each parameter. File paths will require extensions as well (e.g., `||l f=first.txt`).
@@ -35,6 +35,9 @@ Command to end dialogue after current dialogue is finished. Shorthand for `||l f
 
 `... |||`\
 Command to end dialogue immediately. Shorthand for `||f EndDialogueB`
+
+`||c [chara name]`: Command to switch characters.\
+The name `chara name` will be the "true name" of an NPC. If "null", the box title will be an empty string. Short hand for `||f Modify chara_name`
 
 
 

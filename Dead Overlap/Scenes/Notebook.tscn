@@ -1,8 +1,10 @@
-[gd_scene load_steps=4 format=3 uid="uid://r4i21wc007bo"]
+[gd_scene load_steps=6 format=3 uid="uid://r4i21wc007bo"]
 
 [ext_resource type="Script" path="res://Scripts/Notebook.cs" id="1_g6qov"]
 [ext_resource type="FontFile" uid="uid://bhtiplwjrbpc7" path="res://Assets/Fonts/futura light bt.ttf" id="1_qt1ux"]
 [ext_resource type="Texture2D" uid="uid://dmrdwi1vlycw4" path="res://quad_128.png" id="3_uovad"]
+[ext_resource type="FontFile" uid="uid://cy02rq8ibiqx8" path="res://Assets/Fonts/futur.ttf" id="4_ng4ob"]
+[ext_resource type="FontFile" uid="uid://brtoretp4o0u6" path="res://Assets/Fonts/Futura Extra Black font.ttf" id="5_rjhec"]
 
 [node name="Notebook" type="Control"]
 layout_mode = 3
@@ -24,10 +26,10 @@ offset_bottom = 584.0
 theme_override_fonts/font = ExtResource("1_qt1ux")
 tab_alignment = 1
 
-[node name="Control" type="Control" parent="TabContainer"]
+[node name="SuspectWindow" type="Control" parent="TabContainer"]
 layout_mode = 2
 
-[node name="GridContainer" type="GridContainer" parent="TabContainer/Control"]
+[node name="GridContainer" type="GridContainer" parent="TabContainer/SuspectWindow"]
 layout_mode = 0
 offset_left = 12.0
 offset_top = 32.0
@@ -35,102 +37,156 @@ offset_right = 932.0
 offset_bottom = 187.0
 columns = 7
 
-[node name="TextureButton" type="TextureButton" parent="TabContainer/Control/GridContainer"]
+[node name="PCButton" type="TextureButton" parent="TabContainer/SuspectWindow/GridContainer"]
 layout_mode = 2
 texture_normal = ExtResource("3_uovad")
 
-[node name="TextureButton2" type="TextureButton" parent="TabContainer/Control/GridContainer"]
+[node name="JLButton" type="TextureButton" parent="TabContainer/SuspectWindow/GridContainer"]
 layout_mode = 2
 texture_normal = ExtResource("3_uovad")
 
-[node name="TextureButton3" type="TextureButton" parent="TabContainer/Control/GridContainer"]
+[node name="IPButton" type="TextureButton" parent="TabContainer/SuspectWindow/GridContainer"]
 layout_mode = 2
 texture_normal = ExtResource("3_uovad")
 
-[node name="TextureButton4" type="TextureButton" parent="TabContainer/Control/GridContainer"]
+[node name="AAButton" type="TextureButton" parent="TabContainer/SuspectWindow/GridContainer"]
 layout_mode = 2
 texture_normal = ExtResource("3_uovad")
 
-[node name="TextureButton5" type="TextureButton" parent="TabContainer/Control/GridContainer"]
+[node name="JCButton" type="TextureButton" parent="TabContainer/SuspectWindow/GridContainer"]
 layout_mode = 2
 texture_normal = ExtResource("3_uovad")
 
-[node name="TextureButton6" type="TextureButton" parent="TabContainer/Control/GridContainer"]
+[node name="FSButton" type="TextureButton" parent="TabContainer/SuspectWindow/GridContainer"]
 layout_mode = 2
 texture_normal = ExtResource("3_uovad")
 
-[node name="TextureButton7" type="TextureButton" parent="TabContainer/Control/GridContainer"]
+[node name="MBButton" type="TextureButton" parent="TabContainer/SuspectWindow/GridContainer"]
 layout_mode = 2
 texture_normal = ExtResource("3_uovad")
 
-[node name="RichTextLabel" type="RichTextLabel" parent="TabContainer/Control/GridContainer"]
+[node name="PCName" type="RichTextLabel" parent="TabContainer/SuspectWindow/GridContainer"]
 layout_mode = 2
-text = "Patrick Cuno"
+theme_override_fonts/normal_font = ExtResource("4_ng4ob")
+theme_override_fonts/bold_font = ExtResource("5_rjhec")
+bbcode_enabled = true
+text = "[center]Patrick Cuno"
 fit_content = true
 scroll_active = false
 autowrap_mode = 0
 
-[node name="RichTextLabel2" type="RichTextLabel" parent="TabContainer/Control/GridContainer"]
+[node name="JLName" type="RichTextLabel" parent="TabContainer/SuspectWindow/GridContainer"]
 layout_mode = 2
-text = "Johnny Lawn"
+theme_override_fonts/normal_font = ExtResource("4_ng4ob")
+theme_override_fonts/bold_font = ExtResource("5_rjhec")
+bbcode_enabled = true
+text = "[center]Johnny Lawn"
 fit_content = true
 scroll_active = false
 autowrap_mode = 0
 
-[node name="RichTextLabel3" type="RichTextLabel" parent="TabContainer/Control/GridContainer"]
+[node name="IPName" type="RichTextLabel" parent="TabContainer/SuspectWindow/GridContainer"]
 layout_mode = 2
-text = "Ignacio Pascal"
+theme_override_fonts/normal_font = ExtResource("4_ng4ob")
+theme_override_fonts/bold_font = ExtResource("5_rjhec")
+bbcode_enabled = true
+text = "[center]Ignacio Pascal"
 fit_content = true
 scroll_active = false
 autowrap_mode = 0
 
-[node name="RichTextLabel4" type="RichTextLabel" parent="TabContainer/Control/GridContainer"]
+[node name="AAName" type="RichTextLabel" parent="TabContainer/SuspectWindow/GridContainer"]
 layout_mode = 2
-text = "Adora Aga"
+theme_override_fonts/normal_font = ExtResource("4_ng4ob")
+theme_override_fonts/bold_font = ExtResource("5_rjhec")
+bbcode_enabled = true
+text = "[center]Adora Aga"
 fit_content = true
 scroll_active = false
 autowrap_mode = 0
 
-[node name="RichTextLabel5" type="RichTextLabel" parent="TabContainer/Control/GridContainer"]
+[node name="JCName" type="RichTextLabel" parent="TabContainer/SuspectWindow/GridContainer"]
 layout_mode = 2
-text = "Jordan Cuno"
+theme_override_fonts/normal_font = ExtResource("4_ng4ob")
+theme_override_fonts/bold_font = ExtResource("5_rjhec")
+bbcode_enabled = true
+text = "[center]Jordan Cuno"
 fit_content = true
 scroll_active = false
 autowrap_mode = 0
 
-[node name="RichTextLabel6" type="RichTextLabel" parent="TabContainer/Control/GridContainer"]
+[node name="FSName" type="RichTextLabel" parent="TabContainer/SuspectWindow/GridContainer"]
 layout_mode = 2
-text = "Farah Sal-Cuno"
+theme_override_fonts/normal_font = ExtResource("4_ng4ob")
+theme_override_fonts/bold_font = ExtResource("5_rjhec")
+bbcode_enabled = true
+text = "[center]Farah Sal-Cuno"
 fit_content = true
 scroll_active = false
 autowrap_mode = 0
 
-[node name="RichTextLabel7" type="RichTextLabel" parent="TabContainer/Control/GridContainer"]
+[node name="MBName" type="RichTextLabel" parent="TabContainer/SuspectWindow/GridContainer"]
 layout_mode = 2
-text = "Marie Bornstein"
+theme_override_fonts/normal_font = ExtResource("4_ng4ob")
+theme_override_fonts/bold_font = ExtResource("5_rjhec")
+bbcode_enabled = true
+text = "[center]Marie Bornstein"
 fit_content = true
 scroll_active = false
 autowrap_mode = 0
 
-[node name="Description" type="RichTextLabel" parent="TabContainer/Control"]
+[node name="Description" type="RichTextLabel" parent="TabContainer/SuspectWindow"]
 layout_mode = 0
-offset_left = 16.0
-offset_top = 283.0
-offset_right = 929.0
+offset_left = 14.0
+offset_top = 204.0
+offset_right = 927.0
 offset_bottom = 541.0
-text = "new Note(txt, year, npc)new Note(txt, year, npc)new Note(txt, year, npc)new Note(txt, year, npc)new Note(txt, year, npc)new Note(txt, year, npc)new Note(txt, year, npc)new Note(txt, year, npc)new Note(txt, year, npc)new Note(txt, year, npc)new Note(txt, year, npc)new Note(txt, year, npc)new Note(txt, year, npc)new Note(txt, year, npc)new Note(txt, year, npc)new Note(txt, year, npc)"
+focus_mode = 2
+theme_override_colors/default_color = Color(1, 1, 1, 1)
+theme_override_fonts/normal_font = ExtResource("4_ng4ob")
+theme_override_fonts/bold_font = ExtResource("5_rjhec")
+bbcode_enabled = true
+text = "lepiqué"
 fit_content = true
 scroll_active = false
+selection_enabled = true
 
-[node name="ScrollContainer" type="ScrollContainer" parent="TabContainer"]
+[node name="NoteWindow" type="ScrollContainer" parent="TabContainer"]
 visible = false
 layout_mode = 2
 
-[node name="SavedNotes" type="VBoxContainer" parent="TabContainer/ScrollContainer"]
+[node name="SavedNotes" type="VBoxContainer" parent="TabContainer/NoteWindow"]
 layout_mode = 2
 size_flags_horizontal = 3
 alignment = 1
 
-[node name="RichTextLabel2" type="RichTextLabel" parent="TabContainer"]
+[node name="Notice" type="RichTextLabel" parent="TabContainer/NoteWindow/SavedNotes"]
+layout_mode = 2
+theme_override_fonts/normal_font = ExtResource("4_ng4ob")
+theme_override_fonts/bold_font = ExtResource("5_rjhec")
+bbcode_enabled = true
+text = "
+[center][b]RIGHT CLICK on a note to delete it.
+ 
+"
+fit_content = true
+scroll_active = false
+
+[node name="HSeparator" type="HSeparator" parent="TabContainer/NoteWindow/SavedNotes"]
+layout_mode = 2
+
+[node name="HSeparator2" type="HSeparator" parent="TabContainer/NoteWindow/SavedNotes"]
+layout_mode = 2
+
+[node name="Victim" type="RichTextLabel" parent="TabContainer"]
 visible = false
 layout_mode = 2
+
+[connection signal="tab_button_pressed" from="TabContainer" to="." method="_on_tab_container_tab_button_pressed"]
+[connection signal="pressed" from="TabContainer/SuspectWindow/GridContainer/PCButton" to="." method="_on_pc_button_pressed"]
+[connection signal="pressed" from="TabContainer/SuspectWindow/GridContainer/JLButton" to="." method="_on_jl_button_pressed"]
+[connection signal="pressed" from="TabContainer/SuspectWindow/GridContainer/IPButton" to="." method="_on_ip_button_pressed"]
+[connection signal="pressed" from="TabContainer/SuspectWindow/GridContainer/AAButton" to="." method="_on_aa_button_pressed"]
+[connection signal="pressed" from="TabContainer/SuspectWindow/GridContainer/JCButton" to="." method="_on_jc_button_pressed"]
+[connection signal="pressed" from="TabContainer/SuspectWindow/GridContainer/FSButton" to="." method="_on_fs_button_pressed"]
+[connection signal="pressed" from="TabContainer/SuspectWindow/GridContainer/MBButton" to="." method="_on_mb_button_pressed"]

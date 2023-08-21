@@ -12,6 +12,8 @@ public partial class GameManager : Node
 
 	public static Font normalFont, boldFont, lightFont;
 
+	public static bool isGamePaused = false;
+
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{

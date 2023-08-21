@@ -166,6 +166,9 @@ public partial class DialogueManager : Node
                             case "l":
 								tdo.AddDialogueFunction("ParseB res://Dialogue/" + line[(fnc_find + 4)..], 0); // load dialogue file
 								break;
+							case "c":
+								tdo.AddDialogueFunction("Modify " + line[(fnc_find + 4)..], 0); // call function
+								break;
                             case "f":
 								tdo.AddDialogueFunction(line[(fnc_find + 4)..], 0); // call function
 								break;
@@ -199,6 +202,9 @@ public partial class DialogueManager : Node
                             case "l":
 								tdo.AddChoiceFunction("ParseB res://Dialogue/" + line[(fnc_find + 4)..], choice_dialogue_marker);
 								break;
+							case "c":
+								tdo.AddChoiceFunction("Modify " + line[(fnc_find + 4)..], choice_dialogue_marker); // call function
+								break;
                             case "f":
 								tdo.AddChoiceFunction(line[(fnc_find + 4)..], choice_dialogue_marker);
 								break;
@@ -231,6 +237,9 @@ public partial class DialogueManager : Node
 								break;
                             case "l":
 								tdo.AddResponseFunction("ParseB res://Dialogue/" + line[(fnc_find + 4)..], response_dialogue_marker);
+								break;
+							case "c":
+								tdo.AddResponseFunction("Modify " + line[(fnc_find + 4)..], response_dialogue_marker); // call function
 								break;
                             case "f":
 								tdo.AddResponseFunction(line[(fnc_find + 4)..], response_dialogue_marker);
@@ -333,6 +342,10 @@ public partial class DialogueManager : Node
 		EndDialogue();
 		// isDialogueActive = false;
 		// activeDialogue = null;
+	}
+
+	public void Modify(string nameTitle) {
+		activeDialogueBox.Modify(nameTitle);
 	}
 
 	public void OnTimerTimeout() {

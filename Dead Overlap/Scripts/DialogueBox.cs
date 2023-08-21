@@ -36,7 +36,6 @@ public partial class DialogueBox : Control
 	public override void _Process(double delta) {
 		txtbg.Visible = txt.Visible;
 		chcsbg.Visible = chcs.Visible;
-		if (Globals.gui.isDialogueActive) nameLabel.Text = Globals.talkingNPC.Name;
 	}
 
 	/// <summary>
@@ -45,6 +44,7 @@ public partial class DialogueBox : Control
 	/// <param name="d"></param>
 	public void LoadDialogue(DialogueObject d) {
 		dialogue = d;
+		nameLabel.Text = Globals.talkingNPC.Name;
 	}
 
 	/// <summary>
@@ -239,9 +239,13 @@ public partial class DialogueBox : Control
 		if (dialogue.functionResult is not null) GD.Print(string.Format("DIALOGUE FUNCTION RESULT: {0}", dialogue.functionResult));
 	}
 
-
-	public void Modify(string nameTitle, string newDialogue) {
+	/// <summary>
+	/// Modify the dialogue box and update any changes.
+	/// </summary>
+	/// <param name="nameTitle"></param>
+	/// <param name="newDialogue"></param>
+	public void Modify(string nameTitle) {
 		nameLabel.Text = nameTitle;
-		WriteDialogue(newDialogue);
+		GD.Print(Globals.GetNPC(nameTitle).voicePath);
 	}
 }

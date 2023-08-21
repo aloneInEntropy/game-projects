@@ -1,17 +1,8 @@
-
 (If anything is not finished on the intended date(s), forward it to the following day and reduce its scale. Writing and time travel mechanics are to be given priority.)
 
 21/08/2023
-- [x] Work on Notebook menu and Dialogue Switching mechanics
 - [ ] Finish writing about all characters and events
-	- [x] Makoto Bourdain
-	- [x] Adora Aga
-	- [x] Johnny Lawn
-	- [ ] Ignacio Pascal
-	- [x] Patrick Cuno
-	- [ ] Jordan Cuno
-	- [ ] Farah Sal-Cuno
-	- [ ] Marie Bornstein
+- [x] Work on Notebook menu and Dialogue Switching mechanics
 
 22/08
 - [ ] Set up (very basic) NPC sprites and general tilesets
@@ -25,7 +16,6 @@
 	- [ ] Patrick Cuno
 	- [ ] Jordan Cuno
 	- [ ] Farah Sal-Cuno
-	- [ ] Marie Bornstein
 
 23/08
 - [ ] Tilemap setup, room traversal, item interaction
@@ -36,5 +26,5 @@
 
 26/08
 - [ ] Polish
-	- [ ] Extra UI effects, such as a pop-up when dialogue is saved or deleted.
+    - [ ] Extra UI effects, such as a pop-up when dialogue is saved or deleted.
 	- [ ] Different design for the notebook.

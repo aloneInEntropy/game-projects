@@ -13,7 +13,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "A Mystery Game.md",
+                "file": "Dead Overlap.md",
                 "mode": "source",
                 "source": false
               }
@@ -120,7 +120,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "A Mystery Game.md"
+                "file": "Dead Overlap.md"
               }
             }
           },
@@ -130,7 +130,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "A Mystery Game.md",
+                "file": "Dead Overlap.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -142,7 +142,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "A Mystery Game.md",
+                "file": "Dead Overlap.md",
                 "collapseAll": true,
                 "extraContext": true,
                 "sortOrder": "alphabetical",
@@ -190,8 +190,8 @@
   "active": "97eb65065815623a",
   "lastOpenFiles": [
     "Mechanics.md",
-    "A Mystery Game.md",
     "TODO.md",
+    "Dead Overlap.md",
     "Help.md",
     "dfvdf.md",
     "Apart/Characters/Main/Khane.md",

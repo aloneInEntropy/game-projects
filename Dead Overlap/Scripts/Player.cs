@@ -44,14 +44,16 @@ public partial class Player : CharacterBody2D
 
     public override void _Process(double delta)
     {
-		rayCast.TargetPosition = lastDirection * 32;
-		attackBoxColl.Position = lastDirection * 64;
-		UpdateAnimationParameters();
+		if (!GameManager.isGamePaused) {
+			rayCast.TargetPosition = lastDirection * 32;
+			attackBoxColl.Position = lastDirection * 64;
+			UpdateAnimationParameters();
+		}
     }
 
     public override void _Input(InputEvent @event)
     {
-        if (@event.IsActionPressed("ui_accept") || @event.IsActionPressed("next")) {
+        if (!GameManager.isGamePaused && (@event.IsActionPressed("ui_accept") || @event.IsActionPressed("next"))) {
 			// if the player is overlapping multiple objects, choose the one it is looking at.
 			// otherwise, pick the overlapping object.
 
@@ -83,7 +85,7 @@ public partial class Player : CharacterBody2D
 
 		// Get the input direction and handle the movement/deceleration.
 		// As good practice, you should replace UI actions with custom gameplay actions.
-		direction = gui.isDialogueActive ? 
+		direction = gui.isDialogueActive || GameManager.isGamePaused ? 
 			Vector2.Zero :	
 			Input.GetVector("ui_left", "ui_right", "ui_up", "ui_down");
 		

@@ -7,7 +7,7 @@ public partial class Mark : NPC
 		trueName = "Mark";
 		Globals.AddNPC(this);
 
-		diagPath = "res://Dialogue/d2.txt";
+		diagPath = "res://Dialogue/d3.txt";
 		LoadDialogue(diagPath);
 
 		voicePath = "res://Assets/Audio/Voices/Mark.wav";

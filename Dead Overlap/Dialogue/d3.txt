@@ -3,7 +3,7 @@
 ~1 
     We just finished a prototype of the EMC, and it looks like it works alright. I managed to figure out the correlation between the Orten coordinate of localised conceptspace for an individual and the amount of information required to find it. 
 ~2
-    Turns out it's near infinite, relatively speaking, but it's progress. I never really expected to locate a complete concept first try, y'know? Like, that's the point of the EMC to begin with.
+    Turns out it's near infinite, relatively speaking, but it's progress. I never really expected to locate a complete concept first try, y'know? Like, that's the point of the EMC to begin with.||c Olivia
 ~~3
     Did you get what I meant?
         ~##2
