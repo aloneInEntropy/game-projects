@@ -1,0 +1,29 @@
+[gd_scene load_steps=6 format=3 uid="uid://d1sgxaxy1cuk4"]
+
+[ext_resource type="Texture2D" uid="uid://dmrdwi1vlycw4" path="res://quad_128.png" id="1_uomgm"]
+[ext_resource type="PackedScene" uid="uid://bocidko04r36c" path="res://Scenes/Player.tscn" id="2_fhxdg"]
+[ext_resource type="PackedScene" uid="uid://6wwwvpsqguwa" path="res://Scenes/GUI.tscn" id="4_xfdgx"]
+[ext_resource type="PackedScene" uid="uid://chiqrcav1pe3g" path="res://Scenes/Olivia.tscn" id="5_blx77"]
+[ext_resource type="PackedScene" uid="uid://dpjug58yjaf0l" path="res://Scenes/Mark.tscn" id="6_rviol"]
+
+[node name="World" type="Node2D"]
+
+[node name="Background" type="Sprite2D" parent="."]
+modulate = Color(0.823529, 0.74902, 0.709804, 1)
+z_index = -2
+y_sort_enabled = true
+position = Vector2(-16, -15)
+scale = Vector2(9.19531, 5.30469)
+texture = ExtResource("1_uomgm")
+centered = false
+
+[node name="Player" parent="." instance=ExtResource("2_fhxdg")]
+position = Vector2(213, 211)
+
+[node name="Olivia" parent="." instance=ExtResource("5_blx77")]
+position = Vector2(100, 302)
+
+[node name="Mark" parent="." instance=ExtResource("6_rviol")]
+position = Vector2(361, 211)
+
+[node name="GUI" parent="." instance=ExtResource("4_xfdgx")]

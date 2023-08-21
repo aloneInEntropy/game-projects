@@ -1,0 +1,32 @@
+~0
+Hello world! This is the first sentence. 
+
+//This is the second sentence, I guess.
+
+
+
+Third one now.
+~~1
+    What would you like for dinner?
+        ~##5
+            ~@0
+                Pasta.
+                ~#@0
+                    Pasta, huh! My favourite! Quick and easy to make, and such great taste!
+            ~@1
+                Pizza. 
+                ~#@1
+                    ...Pizza, huh? Who's gonna pay for that, d'ya think? I... what, you can't possibly be [b]that[/b] hungry! God, you're bleedin' me dry.
+            ~@2
+                Pie. 
+                ~#@2
+                    Pie? I think, we have some in the fridge... don't think it's gonna fill ya up all that much, though.
+            ~@3
+                Quiche. ||j d2_1.txt p=0
+            ~@4
+                I'm not hungry, thank you. |||
+        ~##.
+    ~~.
+~2
+Well, that was nice, I suppose. I'm headin' to bed. See ya in tha mornin'. ||l d1.txt l=false p=4
+~.

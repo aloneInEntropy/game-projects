@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://c6whoufv5kho6"]
+
+[ext_resource type="Script" path="res://Scripts/AudioManager.cs" id="1_hp76l"]
+
+[node name="AudioManager" type="Node"]
+script = ExtResource("1_hp76l")
+
+[node name="VoicePlayer" type="AudioStreamPlayer" parent="."]
+volume_db = -10.0

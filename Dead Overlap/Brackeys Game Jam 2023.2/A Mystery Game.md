@@ -1,6 +1,6 @@
 
 # Plot
-The year is 1989. A cold case has recently received new evidence in the form of a confession. In 1984, a man named Makoto Bourdain died under mysterious circumstances. You play as the great detective, Marceline Ren, as you try to figure out which of eight suspects murdered Makoto. 
+The year is 1989. A cold case has recently received new evidence in the form of a death of a prior suspect. In 1984, a man named Makoto Bourdain died under mysterious circumstances. You play as the great detective, Marceline Ren, as you try to figure out which of eight suspects murdered Makoto. 
 
 You have the ability to dive into people's memories, with restraint applied by group you work with, the Patchwork Collective. From there, you can talk to different suspects in the past and gather clues. Find out who murdered Makoto.
 
@@ -15,14 +15,14 @@ On September 8th, 1984, the date of Makoto's death, several events that took pla
 | 13:04          | Makoto was seen entering the office of the mayor, ***Patrick Cuno***, carrying a folder.                                                                                                                                                                                                                               |
 | 13:11          | Makoto leaves the office without the folder and returns home, buying a bandage and newspaper from the market.                                                                                                                                                                                                     |
 | 15:54          | The police are called, but the line hangs up just seconds later.                                                                                                                                                                                                                                                  |   
-| 17:22          | Makoto is caught speeding on the road. When questioned by the police officer, ***Johnny Lain***, he is noted as being "cordial". He accepts the ticket and leaves.                                                                                                                                                     |
+| 17:22          | Makoto is caught speeding on the road. When questioned by the police officer, ***Johnny Lawn***, he is noted as being "cordial". He accepts the ticket and leaves.                                                                                                                                                     |
 | 17:27          | Makoto is caught speeding on the road again. When questioned by the second police officer, ***Ignacio Pascal***, he is noted as being "frantic, in a hurry, and anxious". He screams and curses the police officer, but ultimately accepts the second ticket and leaves.                                              |
 | 18:48          | Makoto returns to the market and buys several cans of food, knives, sheets of paper, newspapers, syringes, and three more bandages. He was overheard having an argument with the cashier, identified as ***Marie Bornstein***. This was the same cashier he bought the bandage and newspaper from.                     |
 | 21:24          | Makoto is found dead on his couch with a bloody knife in his hand. And his house is trashed. The DNA tests show that the blood is inhuman. His death was ruled to be a heart attack. He was not bleeding and had no history of heart problems. There are several holes (potentially injection sites) on his arms. |     
 | September 9th  | ***Jordan Cuno***, the mayor's child, and ***Farah Sal-Cuno***, Jordan's wife, visit a hospital several states over after getting in a car crash and stayed there for three days.                                                                                                                                      |
 | September 11th | Adora returns from her "business trip".                                                                                                                                                                                                                                                                           |   
 
-Afterwards, a bag of heroin was found in his car, but there was none in his system. When questioned, Adora claimed Makoto to be "rash at times, and a savage". When asked about a drug problem, she admitted she also believed the rumour, but had no proof on whether or not it was true. She did not appear to be distraught over the death of her husband.
+Afterwards, a bag of heroin was found in his car, but there was none in his system. When questioned, Adora claimed Makoto to be "rash at times, and a savage". When asked about a drug problem, she admitted she also believed the rumour, but had no proof on whether or not it was true. She did not appear to be distraught over the death of her husband. An explosive was also detonated near her house, causing minor damage, but this was not reported by her.
 
 Jordan and Farah have wounds on their stomach and arms that they claim is from broken glass from Jordan's car after the crash. The bloody glass matched both of their DNA.
 
@@ -43,7 +43,7 @@ They planned to use Patrick's well-known dislike of Makoto to slander him, forci
 
 On both occasions, the poison leaked into the pen tip soon after application and did not affect Makoto, though the tip itself did draw blood.
 
-#### Johnny Lain and Ignacio Pascal
+#### Johnny Lawn and Ignacio Pascal
 Johnny too envied Makoto's finances and wanted to frame him. After falling into poverty, he grew embarrassed and pitiful for having to ask Makoto for financial aid, even as a police officer. He wanted to frame Makoto for being a drug abuser, arrest him, then let him go, just to feel power over him again. He had never planned to kill him, but went about it in an extremely dangerous way. Ignacio's feelings were far stronger than Johnny's, as Makoto failed to save his son after a stroke. He hated Makoto for this, as he was supposed to be the "master neurosurgeon". 
 
 Ignacio teamed up with Johnny (after careful consideration) and planned for Johnny to inject Makoto with heroin after stopping him for speeding. Afterwards, Ignacio would stop him again and inject him again. He antagonised Makoto, forcing him to erupt in rage and exit his car, mad about getting poked so often and about how he knew he wasn't speeding. Ignacio made sure the dosage of heroin in his syringe was lethal, and threw a small bag of heroin powder in the back of his car for good measure.
@@ -58,7 +58,11 @@ Adora crafted an improvised explosive utilising knowledge of her chemistry class
 Neither bomb went off. She set both incorrectly, and the second bomb (in front of the house) exploded the day after she returned, breaking a window and burning some grass. Because it was raining, no fires were started.
 
 #### Jordan Cuno and Farah Sal-Cuno
-Jordan and Farah were always an odd pair. 
+Jordan and Farah were always an odd pair. Jordan, as the neglected child of the mayor, was always looking for a new way to piss him off. Their wife, Farah, supported their decisions but didn't always like them. Unlike the others, the pair did not intend to kill Makoto. At least, not initially.
+
+Jordan's latest scheme was to steal a dog, get it hopped up on a variety of drugs, and let it run wild in the mayor's office. After witnessing Makoto leave the office in a bad mood, they had the idea to frame Makoto for the damages. Farah kidnapped her cousin's German Shepard and helped drug it, then set it on Makoto in the evening. They broke open his door and set the dog loose.
+
+Makoto was already feeling extremely paranoid by that point, given everything that had happened to him that day. When he first heard his front door being picked open, he armed himself with two of the knives he had bought that day. The dog leapt on him, but it was so sick with everything the two gave it that it couldn't put up much of a fight. Makoto defended himself regardless, cutting the dog in its face, legs, and body. Jordan and Farah came in wearing black ski-masks, but Makoto was utterly terrified by this point. His heart gave out, and he collapsed on his couch having a heart attack. The couple ran out of the house, putting the now dead dog in a plastic bag and tossed it in the boot. They drove away as fast as they could but accidentally crashed the car in their panic. Jordan put both their bloody clothes into the bag and threw it into a river before visiting a hospital three cities away.
 
 ## Outside Events
 ### Death of Simon O'Hare
@@ -86,12 +90,12 @@ The German Shepard of Farah's cousin, Juno, had gone missing a on September 5th.
 
 
 ---
-### Johnny Lain
+### Johnny Lawn
 **Skin**: White
 **Hair**: Blond
 **Age**: 55
 **Pronouns**: He/him
-**Description**: Johnny Lain was a close friend of Makoto. Having grown up with him in a small community, the two went to college together, taking different course
+**Description**: Johnny Lawn was a close friend of Makoto. Having grown up with him in a small community, the two went to college together, taking different course
 
 ### Patrick Cuno
 An asshole politician.

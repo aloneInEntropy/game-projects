@@ -1,0 +1,136 @@
+[gd_scene load_steps=4 format=3 uid="uid://r4i21wc007bo"]
+
+[ext_resource type="Script" path="res://Scripts/Notebook.cs" id="1_g6qov"]
+[ext_resource type="FontFile" uid="uid://bhtiplwjrbpc7" path="res://Assets/Fonts/futura light bt.ttf" id="1_qt1ux"]
+[ext_resource type="Texture2D" uid="uid://dmrdwi1vlycw4" path="res://quad_128.png" id="3_uovad"]
+
+[node name="Notebook" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 8.0
+offset_top = 8.0
+offset_right = -8.0
+offset_bottom = -8.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_g6qov")
+
+[node name="TabContainer" type="TabContainer" parent="."]
+layout_mode = 0
+offset_right = 944.0
+offset_bottom = 584.0
+theme_override_fonts/font = ExtResource("1_qt1ux")
+tab_alignment = 1
+
+[node name="Control" type="Control" parent="TabContainer"]
+layout_mode = 2
+
+[node name="GridContainer" type="GridContainer" parent="TabContainer/Control"]
+layout_mode = 0
+offset_left = 12.0
+offset_top = 32.0
+offset_right = 932.0
+offset_bottom = 187.0
+columns = 7
+
+[node name="TextureButton" type="TextureButton" parent="TabContainer/Control/GridContainer"]
+layout_mode = 2
+texture_normal = ExtResource("3_uovad")
+
+[node name="TextureButton2" type="TextureButton" parent="TabContainer/Control/GridContainer"]
+layout_mode = 2
+texture_normal = ExtResource("3_uovad")
+
+[node name="TextureButton3" type="TextureButton" parent="TabContainer/Control/GridContainer"]
+layout_mode = 2
+texture_normal = ExtResource("3_uovad")
+
+[node name="TextureButton4" type="TextureButton" parent="TabContainer/Control/GridContainer"]
+layout_mode = 2
+texture_normal = ExtResource("3_uovad")
+
+[node name="TextureButton5" type="TextureButton" parent="TabContainer/Control/GridContainer"]
+layout_mode = 2
+texture_normal = ExtResource("3_uovad")
+
+[node name="TextureButton6" type="TextureButton" parent="TabContainer/Control/GridContainer"]
+layout_mode = 2
+texture_normal = ExtResource("3_uovad")
+
+[node name="TextureButton7" type="TextureButton" parent="TabContainer/Control/GridContainer"]
+layout_mode = 2
+texture_normal = ExtResource("3_uovad")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="TabContainer/Control/GridContainer"]
+layout_mode = 2
+text = "Patrick Cuno"
+fit_content = true
+scroll_active = false
+autowrap_mode = 0
+
+[node name="RichTextLabel2" type="RichTextLabel" parent="TabContainer/Control/GridContainer"]
+layout_mode = 2
+text = "Johnny Lawn"
+fit_content = true
+scroll_active = false
+autowrap_mode = 0
+
+[node name="RichTextLabel3" type="RichTextLabel" parent="TabContainer/Control/GridContainer"]
+layout_mode = 2
+text = "Ignacio Pascal"
+fit_content = true
+scroll_active = false
+autowrap_mode = 0
+
+[node name="RichTextLabel4" type="RichTextLabel" parent="TabContainer/Control/GridContainer"]
+layout_mode = 2
+text = "Adora Aga"
+fit_content = true
+scroll_active = false
+autowrap_mode = 0
+
+[node name="RichTextLabel5" type="RichTextLabel" parent="TabContainer/Control/GridContainer"]
+layout_mode = 2
+text = "Jordan Cuno"
+fit_content = true
+scroll_active = false
+autowrap_mode = 0
+
+[node name="RichTextLabel6" type="RichTextLabel" parent="TabContainer/Control/GridContainer"]
+layout_mode = 2
+text = "Farah Sal-Cuno"
+fit_content = true
+scroll_active = false
+autowrap_mode = 0
+
+[node name="RichTextLabel7" type="RichTextLabel" parent="TabContainer/Control/GridContainer"]
+layout_mode = 2
+text = "Marie Bornstein"
+fit_content = true
+scroll_active = false
+autowrap_mode = 0
+
+[node name="Description" type="RichTextLabel" parent="TabContainer/Control"]
+layout_mode = 0
+offset_left = 16.0
+offset_top = 283.0
+offset_right = 929.0
+offset_bottom = 541.0
+text = "new Note(txt, year, npc)new Note(txt, year, npc)new Note(txt, year, npc)new Note(txt, year, npc)new Note(txt, year, npc)new Note(txt, year, npc)new Note(txt, year, npc)new Note(txt, year, npc)new Note(txt, year, npc)new Note(txt, year, npc)new Note(txt, year, npc)new Note(txt, year, npc)new Note(txt, year, npc)new Note(txt, year, npc)new Note(txt, year, npc)new Note(txt, year, npc)"
+fit_content = true
+scroll_active = false
+
+[node name="ScrollContainer" type="ScrollContainer" parent="TabContainer"]
+visible = false
+layout_mode = 2
+
+[node name="SavedNotes" type="VBoxContainer" parent="TabContainer/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+alignment = 1
+
+[node name="RichTextLabel2" type="RichTextLabel" parent="TabContainer"]
+visible = false
+layout_mode = 2

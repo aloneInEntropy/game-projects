@@ -1,0 +1,35 @@
+[
+    {
+        "MType": {
+            "Name": "Talk",
+            "TargetNPCName": "Mark"
+        },
+        "Name": "Talk to Mark.",
+        "Description": "Talk to Mark for the first time.",
+        "WinConditionDescription": "The Player speaks to Mark.",
+        "Active": false,
+        "Completed": false
+    },
+    {
+        "MType": {
+            "Name": "Deliver",
+            "TargetNPCName": "Mark"
+        },
+        "Name": "Give Mark a flower.",
+        "Description": "Give Mark a flower from the market or the forest.",
+        "WinConditionDescription": "Mark gets at least 1 flower from the Player.",
+        "Active": false,
+        "Completed": false
+    },
+    {
+        "MType": {
+            "Name": "Talk",
+            "TargetNPCName": "Mark"
+        },
+        "Name": "Ask Mark about Khana.",
+        "Description": "Ask Mark about Khana and about the one you saw.",
+        "WinConditionDescription": "The correct dialogue option is selected.",
+        "Active": false,
+        "Completed": false
+    }
+]
