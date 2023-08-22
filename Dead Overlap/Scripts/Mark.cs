@@ -4,21 +4,21 @@ using System;
 public partial class Mark : NPC
 {	
 	public override void _Ready() {
+		portraitPath = "MakotoPortrait.png";
+
 		trueName = "Mark";
 		Globals.AddNPC(this);
 
-		diagPath = "res://Dialogue/d3.txt";
+		diagPath = "d3.txt";
 		LoadDialogue(diagPath);
 
-		voicePath = "res://Assets/Audio/Voices/Mark.wav";
+		voicePath = "Mark.wav";
 		SetVoice(voicePath);
 
-		missionJSONPath = "res://Scripts/Missions/Mark.json";
+		missionJSONPath = "Mark.json";
 		SetMissionsJSON(missionJSONPath);
 	}
 
 	public override void _Process(double delta) {
-		// if (diagPath != "res://Dialogue/d3.txt") diagPath = "res://Dialogue/d3.txt";
-		// if (diagPath != "res://Dialogue/d2.txt") diagPath = "res://Dialogue/d2.txt";
 	}
 }

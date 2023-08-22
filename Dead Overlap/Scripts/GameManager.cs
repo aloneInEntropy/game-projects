@@ -7,12 +7,18 @@ using System.Text.RegularExpressions;
 /// The Game Manager script. Handles all general/auxillary functions and variables.
 /// </summary>
 public partial class GameManager : Node
-{
+{	
+	/// <summary>
+	/// The number of frames ran since the game started in Process.
+	/// </summary>
 	public static int frame = 0;
+	
+	/// <summary>
+	/// Has the player paused the game?
+	/// </summary>
+	public static bool isGamePaused = false;
 
 	public static Font normalFont, boldFont, lightFont;
-
-	public static bool isGamePaused = false;
 
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()

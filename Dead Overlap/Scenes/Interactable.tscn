@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=3 uid="uid://cnnt7msd0tt44"]
+
+[ext_resource type="Script" path="res://Scripts/Interactable.cs" id="1_tmpey"]
+
+[node name="Interactable" type="Area2D"]
+collision_layer = 4
+collision_mask = 4
+script = ExtResource("1_tmpey")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+polygon = PackedVector2Array(-10, -10, 10, -10, 10, 10, -10, 10)

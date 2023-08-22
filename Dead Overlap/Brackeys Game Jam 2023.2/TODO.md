@@ -7,32 +7,34 @@
 	- [x] Makoto Bourdain
 	- [x] Adora Aga
 	- [x] Johnny Lawn
-	- [ ] Ignacio Pascal
+	- [x] Ignacio Pascal
 	- [x] Patrick Cuno
 	- [ ] Jordan Cuno
 	- [ ] Farah Sal-Cuno
-	- [ ] Marie Bornstein
+	- [x] Marie Bornstein
 
 22/08
 - [ ] Set up (very basic) NPC sprites and general tilesets
 - [ ] Create NPC voices
-- [ ] Consider NPC pictures in the dialogue box
+- [x] Consider NPC pictures in the dialogue box
 - [ ] Finished NPCs:
-	- [ ] Makoto Bourdain
-	- [ ] Adora Aga
+	- [x] Makoto Bourdain
+	- [x] Adora Aga
 	- [ ] Johnny Lawn
 	- [ ] Ignacio Pascal
 	- [ ] Patrick Cuno
-	- [ ] Jordan Cuno
-	- [ ] Farah Sal-Cuno
-	- [ ] Marie Bornstein
+	- [x] Jordan Cuno
+	- [x] Farah Sal-Cuno
+	- [x] Marie Bornstein
 
 23/08
-- [ ] Tilemap setup, room traversal, item interaction
+- [x] Item interaction
+- [ ] Tilemap setup, room traversal,
 - [ ] Pause menu and ability to return to the present time
 
 24/08 - 25/08
-- [ ] Writing dialogue, the mystery, and the setting
+- [ ] Music and sound effects
+- [ ] Writing the mystery
 
 26/08
 - [ ] Polish

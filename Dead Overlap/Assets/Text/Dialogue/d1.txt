@@ -35,7 +35,7 @@
 				~#@0 
 					Ah, wonderful. We have plenty of apple trees growing in the area. I'll make sure to pick a few for your welcoming party!
 			~@1
-				//Strawberry. ||j res://Dialogue/d2_1.txt p=1
+				//Strawberry. ||j d2_1.txt p=1
 				Strawberry.
 				~#@1
 					Ah, that's my favourite too! Maybe you could come with me to pick a few this afternoon? They're ripening soon.

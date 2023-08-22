@@ -4,24 +4,22 @@ using System;
 public partial class Olivia : NPC
 {
 	public override void _Ready() {
+		portraitPath = "AdoraPortrait.png";
+
 		trueName = "Olivia";
 		Globals.AddNPC(this);
 
-		diagPath = "res://Dialogue/d1.txt";
+		diagPath = "d1.txt";
 		LoadDialogue(diagPath);
 
-		voicePath = "res://Assets/Audio/Voices/Olivia.wav";
+		voicePath = "Olivia.wav";
 		SetVoice(voicePath);
 
-		missionJSONPath = "res://Scripts/Missions/Olivia.json";
+		missionJSONPath = "Olivia.json";
 		SetMissionsJSON(missionJSONPath);
 	}
 
 	public override void _Process(double delta) {
-		// if (diagPath != "res://Dialogue/d1.txt") diagPath = "res://Dialogue/d1.txt";
-	}
-
-	public void SetMissionActiveState(int n, bool b) {
-
+		
 	}
 }

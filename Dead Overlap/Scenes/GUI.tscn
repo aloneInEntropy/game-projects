@@ -20,7 +20,8 @@ fit_content = true
 scroll_active = false
 
 [node name="DialogueBox" parent="." instance=ExtResource("2_5syqh")]
-metadata/_edit_lock_ = true
+y_sort_enabled = true
 
 [node name="Notebook" parent="." instance=ExtResource("4_qealq")]
 visible = false
+y_sort_enabled = true

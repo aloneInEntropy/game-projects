@@ -2,7 +2,7 @@ using Godot;
 using System.Linq;
 using System.Collections.Generic;
 using System.Text.Json;
-
+using System;
 
 
 /// <summary>
@@ -40,7 +40,42 @@ public partial class Globals : Node
     /// </summary>
     public static JsonSerializerOptions options = new() { IncludeFields = true, WriteIndented = true };
 
-	public static string pathToNotes = "Scripts/Notes/notes.json";
+	/// <summary>
+	/// The path to the notes.json file in standard format.
+	/// </summary>
+	public static string pathToNotes = "Assets/Text/Notes/notes.json";
+
+	/// <summary>
+	/// The path to the dialogue file folder in Godot format (prepended with "res://")
+	/// </summary>
+	public static string resPathToDialogue = "res://Assets/Text/Dialogue/";
+	
+	/// <summary>
+	/// The path to the missions file folder in Godot format (prepended with "res://")
+	/// </summary>
+	public static string resPathToMissions = "res://Assets/Text/Missions/";
+	
+	/// <summary>
+	/// The path to the missions file folder in Godot format (prepended with "res://")
+	/// </summary>
+	public static string resPathToVoice = "res://Assets/Audio/Voices/";
+	
+	/// <summary>
+	/// The path to the missions file folder in Godot format (prepended with "res://")
+	/// </summary>
+	public static string resPathToPortraits = "res://Assets/Sprites/Portraits/";
+
+	/// <summary>
+	/// The timeline of days the events take place. Use dayToDate[day] to get the string date of that day.
+	/// </summary>
+	public static string[] dayToDate = new[] {
+		"September 7th",
+		"September 8th",
+		"September 9th",
+		"September 10th",
+		"September 11th",
+		"September 12th"
+	};
 
 
 	// Called when the node enters the scene tree for the first time.

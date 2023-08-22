@@ -72,30 +72,36 @@ public partial class GUI : CanvasLayer
 	}
 
 	void SetDialogue(DialogueObject dialogue) {
-		if (!IsInstanceValid(db)) {
-			db = dialogue_box.Instantiate<DialogueBox>();
-			AddChild(db);
-			db.Owner = this; // instanced nodes don't have an scene root, so add this GUI as its parent
-		} 
 		db.LoadDialogue(dialogue);
 	}
 
+	/// <summary>
+	/// Open the dialogue box and write the string <c>d</c> into it. <br/>
+	/// If <c>isDialogue</c> is true, assume there may be choices incoming. Otherwise, write string plainly.
+	/// </summary>
+	/// <param name="d"></param>
+	/// <param name="isDialogue"></param>
+	public void OpenDialogue(string d, bool isDialogue = true) {
+		missionText.Text = "";
+		isDialogueActive = true;
+		db.Open();
+		if (isDialogue) db.Write(d);
+		else db.WriteCustom(d:d);
+	}
+
+	/// <summary>
+	/// Open the dialogue box and write the current dialogue object into it. <br/>
+	/// </summary>
 	public void OpenDialogue() {
 		missionText.Text = "";
-		foreach (var m in talkingNPC.GetUncompletedMissions()) {
-			missionText.Text += $"{m.Name} ({m.MType.Name} to {m.MType.TargetNPC.trueName})" + "\n";
-		}
 		isDialogueActive = true;
-		db.Visible = true;
+		db.Open();
 		db.Write();
 	}
 
 	public void CloseDialogue() {
 		missionText.Text = "";
-		if (IsInstanceValid(db)) {
-			db.QueueFree();
-			db = null;
-		}
+		db.Close();
 		if (IsInstanceValid(talkingNPC)) {
 			talkingNPC.ResetDialogue(talkingNPC.diagPath);
 			talkingNPC = null;

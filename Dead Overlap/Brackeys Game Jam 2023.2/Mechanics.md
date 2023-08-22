@@ -14,3 +14,5 @@ If the `target speaker name` is otherwise not the name of an NPC, continue with 
 If the `target speaker name` is "null", hide the name and picture label.
 
 
+## Room Traversal
+Keep track of whether or not the Player is inside a building and, if so, keep track of the position they were at before entering in the GameManager. Then load the scene of that particular building, maybe making use of an Area2D RoomTrigger node or something similar.

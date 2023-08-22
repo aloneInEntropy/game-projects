@@ -6,12 +6,17 @@ using System.Collections.Generic;
 /// <summary>
 /// The NPC class. Contains information and methods relation to any non-player character.
 /// </summary>
-public partial class NPC : Interactable
+public partial class NPC : StaticBody2D
 {
 	/// <summary>
 	/// The true name of this NPC.
 	/// </summary>
 	public string trueName = "Generic";
+
+	/// <summary>
+	/// The path to the portrait texture used by this NPC.
+	/// </summary>
+	public string portraitPath = "";
 
 	/// <summary>
 	/// The path to the voice sound file used by this NPC.
@@ -38,13 +43,11 @@ public partial class NPC : Interactable
 	/// </summary>
 	public List<DialogueObject> dialogue = new();
 
-	[Export]
 	/// <summary>
-	/// Path to dialogue.
+	/// Path to dialogue file.
 	/// </summary>
 	public string diagPath;
 
-	[Export]
 	/// <summary>
 	/// Dialogue section to display.
 	/// </summary>
@@ -85,15 +88,15 @@ public partial class NPC : Interactable
 	/// </summary>
 	/// <param name="vPath"></param>
 	public void SetVoice(string vPath) {
-		voice = (AudioStreamWav)GD.Load(vPath);
+		voice = (AudioStreamWav)GD.Load(Globals.resPathToVoice + vPath);
 	}
 
 	/// <summary>
-	/// Set the missions of the NPC using the path <c>missionPath</c> to a JSON file.
+	/// Set the missions of the NPC using the path <c>missionPath</c> to a JSON file. All files are assumed to be in the folder "res://Assets/Text/Missions".
 	/// </summary>
 	/// <param name="missionPath"></param>
 	public void SetMissionsJSON(string missionPath) {
-		FileAccess file = FileAccess.Open(missionPath, FileAccess.ModeFlags.Read);
+		FileAccess file = FileAccess.Open(Globals.resPathToMissions + missionPath, FileAccess.ModeFlags.Read);
 		string jsonString = file.GetAsText();
 		Missions = JsonSerializer.Deserialize<List<Mission>>(jsonString, Globals.options);
 		foreach (Mission m in Missions) m.MType.Init();

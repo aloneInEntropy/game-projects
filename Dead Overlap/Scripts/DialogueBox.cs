@@ -14,6 +14,8 @@ public partial class DialogueBox : Control
 	public TextureRect finishedMarker = new();
 	public DialogueObject dialogue = new();
 	public Array<Button> choiceButtons = new();
+	public TextureRect portrait = new();
+	public bool isOpen = false;
 
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
@@ -27,6 +29,7 @@ public partial class DialogueBox : Control
 		choiceControl = (Control)GetNode("ChoiceControl");
 		chcs = (RichTextLabel)GetNode("ChoiceControl/ChoiceLabel");
 		chcsbg = (TextureRect)GetNode("ChoiceControl/CBBG");
+		portrait = (TextureRect)GetNode("Portrait");
 		txt.Text = "";
 		chcs.Text = "";
 		txt.VisibleRatio = 0;
@@ -45,6 +48,16 @@ public partial class DialogueBox : Control
 	public void LoadDialogue(DialogueObject d) {
 		dialogue = d;
 		nameLabel.Text = Globals.talkingNPC.Name;
+	}
+
+	/// <summary>
+	/// Write custom strings. For custom dialogue, use Write(string).
+	/// </summary>
+	/// <param name="d"></param>
+	public void WriteCustom(string d, string nameLabelTitle = "Narrator", string voicePath = "null", string portraitPath = "null") {
+		choiceControl.Visible = false;
+		WriteDialogue(d);
+		Modify(nameLabelTitle, voicePath, portraitPath);
 	}
 
 	/// <summary>
@@ -115,7 +128,7 @@ public partial class DialogueBox : Control
 	public void DisplayDialogueResult() {
 		// If dialogue file set to end, IMMEDIATELY DISCARD DIALOGUE FILE to prevent dialogue cancel loop.
 		// Since this will end the dialogue, do NOT save the previous dialogue position and restart it instead.
-		if (dialogue.originFilePath[15..] == "end.txt") {
+		if (dialogue.originFilePath == "end.txt") {
 			Globals.talkingNPC.LoadWaitingDialogue(0);
 		}
 
@@ -146,7 +159,7 @@ public partial class DialogueBox : Control
 				);
 			}
 		}
-		if (dialogue.functionResult is not null) GD.Print(string.Format("DIALOGUE FUNCTION RESULT: {0}", dialogue.functionResult));
+		// if (dialogue.functionResult is not null) GD.Print(string.Format("DIALOGUE FUNCTION RESULT: {0}", dialogue.functionResult));
 	}
 
 	/// <summary>
@@ -156,7 +169,7 @@ public partial class DialogueBox : Control
 		GetParent<GUI>().canProgressDialogue = true; // Allow progression after making a choice.
 		// If dialogue file set to end, IMMEDIATELY DISCARD DIALOGUE FILE to prevent dialogue cancel loop.
 		// Since this will end the dialogue, do NOT save the previous dialogue position and restart it instead.
-		if (dialogue.originFilePath[15..] == "end.txt") {
+		if (dialogue.originFilePath == "end.txt") {
 			Globals.talkingNPC.LoadWaitingDialogue(0);
 		}
 
@@ -188,7 +201,7 @@ public partial class DialogueBox : Control
 				);
 			}
 		}
-		if (dialogue.functionResult is not null) GD.Print(dialogue.functionResult); // choice function results (discarded for now)
+		// if (dialogue.functionResult is not null) GD.Print(dialogue.functionResult); // choice function results (discarded for now)
 		if (dialogue.choiceResponses.ContainsKey((string)s)) {
 			WriteDialogue(dialogue.choiceResponses[(string)s]);
 			DisplayResponseResult(dialogue.choiceResponses[(string)s]);
@@ -205,7 +218,7 @@ public partial class DialogueBox : Control
 	public void DisplayResponseResult(Variant s) {
 		// If dialogue file set to end, IMMEDIATELY DISCARD DIALOGUE FILE to prevent dialogue cancel loop.
 		// Since this will end the dialogue, do NOT save the previous dialogue position and restart it instead.
-		if (dialogue.originFilePath[15..] == "end.txt") {
+		if (dialogue.originFilePath == "end.txt") {
 			Globals.talkingNPC.LoadWaitingDialogue(0);
 		}
 
@@ -236,16 +249,40 @@ public partial class DialogueBox : Control
 				);
 			}
 		}
-		if (dialogue.functionResult is not null) GD.Print(string.Format("DIALOGUE FUNCTION RESULT: {0}", dialogue.functionResult));
+		// if (dialogue.functionResult is not null) GD.Print(string.Format("DIALOGUE FUNCTION RESULT: {0}", dialogue.functionResult));
 	}
 
 	/// <summary>
 	/// Modify the dialogue box and update any changes.
 	/// </summary>
 	/// <param name="nameTitle"></param>
-	/// <param name="newDialogue"></param>
-	public void Modify(string nameTitle) {
-		nameLabel.Text = nameTitle;
-		GD.Print(Globals.GetNPC(nameTitle).voicePath);
+	/// <param name="voicePath"></param>
+	/// <param name="portraitPath"></param>
+	public void Modify(string nameTitle, string voicePath = "Narrator.wav", string portraitPath = "null") {
+		if (nameTitle == "Narrator") {
+			nameLabel.Text = "";
+			Globals.talkingNPC.SetVoice("Narrator.wav");
+			portrait.Texture = GD.Load<Texture2D>("res://Assets/Sprites/Blank.png");
+		} else {
+			nameLabel.Text = nameTitle;
+			Globals.talkingNPC.SetVoice(Globals.GetNPC(nameTitle).voicePath);
+			portrait.Texture = GD.Load<Texture2D>(Globals.resPathToPortraits + Globals.GetNPC(nameTitle).portraitPath);
+		}
+	}
+
+	/// <summary>
+	/// Open and show this dialogue box.
+	/// </summary>
+	public void Open() {
+		isOpen = true;
+		Visible = true;
+	}
+	
+	/// <summary>
+	/// Close and hide this dialogue box.
+	/// </summary>
+	public void Close() {
+		isOpen = false;
+		Visible = false;
 	}
 }

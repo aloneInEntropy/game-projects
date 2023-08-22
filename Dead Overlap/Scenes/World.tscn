@@ -1,10 +1,11 @@
-[gd_scene load_steps=6 format=3 uid="uid://d1sgxaxy1cuk4"]
+[gd_scene load_steps=7 format=3 uid="uid://d1sgxaxy1cuk4"]
 
 [ext_resource type="Texture2D" uid="uid://dmrdwi1vlycw4" path="res://quad_128.png" id="1_uomgm"]
 [ext_resource type="PackedScene" uid="uid://bocidko04r36c" path="res://Scenes/Player.tscn" id="2_fhxdg"]
 [ext_resource type="PackedScene" uid="uid://6wwwvpsqguwa" path="res://Scenes/GUI.tscn" id="4_xfdgx"]
 [ext_resource type="PackedScene" uid="uid://chiqrcav1pe3g" path="res://Scenes/Olivia.tscn" id="5_blx77"]
 [ext_resource type="PackedScene" uid="uid://dpjug58yjaf0l" path="res://Scenes/Mark.tscn" id="6_rviol"]
+[ext_resource type="PackedScene" uid="uid://cnnt7msd0tt44" path="res://Scenes/Interactable.tscn" id="6_y0fh6"]
 
 [node name="World" type="Node2D"]
 
@@ -27,3 +28,52 @@ position = Vector2(100, 302)
 position = Vector2(361, 211)
 
 [node name="GUI" parent="." instance=ExtResource("4_xfdgx")]
+
+[node name="Interactable" parent="." instance=ExtResource("6_y0fh6")]
+position = Vector2(822, 177)
+description = "An odd little thing."
+metadata/_edit_group_ = true
+
+[node name="CollisionPolygon2D" parent="Interactable" index="0"]
+position = Vector2(45.5, 41.5)
+scale = Vector2(3.84375, 3.59375)
+
+[node name="Sprite2D" type="Sprite2D" parent="Interactable"]
+position = Vector2(13, 10)
+scale = Vector2(0.5, 0.484375)
+texture = ExtResource("1_uomgm")
+centered = false
+
+[node name="Interactable2" parent="." instance=ExtResource("6_y0fh6")]
+position = Vector2(636, 96)
+description = "uwu :3 murr"
+metadata/_edit_group_ = true
+
+[node name="CollisionPolygon2D" parent="Interactable2" index="0"]
+position = Vector2(45.5, 41.5)
+scale = Vector2(3.84375, 3.59375)
+
+[node name="Sprite2D" type="Sprite2D" parent="Interactable2"]
+position = Vector2(13, 10)
+scale = Vector2(0.5, 0.484375)
+texture = ExtResource("1_uomgm")
+centered = false
+
+[node name="Interactable3" parent="." instance=ExtResource("6_y0fh6")]
+position = Vector2(633, 218)
+description = "A cut-out letter. The text reads: \"WE KNOW WHAT YOU DID. LEAVE €10,000 IN CASH UNDERNEATH THE OLD BARN BY SEPTEMBER 12TH OR WE WILL LEAK THE FOOTAGE.\""
+metadata/_edit_group_ = true
+
+[node name="CollisionPolygon2D" parent="Interactable3" index="0"]
+position = Vector2(45.5, 41.5)
+scale = Vector2(3.84375, 3.59375)
+
+[node name="Sprite2D" type="Sprite2D" parent="Interactable3"]
+position = Vector2(13, 10)
+scale = Vector2(0.5, 0.484375)
+texture = ExtResource("1_uomgm")
+centered = false
+
+[editable path="Interactable"]
+[editable path="Interactable2"]
+[editable path="Interactable3"]

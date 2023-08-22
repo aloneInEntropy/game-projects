@@ -1,0 +1,34 @@
+[remap]
+
+importer="texture"
+type="CompressedTexture2D"
+uid="uid://dn6xlt41nd3so"
+path="res://.godot/imported/Pasted image 20230822133827.png-fda0ac8fc643dc10676593ee9838c497.ctex"
+metadata={
+"vram_texture": false
+}
+
+[deps]
+
+source_file="res://Brackeys Game Jam 2023.2/Pasted image 20230822133827.png"
+dest_files=["res://.godot/imported/Pasted image 20230822133827.png-fda0ac8fc643dc10676593ee9838c497.ctex"]
+
+[params]
+
+compress/mode=0
+compress/high_quality=false
+compress/lossy_quality=0.7
+compress/hdr_compression=1
+compress/normal_map=0
+compress/channel_pack=0
+mipmaps/generate=false
+mipmaps/limit=-1
+roughness/mode=0
+roughness/src_normal=""
+process/fix_alpha_border=true
+process/premult_alpha=false
+process/normal_map_invert_y=false
+process/hdr_as_srgb=false
+process/hdr_clamp_exposure=false
+process/size_limit=0
+detect_3d/compress_to=1

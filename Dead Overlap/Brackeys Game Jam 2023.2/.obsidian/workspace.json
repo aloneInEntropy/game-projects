@@ -32,6 +32,18 @@
             }
           },
           {
+            "id": "3722f19127b64556",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Help.md",
+                "mode": "source",
+                "source": false
+              }
+            }
+          },
+          {
             "id": "7629125956f0d479",
             "type": "leaf",
             "state": {
@@ -189,10 +201,12 @@
   },
   "active": "97eb65065815623a",
   "lastOpenFiles": [
-    "Mechanics.md",
     "TODO.md",
-    "Dead Overlap.md",
     "Help.md",
+    "Mechanics.md",
+    "Dead Overlap.md",
+    "Pasted image 20230822133827.png",
+    "Pasted image 20230822133827.png.import",
     "dfvdf.md",
     "Apart/Characters/Main/Khane.md",
     "The Barnstormer/The Barnstormer.md",
@@ -214,7 +228,6 @@
     "Abstracture/Abstracture.md",
     "Abstracture/Ennnoiamnesia/Ennoiamnesia - About.md",
     "The Barnstormer/[.md",
-    "Apart/Runes/terminals.md",
     "Z_Other/Self-Referential Abstracture.png",
     "Self-Referential Abstracture.png",
     "Pasted image 20230611204537.png",

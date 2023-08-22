@@ -53,7 +53,7 @@ public partial class Player : CharacterBody2D
 
     public override void _Input(InputEvent @event)
     {
-        if (!GameManager.isGamePaused && (@event.IsActionPressed("ui_accept") || @event.IsActionPressed("next"))) {
+		if (!GameManager.isGamePaused && (@event.IsActionPressed("interact") || @event.IsActionPressed("next"))) {
 			// if the player is overlapping multiple objects, choose the one it is looking at.
 			// otherwise, pick the overlapping object.
 
@@ -61,18 +61,27 @@ public partial class Player : CharacterBody2D
 				overlapping[0] :
 				(Node2D)rayCast.GetCollider() // cast Object to Node2D
 			;
-			// GD.Print(GameManager.IsSameOrSubclass(typeof(NPC), facingObj.GetType()));
-			
-			if (facingObj is not null && facingObj.GetType().IsSubclassOf(typeof(NPC))) {
+
+			if (facingObj is not null) {
 				Velocity = Vector2.Zero; // Stop any sliding when talking to an NPC.
-				Globals.talkingNPC = (NPC)facingObj;
-				// GD.Print(facingObj.Name);
-				if (DialogueManager.isDialogueReading) {
-					// if dialogue is currently being typed out
-					DialogueManager.UpdateVisibleText(true);
-				} else {
-					// if dialogue has finished being typed out
-					gui.ProgressDialogue((NPC)facingObj);
+				if (facingObj.GetType().IsSubclassOf(typeof(NPC))) {
+					Globals.talkingNPC = (NPC)facingObj;
+					// GD.Print(facingObj.Name);
+					if (DialogueManager.isDialogueReading) {
+						// if dialogue is currently being typed out
+						DialogueManager.UpdateVisibleText(true);
+					} else {
+						// if dialogue has finished being typed out
+						gui.ProgressDialogue((NPC)facingObj);
+					}
+				} else if (facingObj.GetType() == typeof(Interactable)) {
+					if (DialogueManager.isDialogueReading) {
+						// if dialogue is currently being typed out
+						DialogueManager.UpdateVisibleText(true);
+					} else {
+						// if dialogue has finished being typed out
+						((Interactable)facingObj).OpenDescription();
+					}
 				}
 			}
 		}
@@ -118,13 +127,14 @@ public partial class Player : CharacterBody2D
 	void _on_interact_box_area_entered(Area2D area) {
 		#pragma warning restore IDE0051 // restore the INFO (they're still useful after all)
 		#pragma warning restore IDE1006 // ditto
-		// GD.Print(area.GetParent<Node2D>().Name);
 		if (area.GetParent().GetType().IsSubclassOf(typeof(NPC))) {
 			// if the node is an NPC, start it's dialogue from the beginning
 			// var p = (NPC)area.GetParent();
 			// p.ResetDialogue();
 			if (!overlapping.Contains(area.GetParent<NPC>())) overlapping.Add(area.GetParent<NPC>());
 			// GD.Print(string.Format("{0} entered {1}", Name, area.GetParent<Node2D>().Name));
+		} else if (area.GetType() == typeof(Interactable)) {
+			if (!overlapping.Contains(area)) overlapping.Add(area);
 		}
 	}
 	
@@ -138,6 +148,12 @@ public partial class Player : CharacterBody2D
 			gui.CloseDialogue();
 			// if the node is an NPC
 			if (overlapping.Contains(area.GetParent<NPC>())) overlapping.Remove(area.GetParent<NPC>());
+			// GD.Print(string.Format("{0} entered {1}", Name, area.GetParent<Node2D>().Name));
+		}
+
+		if (area.GetType() == typeof(Interactable)) {
+			// if the node is an NPC
+			if (overlapping.Contains(area)) overlapping.Remove(area);
 			// GD.Print(string.Format("{0} entered {1}", Name, area.GetParent<Node2D>().Name));
 		}
 	}
