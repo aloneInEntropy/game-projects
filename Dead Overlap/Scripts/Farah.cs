@@ -11,7 +11,7 @@ public partial class Farah : NPC
 		trueName = "Farah";
 		Globals.AddNPC(this);
 
-		diagPath = "d1.txt";
+		diagPath = "d4.txt";
 		LoadDialogue(diagPath);
 
 		voicePath = "Olivia.wav";

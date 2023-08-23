@@ -1,0 +1,7 @@
+[gd_scene load_steps=3 format=3 uid="uid://hfo0tlwgf4nj"]
+
+[ext_resource type="PackedScene" uid="uid://cp8831bvwwy6t" path="res://Scenes/NPC.tscn" id="1_gwmxm"]
+[ext_resource type="Script" path="res://Scripts/Narrator.cs" id="2_lqpac"]
+
+[node name="Narrator" instance=ExtResource("1_gwmxm")]
+script = ExtResource("2_lqpac")

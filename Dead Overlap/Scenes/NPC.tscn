@@ -1,7 +1,7 @@
 [gd_scene load_steps=6 format=3 uid="uid://cp8831bvwwy6t"]
 
-[ext_resource type="Texture2D" uid="uid://b2arqqk5sp8dj" path="res://icon.svg" id="1_3318d"]
 [ext_resource type="Script" path="res://Scripts/NPC.cs" id="1_nkwdv"]
+[ext_resource type="Texture2D" uid="uid://738f3wn0cx56" path="res://Assets/Sprites/NPC/Farah.png" id="2_h7uxn"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_56f24"]
 radius = 50.0
@@ -13,12 +13,7 @@ radius = 24.0
 radius = 30.0
 
 [node name="NPC" type="StaticBody2D"]
-modulate = Color(0.709804, 0, 0.270588, 1)
 script = ExtResource("1_nkwdv")
-
-[node name="Sprite2D" type="Sprite2D" parent="."]
-scale = Vector2(0.25, 0.25)
-texture = ExtResource("1_3318d")
 
 [node name="InteractBox" type="Area2D" parent="."]
 collision_layer = 4
@@ -35,6 +30,9 @@ shape = SubResource("CircleShape2D_gk8vp")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
 shape = SubResource("CircleShape2D_elvxe")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_h7uxn")
 
 [connection signal="area_entered" from="InteractBox" to="." method="_on_interact_box_area_entered"]
 [connection signal="area_exited" from="InteractBox" to="." method="_on_interact_box_area_exited"]

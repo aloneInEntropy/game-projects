@@ -1,12 +1,17 @@
 [
   {
+    "Text": "Alright, this is video log... fifty-four, I think? We\u0027re having Christmas early so everyone can get their holidays in, and I\u0027m one of those people, so I\u0027ll make this quick. I am Dr Lucy Alone and it is currently the 22nd of December, 2025. ",
+    "Day": 0,
+    "NPCName": "Farah"
+  },
+  {
     "Text": "Hello there! My name is Olivia, but you can call me Liv. Welcome to the town of Orast! Here, you\u0027ll find many people to talk to, shops to shop at, and houses to live in! Please make yourself at home here. ",
     "Day": 0,
     "NPCName": "Olivia"
   },
   {
-    "Text": "Alright, this is video log... fifty-four, I think? We\u0027re having Christmas early so everyone can get their holidays in, and I\u0027m one of those people, so I\u0027ll make this quick. I am Dr Lucy Alone and it is currently the 22nd of December, 2025. ",
+    "Text": "That there is no mystery. There was no crime. There was only lies, deceit, and hatred. The realisation hits you hard, so hard that you forget how to breathe for a moment. Here, in this space, you are as alone as you would be in death. And here, you...",
     "Day": 0,
-    "NPCName": "Farah"
+    "NPCName": "Narrator"
   }
 ]

@@ -9,6 +9,7 @@
 script = ExtResource("1_h7svq")
 
 [node name="MissionText" type="RichTextLabel" parent="."]
+visible = false
 offset_left = 36.0
 offset_top = 48.0
 offset_right = 481.0

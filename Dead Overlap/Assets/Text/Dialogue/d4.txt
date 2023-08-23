@@ -1,0 +1,27 @@
+~0
+    Alright Farah, what did you want to tell me? What was up with that letter? ||c Marceline
+~1 
+    I... I just couldn't keep it a secret anymore. I didn't want to get Jordan in trouble, you have to believe me! I just... I didn't know... I [i]never[/i] know what they're thinking! It's infuriating how they just never ask what [i]I[/i] want or what I think or... or... ||c Farah
+~2
+    Hey, hey! It's alright! You guys aren't under arrest at the moment - I don't even have that power, really. I'm just trying to figure out what happened to Makoto. Do you think you could help me? ||c Marceline
+~~3
+    *sniffles* I... I... ||c Farah
+~4
+    (She must really care for Jordan, huh?) ||c Marceline
+        ~##2
+            ~@0
+                Ask her about the dog.
+                ~#@0
+                    listen 'ere, bub. imma beat the fuck outta u
+            ~@1
+                Pressure her.
+                ~#@1
+                    gay sex!
+        ~##.
+    ~~.
+~5
+    what the fuck ||c Farah
+    ||l d4_re.txt l=false
+    // This order breaks the ||c command.
+    // Reversing them means ||l doesn't work.
+~.

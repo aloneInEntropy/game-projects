@@ -11,7 +11,7 @@ On September 8th, 1989, the date of Makoto's death, several events that took pla
 | Date           | Event                                                                                                                                                                                                                                                                                                             |
 | -------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | **September 7th**  | Makoto's wife, ***Adora Aga***, had left on a "business trip". Adora is not believed to have been employed at the time.                                                                                                                                                                                           |
-| **September 8th** ??:??          | Makoto receives a cut-out letter with the text, "WE KNOW WHAT YOU DID. LEAVE €10,000 IN CASH UNDERNEATH THE OLD BARN BY SEPTEMBER 12TH OR WE WILL LEAK THE FOOTAGE."                                                                                                                                         |
+| **September 8th** ??:??          | Makoto receives a [[#Cut-out letter\|ransom letter]].                                                                                                                                         |
 | 13:04          | Makoto was seen entering the office of the mayor, ***Patrick Cuno***, carrying a folder.                                                                                                                                                                                                                          |
 | 13:11          | Makoto leaves the office without the folder and returns home, buying a bandage and newspaper from the market.                                                                                                                                                                                                     |
 | 15:54          | The police are called, but the line hangs up just seconds later.                                                                                                                                                                                                                                                  |
@@ -83,7 +83,7 @@ The German Shepard of Farah's cousin, Juno, had gone missing on September 7th. H
 
 ### Cut-out letter
 A cut-out letter was delivered to Makoto's household at some point on September 8th. It was discovered during Marceline Ren's search of the house on September 12th. It reads:
-"WE KNOW WHAT YOU DID. LEAVE €10,000 IN CASH UNDERNEATH THE OLD BARN BY SEPTEMBER 12TH OR WE WILL LEAK THE FOOTAGE."
+"WE KNOW WHAT YOU DID. LEAVE €10,000 IN CASH UNDERNEATH THE OLD BARN BY 11 P.M. OR WE WILL LEAK THE FOOTAGE"
 
 ## Sequence of Discovery
 1. The first scene shows Marceline Ren talking to her future self, saying that she solves the case and needs to figure it out all today. She can't tell her the answer because of causality stuff, but it is vital that she ascertain what happened and who really killed Makoto Bourdain.
@@ -185,14 +185,24 @@ Her insistence on finding and reading Makoto's will is troubling, especially for
 **Hair**: Brown
 **D.O.B.**: 1963/01/05
 **Pronouns**: They/them
-**Description**: The non-binary child of [[#Patrick Cuno]].
+**Description**: The non-binary child of [[#Patrick Cuno]]. They are extremely impulsive, erratic, sudden, and any other descriptor you could use to describe someone with no thoughts in their head. Their relationship with their father, the mayor of Shune, seems to weigh on them quite a bit. They have a law degree, but don't appear to be using it for much, instead relying on allowances from Cuno.
+
+Their wife, Farah, seems to be the thinker in their relationship. If Jordan sets out to do something, it's Farah who actually considers their options. Their accepting Farah's proposal probably had something to do with that.
+
+Sometimes, they can be extremely cold and calculating. I would say "distant", but I wouldn't want to passively accuse them of having bipolar disorder. When they're in that mood, however, they can talk circles around even the smartest people I know.
+
+The whole "not a man or woman" thing is interesting, but I don't judge. I wasn't always a woman, either.
 
 ### Farah Sal-Cuno
 **Skin/Ethnicity**: Indian (Brown)
 **Hair**: Brown
-**D.O.B.**: 1947/19/06
+**D.O.B.**: 1961/15/12
 **Pronouns**: She/her
-**Description**: The wife of [[#Jordan Cuno]].
+**Description**: The wife of [[#Jordan Cuno]]. She proposed to Jordan at just 24, and Jordan surprisingly said yes. They seem to be one of the happiest couples in Shune, though given the general state of the town, that's not saying much. She recently completed her literature degree and writes for the local newspaper.
+
+Her partner, who prefers to referred to as Farah's wife, tends to string her along into her more impulsive acts. Jordan's erratic and often dangerous behaviour actually isn't the worst of what they can do; Farah holds them back at every turn. This appears to cause her significant distress, which is understandable. If Farah is ever implicated in a crime, you can be sure Jordan isn't too far away.
+
+Young love is strange. I can't relate to it, even as a 26-year-old woman, but I'd be seriously reconsidering why I would willingly marry such a character.
 
 ### Marie Bornstein
 **Skin/Ethnicity**: German (Jewish)

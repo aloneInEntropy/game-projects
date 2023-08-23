@@ -46,6 +46,7 @@ public partial class NPC : StaticBody2D
 	/// <summary>
 	/// Path to dialogue file.
 	/// </summary>
+	[Export]
 	public string diagPath;
 
 	/// <summary>

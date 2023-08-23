@@ -5,7 +5,7 @@
 using Godot;
 public partial class Interactable : Area2D
 {
-    [Export]
+    [Export(PropertyHint.MultilineText)]
     public string description = "";
 
     [Export]
@@ -15,7 +15,6 @@ public partial class Interactable : Area2D
     private bool hasShownDesc = false;
 
     public void OpenDescription() {
-        GD.Print("opening");
         if (!hasShownDesc) {
             Globals.gui.OpenDialogue(description, false);
             hasShownDesc = true;

@@ -58,7 +58,7 @@ public partial class DialogueManager : Node
 		/* 
 		This is a fix for a bug caused by a few disconnected factors.
 		
-		When loading a file using Parse(file_name), the method strips each line's edge whitespace before continuing. The file end.txt has no characters to display and so returns an empty string.
+		When loading a file using Parse(file_name), the method strips each line's end whitespace before continuing. The file end.txt has no characters to display and so returns an empty string.
 		Due to some weird fuckery surrounding the RichTextLabel's visible character and ratio fields, this allows it to set visible characters to 0 (the total amount of characters) and visible ratio to 1 (all characters are being displayed). Somehow, this carries over in the dialogue box because it is no longer being deleted and recreated every time it closes, only reset manually.
 
 		As for why this bug didn't appear consistently, I can only assume it had something to do with load times.

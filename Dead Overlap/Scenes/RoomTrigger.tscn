@@ -1,14 +1,14 @@
 [gd_scene load_steps=3 format=3 uid="uid://7agyq5ghpobi"]
 
-[ext_resource type="Script" path="res://Scripts/RoomTrigger.cs" id="1_8w11k"]
+[ext_resource type="Script" path="res://Scripts/RoomTrigger.cs" id="1_52c44"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_dmlan"]
-size = Vector2(50, 44)
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_qcogp"]
+size = Vector2(114.5, 48)
 
 [node name="RoomTrigger" type="Area2D"]
 collision_layer = 4
 collision_mask = 4
-script = ExtResource("1_8w11k")
+script = ExtResource("1_52c44")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource("RectangleShape2D_dmlan")
+shape = SubResource("RectangleShape2D_qcogp")

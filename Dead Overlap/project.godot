@@ -22,6 +22,7 @@ DialogueManager="*res://Scenes/DialogueManager.tscn"
 GameManager="*res://Scenes/GameManager.tscn"
 Globals="*res://Scripts/Globals.cs"
 Narrator="*res://Scripts/Narrator.cs"
+Marceline="*res://Scenes/Marceline.tscn"
 
 [display]
 

@@ -20,6 +20,12 @@ public partial class RoomTrigger : Area2D
     /// </summary>
     [Export]
     public Vector2 faceDir;
+    
+    /// <summary>
+    /// Should the next room be loaded immediately upon touch?
+    /// </summary>
+    [Export]
+    public bool autoTrigger = false;
 
     /// <summary>
     /// Change the scene according to this RoomTrigger's variables.

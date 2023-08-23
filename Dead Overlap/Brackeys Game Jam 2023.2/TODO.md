@@ -10,11 +10,11 @@
 	- [x] Ignacio Pascal
 	- [x] Patrick Cuno
 	- [ ] Jordan Cuno
-	- [ ] Farah Sal-Cuno
+	- [x] Farah Sal-Cuno
 	- [x] Marie Bornstein
 
 22/08
-- [ ] Set up (very basic) NPC sprites and general tilesets
+- [x] Set up (very basic) NPC sprites and general tilesets
 - [ ] Create NPC voices
 - [x] Consider NPC pictures in the dialogue box
 - [x] Finished NPCs:
@@ -26,11 +26,18 @@
 	- [x] Jordan Cuno
 	- [x] Farah Sal-Cuno
 	- [x] Marie Bornstein
+	- [x] Marceline Ren
+		- [ ] make her swing her goddamn arms
 
 23/08
 - [x] Item interaction
 - [ ] Tilemap setup
-- [x] Room traversal,
+	- [x] Adora's house
+	- [ ] Mayor's office
+	- [ ] The market
+	- [ ] The Hub
+	- [ ] Shune
+- [x] Room traversal
 - [ ] Pause menu and ability to return to the present time
 
 24/08 - 25/08

@@ -1,30 +1,50 @@
 (If anything is not finished on the intended date(s), forward it to the following day and reduce its scale. Writing and time travel mechanics are to be given priority.)
 
 21/08/2023
-- [ ] Finish writing about all characters and events
 - [x] Work on Notebook menu and Dialogue Switching mechanics
+- [ ] Finish writing about all characters and events
+	- [x] Makoto Bourdain
+	- [x] Adora Aga
+	- [x] Johnny Lawn
+	- [x] Ignacio Pascal
+	- [x] Patrick Cuno
+	- [ ] Jordan Cuno
+	- [x] Farah Sal-Cuno
+	- [x] Marie Bornstein
 
 22/08
-- [ ] Set up (very basic) NPC sprites and general tilesets
+- [x] Set up (very basic) NPC sprites and general tilesets
 - [ ] Create NPC voices
-- [ ] Consider NPC pictures in the dialogue box
-- [ ] Finished NPCs:
-	- [ ] Makoto Bourdain
-	- [ ] Adora Aga
-	- [ ] Johnny Lawn
-	- [ ] Ignacio Pascal
-	- [ ] Patrick Cuno
-	- [ ] Jordan Cuno
-	- [ ] Farah Sal-Cuno
+- [x] Consider NPC pictures in the dialogue box
+- [x] Finished NPCs:
+	- [x] Makoto Bourdain
+	- [x] Adora Aga
+	- [x] Johnny Lawn
+	- [x] Ignacio Pascal
+	- [x] Patrick Cuno
+	- [x] Jordan Cuno
+	- [x] Farah Sal-Cuno
+	- [x] Marie Bornstein
+	- [x] Marceline Ren
+		- [ ] make her swing her goddamn arms
 
 23/08
-- [ ] Tilemap setup, room traversal, item interaction
+- [x] Item interaction
+- [ ] Tilemap setup
+	- [x] Adora's house
+	- [ ] Mayor's office
+	- [ ] The market
+	- [ ] The Hub
+	- [ ] Shune
+- [x] Room traversal
 - [ ] Pause menu and ability to return to the present time
 
 24/08 - 25/08
-- [ ] Writing dialogue, the mystery, and the setting
+- [ ] Ability to call multiple commands at once.
+- [ ] Music and sound effects
+- [ ] Writing the mystery
 
 26/08
 - [ ] Polish
-    - [ ] Extra UI effects, such as a pop-up when dialogue is saved or deleted.
+	- [ ] Extra UI effects, such as a pop-up when dialogue is saved or deleted.
 	- [ ] Different design for the notebook.

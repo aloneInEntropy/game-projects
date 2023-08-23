@@ -1,13 +1,14 @@
-[gd_scene load_steps=3 format=3 uid="uid://dpjug58yjaf0l"]
+[gd_scene load_steps=4 format=3 uid="uid://dpjug58yjaf0l"]
 
 [ext_resource type="PackedScene" uid="uid://cp8831bvwwy6t" path="res://Scenes/NPC.tscn" id="1_5hryb"]
 [ext_resource type="Script" path="res://Scripts/Mark.cs" id="2_veyg7"]
+[ext_resource type="Texture2D" uid="uid://dqlve5hx2wcms" path="res://Assets/Sprites/NPC/Patrick.png" id="3_n8w5n"]
 
 [node name="Mark" instance=ExtResource("1_5hryb")]
 script = ExtResource("2_veyg7")
 
-[node name="Sprite2D" parent="." index="0"]
-modulate = Color(0.698039, 0, 0.717647, 0.423529)
-
 [node name="CollisionShape2D" parent="InteractBox" index="0"]
 debug_color = Color(0.764706, 0.172549, 1, 0.419608)
+
+[node name="Sprite2D" parent="." index="3"]
+texture = ExtResource("3_n8w5n")

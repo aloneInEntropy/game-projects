@@ -9,7 +9,7 @@ public partial class Player : CharacterBody2D
 {
 	[ExportGroup("Movement")]
 	[Export]
-	public const float Speed = 300.0f;
+	public const float Speed = 200.0f;
 	[Export]
 	private Vector2 _velocity;
 	[Export]
@@ -120,10 +120,10 @@ public partial class Player : CharacterBody2D
 		animationPlayer.SpeedScale = 2.5f;
 		animationTree.Set("parameters/conditions/idle", Velocity == Vector2.Zero);
 		animationTree.Set("parameters/conditions/isMoving", Velocity != Vector2.Zero);
-		animationTree.Set("parameters/conditions/attack", Input.IsActionJustPressed("attack"));
+		// animationTree.Set("parameters/conditions/attack", Input.IsActionJustPressed("attack"));
 		animationTree.Set("parameters/Idle/blend_position", lastDirection);
 		animationTree.Set("parameters/Walk/blend_position", lastDirection);
-		animationTree.Set("parameters/Attack/blend_position", lastDirection);
+		// animationTree.Set("parameters/Attack/blend_position", lastDirection);
 	}
 
 
@@ -141,7 +141,12 @@ public partial class Player : CharacterBody2D
 		} else if (area.GetType() == typeof(Interactable)) {
 			if (!overlapping.Contains(area)) overlapping.Add(area);
 		} else if (area.GetType() == typeof(RoomTrigger)) {
-			if (!overlapping.Contains(area)) overlapping.Add(area);
+			if (((RoomTrigger)area).autoTrigger) {
+				((RoomTrigger)area).faceDir = lastDirection;
+				((RoomTrigger)area).Change();
+			} else {
+				if (!overlapping.Contains(area)) overlapping.Add(area);
+			}
 		}
 	}
 	

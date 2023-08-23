@@ -1,0 +1,11 @@
+[gd_scene load_steps=4 format=3 uid="uid://c16ao4hx4n32e"]
+
+[ext_resource type="PackedScene" uid="uid://cp8831bvwwy6t" path="res://Scenes/NPC.tscn" id="1_unvpv"]
+[ext_resource type="Texture2D" uid="uid://cxeiycag6661c" path="res://Assets/Sprites/Blank.png" id="2_gk1ri"]
+[ext_resource type="Script" path="res://Scripts/Marceline.cs" id="2_h7771"]
+
+[node name="Marceline" instance=ExtResource("1_unvpv")]
+script = ExtResource("2_h7771")
+
+[node name="Sprite2D" parent="." index="3"]
+texture = ExtResource("2_gk1ri")
