@@ -9,7 +9,7 @@ public partial class Interactable : Area2D
     public string description = "";
 
     [Export]
-    public Texture showcase = new();
+    public Texture showcase;
 
     public bool displayShowcase = false;
     private bool hasShownDesc = false;

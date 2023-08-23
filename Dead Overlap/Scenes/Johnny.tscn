@@ -1,0 +1,13 @@
+[gd_scene load_steps=4 format=3 uid="uid://cd68ejdj6cmcv"]
+
+[ext_resource type="PackedScene" uid="uid://cp8831bvwwy6t" path="res://Scenes/NPC.tscn" id="1_j0344"]
+[ext_resource type="Script" path="res://Scripts/Johnny.cs" id="2_2ovs4"]
+[ext_resource type="Texture2D" uid="uid://cm8fmkfmr0v5c" path="res://Assets/Sprites/NPC/Johnny.png" id="2_q5ber"]
+
+[node name="Johnny" instance=ExtResource("1_j0344")]
+modulate = Color(1, 1, 1, 1)
+script = ExtResource("2_2ovs4")
+
+[node name="Sprite2D" parent="." index="0"]
+scale = Vector2(1, 1)
+texture = ExtResource("2_q5ber")

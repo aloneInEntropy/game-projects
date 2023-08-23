@@ -49,7 +49,7 @@ public partial class GUI : CanvasLayer
 
 		if (isDialogueActive && IsInstanceValid(db) && @event.IsActionPressed("save_dialogue")) {
 			// Don't save "un-spoken" dialogue.
-			if (db.nameLabel.Text != "") notebook.SaveDialogueAsNote(db.txt.Text, Globals.year, db.nameLabel.Text);
+			if (db.nameLabel.Text != "") notebook.SaveDialogueAsNote(db.txt.Text, Globals.day, db.nameLabel.Text);
 		}
 	}
 

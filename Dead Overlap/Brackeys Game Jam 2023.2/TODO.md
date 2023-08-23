@@ -17,19 +17,20 @@
 - [ ] Set up (very basic) NPC sprites and general tilesets
 - [ ] Create NPC voices
 - [x] Consider NPC pictures in the dialogue box
-- [ ] Finished NPCs:
+- [x] Finished NPCs:
 	- [x] Makoto Bourdain
 	- [x] Adora Aga
-	- [ ] Johnny Lawn
-	- [ ] Ignacio Pascal
-	- [ ] Patrick Cuno
+	- [x] Johnny Lawn
+	- [x] Ignacio Pascal
+	- [x] Patrick Cuno
 	- [x] Jordan Cuno
 	- [x] Farah Sal-Cuno
 	- [x] Marie Bornstein
 
 23/08
 - [x] Item interaction
-- [ ] Tilemap setup, room traversal,
+- [ ] Tilemap setup
+- [x] Room traversal,
 - [ ] Pause menu and ability to return to the present time
 
 24/08 - 25/08

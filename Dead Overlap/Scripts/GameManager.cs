@@ -20,6 +20,9 @@ public partial class GameManager : Node
 
 	public static Font normalFont, boldFont, lightFont;
 
+	public static Vector2 sceneChangePosition = Vector2.Inf;
+	public static Vector2 sceneChangeFacing;
+
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
@@ -33,6 +36,15 @@ public partial class GameManager : Node
 	{
 		frame++;
 	}
+
+	/// <summary>
+	/// Load the location scene <c>location</c>.
+	/// </summary>
+	public void LoadLocationB(PackedScene location, Vector2 pos) {
+        
+    }
+	
+	
 
 	// Check if a Type `potentialDescendant` is inherited from or equal to a class `potentialBase`
 	// https://stackoverflow.com/questions/2742276/how-do-i-check-if-a-type-is-a-subtype-or-the-type-of-an-object

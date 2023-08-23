@@ -55,7 +55,8 @@
               }
             }
           }
-        ]
+        ],
+        "currentTab": 3
       }
     ],
     "direction": "vertical"
@@ -132,7 +133,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Dead Overlap.md"
+                "file": "TODO.md"
               }
             }
           },
@@ -142,7 +143,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "Dead Overlap.md",
+                "file": "TODO.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -154,7 +155,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Dead Overlap.md",
+                "file": "TODO.md",
                 "collapseAll": true,
                 "extraContext": true,
                 "sortOrder": "alphabetical",
@@ -199,14 +200,14 @@
       "table-editor-obsidian:Advanced Tables Toolbar": false
     }
   },
-  "active": "97eb65065815623a",
+  "active": "7629125956f0d479",
   "lastOpenFiles": [
+    "Pasted image 20230822133827.png.import",
+    "Dead Overlap.md",
     "TODO.md",
     "Help.md",
     "Mechanics.md",
-    "Dead Overlap.md",
     "Pasted image 20230822133827.png",
-    "Pasted image 20230822133827.png.import",
     "dfvdf.md",
     "Apart/Characters/Main/Khane.md",
     "The Barnstormer/The Barnstormer.md",

@@ -40,6 +40,7 @@ offset_left = 209.0
 offset_top = 427.0
 offset_right = 660.0
 offset_bottom = 583.0
+focus_mode = 2
 theme_override_colors/default_color = Color(0, 0, 0, 1)
 theme_override_fonts/normal_font = ExtResource("2_t8gjk")
 theme_override_fonts/bold_font = ExtResource("3_1rhln")
@@ -49,6 +50,7 @@ bbcode_enabled = true
 text = "Hello world"
 fit_content = true
 scroll_active = false
+selection_enabled = true
 
 [node name="NameLabel" type="RichTextLabel" parent="."]
 layout_mode = 0
@@ -104,6 +106,7 @@ fit_content = true
 scroll_active = false
 
 [node name="Portrait" type="TextureRect" parent="."]
+layout_mode = 0
 offset_left = 24.0
 offset_top = 427.0
 offset_right = 184.0

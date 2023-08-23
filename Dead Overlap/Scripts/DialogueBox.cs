@@ -142,7 +142,6 @@ public partial class DialogueBox : Control
 				parseResult[2] = int -> the dialogue number to start the above list from
 				parseResult[3] = bool -> choose whether or not to save parseResult[0] to the NPC
 			 */
-			GD.Print(dialogue.parseResult.Count);
 			if ((bool)dialogue.parseResult[1]) {
 				// update dialogue scene
 				Globals.talkingNPC.LoadDialogue(
@@ -232,7 +231,6 @@ public partial class DialogueBox : Control
 				parseResult[2] = int -> the dialogue number to start the above list from
 				parseResult[3] = bool -> choose whether or not to save parseResult[0] to the NPC
 			 */
-			GD.Print(dialogue.parseResult.Count);
 			if ((bool)dialogue.parseResult[1]) {
 				// update dialogue scene
 				Globals.talkingNPC.LoadDialogue(

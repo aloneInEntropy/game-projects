@@ -17,6 +17,9 @@ public partial class Player : CharacterBody2D
 	[Export]
 	public float _acceleration = 800;
 
+	public Vector2 direction;
+	Vector2 lastDirection;
+
 	RayCast2D rayCast;
 	Area2D attackBox;
 	CollisionShape2D attackBoxColl;
@@ -26,8 +29,6 @@ public partial class Player : CharacterBody2D
     readonly Array<Node2D> overlapping = new();
 	GUI gui;
     Node2D facingObj;
-	Vector2 direction;
-	Vector2 lastDirection;
 
 	public override void _Ready() {
 		Globals.player = this;
@@ -39,6 +40,7 @@ public partial class Player : CharacterBody2D
         animationTree = GetNodeOrNull<AnimationTree>("AnimationTree");
 		animationTree.Active = true;
 		gui = GetParent().GetNodeOrNull<GUI>("GUI");
+		gui.Visible = true;
 	}
 
 
@@ -82,6 +84,9 @@ public partial class Player : CharacterBody2D
 						// if dialogue has finished being typed out
 						((Interactable)facingObj).OpenDescription();
 					}
+				} else if (facingObj.GetType() == typeof(RoomTrigger)) {
+					((RoomTrigger)facingObj).faceDir = lastDirection;
+					((RoomTrigger)facingObj).Change();
 				}
 			}
 		}
@@ -125,8 +130,8 @@ public partial class Player : CharacterBody2D
 	#pragma warning disable IDE0051 // remove unused function INFO (this is ran by Godot internally anyway)
 	#pragma warning disable IDE1006 // remove naming style INFO ("should start with a capital letter" stuff)
 	void _on_interact_box_area_entered(Area2D area) {
-		#pragma warning restore IDE0051 // restore the INFO (they're still useful after all)
-		#pragma warning restore IDE1006 // ditto
+#pragma warning restore IDE0051 // restore the INFO (they're still useful after all)
+#pragma warning restore IDE1006 // ditto
 		if (area.GetParent().GetType().IsSubclassOf(typeof(NPC))) {
 			// if the node is an NPC, start it's dialogue from the beginning
 			// var p = (NPC)area.GetParent();
@@ -135,26 +140,27 @@ public partial class Player : CharacterBody2D
 			// GD.Print(string.Format("{0} entered {1}", Name, area.GetParent<Node2D>().Name));
 		} else if (area.GetType() == typeof(Interactable)) {
 			if (!overlapping.Contains(area)) overlapping.Add(area);
+		} else if (area.GetType() == typeof(RoomTrigger)) {
+			if (!overlapping.Contains(area)) overlapping.Add(area);
 		}
 	}
 	
 	#pragma warning disable IDE0051
 	#pragma warning disable IDE1006
 	void _on_interact_box_area_exited(Area2D area) {
-		#pragma warning restore IDE0051
-		#pragma warning restore IDE1006
+#pragma warning restore IDE0051
+#pragma warning restore IDE1006
 		// GD.Print(area.GetParent<Node2D>().Name);
 		if (area.GetParent().GetType().IsSubclassOf(typeof(NPC))) {
 			gui.CloseDialogue();
 			// if the node is an NPC
 			if (overlapping.Contains(area.GetParent<NPC>())) overlapping.Remove(area.GetParent<NPC>());
-			// GD.Print(string.Format("{0} entered {1}", Name, area.GetParent<Node2D>().Name));
-		}
-
-		if (area.GetType() == typeof(Interactable)) {
-			// if the node is an NPC
+		} else if (area.GetType() == typeof(Interactable)) {
+			// if the node is an Interactable
 			if (overlapping.Contains(area)) overlapping.Remove(area);
-			// GD.Print(string.Format("{0} entered {1}", Name, area.GetParent<Node2D>().Name));
+		} else if (area.GetType() == typeof(RoomTrigger)) {
+			// if the node is a RoomTrigger
+			if (overlapping.Contains(area)) overlapping.Remove(area);
 		}
 	}
 

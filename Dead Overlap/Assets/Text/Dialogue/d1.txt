@@ -1,5 +1,5 @@
 ~0
-	Hello there! My name is [b]Olivia[/b], but you can call me Liv. Welcome to the town of Orast! Here, you'll find many people to talk to, shops to shop at, and houses to live in! Please make yourself at home here.
+	Hello there! My name is [b]Olivia[/b], but you can call me Liv. Welcome to the town of Orast! Here, you'll find many people to talk to, shops to shop at, and houses to live in! Please make yourself at home here. ||c Olivia
 ~1
 	In case you forgot, you can always leave this place again by entering the portal behind you. It will never close, so you can come and leave as you like. 
 ~~2

@@ -11,6 +11,11 @@ using System;
 public partial class Globals : Node
 {
 	/// <summary>
+	/// The current scene.
+	/// </summary>
+	public static PackedScene currentScene = new();
+
+	/// <summary>
 	/// The global onscreen GUI.
 	/// </summary>
 	public static GUI gui = new();
@@ -31,9 +36,9 @@ public partial class Globals : Node
 	public static HashSet<NPC> nPCs = new();
 
 	/// <summary>
-	/// The current year the Player is exploring in.
+	/// The current day the Player is exploring in.
 	/// </summary>
-	public static int year = new();
+	public static int day = new();
 
 	/// <summary>
     /// Static JSON serializer options.
@@ -81,7 +86,7 @@ public partial class Globals : Node
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
-		year = 1989;
+		day = 0;
 	}
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.

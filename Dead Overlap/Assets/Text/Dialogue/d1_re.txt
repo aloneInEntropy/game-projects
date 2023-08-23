@@ -1,5 +1,5 @@
 ~0
-    Get going already! Leave this old woman alone and explore, traveller!
+    Get going already! Leave this old woman alone and explore, traveller! ||c Olivia
 ~~1
     Unless, there's something you want to ask...?
         ~##3

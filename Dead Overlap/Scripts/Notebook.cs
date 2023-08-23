@@ -79,7 +79,7 @@ public partial class Notebook : Control
 			rtl.AddThemeFontOverride("normal_font", GameManager.normalFont);
 			rtl.AddThemeFontOverride("bold_font", GameManager.boldFont);
 
-			rtl.Text = $"[b][i]{n.NPCName}, {n.Year}[/i][/b]\n\n{n.Text}";
+			rtl.Text = $"[b][i]{n.NPCName}, {Globals.dayToDate[n.Day]}[/i][/b]\n\n{n.Text}";
 			savedDialogueContainer.AddChild(rtl);
 			rtl.GuiInput += @event => RemoveNote(@event, rtl, n);
 
@@ -89,16 +89,16 @@ public partial class Notebook : Control
 	}
 
 	/// <summary>
-	/// Store dialogue, the year it was spoken, and who spoke it into the Player's notebook as a Note. Will not store duplicate notes.
+	/// Store dialogue, the day it was spoken, and who spoke it into the Player's notebook as a Note. Will not store duplicate notes.
 	/// </summary>
 	/// <param name="txt"></param>
-	/// <param name="year"></param>
+	/// <param name="day"></param>
 	/// <param name="npc"></param>
-	public void SaveDialogueAsNote(string txt, int year, string npcName) {
+	public void SaveDialogueAsNote(string txt, int day, string npcName) {
 		Note nn = new()
 		{
 			Text = txt,
-			Year = year,
+			Day = day,
 			NPCName = npcName
 		};
 
@@ -118,7 +118,7 @@ public partial class Notebook : Control
 			rtl.AddThemeFontOverride("normal_font", GameManager.normalFont);
 			rtl.AddThemeFontOverride("bold_font", GameManager.boldFont);
 
-			rtl.Text = $"[b][i]{npcName}, {year}[/i][/b]\n\n{txt}";
+			rtl.Text = $"[b][i]{npcName}, {Globals.dayToDate[day]}[/i][/b]\n\n{txt}";
 			savedDialogueContainer.AddChild(rtl);
 			rtl.GuiInput += @event => RemoveNote(@event, rtl, nn);
 
@@ -181,7 +181,7 @@ public partial class Notebook : Control
 }
 
 /// <summary>
-/// The Note class. Contains information about the text, year, and NPC of a section of spoken dialogue.
+/// The Note class. Contains information about the text, day, and NPC of a section of spoken dialogue.
 /// </summary>
 public partial class Note : IEquatable<Note> {
 	/// <summary>
@@ -191,10 +191,10 @@ public partial class Note : IEquatable<Note> {
 	public string Text { set; get; }
 
 	/// <summary>
-	/// The year the note was written for.
+	/// The day the note was written for.
 	/// </summary>
-	[JsonPropertyName("Year")]
-	public int Year { set; get; }
+	[JsonPropertyName("Day")]
+	public int Day { set; get; }
 
 	/// <summary>
 	/// The NPC who said the dialogue.
@@ -204,10 +204,10 @@ public partial class Note : IEquatable<Note> {
 
 	public bool Equals(Note n) {
 		return Text == n.Text &&
-				Year == n.Year &&
+				Day == n.Day &&
 				NPCName == n.NPCName;
 	}
 	public override int GetHashCode() {
-		return HashCode.Combine(Text, Year, NPCName);
+		return HashCode.Combine(Text, Day, NPCName);
 	}
 }

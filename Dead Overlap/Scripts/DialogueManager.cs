@@ -55,7 +55,24 @@ public partial class DialogueManager : Node
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
 	public override void _Process(double delta)
 	{
-		// GD.Print(Engine.GetFramesPerSecond());
+		/* 
+		This is a fix for a bug caused by a few disconnected factors.
+		
+		When loading a file using Parse(file_name), the method strips each line's edge whitespace before continuing. The file end.txt has no characters to display and so returns an empty string.
+		Due to some weird fuckery surrounding the RichTextLabel's visible character and ratio fields, this allows it to set visible characters to 0 (the total amount of characters) and visible ratio to 1 (all characters are being displayed). Somehow, this carries over in the dialogue box because it is no longer being deleted and recreated every time it closes, only reset manually.
+
+		As for why this bug didn't appear consistently, I can only assume it had something to do with load times.
+		 */
+		if (IsInstanceValid(activeDialogueBox)) {
+			if (activeDialogueBox.txt.VisibleCharacters == 0) {
+				if (activeDialogueBox.txt.VisibleRatio == 1) {
+					GD.Print($"error from {activeDialogueBox.dialogue.originFilePath}");
+				}
+				activeDialogueBox.txt.VisibleRatio = 0;
+			}
+			activeDialogueBox.finishedMarker.Visible = !isDialogueReading;
+		}
+
 		if (!GameManager.isGamePaused) {
 			if (isDialogueReading) {
 				// GD.Print(activeDialogueBox.txt.Text.Length);
@@ -80,7 +97,6 @@ public partial class DialogueManager : Node
 			// 		isDialogueReading = true;
 			// 	}
 			// }
-			if (IsInstanceValid(activeDialogueBox)) activeDialogueBox.finishedMarker.Visible = !isDialogueReading;
 		}
 	}
 
@@ -104,7 +120,6 @@ public partial class DialogueManager : Node
 		int choice_dialogue_marker = 0; // which choice dialogue are you currently parsing?
 		bool adding_response_dialogue = false; // are you adding response dialogue? (~#@x marker)
 		int response_dialogue_marker = 0; // which response dialogue are you currently parsing?
-		GD.Print(Globals.resPathToDialogue + txtPath);
 		while (file.GetPosition() < file.GetLength()) {
 			string line = file.GetLine().StripEdges();
 			if (line.StartsWith('~')) {
@@ -287,7 +302,9 @@ public partial class DialogueManager : Node
 	/// </summary>
 	/// <param name="finish"></param>
 	public static void UpdateVisibleText(bool finish = false) {
+		// GD.Print(activeDialogueBox.txt.Text.Length);
 		if (finish) {
+			activeDialogueBox.txt.VisibleCharacters = -1;
 			activeDialogueBox.txt.VisibleRatio = 1;
 		} else {
 			if (GameManager.frame % framesBeforeUpdating == 0) {
@@ -297,7 +314,7 @@ public partial class DialogueManager : Node
 				AudioManager.PlayVoice(Globals.talkingNPC.voice);
 			}
 		}
-		isDialogueReading = activeDialogueBox.txt.VisibleRatio != 1;
+		isDialogueReading = activeDialogueBox.txt.VisibleRatio != 1 && activeDialogueBox.txt.VisibleCharacters != -1;
 	}
 
 	/// <summary>
@@ -333,8 +350,7 @@ public partial class DialogueManager : Node
 	public static void EndDialogue() {
 		isDialogueReading = false;
 		activeDialogue = null;
-		GUI g = (GUI)activeDialogueBox.Owner;
-        g.CloseDialogue();
+        Globals.gui.CloseDialogue();
 	}
 	
 	/// <summary>
@@ -349,9 +365,5 @@ public partial class DialogueManager : Node
 
 	public void Modify(string nameTitle) {
 		activeDialogueBox.Modify(nameTitle);
-	}
-
-	public void OnTimerTimeout() {
-		
 	}
 }

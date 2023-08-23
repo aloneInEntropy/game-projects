@@ -1,25 +1,33 @@
-[gd_scene load_steps=7 format=3 uid="uid://d1sgxaxy1cuk4"]
+[gd_scene load_steps=11 format=3 uid="uid://d1sgxaxy1cuk4"]
 
 [ext_resource type="Texture2D" uid="uid://dmrdwi1vlycw4" path="res://quad_128.png" id="1_uomgm"]
+[ext_resource type="Script" path="res://Scripts/Location.cs" id="1_ur7yw"]
 [ext_resource type="PackedScene" uid="uid://bocidko04r36c" path="res://Scenes/Player.tscn" id="2_fhxdg"]
 [ext_resource type="PackedScene" uid="uid://6wwwvpsqguwa" path="res://Scenes/GUI.tscn" id="4_xfdgx"]
 [ext_resource type="PackedScene" uid="uid://chiqrcav1pe3g" path="res://Scenes/Olivia.tscn" id="5_blx77"]
 [ext_resource type="PackedScene" uid="uid://dpjug58yjaf0l" path="res://Scenes/Mark.tscn" id="6_rviol"]
 [ext_resource type="PackedScene" uid="uid://cnnt7msd0tt44" path="res://Scenes/Interactable.tscn" id="6_y0fh6"]
+[ext_resource type="PackedScene" uid="uid://cd68ejdj6cmcv" path="res://Scenes/Johnny.tscn" id="7_gjam0"]
+[ext_resource type="PackedScene" uid="uid://bxerldx3p5hi6" path="res://Scenes/Farah.tscn" id="8_xt41j"]
+[ext_resource type="PackedScene" uid="uid://7agyq5ghpobi" path="res://Scenes/RoomTrigger.tscn" id="10_10hjv"]
 
 [node name="World" type="Node2D"]
+script = ExtResource("1_ur7yw")
+defaultEntryPoint = Vector2(200, 200)
 
 [node name="Background" type="Sprite2D" parent="."]
 modulate = Color(0.823529, 0.74902, 0.709804, 1)
 z_index = -2
 y_sort_enabled = true
 position = Vector2(-16, -15)
-scale = Vector2(9.19531, 5.30469)
+scale = Vector2(18.8125, 11.0391)
 texture = ExtResource("1_uomgm")
 centered = false
 
 [node name="Player" parent="." instance=ExtResource("2_fhxdg")]
 position = Vector2(213, 211)
+
+[node name="Camera2D" type="Camera2D" parent="Player"]
 
 [node name="Olivia" parent="." instance=ExtResource("5_blx77")]
 position = Vector2(100, 302)
@@ -28,6 +36,7 @@ position = Vector2(100, 302)
 position = Vector2(361, 211)
 
 [node name="GUI" parent="." instance=ExtResource("4_xfdgx")]
+visible = false
 
 [node name="Interactable" parent="." instance=ExtResource("6_y0fh6")]
 position = Vector2(822, 177)
@@ -73,6 +82,17 @@ position = Vector2(13, 10)
 scale = Vector2(0.5, 0.484375)
 texture = ExtResource("1_uomgm")
 centered = false
+
+[node name="Johnny" parent="." instance=ExtResource("7_gjam0")]
+position = Vector2(498, 344)
+
+[node name="Farah" parent="." instance=ExtResource("8_xt41j")]
+position = Vector2(258, 378)
+
+[node name="RoomTrigger" parent="." instance=ExtResource("10_10hjv")]
+position = Vector2(644, 372)
+sceneName = "Location"
+entryPoint = Vector2(517, 116)
 
 [editable path="Interactable"]
 [editable path="Interactable2"]
