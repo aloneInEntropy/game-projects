@@ -45,8 +45,8 @@ public partial class DialogueManager : Node
 	int sentenceBreakPause = 5;
 	int sentenceBreakPauseRate = 0;
 
-	string[] sentenceEnds = { ".", "!", "?" };
-	string[] sentencePauses = { ",", ":", ";" };
+	string[] sentenceEnds = { ".", "!", "?", ":" };
+	string[] sentencePauses = { ",", ";" };
 
 	public override void _Ready()
     {
@@ -133,23 +133,23 @@ public partial class DialogueManager : Node
 					adding_reg_dialogue = true;
 					reg_dialogue_marker = fn.ToString().ToInt();
 					// GD.Print(string.Format("{0}, {1}, {2}", txt_path, reg_dialogue_marker, dobjs.Count));
-				} else if (fn.StartsWith("~") && fn[1].ToString().IsValidInt()) {
+				} else if (fn.StartsWith("~") && fn[1..].ToString().IsValidInt()) {
 					// GD.Print("choice dialogue start");
 					adding_reg_dialogue = true;
-					reg_dialogue_marker = fn[1].ToString().ToInt();
+					reg_dialogue_marker = fn[1..].ToString().ToInt();
 					// GD.Print(string.Format("{0}, {1}, {2}", txt_path, reg_dialogue_marker, dobjs.Count));
 				} else if (fn.StartsWith("##") && fn[2].ToString().IsValidInt()) {
 					// GD.Print("dialogue option start");
-				} else if (fn.StartsWith("@") && fn[1].ToString().IsValidInt()) {
+				} else if (fn.StartsWith("@") && fn[1..].ToString().IsValidInt()) {
 					// GD.Print("dialogue choice");
 					adding_choice_dialogue = true;
-					choice_dialogue_marker = fn[1].ToString().ToInt();
+					choice_dialogue_marker = fn[1..].ToString().ToInt();
 				} else if (fn.StartsWith("##.")) {
 					// GD.Print("dialogue option end");
-				} else if (fn.StartsWith("#@") && fn[2].ToString().IsValidInt()) {
+				} else if (fn.StartsWith("#@") && fn[2..].ToString().IsValidInt()) {
 					// GD.Print("post-dialogue choice option");
 					adding_response_dialogue = true;
-					response_dialogue_marker = fn[2].ToString().ToInt();
+					response_dialogue_marker = fn[2..].ToString().ToInt();
 				} else if (fn == "~.") {
 					// GD.Print("choice dialogue end");
 				} else if (fn == ".") {

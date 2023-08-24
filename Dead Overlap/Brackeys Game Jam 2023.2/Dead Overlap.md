@@ -200,7 +200,7 @@ The whole "not a man or woman" thing is interesting, but I don't judge. I wasn't
 **Pronouns**: She/her
 **Description**: The wife of [[#Jordan Cuno]]. She proposed to Jordan at just 24, and Jordan surprisingly said yes. They seem to be one of the happiest couples in Shune, though given the general state of the town, that's not saying much. She recently completed her literature degree and writes for the local newspaper.
 
-Her partner, who prefers to referred to as Farah's wife, tends to string her along into her more impulsive acts. Jordan's erratic and often dangerous behaviour actually isn't the worst of what they can do; Farah holds them back at every turn. This appears to cause her significant distress, which is understandable. If Farah is ever implicated in a crime, you can be sure Jordan isn't too far away.
+Her partner, who prefers to referred to as Farah's wife, tends to string her along into their more impulsive acts. Jordan's erratic and often dangerous behaviour actually isn't the worst of what they can do; Farah holds them back at every turn. This appears to cause her significant distress, which is understandable. If Farah is ever implicated in a crime, you can be sure Jordan isn't too far away.
 
 Young love is strange. I can't relate to it, even as a 26-year-old woman, but I'd be seriously reconsidering why I would willingly marry such a character.
 

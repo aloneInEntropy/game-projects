@@ -1,10 +1,10 @@
 [gd_scene load_steps=7 format=3 uid="uid://cqpj6a45n36qi"]
 
 [ext_resource type="Script" path="res://Scripts/DialogueBox.cs" id="1_880yw"]
-[ext_resource type="Texture2D" uid="uid://dmrdwi1vlycw4" path="res://quad_128.png" id="1_rpggg"]
+[ext_resource type="Texture2D" uid="uid://cew5e7qnlsdpq" path="res://Assets/DialogueBoxStyle.png" id="2_hlvak"]
 [ext_resource type="FontFile" uid="uid://cy02rq8ibiqx8" path="res://Assets/Fonts/futur.ttf" id="2_t8gjk"]
 [ext_resource type="FontFile" uid="uid://brtoretp4o0u6" path="res://Assets/Fonts/Futura Extra Black font.ttf" id="3_1rhln"]
-[ext_resource type="Texture2D" uid="uid://b2arqqk5sp8dj" path="res://icon.svg" id="5_f5aep"]
+[ext_resource type="Texture2D" uid="uid://c6uu3l8frxcvc" path="res://Assets/Sprites/DialogueIndicator.png" id="3_75e0v"]
 [ext_resource type="Texture2D" uid="uid://cwxyfpdhhxoki" path="res://Assets/Sprites/Portraits/MarcelinePortrait.png" id="6_thw6s"]
 
 [node name="DialogueBox" type="Control"]
@@ -18,34 +18,34 @@ script = ExtResource("1_880yw")
 
 [node name="DBBG" type="TextureRect" parent="."]
 layout_mode = 0
-offset_left = 195.0
+offset_left = 176.0
 offset_top = 421.0
-offset_right = 673.0
-offset_bottom = 591.0
-texture = ExtResource("1_rpggg")
-expand_mode = 1
+offset_right = 944.0
+offset_bottom = 597.0
+texture = ExtResource("2_hlvak")
+metadata/_edit_lock_ = true
 
-[node name="FinishedMarker" type="TextureRect" parent="DBBG"]
+[node name="FinishedMarker" type="TextureRect" parent="."]
 layout_mode = 0
-offset_left = 464.0
-offset_top = 155.0
-offset_right = 475.0
-offset_bottom = 167.0
-texture = ExtResource("5_f5aep")
+offset_left = 912.0
+offset_top = 573.0
+offset_right = 928.0
+offset_bottom = 589.0
+texture = ExtResource("3_75e0v")
 expand_mode = 1
 
 [node name="TxtLabel" type="RichTextLabel" parent="."]
 layout_mode = 0
-offset_left = 209.0
-offset_top = 427.0
-offset_right = 660.0
-offset_bottom = 583.0
+offset_left = 189.0
+offset_top = 432.0
+offset_right = 931.0
+offset_bottom = 588.0
 focus_mode = 2
-theme_override_colors/default_color = Color(0, 0, 0, 1)
+theme_override_colors/default_color = Color(1, 1, 1, 1)
 theme_override_fonts/normal_font = ExtResource("2_t8gjk")
 theme_override_fonts/bold_font = ExtResource("3_1rhln")
-theme_override_font_sizes/normal_font_size = 20
-theme_override_font_sizes/bold_font_size = 20
+theme_override_font_sizes/normal_font_size = 24
+theme_override_font_sizes/bold_font_size = 24
 bbcode_enabled = true
 text = "Hello world"
 fit_content = true
@@ -66,49 +66,24 @@ text = "Hello world"
 fit_content = true
 scroll_active = false
 
-[node name="ChoiceControl" type="Control" parent="."]
-layout_mode = 1
-anchor_left = 0.718
-anchor_top = 0.688
-anchor_right = 0.718
-anchor_bottom = 0.688
-offset_left = -0.28009
-offset_top = 0.199951
-offset_right = -0.28009
-offset_bottom = 0.199951
-metadata/_edit_group_ = true
-
-[node name="CBBG" type="TextureRect" parent="ChoiceControl"]
-modulate = Color(0.266667, 0.305882, 0, 1)
-layout_mode = 1
-offset_left = -0.112999
-offset_top = -0.032999
-offset_right = 251.887
-offset_bottom = 182.967
-texture = ExtResource("1_rpggg")
-expand_mode = 1
-
-[node name="ChoiceLabel" type="RichTextLabel" parent="ChoiceControl"]
+[node name="ChoiceControl" type="VBoxContainer" parent="."]
 layout_mode = 1
 anchors_preset = -1
-offset_left = 1.23978e-05
-offset_top = -0.050015
-offset_right = 246.0
-offset_bottom = 177.95
-theme_override_colors/default_color = Color(0, 0, 0, 1)
-theme_override_fonts/normal_font = ExtResource("2_t8gjk")
-theme_override_fonts/bold_font = ExtResource("3_1rhln")
-theme_override_font_sizes/normal_font_size = 20
-theme_override_font_sizes/bold_font_size = 20
-bbcode_enabled = true
-text = "Hello world"
-fit_content = true
-scroll_active = false
+anchor_left = 0.542
+anchor_top = 0.6
+anchor_right = 0.542
+anchor_bottom = 0.6
+offset_left = -0.320068
+offset_top = -20.0
+offset_right = 409.68
+offset_bottom = 50.0
+grow_vertical = 0
+alignment = 1
 
 [node name="Portrait" type="TextureRect" parent="."]
 layout_mode = 0
-offset_left = 24.0
+offset_left = 13.0
 offset_top = 427.0
-offset_right = 184.0
+offset_right = 173.0
 offset_bottom = 587.0
 texture = ExtResource("6_thw6s")

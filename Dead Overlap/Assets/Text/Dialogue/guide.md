@@ -1,6 +1,7 @@
 The text parser is still under construction, but the basics work like below. All text will be fed into Godot's bbcode system, to handle more complex/annoying cases dealing with things like bold and italic fonts. 
 
 Please note that **ALL NUMBERS ARE *ZERO-INDEXED***. Assume that not following this **exact structure** will crash the dialogue parser.
+Also note that the dialogue box can currently fit 342 characters before overflowing.
 
 ## Cheat Sheet
 ### Syntax
@@ -15,11 +16,11 @@ Please note that **ALL NUMBERS ARE *ZERO-INDEXED***. Assume that not following t
 `~.`: End of dialogue\
 
 ### Commands
-For the following commands, anything involving parsing a file (i.e., `||l`, `||j`) will require parameter signifiers for each parameter. File paths will require extensions as well (e.g., `||l f=first.txt`).
+For the following commands, anything involving parsing a file (i.e., `||l`, `||j`) will require parameter signifiers for each parameter. File paths will require extensions as well (e.g., `||l f=first.txt`). (I cannot be bothered to add multiple commands to a line, so just use `||f` whenever you want to do that.)
 
 `... ||f [function name] [parameter1] [parameter2]`: call function during dialogue\
 `... ||s [signal name] [parameter1] [parameter2]`: call signal during dialogue\
-`... ||f/s [function/signal name] [parameter1] [parameter2]|[function/signal name] [parameter1]`: call multiple functions/signals during dialogue\
+`... ||f/s [function/signal name] [parameter1] [parameter2] | [function/signal name] [parameter1]`: call multiple functions/signals during dialogue\
 
 `... ||l f=[file path] l=[load immediately?] p=[dialogue number] s=[save path?]`\
 `file path` (`str`) - path to file from `"Globals.dialoguePath"`\

@@ -29,6 +29,17 @@ metadata/_edit_group_ = true
 [node name="GUI" parent="." instance=ExtResource("3_vl4kx")]
 visible = false
 
+[node name="RoomTrigger" parent="." instance=ExtResource("8_gw1p0")]
+position = Vector2(475, 611)
+sceneName = "TownSouth"
+entryPoint = Vector2(944, 199)
+faceDir = Vector2(0, 1)
+autoTrigger = true
+
+[node name="CollisionShape2D" parent="RoomTrigger" index="0"]
+position = Vector2(-8, 18)
+shape = SubResource("RectangleShape2D_3f3gn")
+
 [node name="Farah" parent="." instance=ExtResource("4_58p41")]
 position = Vector2(415, 128)
 
@@ -157,21 +168,11 @@ limit_bottom = 600
 limit_smoothed = true
 editor_draw_limits = true
 
-[node name="RoomTrigger" parent="." instance=ExtResource("8_gw1p0")]
-position = Vector2(475, 611)
-sceneName = "World"
-entryPoint = Vector2(944, 199)
-faceDir = Vector2(0, 1)
-autoTrigger = true
-
-[node name="CollisionShape2D" parent="RoomTrigger" index="0"]
-position = Vector2(-8, 18)
-shape = SubResource("RectangleShape2D_3f3gn")
-
 [node name="Narrator" parent="." instance=ExtResource("9_rehn5")]
 position = Vector2(1339, 413)
 diagPath = "secret.txt"
 
+[editable path="RoomTrigger"]
 [editable path="Interactables/Paper"]
 [editable path="Interactables/Bed1"]
 [editable path="Interactables/Letter"]
@@ -182,4 +183,3 @@ diagPath = "secret.txt"
 [editable path="Interactables/TableFood"]
 [editable path="Interactables/FloorHole"]
 [editable path="Interactables/TV"]
-[editable path="RoomTrigger"]

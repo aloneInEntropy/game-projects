@@ -1,0 +1,23 @@
+// "Pressure her".
+~0
+    Look, Farah. It was you who sent me the letter. Now, while I don't have the power to arrest you, I am working with people who can. So if you won't talk to me, you're gonna have to talk to them. And then I won't be able to guarantee Jordan's safety. ||c Marceline
+~1
+    I... okay, fine. Whatever. Just promise me we'll me okay. ||c Farah
+~2
+    I promise. ||f Modify Marceline | ParseB d4_re_1.txt p=9
+~3
+    (hidden)
+// "Calm her down".
+~4
+    Farah, look. I promise the two of you will be okay. I just want to know what happened. Trust me, this thing is far more complicated than you think. It's unlikely that you're at fault here. Can you trust me? ||c Marceline
+~5
+    I... ||c Farah
+~6
+    O-okay. I'll trust you. And I'll try to get Jordan to help you, too. Sorry for the other day, by the way.
+~7
+    It's no biggie. People tend to think I'm weird, anyway. ||c Marceline
+~8
+    Heh. ||c Farah
+~9 
+    ...Alright. ||f Modify Farah | ParseB d4.txt p=5
+~.

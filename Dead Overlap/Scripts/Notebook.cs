@@ -112,7 +112,8 @@ public partial class Notebook : Control
 			{
 				BbcodeEnabled = true,
 				ScrollActive = false,
-				FitContent = true
+				FitContent = true,
+				SelectionEnabled = true
 			};
 
 			rtl.AddThemeFontOverride("normal_font", GameManager.normalFont);

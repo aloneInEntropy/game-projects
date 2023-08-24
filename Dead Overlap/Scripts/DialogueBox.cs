@@ -1,19 +1,37 @@
 using Godot;
 using Godot.Collections;
+using Microsoft.VisualBasic;
 using System.Collections.Generic;
 
 public partial class DialogueBox : Control
 {
-	// public RichTextLabel missionText = new();
+	/// <summary>
+	/// The RichTextLabel the dialogue box uses to display text.
+	/// </summary>
 	public RichTextLabel txt = new();
-	public RichTextLabel chcs = new();
+
+	/// <summary>
+	/// The RichTextLabel used to display the name of the presently-speaking NPC.
+	/// </summary>
 	public RichTextLabel nameLabel = new();
-	public Control choiceControl = new();
+
+	public VBoxContainer choiceControl = new();
 	public TextureRect txtbg = new();
-	public TextureRect chcsbg = new();
 	public TextureRect finishedMarker = new();
+
+	/// <summary>
+	/// The DialogueObject currently in the dialogue box.
+	/// </summary>
 	public DialogueObject dialogue = new();
+
+	/// <summary>
+	/// The Array of Buttons used for choices.
+	/// </summary>
 	public Array<Button> choiceButtons = new();
+
+	/// <summary>
+	/// The TextureRect used to display the portrait of the presently-speaking NPC.
+	/// </summary>
 	public TextureRect portrait = new();
 	public bool isOpen = false;
 
@@ -25,20 +43,16 @@ public partial class DialogueBox : Control
 		txt = (RichTextLabel)GetNode("TxtLabel");
 		nameLabel = (RichTextLabel)GetNode("NameLabel");
 		txtbg = (TextureRect)GetNode("DBBG");
-		finishedMarker = (TextureRect)GetNode("DBBG/FinishedMarker");
-		choiceControl = (Control)GetNode("ChoiceControl");
-		chcs = (RichTextLabel)GetNode("ChoiceControl/ChoiceLabel");
-		chcsbg = (TextureRect)GetNode("ChoiceControl/CBBG");
+		finishedMarker = (TextureRect)GetNode("FinishedMarker");
+		choiceControl = (VBoxContainer)GetNode("ChoiceControl");
 		portrait = (TextureRect)GetNode("Portrait");
 		txt.Text = "";
-		chcs.Text = "";
 		txt.VisibleRatio = 0;
 	}
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
 	public override void _Process(double delta) {
 		txtbg.Visible = txt.Visible;
-		chcsbg.Visible = chcs.Visible;
 	}
 
 	/// <summary>
@@ -103,23 +117,19 @@ public partial class DialogueBox : Control
 		}
 		choiceButtons.Clear();
 
-		var nbpos = new Vector2(0, 8);
 		for (int i = 0; i < dialogue.choices.Count; i++) {
 			GetParent<GUI>().canProgressDialogue = false;
 			string c = dialogue.choices[i];
             Button nb = new() {
                 Text = c,
-                Position = nbpos
+				Theme = GD.Load<Theme>("res://Resources/ButtonTheme.tres")
             };
 			// some lambda thing. 
 			// https://ask.godotengine.org/147861/there-way-provide-additional-arguments-for-pressed-event-c%23
 			nb.Pressed += () => DisplayChoiceResponse(c); 
-            nbpos += new Vector2(0, 32); // move each successive button down 32 pixels
 			choiceButtons.Add(nb);
             choiceControl.AddChild(nb);
 		}
-		// chcs.Text = string.Join('\n', dialogue.choices);
-		chcs.Visible = dialogue.choices.Count > 0;
 	}
 
 	/// <summary>

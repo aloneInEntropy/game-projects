@@ -3,13 +3,13 @@
 
 21/08/2023
 - [x] Work on Notebook menu and Dialogue Switching mechanics
-- [ ] Finish writing about all characters and events
+- [x] Finish writing about all characters and events
 	- [x] Makoto Bourdain
 	- [x] Adora Aga
 	- [x] Johnny Lawn
 	- [x] Ignacio Pascal
 	- [x] Patrick Cuno
-	- [ ] Jordan Cuno
+	- [x] Jordan Cuno
 	- [x] Farah Sal-Cuno
 	- [x] Marie Bornstein
 
