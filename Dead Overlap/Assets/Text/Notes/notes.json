@@ -18,5 +18,15 @@
     "Text": "We just finished a prototype of the EMC, and it looks like it works alright. I managed to figure out the correlation between the Orten coordinate of localised conceptspace for an individual and the amount of information required to find it. ",
     "Day": 0,
     "NPCName": "Johnny"
+  },
+  {
+    "Text": "We heard the dog hacking and coughing, and when we looked inside, Makoto was holding knives. I don\u0027t know where he got them from, but he was covered in blood. I ran in to grab the dog and get it out but Makoto looked at me, and he...",
+    "Day": 0,
+    "NPCName": "Farah"
+  },
+  {
+    "Text": "(She must really care for Jordan, huh?) ",
+    "Day": 0,
+    "NPCName": "Marceline"
   }
 ]

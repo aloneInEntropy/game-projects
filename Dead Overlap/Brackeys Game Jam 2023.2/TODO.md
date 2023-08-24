@@ -32,17 +32,25 @@
 23/08
 - [x] Item interaction
 - [ ] Tilemap setup
-	- [x] Adora's house
-	- [ ] Mayor's office
-	- [ ] The market
-	- [ ] The Hub
 	- [ ] Shune
+		- [ ] South
+			- [x] Adora's house
+		- [ ] Centre
+			- [ ] Mayor's office
+				- [ ] The Hub
+			- [ ] Police station
+		- [ ] North
+			- [ ] The Market
+		- [ ] East
+			- [ ] The Shack
 - [x] Room traversal
 - [ ] Pause menu and ability to return to the present time
 
 24/08 - 25/08
 - [ ] Music and sound effects
 - [ ] Writing the mystery
+- [ ] Finishing tilemap
+- [ ] Figuring out how to make the game more fun to play
 
 26/08
 - [ ] Polish

@@ -205,6 +205,7 @@ radius = 40.0
 height = 102.0
 
 [node name="Player" type="CharacterBody2D"]
+z_index = 1
 motion_mode = 1
 script = ExtResource("1_1vb4r")
 _friction = 800.0
@@ -239,9 +240,10 @@ libraries = {
 [node name="AnimationTree" type="AnimationTree" parent="."]
 tree_root = SubResource("AnimationNodeStateMachine_mr1qy")
 anim_player = NodePath("../AnimationPlayer")
+active = true
 parameters/conditions/idle = false
 parameters/conditions/isMoving = false
-parameters/Idle/blend_position = Vector2(0, 0)
+parameters/Idle/blend_position = Vector2(0.00846565, -0.587209)
 parameters/Walk/blend_position = Vector2(0.0338625, -0.293103)
 
 [node name="AttackBox" type="Area2D" parent="."]

@@ -34,6 +34,7 @@ public partial class DialogueBox : Control
 	/// </summary>
 	public TextureRect portrait = new();
 	public bool isOpen = false;
+	private bool buttonsReady = false;
 
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
@@ -53,6 +54,12 @@ public partial class DialogueBox : Control
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
 	public override void _Process(double delta) {
 		txtbg.Visible = txt.Visible;
+		if (!DialogueManager.isDialogueReading) {
+			if (choiceButtons.Count > 0 && buttonsReady) {
+				choiceButtons[0].GrabFocus();
+				buttonsReady = false;
+			} 
+		}
 	}
 
 	/// <summary>
@@ -122,14 +129,17 @@ public partial class DialogueBox : Control
 			string c = dialogue.choices[i];
             Button nb = new() {
                 Text = c,
-				Theme = GD.Load<Theme>("res://Resources/ButtonTheme.tres")
+				Theme = GD.Load<Theme>("res://Resources/ButtonTheme.tres"),
+				FocusMode = FocusModeEnum.All
             };
 			// some lambda thing. 
 			// https://ask.godotengine.org/147861/there-way-provide-additional-arguments-for-pressed-event-c%23
-			nb.Pressed += () => DisplayChoiceResponse(c); 
+			nb.Pressed += () => DisplayChoiceResponse(c);
+			// nb.Owner = GetParent().GetParent();
 			choiceButtons.Add(nb);
             choiceControl.AddChild(nb);
 		}
+		buttonsReady = true;
 	}
 
 	/// <summary>

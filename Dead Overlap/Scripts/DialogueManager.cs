@@ -46,7 +46,7 @@ public partial class DialogueManager : Node
 	int sentenceBreakPauseRate = 0;
 
 	string[] sentenceEnds = { ".", "!", "?", ":" };
-	string[] sentencePauses = { ",", ";" };
+	string[] sentencePauses = { ",", ";", "-" };
 
 	public override void _Ready()
     {

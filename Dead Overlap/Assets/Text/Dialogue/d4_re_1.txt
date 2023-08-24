@@ -2,7 +2,7 @@
 ~0
     Look, Farah. It was you who sent me the letter. Now, while I don't have the power to arrest you, I am working with people who can. So if you won't talk to me, you're gonna have to talk to them. And then I won't be able to guarantee Jordan's safety. ||c Marceline
 ~1
-    I... okay, fine. Whatever. Just promise me we'll me okay. ||c Farah
+    I... okay, fine. Whatever. Just promise me we'll be okay. ||c Farah
 ~2
     I promise. ||f Modify Marceline | ParseB d4_re_1.txt p=9
 ~3

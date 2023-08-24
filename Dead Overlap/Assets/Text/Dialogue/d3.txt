@@ -1,9 +1,9 @@
 ~0
-    Alright, this is video log... fifty-four, I think? We're having Christmas early so everyone can get their holidays in, and I'm one of those people, so I'll make this quick. I am Dr Lucy Alone and it is currently the 22nd of December, 2025. ||c Farah
+    Alright, this is video log... fifty-four, I think? We're having Christmas early so everyone can get their holidays in, and I'm one of those people, so I'll make this quick. I am Dr Lucy Alone and it is currently the 22nd of December, 2025. ||c Adora
 ~1 
     We just finished a prototype of the EMC, and it looks like it works alright. I managed to figure out the correlation between the Orten coordinate of localised conceptspace for an individual and the amount of information required to find it. ||c Johnny
 ~2
-    Turns out it's near infinite, relatively speaking, but it's progress. I never really expected to locate a complete concept first try, y'know? Like, that's the point of the EMC to begin with. ||c Farah 
+    Turns out it's near infinite, relatively speaking, but it's progress. I never really expected to locate a complete concept first try, y'know? Like, that's the point of the EMC to begin with. ||c Adora
 ~~3
     Did you get what I meant? ||c Johnny
         ~##2

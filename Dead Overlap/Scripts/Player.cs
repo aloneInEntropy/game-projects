@@ -85,7 +85,7 @@ public partial class Player : CharacterBody2D
 						((Interactable)facingObj).OpenDescription();
 					}
 				} else if (facingObj.GetType() == typeof(RoomTrigger)) {
-					((RoomTrigger)facingObj).faceDir = lastDirection;
+					((RoomTrigger)facingObj).facingDirection = lastDirection;
 					((RoomTrigger)facingObj).Change();
 				}
 			}
@@ -142,7 +142,7 @@ public partial class Player : CharacterBody2D
 			if (!overlapping.Contains(area)) overlapping.Add(area);
 		} else if (area.GetType() == typeof(RoomTrigger)) {
 			if (((RoomTrigger)area).autoTrigger) {
-				((RoomTrigger)area).faceDir = lastDirection;
+				((RoomTrigger)area).facingDirection = lastDirection;
 				((RoomTrigger)area).Change();
 			} else {
 				if (!overlapping.Contains(area)) overlapping.Add(area);

@@ -14,7 +14,7 @@ public partial class Adora : NPC
 		diagPath = "d4.txt";
 		LoadDialogue(diagPath);
 
-		voicePath = "Olivia.wav";
+		voicePath = "Adora.wav";
 		SetVoice(voicePath);
 
 		missionJSONPath = "Olivia.json";
