@@ -16,6 +16,7 @@ public partial class Notebook : Control
 	Control suspectWindow = new();
 	Control victimWindow = new();
 	ScrollContainer noteWindow = new();
+	ScrollContainer missionWindow = new();
 
 	/// <summary>
 	/// The RichTextLabel containing the description of the selected suspect.
@@ -26,11 +27,23 @@ public partial class Notebook : Control
 	/// The VBoxContainer storing all saved notes as RichTextLabels and their respective HSeparators.
 	/// </summary>
 	VBoxContainer savedDialogueContainer = new();
+	
+	/// <summary>
+	/// The VBoxContainer storing all missions as RichTextLabels and their respective HSeparators.
+	/// </summary>
+	VBoxContainer missionContainer = new();
 
     /// <summary>
     /// The List of Note objects the player stores. Can be checked using a keyboard command and read.
     /// </summary>
     List<Note> notes = new();
+    
+	/// <summary>
+    /// The List of Mission objects the player stores.
+    /// </summary>
+    List<Mission> missions = new();
+
+	List<RichTextLabel> missionLabels = new();
 
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
@@ -39,6 +52,7 @@ public partial class Notebook : Control
 		tabContainer.SetTabTitle(0, "Suspects");
 		tabContainer.SetTabTitle(1, "Saved Notes");
 		tabContainer.SetTabTitle(2, "Victim");
+		tabContainer.SetTabTitle(3, "Tasks");
 		suspectWindow = GetNodeOrNull<Control>("TabContainer/SuspectWindow");
 		suspectDescription = GetNodeOrNull<RichTextLabel>("TabContainer/SuspectWindow/Description");
 		noteWindow = GetNodeOrNull<ScrollContainer>("TabContainer/NoteWindow");
@@ -46,7 +60,8 @@ public partial class Notebook : Control
 		suspectDescription.Text = "";
 		victimWindow = GetNodeOrNull<Control>("TabContainer/VictimWindow");
 		victimWindow.GetNode<RichTextLabel>("Description").Text = Godot.FileAccess.Open("res://Assets/Text/Descriptions/MakotoBourdain.txt", Godot.FileAccess.ModeFlags.Read).GetAsText();
-
+		missionWindow = GetNodeOrNull<ScrollContainer>("TabContainer/MissionWindow");
+		missionContainer = GetNodeOrNull<VBoxContainer>("TabContainer/MissionWindow/MarginContainer/MissionList");
 
 		try {
 			SetNotes(JsonSerializer.Deserialize<List<Note>>(
@@ -57,6 +72,14 @@ public partial class Notebook : Control
 			// JsonSerialiser.Deserialise() throws an exception if there's nothing in the target file to deserialize. 
 			// This catches and ignores the exception.
 			GD.Print("No saved notes from last load.");
+		}
+
+		try {
+			SetMissions(PlayerVariables.Missions);	
+		} catch (JsonException) {
+			// JsonSerialiser.Deserialise() throws an exception if there's nothing in the target file to deserialize. 
+			// This catches and ignores the exception.
+			GD.Print("No missions from last load.");
 		}
 	}
 
@@ -144,6 +167,72 @@ public partial class Notebook : Control
 				notes.Remove(n);
             }
         }
+	}
+
+	public void SetMissions(List<Mission> mms) {
+		// missions = mms;
+		foreach (Mission m in mms) {
+			AddMission(m);
+		}
+	}
+
+	/// <summary>
+	/// Add a mission to the Notebook.
+	/// </summary>
+	/// <param name="m"></param>
+	public void AddMission(Mission m) {
+		if (!missions.Contains(m)) {
+			missions.Add(m);
+			
+			RichTextLabel rtl = new()
+			{
+				BbcodeEnabled = true,
+				ScrollActive = false,
+				FitContent = true,
+				DeselectOnFocusLossEnabled = false
+			};
+
+			rtl.AddThemeFontOverride("normal_font", GameManager.normalFont);
+			rtl.AddThemeFontOverride("bold_font", GameManager.boldFont);
+
+			rtl.Text = m.Completed ? 
+				$"[fgcolor=#00000088][i]{m.Name}[/i][/fgcolor]\n\n[fgcolor=#00000088]{m.Description}[/fgcolor]":
+				$"[b][i]{m.Name}[/i][/b]\n\n{m.Description}"
+			;
+			missionContainer.AddChild(rtl);
+			rtl.GuiInput += @event => RemoveMission(@event, rtl, m);
+			missionLabels.Add(rtl);
+			HSeparator hs1 = new();
+			missionContainer.AddChild(hs1);
+		}
+	}
+	
+	/// <summary>
+	/// Mark a mission as completed.
+	/// </summary>
+	/// <param name="m"></param>
+	public void CompleteMission(Mission m) {
+		RichTextLabel rtl = missionLabels[missions.IndexOf(m)];
+		rtl.Text = $"[fgcolor=#00000088][i]{m.Name}[/i][/fgcolor]\n\n[fgcolor=#00000088]{m.Description}[/fgcolor]";
+	}
+
+	/// <summary>
+	/// Remove a mission from the Notebook when it is completed.
+	/// </summary>
+	/// <param name="event"></param>
+	/// <param name="pos"></param>
+	void RemoveMission(InputEvent @event, RichTextLabel rtl, Mission m) {
+		if (@event is InputEventMouseButton mb) {
+			if (mb.ButtonMask == MouseButtonMask.Right && mb.Pressed) {
+				if (m.Completed) {
+					var chs = missionContainer.GetChildren();
+					int tbd = chs.IndexOf(rtl);
+					chs[tbd].QueueFree();
+					chs[tbd + 1].QueueFree();
+					missions.Remove(m);
+				}
+			}
+		}
 	}
 
 	public void _on_tab_container_tab_button_pressed(int tab) {

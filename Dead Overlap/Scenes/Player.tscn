@@ -198,7 +198,7 @@ states/Start/position = Vector2(154, 106)
 states/Walk/node = SubResource("AnimationNodeBlendSpace2D_waxma")
 states/Walk/position = Vector2(569, 106)
 transitions = ["Start", "Idle", SubResource("AnimationNodeStateMachineTransition_ndfhb"), "Idle", "Walk", SubResource("AnimationNodeStateMachineTransition_0nhi8"), "Walk", "Idle", SubResource("AnimationNodeStateMachineTransition_5p0pm")]
-graph_offset = Vector2(-386, -118)
+graph_offset = Vector2(-448, -54)
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_5k2mv"]
 radius = 40.0

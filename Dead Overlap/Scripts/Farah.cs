@@ -16,9 +16,6 @@ public partial class Farah : NPC
 
 		voicePath = "Olivia.wav";
 		SetVoice(voicePath);
-
-		missionJSONPath = "Olivia.json";
-		SetMissionsJSON(missionJSONPath);
 	}
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.

@@ -6,7 +6,6 @@ using Godot;
 /// </summary>
 public partial class GUI : CanvasLayer
 {
-	public RichTextLabel missionText = new();
 	public RichTextLabel noteSaveNotif = new();
 	public DialogueBox db = new();
 	public Notebook notebook = new();
@@ -30,7 +29,6 @@ public partial class GUI : CanvasLayer
 	public override void _Ready()
 	{
 		Globals.gui = this;
-		missionText = (RichTextLabel)GetNode("MissionText");
 		noteSaveNotif = (RichTextLabel)GetNode("NoteSaveNotif");
 		noteSaveNotif.Modulate = new Color(1, 1, 1, 0);
 		db = (DialogueBox)GetNode("DialogueBox");
@@ -87,7 +85,6 @@ public partial class GUI : CanvasLayer
 	/// <param name="d"></param>
 	/// <param name="isDialogue"></param>
 	public void OpenDialogue(string d, bool isDialogue = true) {
-		missionText.Text = "";
 		isDialogueActive = true;
 		db.Open();
 		if (isDialogue) db.Write(d);
@@ -98,14 +95,12 @@ public partial class GUI : CanvasLayer
 	/// Open the dialogue box and write the current dialogue object into it. <br/>
 	/// </summary>
 	public void OpenDialogue() {
-		missionText.Text = "";
 		isDialogueActive = true;
 		db.Open();
 		db.Write();
 	}
 
 	public void CloseDialogue() {
-		missionText.Text = "";
 		db.Close();
 		if (IsInstanceValid(talkingNPC)) {
 			talkingNPC.ResetDialogue(talkingNPC.diagPath);

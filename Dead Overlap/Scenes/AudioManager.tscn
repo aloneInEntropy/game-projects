@@ -1,9 +1,19 @@
-[gd_scene load_steps=2 format=3 uid="uid://c6whoufv5kho6"]
+[gd_scene load_steps=3 format=3 uid="uid://c6whoufv5kho6"]
 
 [ext_resource type="Script" path="res://Scripts/AudioManager.cs" id="1_hp76l"]
+[ext_resource type="AudioStream" uid="uid://bnlmfiebpgnfe" path="res://Assets/Audio/Player/footstep.wav" id="2_i4jsh"]
 
 [node name="AudioManager" type="Node"]
 script = ExtResource("1_hp76l")
 
 [node name="VoicePlayer" type="AudioStreamPlayer" parent="."]
 volume_db = -10.0
+
+[node name="StepAudio" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("2_i4jsh")
+
+[node name="StepTimer" type="Timer" parent="."]
+wait_time = 0.4
+one_shot = true
+
+[connection signal="timeout" from="StepTimer" to="." method="OnTimerTimeout"]

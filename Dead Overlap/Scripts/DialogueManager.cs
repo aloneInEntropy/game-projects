@@ -1,6 +1,8 @@
 using Godot;
 using System;
 using System.Collections.Generic;
+using System.Linq;
+
 
 
 /// <summary>
@@ -371,5 +373,19 @@ public partial class DialogueManager : Node
 		if (varName == "hasLight") {
 			PlayerVariables.hasLight = bool.Parse(val);
 		}
+	}
+	
+	public void CompleteMission(string missionName) {
+		// Globals.gui.notebook.RemoveMission(PlayerVariables.GetMission(missionName));
+		GD.Print(missionName);
+		PlayerVariables.GetMission(missionName).Complete();
+		Globals.gui.notebook.CompleteMission(PlayerVariables.GetMission(missionName));
+
+	}
+	
+	public void ActivateMission(string missionName) {
+		Globals.gui.notebook.AddMission(PlayerVariables.GetMission(missionName));
+		PlayerVariables.GetMission(missionName).Activate();
+		// GD.Print(missionName);
 	}
 }

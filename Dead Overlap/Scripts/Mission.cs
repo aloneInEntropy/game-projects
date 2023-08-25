@@ -1,5 +1,6 @@
 using System.Text.Json;
 using System.Text.Json.Serialization;
+using System;
 
 
 /// <summary>
@@ -42,8 +43,28 @@ public partial class Mission
     /// </summary>
     public void Complete() {
         Completed = true;
-        Active = false;
+        // Active = false;
     }
+    
+    /// <summary>
+    /// Activate this mission, setting Active state of this object to true and allowing it to be completed.
+    /// </summary>
+    public void Activate() {
+        Active = true;
+    }
+
+    public bool Equals(Mission m) {
+        return MType == m.MType &&
+                Name == m.Name &&
+                Description == m.Description && 
+                WinConditionDescription == m.WinConditionDescription && 
+                Active == m.Active &&
+                Completed == m.Completed;
+    }
+
+    public override int GetHashCode() {
+		return HashCode.Combine(Name, Description, WinConditionDescription, Active, Completed);
+	}
 }
 
 /// <summary>
@@ -75,6 +96,17 @@ public partial class MissionType
         // GD.Print(TargetNPCName);
         // GD.Print(TargetNPC.trueName);
     }
+
+    public bool Equals(MissionType m) {
+        return Name == m.Name &&
+                TargetNPCName == m.TargetNPCName && 
+                Location == m.Location && 
+                TargetNPC == m.TargetNPC;
+    }
+
+    public override int GetHashCode() {
+		return HashCode.Combine(Name, TargetNPCName, Location, TargetNPC);
+	}
 }
 
 public struct MissionLocation

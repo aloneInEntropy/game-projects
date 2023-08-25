@@ -14,9 +14,6 @@ public partial class Olivia : NPC
 
 		voicePath = "Olivia.wav";
 		SetVoice(voicePath);
-
-		missionJSONPath = "Olivia.json";
-		SetMissionsJSON(missionJSONPath);
 	}
 
 	public override void _Process(double delta) {

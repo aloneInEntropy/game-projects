@@ -15,9 +15,6 @@ public partial class Johnny : NPC
 
 		voicePath = "Mark.wav";
 		SetVoice(voicePath);
-
-		missionJSONPath = "Mark.json";
-		SetMissionsJSON(missionJSONPath);
 	}
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.

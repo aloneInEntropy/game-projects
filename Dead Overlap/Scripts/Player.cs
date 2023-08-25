@@ -1,6 +1,7 @@
 using Godot;
 using Godot.Collections;
-
+using System.Collections.Generic;
+using System.Text.Json;
 
 /// <summary>
 /// The Player class. Contains references and methods relating to the Player character.
@@ -18,6 +19,7 @@ public partial class Player : CharacterBody2D
 	public float _acceleration = 800;
 
 	public Vector2 direction;
+
 	Vector2 lastDirection;
 
 	RayCast2D rayCast;
@@ -103,12 +105,15 @@ public partial class Player : CharacterBody2D
 			Vector2.Zero :	
 			Input.GetVector("ui_left", "ui_right", "ui_up", "ui_down");
 		
-		if (direction != Vector2.Zero) lastDirection = direction;
-
 		// Velocity handling
-		_velocity = direction == Vector2.Zero ? 
-			_velocity.MoveToward(Vector2.Zero, _friction * (float)delta) :
-			_velocity.MoveToward(direction * Speed, _acceleration * (float)delta);
+		if (direction == Vector2.Zero) {
+			_velocity = _velocity.MoveToward(Vector2.Zero, _friction * (float)delta);
+		} else {
+			AudioManager.PlayStep();
+			lastDirection = direction;
+			_velocity = _velocity.MoveToward(direction * Speed, _acceleration * (float)delta);
+		}
+
 		Velocity = _velocity;
 		MoveAndSlide();
 	}

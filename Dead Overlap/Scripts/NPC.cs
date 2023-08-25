@@ -29,16 +29,6 @@ public partial class NPC : StaticBody2D
 	public AudioStreamWav voice = new();
 
 	/// <summary>
-	/// The path to the JSON file used to load missions for this NPC.
-	/// </summary>
-	public string missionJSONPath = "";
-
-	/// <summary>
-	/// The list of missions given to the Player by this NPC.
-	/// </summary>
-	public List<Mission> Missions { set;  get; }
-
-	/// <summary>
 	/// The list of dialogue spoken by this NPC.
 	/// </summary>
 	public List<DialogueObject> dialogue = new();
@@ -92,54 +82,6 @@ public partial class NPC : StaticBody2D
 		voice = (AudioStreamWav)GD.Load(Globals.resPathToVoice + vPath);
 	}
 
-	/// <summary>
-	/// Set the missions of the NPC using the path <c>missionPath</c> to a JSON file. All files are assumed to be in the folder "res://Assets/Text/Missions".
-	/// </summary>
-	/// <param name="missionPath"></param>
-	public void SetMissionsJSON(string missionPath) {
-		FileAccess file = FileAccess.Open(Globals.resPathToMissions + missionPath, FileAccess.ModeFlags.Read);
-		string jsonString = file.GetAsText();
-		Missions = JsonSerializer.Deserialize<List<Mission>>(jsonString, Globals.options);
-		foreach (Mission m in Missions) m.MType.Init();
-		file.Close();
-	}
-
-	/// <summary>
-	/// Get a mission given its name <c>n</c>.
-	/// </summary>
-	/// <param name="n"></param>
-	/// <returns>The mission with the name <c>n</c>.</returns>
-	public Mission GetMission(string n) {
-		foreach (var m in Missions) {
-			if (m.Name == n) return m;
-		}
-		return null;
-	}
-	
-	/// <summary>
-	/// Get a mission at position <c>n</c> in the stored list of missions.
-	/// </summary>
-	/// <param name="n"></param>
-	/// <returns>The mission at position <c>n</c>.</returns>
-	public Mission GetMission(int n) {
-		return Missions[n];
-	}
-	
-	/// <summary>
-	/// Get all missions not yet completed.
-	/// </summary>
-	/// <returns>The list of missions that aren't completed.</returns>
-	public List<Mission> GetUncompletedMissions() {
-		return Missions.FindAll(m => !m.Completed);
-	}
-	
-	/// <summary>
-	/// Get all missions currently tracking completion.
-	/// </summary>
-	/// <returns>The list of missions tracking completion.</returns>
-	public List<Mission> GetActiveMissions() {
-		return Missions.FindAll(m => m.Active);
-	}
 
 	/// <summary>
 	/// Load the DialogueObjects for this NPC from the list of DialogueObjects <c>d</c>. By default, the NPC's dialogue number is set to 0.

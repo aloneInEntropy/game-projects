@@ -34,6 +34,7 @@ theme_override_fonts/font = ExtResource("1_qt1ux")
 tab_alignment = 1
 
 [node name="SuspectWindow" type="Control" parent="TabContainer"]
+visible = false
 layout_mode = 2
 
 [node name="GridContainer" type="GridContainer" parent="TabContainer/SuspectWindow"]
@@ -288,6 +289,36 @@ Makoto was married to Adora Aga. Their relationship was reportedly souring, with
 He was known to be \"aloof yet friendly\". He would sometimes volunteer in the local soup kitchens, join and donate to charity events, and help out the elderly wherever he could. Among the children on Shune, he was called \"The Cool Doctor\".
 
 Makoto had a recorded anxiety disorder, though this never appeared to cause much trouble in his life. He was not medicated despite his doctor's recommendation. He was one of four surgeons living in Shune, two being retired and the other a new graduate. His loss was greatly mourned in the community."
+
+[node name="MissionWindow" type="ScrollContainer" parent="TabContainer"]
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="TabContainer/MissionWindow"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_right = 8
+
+[node name="MissionList" type="VBoxContainer" parent="TabContainer/MissionWindow/MarginContainer"]
+layout_mode = 2
+
+[node name="Info" type="RichTextLabel" parent="TabContainer/MissionWindow/MarginContainer/MissionList"]
+layout_mode = 2
+theme_override_fonts/normal_font = ExtResource("4_ng4ob")
+theme_override_fonts/bold_font = ExtResource("5_rjhec")
+bbcode_enabled = true
+text = "
+[center][b]Tasks to be completed. RIGHT CLICK to remove completed tasks.
+ "
+fit_content = true
+scroll_active = false
+
+[node name="HSeparator" type="HSeparator" parent="TabContainer/MissionWindow/MarginContainer/MissionList"]
+layout_mode = 2
+
+[node name="HSeparator2" type="HSeparator" parent="TabContainer/MissionWindow/MarginContainer/MissionList"]
+layout_mode = 2
 
 [connection signal="tab_button_pressed" from="TabContainer" to="." method="_on_tab_container_tab_button_pressed"]
 [connection signal="pressed" from="TabContainer/SuspectWindow/GridContainer/PCButton" to="." method="_on_pc_button_pressed"]

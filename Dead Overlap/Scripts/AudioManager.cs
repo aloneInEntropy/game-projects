@@ -7,6 +7,9 @@ using Godot;
 public partial class AudioManager : Node
 {
 	public static AudioStreamPlayer voicePlayer = new();
+	public static AudioStreamPlayer footstepPlayer = new();
+
+	private static Timer stepTimer = new();
 
 	/// <summary>
 	/// How frames to pass before playing the dialogue "voice" of a particular NPC or description.
@@ -17,6 +20,8 @@ public partial class AudioManager : Node
 	public override void _Ready()
 	{
 		voicePlayer = GetNode<AudioStreamPlayer>("VoicePlayer");
+		footstepPlayer = GetNode<AudioStreamPlayer>("StepAudio");
+		stepTimer = GetNode<Timer>("StepTimer");
 	}
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -31,5 +36,15 @@ public partial class AudioManager : Node
 
 	public static void SetUpdateVoiceSpeed(float n) {
 		updateVoiceSpeed = n;
+	}
+
+	public static void PlayStep() {
+		if (stepTimer.TimeLeft <= 0) {
+			footstepPlayer.Play();
+			stepTimer.Start();
+		}
+	}
+
+	void OnTimerTimeout() {
 	}
 }

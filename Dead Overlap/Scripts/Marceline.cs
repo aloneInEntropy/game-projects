@@ -16,9 +16,6 @@ public partial class Marceline : NPC
 
 		voicePath = "Marceline.wav";
 		SetVoice(voicePath);
-
-		missionJSONPath = "Olivia.json";
-		SetMissionsJSON(missionJSONPath);
 	}
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.

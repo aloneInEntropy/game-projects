@@ -1,5 +1,5 @@
 ~0
-    Alright Farah, what did you want to tell me? What was up with that letter? ||c Marceline
+    Alright Farah, what did you want to tell me? What was up with that letter? ||f Modify Marceline | CompleteMission Speak to the writer of the note.
 ~1 
     I... I just couldn't keep it a secret anymore. I didn't want to get Jordan in trouble, you have to believe me! I just... I didn't know... I [i]never[/i] know what they're thinking! It's infuriating how they just never ask what [i]I[/i] want or what I think or... or... ||c Farah
 ~2
@@ -24,9 +24,9 @@
 ~8
     Jordan took it very personally. They decided we should find a slightly bigger animal and set it loose on Makoto's house to mess up the place. To be honest... I was angry too. They might be an asshole sometimes, but they're still my [b]fucking[/b] wife. No one shoves my wife like that and gets away with it. Not even him.
 ~9
-    I stole my cousin Chaz's dog to use. Jordan asked that I didn't get an animal that might be noticed, but I forgot them saying that. It was only after they injected it with the heroin that they reminded me. That's solely my fault. ||f SetPVar hasLight true
+    I stole my cousin Chaz's dog to use. Jordan asked that I didn't get an animal that might be noticed, but I forgot them saying that. It was only after they injected it with the heroin that they reminded me. That's solely my fault.
 ~10
-    When we let it loose, we waited outside to take it back again. We never meant to kill him. Or at least I didn't. 
+    When we let it loose, we waited outside to take it back again. We never meant to kill him. Or at least I didn't.
 ~11
     We heard the dog hacking and coughing, and when we looked inside, Makoto was holding knives. I don't know where he got them from, but he was covered in blood. I ran in to grab the dog and get it out but Makoto looked at me, and he...
 ~12
@@ -45,5 +45,5 @@
         ~##.
     ~~.
 ~14
-    ...Right. ||f Modify Farah | ParseB d4_re_2.txt l=false
+    ...Right. ||f Modify Farah | ParseB d4_re_2.txt l=false | ActivateMission Talk to Patrick.
 ~.

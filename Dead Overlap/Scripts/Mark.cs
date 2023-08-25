@@ -14,9 +14,6 @@ public partial class Mark : NPC
 
 		voicePath = "Mark.wav";
 		SetVoice(voicePath);
-
-		missionJSONPath = "Mark.json";
-		SetMissionsJSON(missionJSONPath);
 	}
 
 	public override void _Process(double delta) {
