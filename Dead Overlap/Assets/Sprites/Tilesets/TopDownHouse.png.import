@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cs3o7llt2f8e1"
-path="res://.godot/imported/ButtonStyle.png-c1e876f027588c33210cde864d72d9f0.ctex"
+uid="uid://c14bj6b8q4dll"
+path="res://.godot/imported/TopDownHouse.png-0f4da3228ee67407b4fe51cba4c0914f.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/ButtonStyle.png"
-dest_files=["res://.godot/imported/ButtonStyle.png-c1e876f027588c33210cde864d72d9f0.ctex"]
+source_file="res://Assets/Sprites/Tilesets/TopDownHouse.png"
+dest_files=["res://.godot/imported/TopDownHouse.png-0f4da3228ee67407b4fe51cba4c0914f.ctex"]
 
 [params]
 

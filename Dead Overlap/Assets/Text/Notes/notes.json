@@ -1,47 +1,7 @@
 [
   {
-    "Text": "We... we were just messing around, at first. Jordan found this bag of stuff -- I think it was heroin? -- and wanted to mess around with it. They obviously didn\u0027t mean injecting it into ourselves, but maybe into a small animal or something.",
+    "Text": "...For what it\u0027s worth, he bought specifically four bandages, but we only pricked him twice. Maybe there was someone else...?",
     "Day": 0,
-    "NPCName": "Farah"
-  },
-  {
-    "Text": "But a few days ago, Jordan bumped into Makoto at their father\u0027s office. Y\u0027know, the mayor? He was angry about something and shoved them out of the way very rudely. They fell and sprained their ankle, but Makoto didn\u0027t even stop to say sorry. Probably because they were the kid of the guy he was mad at.",
-    "Day": 0,
-    "NPCName": "Farah"
-  },
-  {
-    "Text": "When we let it loose, we waited outside to take it back again. We never meant to kill him. Or at least I didn\u0027t.",
-    "Day": 0,
-    "NPCName": "Farah"
-  },
-  {
-    "Text": "We just finished a prototype of the EMC, and it looks like it works alright. I managed to figure out the correlation between the Orten coordinate of localised conceptspace for an individual and the amount of information required to find it. ",
-    "Day": 0,
-    "NPCName": "Johnny"
-  },
-  {
-    "Text": "We heard the dog hacking and coughing, and when we looked inside, Makoto was holding knives. I don\u0027t know where he got them from, but he was covered in blood. I ran in to grab the dog and get it out but Makoto looked at me, and he...",
-    "Day": 0,
-    "NPCName": "Farah"
-  },
-  {
-    "Text": "(She must really care for Jordan, huh?) ",
-    "Day": 0,
-    "NPCName": "Marceline"
-  },
-  {
-    "Text": "Johnny? ",
-    "Day": 0,
-    "NPCName": "Marceline"
-  },
-  {
-    "Text": "O-oh! Hi, Ms. Ren. I just... I was just heading out on a walk. ",
-    "Day": 0,
-    "NPCName": "Johnny"
-  },
-  {
-    "Text": "(How stupid does this guy think I am?) ",
-    "Day": 0,
-    "NPCName": "Marceline"
+    "NPCName": "Marie"
   }
 ]

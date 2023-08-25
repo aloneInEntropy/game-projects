@@ -1,0 +1,9 @@
+[gd_scene load_steps=3 format=3 uid="uid://dvdpid84c1ak8"]
+
+[ext_resource type="PackedScene" uid="uid://cp8831bvwwy6t" path="res://Scenes/NPC.tscn" id="1_fouy7"]
+[ext_resource type="Texture2D" uid="uid://d2vifw3p5b0rj" path="res://Assets/Sprites/NPC/Ignacio.png" id="2_54hbf"]
+
+[node name="Ignacio" instance=ExtResource("1_fouy7")]
+
+[node name="Sprite2D" parent="." index="3"]
+texture = ExtResource("2_54hbf")

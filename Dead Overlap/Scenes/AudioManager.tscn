@@ -16,4 +16,6 @@ stream = ExtResource("2_i4jsh")
 wait_time = 0.4
 one_shot = true
 
+[node name="OneShotOther" type="AudioStreamPlayer" parent="."]
+
 [connection signal="timeout" from="StepTimer" to="." method="OnTimerTimeout"]

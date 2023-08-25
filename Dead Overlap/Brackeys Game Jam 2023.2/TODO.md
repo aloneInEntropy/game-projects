@@ -31,16 +31,16 @@
 
 23/08
 - [x] Item interaction
-- [ ] Tilemap setup
-	- [ ] Shune
+- [x] Tilemap setup
+	- [x] Shune
 		- [x] South
 			- [x] Adora's house
 		- [x] Centre
-			- [ ] Mayor's office
-				- [ ] The Hub
-			- [ ] Police station
-		- [ ] North
-			- [ ] The Market
+			- [x] Mayor's office
+				- [x] The Hub
+		- [x] North
+			- [x] Police station
+			- [x] The Market
 		- [x] East
 			- [x] The Shack
 - [x] Room traversal
@@ -49,10 +49,13 @@
 24/08 - 25/08
 - [ ] Music and sound effects
 - [ ] Writing the mystery
-- [ ] Finishing tilemap
+- [x] Finishing tilemap
 - [ ] Figuring out how to make the game more fun to play
 
 26/08
 - [ ] Polish
 	- [x] Extra UI effects, such as a pop-up when dialogue is saved or deleted.
 	- [ ] Different design for the notebook.
+- [ ] Farah and Jordan's house
+	- [ ] Speaking to Jordan before Farah's confession
+- [ ] Access Adora's house last

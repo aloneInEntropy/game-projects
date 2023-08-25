@@ -5,7 +5,16 @@
 [ext_resource type="Script" path="res://Scripts/Marceline.cs" id="2_h7771"]
 
 [node name="Marceline" instance=ExtResource("1_unvpv")]
+collision_layer = 0
+collision_mask = 0
 script = ExtResource("2_h7771")
+
+[node name="InteractBox" parent="." index="0"]
+collision_layer = 0
+collision_mask = 0
+
+[node name="Hitbox" parent="." index="1"]
+disabled = true
 
 [node name="Sprite2D" parent="." index="3"]
 texture = ExtResource("2_gk1ri")

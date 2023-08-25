@@ -1,0 +1,71 @@
+~0
+    WHAT?! What about Makoto? Did he die? Is he dead? I didn't do it? I don't understand what you want, lady, but I cannot help you, at all. ||c Marie
+~1
+    ...Marie, you seem very shifty (haha). Are you alright? Do you need to sit down? ||c Marceline
+~2
+    NO! No! No, I don't, thank you. I don't know what you want. ||c Marie
+~3
+    Marie, please calm down! I just want to ask if you remember Makoto buying bandages from you. He was covered in them on the day he died and someone said they heard him arguing with you. If not, then please tell me who was working on the day of September 8th, if you remember. ||c Marceline
+~4
+    I... I don't... are you a cop? You have to tell me if you are. ||c Marie
+~5
+    What? Marie, I'm not a police officer, I'm a private detective. It's my job to figure out what happened, not arrest people. I can't do that. Please just help me here if you can. ||c Marceline
+~6
+    I... ||c Marie
+~7
+    Oh, alright. I was working on the 8th. I sold him bandages. That's all that happened. Sold him some newspapers too, I guess. ||c Marie
+~8
+    Did you notice him wearing any bandages?  ||c Marceline
+~9
+    ...No. ||c Marie
+~10
+    (Not wearing bandages before he came in, huh...) ||c Marceline
+~11
+    ...How many times did he come in that day, do you recall? ||c Marceline
+~12
+    Twice. ||c Marie
+~13
+    And was he weari-- ||c Marceline
+~14
+    Gah! ||c Marie
+~15
+    Marie? ||c Marceline
+~16
+    I'm sorry! I can't do this anymore! I can't lie like this anymore! It's too much! ||c Marie
+~17
+    Marie, wait! We haven't even been playing that long! The game will be over too soon! ||c Marceline
+~18
+    Ah, screw the Player! They look awful anyway! ||c Marie
+~19
+    (jk lols dm me) ||c Narrator
+~20
+    What do you want to tell me, Marie? ||c Marceline
+~21
+    ...I... we... ||c Marie
+~22
+    It was... Patrick and I. I didn't like the way he was using his money, and Patrick, well... everyone knows how Paddy feels about Makoto. I found this bag of drugs in the shack in the east and we used it on our plan.
+~23
+    First, Patrick would make Makoto go into his office for some law thing. There, he would poison a pen tip and poke him with it. Then, because he always comes here in the mornings, I would do the same thing and poke him again. That's why he was agitated and why he bought bandages.
+~24
+    ...For what it's worth, he bought specifically four bandages, but we only pricked him twice. Maybe there was someone else...?
+~25
+    That was... sufficiently succint; thank you, Marie. Can I ask where the pens you used are? ||c Marceline
+~26
+    We threw them away. I didn't do the best job of that, I admit it, but I'm not really experienced with this sort of thing. I threw mine behind the building. ||c Marie
+~27
+    ...Right. Thank you, Marie. ||c Marceline
+~28
+    ...So... when do I go to jail? ||c Marie
+~29
+    Huh? Marie, I just told you-- ||c Marceline
+~30
+    Not for my crimes, for my protection. I don't think... I think Paddy hates me now, for telling you. Oh, what have I done?! ||c Marie
+~31
+    Marie, hold on! I can't arrest you anyway. You might be better off laying low for a while, in case he tries to kill you or something. ||c Marceline
+~32
+    He'll try to kill me?!?! ||c Marie
+~33
+    Probably! :3||c Marceline
+~34
+    Oh, God... I've gotta get out of here... ||f Modify Marie | ParseB d7_re.txt l=false
+~.

@@ -1,0 +1,26 @@
+~0
+    Marie Bornstein? ||f Modify Marceline | CompleteMission Talk to Marie Bornstein.
+~1
+    Huh? Yes? Can I help you? ||c Marie
+~2
+    Hi, Marie, I just wondered if I could ask you a few questions, if you can spare the time? ||c Marceline
+~3
+    O-oh, I can't help you there, I'm still on the clock. If you're looking for flashlights though, we've recently gone on sale. Actually, they're free. We ordered about 40,000 by mistake and now we're in severe debt. Welcome to S-Mart, how can I help you!? *twitches* ||f Modify Marie | SetPVar hasLight true
+~4
+    At 8 p.m.? ||c Marceline
+~5
+    Yes? Is that odd? ||c Marie
+~6
+    ...May I ask who your manager is? ||c Marceline
+~7
+    Mr. Patrick Cuno, why? ||c Marie
+~8
+    (What the actual hell is wrong with this town?) ||c Marceline
+~~9
+    ...Anyway, I wanted to ask about... ||c Marceline
+    ~##2
+        ~@0
+            Makoto Bourdain ||l d7_makoto.txt
+        ~@1
+            The shack. ||l d7_shack.txt
+~.

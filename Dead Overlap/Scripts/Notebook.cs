@@ -75,7 +75,7 @@ public partial class Notebook : Control
 		}
 
 		try {
-			SetMissions(PlayerVariables.Missions);	
+			SetMissions(PlayerVariables.GetNextMissions());	
 		} catch (JsonException) {
 			// JsonSerialiser.Deserialise() throws an exception if there's nothing in the target file to deserialize. 
 			// This catches and ignores the exception.
@@ -165,6 +165,9 @@ public partial class Notebook : Control
 				chs[tbd].QueueFree();
 				chs[tbd+1].QueueFree();
 				notes.Remove(n);
+
+				string newNote = JsonSerializer.Serialize(notes, Globals.options);
+				File.WriteAllText(Globals.pathToNotes, newNote);
             }
         }
 	}
@@ -225,6 +228,7 @@ public partial class Notebook : Control
 		if (@event is InputEventMouseButton mb) {
 			if (mb.ButtonMask == MouseButtonMask.Right && mb.Pressed) {
 				if (m.Completed) {
+					m.Deactivate();
 					var chs = missionContainer.GetChildren();
 					int tbd = chs.IndexOf(rtl);
 					chs[tbd].QueueFree();
@@ -238,6 +242,10 @@ public partial class Notebook : Control
 	public void _on_tab_container_tab_button_pressed(int tab) {
         GD.Print(tab);
         if (tab != 0) suspectDescription.Text = "";
+	}
+
+	void _on_tab_container_tab_changed(int tab) {
+		AudioManager.PlayOnce("res://Assets/Audio/Other/page_turn.wav");
 	}
 
 	public void _on_pc_button_pressed() {

@@ -12,13 +12,13 @@
     },
     {
         "MType": {
-            "Name": "Deliver",
-            "TargetNPCName": "Mark"
+            "Name": "Talk",
+            "TargetNPCName": "Marie"
         },
-        "Name": "Give Mark a flower.",
-        "Description": "Give Mark a flower from the market or the forest.",
-        "WinConditionDescription": "Mark gets at least 1 flower from the Player.",
-        "Active": false,
+        "Name": "Talk to Marie Bornstein.",
+        "Description": "Talk to Marie Bornstein at the market in the north of town.",
+        "WinConditionDescription": "The Player speaks to Marie.",
+        "Active": true,
         "Completed": false
     },
     {

@@ -42,15 +42,23 @@ public partial class Mission
     /// Complete this mission, setting the Completed state and Active state of this object to true.
     /// </summary>
     public void Complete() {
-        Completed = true;
-        // Active = false;
+        if (Active) {
+            Completed = true;
+        }
     }
     
     /// <summary>
-    /// Activate this mission, setting Active state of this object to true and allowing it to be completed.
+    /// Activate this mission, setting the Active state of this object to true and allowing it to be completed.
     /// </summary>
     public void Activate() {
         Active = true;
+    }
+    
+    /// <summary>
+    /// Deactivate this mission, setting the Active state of this object to false.
+    /// </summary>
+    public void Deactivate() {
+        Active = false;
     }
 
     public bool Equals(Mission m) {

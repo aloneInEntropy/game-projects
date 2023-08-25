@@ -1,0 +1,11 @@
+[gd_scene load_steps=4 format=3 uid="uid://bgu84ublqueox"]
+
+[ext_resource type="PackedScene" uid="uid://cp8831bvwwy6t" path="res://Scenes/NPC.tscn" id="1_w6xno"]
+[ext_resource type="Script" path="res://Scripts/Patrick.cs" id="2_8ajg2"]
+[ext_resource type="Texture2D" uid="uid://dqlve5hx2wcms" path="res://Assets/Sprites/NPC/Patrick.png" id="2_m6tdm"]
+
+[node name="Patrick" instance=ExtResource("1_w6xno")]
+script = ExtResource("2_8ajg2")
+
+[node name="Sprite2D" parent="." index="3"]
+texture = ExtResource("2_m6tdm")

@@ -112,7 +112,7 @@ public partial class DialogueBox : Control
 	/// </summary>
 	/// <param name="d"></param>
 	public void WriteDialogue(string d) {
-		txt.Text = GameManager.RemoveBBCTags(string.Join('\n', d));
+		txt.Text = GameManager.RemoveBBCTags(d);
 		txt.VisibleCharacters = 0;
 		DialogueManager.SetDialogueToUpdate(this, frames_before_updating:2);
 	}

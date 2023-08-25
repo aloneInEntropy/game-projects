@@ -1,0 +1,11 @@
+[gd_scene load_steps=4 format=3 uid="uid://d2fcsegb8ryob"]
+
+[ext_resource type="PackedScene" uid="uid://cp8831bvwwy6t" path="res://Scenes/NPC.tscn" id="1_4pk2e"]
+[ext_resource type="Texture2D" uid="uid://c35df21df1fna" path="res://Assets/Sprites/NPC/Marie.png" id="2_ganhn"]
+[ext_resource type="Script" path="res://Scripts/Marie.cs" id="2_h1wl4"]
+
+[node name="Marie" instance=ExtResource("1_4pk2e")]
+script = ExtResource("2_h1wl4")
+
+[node name="Sprite2D" parent="." index="3"]
+texture = ExtResource("2_ganhn")

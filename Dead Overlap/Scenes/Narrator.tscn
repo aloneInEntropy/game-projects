@@ -4,4 +4,13 @@
 [ext_resource type="Script" path="res://Scripts/Narrator.cs" id="2_lqpac"]
 
 [node name="Narrator" instance=ExtResource("1_gwmxm")]
+collision_layer = 0
+collision_mask = 0
 script = ExtResource("2_lqpac")
+
+[node name="InteractBox" parent="." index="0"]
+collision_layer = 0
+collision_mask = 0
+
+[node name="Hitbox" parent="." index="1"]
+disabled = true

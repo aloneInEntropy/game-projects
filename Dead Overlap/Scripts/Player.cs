@@ -10,7 +10,7 @@ public partial class Player : CharacterBody2D
 {
 	[ExportGroup("Movement")]
 	[Export]
-	public const float Speed = 200.0f;
+	public float Speed = 200.0f;
 	[Export]
 	private Vector2 _velocity;
 	[Export]
@@ -99,6 +99,16 @@ public partial class Player : CharacterBody2D
 	{
 		_velocity = Velocity;
 
+		if (Input.IsActionPressed("sprint")) {
+			Speed = 450f;
+			// AudioManager.stepTimer.WaitTime = 0.11;
+			// animationPlayer.SpeedScale = 5f;
+		} else {
+			Speed = 200f;
+			// AudioManager.stepTimer.WaitTime = 0.4;
+			// animationPlayer.SpeedScale = 1f;
+		}
+
 		// Get the input direction and handle the movement/deceleration.
 		// As good practice, you should replace UI actions with custom gameplay actions.
 		direction = gui.isDialogueActive || GameManager.isGamePaused ? 
@@ -137,7 +147,7 @@ public partial class Player : CharacterBody2D
 	void _on_interact_box_area_entered(Area2D area) {
 #pragma warning restore IDE0051 // restore the INFO (they're still useful after all)
 #pragma warning restore IDE1006 // ditto
-		GD.Print(area.Name);
+		// GD.Print(area.GetParent().Name);
 		if (area.GetParent().GetType().IsSubclassOf(typeof(NPC))) {
 			// if the node is an NPC, start it's dialogue from the beginning
 			// var p = (NPC)area.GetParent();

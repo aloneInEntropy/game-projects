@@ -1,0 +1,79 @@
+~0
+    There you are, Mr. Cuno. It's very difficult to get a hold of you, you know. ||c Marceline
+~1
+    What the hell? Who let you in? Melissa? ||c Patrick
+~2
+    dude there's no one else here lol ||c Marceline
+~3
+    damn budget cuts ||c Patrick
+~4
+    time cuts too lol ||c Marceline
+~5
+    lol ||c Patrick
+~6 
+    Anyway, I'd like to ask you a few questions if that's okay. First off, what's your relationship with-- ||c Marceline
+~7
+    Woah, woah! Hang on, there! It's NOT okay! I was actually just about to leave, so if you'll excuse me-- ||c Patrick
+~8
+    Patrick, I have evidence of your affair. ||c Marceline
+~9
+    ... ||c Patrick
+~10
+    ...What affair? What are you talking about? I love my bitch wife 
+~11
+    Your affair with a... Marie Bornstein? The woman that runs the market? Pictures, love letters, the whole shebang. Now if you don't comply with my demands, everything gets released to the public. And what happens to your election chances then? Although, to be fair, you're basically guaranteed to lose. ||c Marceline
+~12
+    ... ||c Patrick
+~13
+    You can't get away with this. This is... this is blackmail! This is illegal! I could call the police on you right now!
+~14
+    And do what, exactly? I'm working with the police, though they don't know about this little scenario. So what is it, Paddy? Comply or deny? ||c Marceline
+~15
+    You... you...! ||c Patrick
+~16
+    I take that as a yes. Now, as I was saying, what is your relationship with the deceased in question, Makoto Bourdain? Seems like the two of you have quite an interesting history. ||c Marceline
+~17
+    --! ||c Patrick
+~18
+    He was... he was popular. I disliked him as a person, in general. Is that so bad?
+~19 
+    Not when you try to kill him over it.||c Marceline
+~20
+    I--! You know what? Screw this! Makoto was an ASSHOLE!! ||c Patrick
+~21
+    (Woah.) ||c Marceline
+~22
+    He was arrogant, annoying, aloof, acidic, and all of anything anyone could ever abhor! He had all this money, and he acted like it made him God! He thought, "Oh, I'm Makoto, chief neurosurgeon or whatever, and I don't have to do what anyone says, because I'm special! I'm the literal, actual best person ever!" ||c Patrick
+~23
+    And he [i]believed it[/i]! He legitimately thought he deserved everything he had, including that wife of his! He thought he could beat me in an election! An [i][b]election[/b][/i]! That's [b][i]my[/i][/b] field! That's what [i]I[/i] do! And he tried to beat me! ||c Patrick
+~24
+    Now, to be fair, he didn't exactly willingly enter the election himsel-- ||c Marceline
+~25
+    Oh, fuck off with that. I don't give a flying [i]fuck[/i] what he wanted to do. It's what he did. It's how it nearly worked. I deserve to be mayor! Just like my dad, and his father before him, and his father before him! This is a family business, goddamnit! And I will not be made to be a fool by the likes of him!!! ||c Patrick
+~26
+    ... ||c Marceline
+~27
+    *pant* *pant* ||c Patrick
+~28
+    ...Well, Mr. Cuno. That was-- ||c Marceline
+~29
+    AND!! ||c Patrick
+~30
+    (ughhhhhhhhhh) ||c Marceline
+~31
+    That "affair" you think is happening? It's bullshit! If you really want something to investigate, why not look into that Bornstein woman going into that weird shack on the edge of town?! Now exit the premises IMMEDIATELY!! ||c Patrick
+~32
+    Jesus, dude, alright! What the fuck is with you? ||c Marceline
+~33
+    Ah, wait, one more thing. Do you think I could have a pen? ||c Marceline
+~34
+    W-What? W-Why do you say that? What is it? What are you talking about? I have no idea what you're talking about. ||c Patrick
+~35
+    A pen. From your desk? I like to collect them, see. ||c Marceline
+~36
+    I- what? No. No! Get out! ||c Patrick
+~37
+    Jeez, alright. No need to poison the mood. ||c Marceline
+~38
+    Hngh--!!! ||f Modify Patrick | ActivateMission Talk to Marie Bornstein.
+~.
