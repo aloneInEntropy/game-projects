@@ -22,7 +22,7 @@ Third one now.
                 ~#@2
                     Pie? I think, we have some in the fridge... don't think it's gonna fill ya up all that much, though.
             ~@3
-                Quiche. ||j d2_1.txt p=0
+                Quiche. ||l d2_1.txt p=0
             ~@4
                 I'm not hungry, thank you. |||
         ~##.

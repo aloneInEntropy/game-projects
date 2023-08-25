@@ -43,11 +43,11 @@ public partial class RoomTrigger : Area2D
     /// Change the scene according to this RoomTrigger's variables. <br/>
 	/// If <c>keepXPosition</c> or <c>keepYPosition</c> are set to <c>true</c>, the <c>entryPoint</c> will be ignored.
     /// </summary>
-    public void Change() {
+    public virtual void Change() {
       GetTree().ChangeSceneToFile("res://Scenes/" + sceneName + ".tscn");
 		GameManager.sceneChangePosition = new Vector2(
-		  keepXPosition ? Globals.player.Position.X : entryPoint.X,
-		  keepYPosition ? Globals.player.Position.Y : entryPoint.Y
+			keepXPosition ? Globals.player.Position.X : entryPoint.X,
+			keepYPosition ? Globals.player.Position.Y : entryPoint.Y
 	  );
       GameManager.sceneChangeFacing = facingDirection;
     }

@@ -1,8 +1,9 @@
-[gd_scene load_steps=5 format=3 uid="uid://6wwwvpsqguwa"]
+[gd_scene load_steps=6 format=3 uid="uid://6wwwvpsqguwa"]
 
 [ext_resource type="Script" path="res://Scripts/GUI.cs" id="1_h7svq"]
 [ext_resource type="PackedScene" uid="uid://cqpj6a45n36qi" path="res://Scenes/DialogueBox.tscn" id="2_5syqh"]
 [ext_resource type="FontFile" uid="uid://bhtiplwjrbpc7" path="res://Assets/Fonts/futura light bt.ttf" id="2_ck4dy"]
+[ext_resource type="FontFile" uid="uid://brtoretp4o0u6" path="res://Assets/Fonts/Futura Extra Black font.ttf" id="4_227b2"]
 [ext_resource type="PackedScene" uid="uid://r4i21wc007bo" path="res://Scenes/Notebook.tscn" id="4_qealq"]
 
 [node name="GUI" type="CanvasLayer"]
@@ -22,7 +23,21 @@ scroll_active = false
 
 [node name="DialogueBox" parent="." instance=ExtResource("2_5syqh")]
 y_sort_enabled = true
+metadata/_edit_lock_ = true
+
+[node name="NoteSaveNotif" type="RichTextLabel" parent="."]
+offset_left = 14.0
+offset_top = 385.0
+offset_right = 167.0
+offset_bottom = 416.0
+theme_override_fonts/normal_font = ExtResource("4_227b2")
+theme_override_font_sizes/normal_font_size = 20
+bbcode_enabled = true
+text = "[center]Note saved!"
+fit_content = true
+scroll_active = false
 
 [node name="Notebook" parent="." instance=ExtResource("4_qealq")]
 visible = false
 y_sort_enabled = true
+metadata/_edit_lock_ = true

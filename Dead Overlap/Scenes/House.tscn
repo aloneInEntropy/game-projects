@@ -42,6 +42,7 @@ shape = SubResource("RectangleShape2D_3f3gn")
 
 [node name="Farah" parent="." instance=ExtResource("4_58p41")]
 position = Vector2(415, 128)
+diagPath = "d4.txt"
 
 [node name="TileMap" type="TileMap" parent="."]
 z_index = -1
@@ -71,7 +72,7 @@ layer_2/tile_data = PackedInt32Array(393225, 458752, 2, 458761, 458752, 2, -5242
 
 [node name="Paper" parent="Interactables" instance=ExtResource("6_8bobd")]
 position = Vector2(496, -178)
-description = "A piece of a torn-up newspaper."
+description = "Makoto's birth certificate."
 metadata/_edit_group_ = true
 
 [node name="CollisionPolygon2D" parent="Interactables/Paper" index="0"]

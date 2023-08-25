@@ -7,6 +7,7 @@ using Godot;
 public partial class GUI : CanvasLayer
 {
 	public RichTextLabel missionText = new();
+	public RichTextLabel noteSaveNotif = new();
 	public DialogueBox db = new();
 	public Notebook notebook = new();
 
@@ -30,6 +31,8 @@ public partial class GUI : CanvasLayer
 	{
 		Globals.gui = this;
 		missionText = (RichTextLabel)GetNode("MissionText");
+		noteSaveNotif = (RichTextLabel)GetNode("NoteSaveNotif");
+		noteSaveNotif.Modulate = new Color(1, 1, 1, 0);
 		db = (DialogueBox)GetNode("DialogueBox");
 		db.Visible = false;
 		notebook = (Notebook)GetNode("Notebook");
@@ -39,6 +42,7 @@ public partial class GUI : CanvasLayer
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
 	public override void _Process(double delta)
 	{
+		noteSaveNotif.Modulate = new Color(1, 1, 1, Mathf.Clamp(noteSaveNotif.Modulate.A - 0.02f, 0, 1));
 	}
 
 	public override void _Input(InputEvent @event) {
@@ -50,6 +54,7 @@ public partial class GUI : CanvasLayer
 		if (isDialogueActive && IsInstanceValid(db) && @event.IsActionPressed("save_dialogue")) {
 			// Don't save "un-spoken" dialogue.
 			if (db.nameLabel.Text != "") notebook.SaveDialogueAsNote(db.txt.Text, Globals.day, db.nameLabel.Text);
+			noteSaveNotif.Modulate = new Color(1, 1, 1, 1);
 		}
 	}
 

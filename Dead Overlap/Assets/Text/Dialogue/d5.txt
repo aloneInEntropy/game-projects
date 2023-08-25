@@ -1,0 +1,32 @@
+~0
+    Johnny? ||c Marceline
+~1
+    O-oh! Hi, Ms. Ren. I just... I was just heading out on a walk. ||c Johnny
+~2
+    (How stupid does this guy think I am?) ||c Marceline
+~~3
+    Well, that's... fine, I just wasn't expecting to see you here. ||f SetPVar hasLight true
+    ~##2
+        ~@0
+            Why are you in a shack?
+            ~#@0
+                Well, I was... just... wandering about, and thought, "Oh, that place looks comfy. Might head in there." ||c Johnny
+        ~@1
+            What's so special about this place?
+            ~#@1
+                Special? Nothing! Nothing at all! This place is awful, I'd never come here! I was... just... wandering about, and thought, "Oh, that place looks evil. Might be some crime in there." ||c Johnny
+        ~@.
+    ~##.
+~4
+    Do you think that about every shack you enter? ||c Marceline
+~5
+    W-well... ||c Johnny
+~6
+    (Odd. This guy and his dumb name, this weird abandoned shack on the edge of town, the town itself... everything about it is odd. I need to solve this case fast.) ||c Marceline
+~7
+    Well, you have a... day. ||c Marceline
+~8
+    Sure will ma'am! *salutes* ||c Johnny
+~9
+    Never fucking do that again. ||f Modify Marceline | ParseB d5_re_1.txt l=false
+~.

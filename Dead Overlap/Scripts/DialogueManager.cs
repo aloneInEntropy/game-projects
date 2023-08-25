@@ -366,4 +366,10 @@ public partial class DialogueManager : Node
 	public void Modify(string nameTitle) {
 		activeDialogueBox.Modify(nameTitle);
 	}
+
+	public void SetPVar(string varName, string val) {
+		if (varName == "hasLight") {
+			PlayerVariables.hasLight = bool.Parse(val);
+		}
+	}
 }

@@ -33,16 +33,16 @@
 - [x] Item interaction
 - [ ] Tilemap setup
 	- [ ] Shune
-		- [ ] South
+		- [x] South
 			- [x] Adora's house
-		- [ ] Centre
+		- [x] Centre
 			- [ ] Mayor's office
 				- [ ] The Hub
 			- [ ] Police station
 		- [ ] North
 			- [ ] The Market
-		- [ ] East
-			- [ ] The Shack
+		- [x] East
+			- [x] The Shack
 - [x] Room traversal
 - [ ] Pause menu and ability to return to the present time
 
@@ -54,5 +54,5 @@
 
 26/08
 - [ ] Polish
-	- [ ] Extra UI effects, such as a pop-up when dialogue is saved or deleted.
+	- [x] Extra UI effects, such as a pop-up when dialogue is saved or deleted.
 	- [ ] Different design for the notebook.

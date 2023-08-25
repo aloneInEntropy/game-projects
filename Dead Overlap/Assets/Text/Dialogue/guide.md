@@ -28,7 +28,7 @@ For the following commands, anything involving parsing a file (i.e., `||l`, `||j
 `dialogue number` (`int`) - the position in the `file path` to load dialogue from (defaults to `0`)\
 `save path?`  (`bool`) -  should the new path be saved to the NPC's current dialogue or switch back afterwards? (defaults to `true`)
 
-`... ||j f=[file path] l=[load immediately?] p=[dialogue number]`\
+`... ||j f=[file path] l=[load immediately?] p=[dialogue number]` (***BROKEN! DO NOT USE.***)\
 Command to jump to dialogue line without saving path. Shorthand for `||l f=[file path] l=[load immediately?] p=[dialogue number] s=false`
 
 `... ||e`\

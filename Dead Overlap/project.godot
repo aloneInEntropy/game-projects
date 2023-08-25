@@ -23,6 +23,7 @@ GameManager="*res://Scenes/GameManager.tscn"
 Globals="*res://Scripts/Globals.cs"
 Narrator="*res://Scripts/Narrator.cs"
 Marceline="*res://Scenes/Marceline.tscn"
+PlayerVariables="*res://Scripts/PlayerVariables.cs"
 
 [display]
 
