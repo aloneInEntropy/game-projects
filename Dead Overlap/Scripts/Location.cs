@@ -12,6 +12,9 @@ public partial class Location : Node2D
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
+		Globals.currentRoom = Name;
+		// if (Name == "Hub") AudioManager.bgMusicPlayer.Stop();
+		// else AudioManager.bgMusicPlayer.Play();
 		player = GetNode<Player>("Player");
 		camera = GetNode<Camera2D>("Player/Camera2D");
 		tilemap = GetNode<TileMap>("TileMap");

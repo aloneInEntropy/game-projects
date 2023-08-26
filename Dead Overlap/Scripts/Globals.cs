@@ -87,6 +87,8 @@ public partial class Globals : Node
 		"September 12th"
 	};
 
+	public static string currentRoom = "";
+
 
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()

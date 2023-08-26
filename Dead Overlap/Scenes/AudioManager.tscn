@@ -1,13 +1,14 @@
-[gd_scene load_steps=3 format=3 uid="uid://c6whoufv5kho6"]
+[gd_scene load_steps=4 format=3 uid="uid://c6whoufv5kho6"]
 
 [ext_resource type="Script" path="res://Scripts/AudioManager.cs" id="1_hp76l"]
 [ext_resource type="AudioStream" uid="uid://bnlmfiebpgnfe" path="res://Assets/Audio/Player/footstep.wav" id="2_i4jsh"]
+[ext_resource type="AudioStream" uid="uid://b4y2riteqmery" path="res://Assets/Audio/Other/dead_overlap_title_screen.wav" id="3_ph6su"]
 
 [node name="AudioManager" type="Node"]
 script = ExtResource("1_hp76l")
 
 [node name="VoicePlayer" type="AudioStreamPlayer" parent="."]
-volume_db = -10.0
+volume_db = -15.0
 
 [node name="StepAudio" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("2_i4jsh")
@@ -17,5 +18,9 @@ wait_time = 0.4
 one_shot = true
 
 [node name="OneShotOther" type="AudioStreamPlayer" parent="."]
+
+[node name="BGMusic" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_ph6su")
+volume_db = -25.0
 
 [connection signal="timeout" from="StepTimer" to="." method="OnTimerTimeout"]

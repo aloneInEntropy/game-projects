@@ -9,6 +9,7 @@ public partial class AudioManager : Node
 	public static AudioStreamPlayer voicePlayer = new();
 	public static AudioStreamPlayer footstepPlayer = new();
 	public static AudioStreamPlayer oneShotPlayer = new();
+	public static AudioStreamPlayer bgMusicPlayer = new();
 
 	public static Timer stepTimer = new();
 
@@ -23,12 +24,20 @@ public partial class AudioManager : Node
 		voicePlayer = GetNode<AudioStreamPlayer>("VoicePlayer");
 		footstepPlayer = GetNode<AudioStreamPlayer>("StepAudio");
 		oneShotPlayer = GetNode<AudioStreamPlayer>("OneShotOther");
+		bgMusicPlayer = GetNode<AudioStreamPlayer>("BGMusic");
 		stepTimer = GetNode<Timer>("StepTimer");
 	}
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
 	public override void _Process(double delta)
 	{
+		if (Globals.currentRoom == "Hub") {
+			bgMusicPlayer.Stop();
+		} else {
+			if (!bgMusicPlayer.Playing) {
+				bgMusicPlayer.Play();
+			}
+		}
 	}
 
 	/// <summary>
