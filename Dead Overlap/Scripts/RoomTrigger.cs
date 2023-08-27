@@ -44,11 +44,22 @@ public partial class RoomTrigger : Area2D
 	/// If <c>keepXPosition</c> or <c>keepYPosition</c> are set to <c>true</c>, the <c>entryPoint</c> will be ignored.
     /// </summary>
     public virtual void Change() {
-      GetTree().ChangeSceneToFile("res://Scenes/" + sceneName + ".tscn");
+      GameManager.sceneChangeFacing = facingDirection;
 		GameManager.sceneChangePosition = new Vector2(
 			keepXPosition ? Globals.player.Position.X : entryPoint.X,
 			keepYPosition ? Globals.player.Position.Y : entryPoint.Y
 	  );
-      GameManager.sceneChangeFacing = facingDirection;
+      GetTree().ChangeSceneToFile("res://Scenes/" + sceneName + ".tscn");
     }
+
+	/// <summary>
+	/// Attempt to update the facing position for this RoomTrigger object.<br/>
+	/// This mainly applies to Auto Trigger RoomTriggers. If the (Auto) Trigger would leave the Player facing an arbitrary position instead of <br/>
+	/// a specific position, the this object's facingDirection will be updated to that value. Otherwise, it will prioritise the given direction <br/>
+	/// set in the Godot Editor.
+	/// </summary>
+	/// <param name="facing"></param>
+	public void TryUpdateFacingPos(Vector2 facing) {
+		if (facingDirection == Vector2.Zero) facingDirection = facing;
+	}
 }

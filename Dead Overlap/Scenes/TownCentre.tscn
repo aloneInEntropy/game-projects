@@ -101,6 +101,7 @@ shape = SubResource("RectangleShape2D_ufual")
 position = Vector2(-434, -862)
 sceneName = "Office"
 entryPoint = Vector2(3, -54)
+facingDirection = Vector2(0, -1)
 metadata/_edit_group_ = true
 
 [node name="CollisionShape2D" parent="RoomTriggers/RoomTriggerMayor" index="0"]

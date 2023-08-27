@@ -72,6 +72,7 @@ color = Color(0.572549, 0.541176, 0.439216, 1)
 position = Vector2(1538, -124)
 sceneName = "Station"
 entryPoint = Vector2(0, -20)
+facingDirection = Vector2(0, 1)
 
 [node name="CollisionShape2D" parent="RoomTriggers/RoomTriggerStation" index="0"]
 shape = SubResource("RectangleShape2D_3fg51")
@@ -80,6 +81,7 @@ shape = SubResource("RectangleShape2D_3fg51")
 position = Vector2(0, 166)
 sceneName = "Market"
 entryPoint = Vector2(-195, 0)
+facingDirection = Vector2(0, -1)
 
 [node name="CollisionShape2D" parent="RoomTriggers/RoomTriggerMarketL" index="0"]
 position = Vector2(0, -13)
@@ -89,6 +91,7 @@ shape = SubResource("RectangleShape2D_17mig")
 position = Vector2(350, 166)
 sceneName = "Market"
 entryPoint = Vector2(485, 2)
+facingDirection = Vector2(0, -1)
 
 [node name="CollisionShape2D" parent="RoomTriggers/RoomTriggerMarketR" index="0"]
 position = Vector2(0, -13)

@@ -18,9 +18,15 @@ public partial class Player : CharacterBody2D
 	[Export]
 	public float _acceleration = 800;
 
+	/// <summary>
+	/// The direction the Player is looking in. Determines walk sprite.
+	/// </summary>
 	public Vector2 direction;
 
-	Vector2 lastDirection;
+	/// <summary>
+	/// The last direction the Player was looking in before stopping movement (direction == (0, 0)). Determines idle sprite.
+	/// </summary>
+	public Vector2 lastDirection;
 
 	RayCast2D rayCast;
 	Area2D attackBox;
@@ -87,7 +93,7 @@ public partial class Player : CharacterBody2D
 						((Interactable)facingObj).OpenDescription();
 					}
 				} else if (GameManager.IsSameOrSubclass(typeof(RoomTrigger), facingObj.GetType())) {
-					((RoomTrigger)facingObj).facingDirection = lastDirection;
+					// ((RoomTrigger)facingObj).facingDirection = lastDirection;
 					((RoomTrigger)facingObj).Change();
 				}
 			}
@@ -158,7 +164,7 @@ public partial class Player : CharacterBody2D
 			if (!overlapping.Contains(area)) overlapping.Add(area);
 		} else if (GameManager.IsSameOrSubclass(typeof(RoomTrigger), area.GetType())) {
 			if (((RoomTrigger)area).autoTrigger) {
-				((RoomTrigger)area).facingDirection = lastDirection;
+				((RoomTrigger)area).TryUpdateFacingPos(lastDirection);
 				((RoomTrigger)area).Change();
 			} else {
 				if (!overlapping.Contains(area)) overlapping.Add(area);

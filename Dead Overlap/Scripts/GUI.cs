@@ -84,11 +84,11 @@ public partial class GUI : CanvasLayer
 	/// </summary>
 	/// <param name="d"></param>
 	/// <param name="isDialogue"></param>
-	public void OpenDialogue(string d, bool isDialogue = true) {
+	public void OpenDialogue(string d, bool isDialogue = true, string speaker = "Narrator") {
 		isDialogueActive = true;
 		db.Open();
 		if (isDialogue) db.Write(d);
-		else db.WriteCustom(d:d);
+		else db.WriteCustom(d: d, nameLabelTitle: speaker);
 	}
 
 	/// <summary>

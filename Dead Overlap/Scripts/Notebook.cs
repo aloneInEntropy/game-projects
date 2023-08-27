@@ -12,7 +12,7 @@ using System.Text.Json.Serialization;
 /// </summary>
 public partial class Notebook : Control
 {
-	TabContainer tabContainer = new();
+	public TabContainer tabContainer = new();
 	Control suspectWindow = new();
 	Control victimWindow = new();
 	ScrollContainer noteWindow = new();
@@ -87,6 +87,20 @@ public partial class Notebook : Control
 	public override void _Process(double delta)
 	{
 	}
+	
+	public override void _Input(InputEvent @event)
+	{
+		if (Visible) {
+			if (@event.IsActionPressed("ui_left")) {
+				tabContainer.CurrentTab = Mathf.Clamp(tabContainer.CurrentTab - 1, 0, tabContainer.GetTabCount());
+			}
+			if (@event.IsActionPressed("ui_right")) {
+				tabContainer.CurrentTab = Mathf.Clamp(tabContainer.CurrentTab + 1, 0, tabContainer.GetTabCount());
+			}
+		}
+	}
+
+
 
 	public void SetNotes(List<Note> nns) {
 		notes = nns;

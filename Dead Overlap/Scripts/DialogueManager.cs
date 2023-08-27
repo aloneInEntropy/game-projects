@@ -368,6 +368,10 @@ public partial class DialogueManager : Node
 	public void Modify(string nameTitle) {
 		activeDialogueBox.Modify(nameTitle);
 	}
+	
+	public void Modify(string nameTitle, string voicePath = "Narrator.wav", string portraitPath = "null") {
+		activeDialogueBox.Modify(nameTitle, voicePath, portraitPath);
+	}
 
 	public void SetPVar(string varName, string val) {
 		if (varName == "hasLight") {

@@ -46,8 +46,13 @@ public partial class GameManager : Node
 	
 	
 
-	// Check if a Type `potentialDescendant` is inherited from or equal to a class `potentialBase`
-	// https://stackoverflow.com/questions/2742276/how-do-i-check-if-a-type-is-a-subtype-or-the-type-of-an-object
+	/// <summary>
+	/// Check if a Type `potentialDescendant` is inherited from or equal to a class `potentialBase` <br/>
+	/// https://stackoverflow.com/questions/2742276/how-do-i-check-if-a-type-is-a-subtype-or-the-type-of-an-object
+	/// </summary>
+	/// <param name="potentialBase"></param>
+	/// <param name="potentialDescendant"></param>
+	/// <returns></returns>
 	public static bool IsSameOrSubclass(Type potentialBase, Type potentialDescendant) {
 		return potentialDescendant.IsSubclassOf(potentialBase) || potentialDescendant == potentialBase;
 	}

@@ -47,7 +47,7 @@
 - [ ] Pause menu and ability to return to the present time
 
 24/08 - 25/08
-- [ ] Music and sound effects
+- [x] Music and sound effects
 - [ ] Writing the mystery
 - [x] Finishing tilemap
 - [ ] Figuring out how to make the game more fun to play
@@ -59,3 +59,41 @@
 - [ ] Farah and Jordan's house
 	- [ ] Speaking to Jordan before Farah's confession
 - [ ] Access Adora's house last
+
+---
+
+fuck it
+i'm gonna do what i want
+
+---
+
+- [ ] North
+	- [ ] Market
+		- [ ] More NPCs
+		- [ ] Item descriptions
+		- [ ] Flashlight section
+		- [ ] Marie Bornstein progressive dialogue
+	- [ ] Police Station
+		- [ ] Jail cells
+		- [ ] Holding cells
+			- [ ] Johnny Lawn progressive dialogue
+- [ ] Centre
+	- [ ] Hub
+		- [ ] Add functionality
+	- [ ] Mayor's office
+		- [ ] Different floors
+			- [ ] Patrick Cuno on fifth floor
+		- [ ] Working elevator
+		- [ ] Patrick Cuno progressive dialogue
+		- [ ] Melissa (secretary) progressive dialogue
+	- [ ] Farah and Jordan's house
+	- [ ] Cars
+- [ ] West
+	- [ ] Expand slightly
+- [ ] East
+	- [ ] Expand shack
+		- [ ] More floors
+- [ ] South
+	- [ ] Adora not present until spoken to all other characters once
+		- [ ] Lock Adora's house until spoken to all other characters, then going to station to collect warrant
+		- [ ] Explosives found at the house

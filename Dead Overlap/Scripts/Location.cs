@@ -24,9 +24,10 @@ public partial class Location : Node2D
 		} else {
 			player.Position = defaultEntryPoint;
 		}
-		player.direction = GameManager.sceneChangeFacing;
+		if (GameManager.sceneChangeFacing != Vector2.Zero) {
+			player.lastDirection = GameManager.sceneChangeFacing;
+		}
 		var lims = tilemap.GetUsedRect();
-		// GD.Print(lims * tilemap.CellQuadrantSize);
 		camera.LimitTop = lims.Position.Y * tilemap.CellQuadrantSize;
 		camera.LimitBottom = (lims.Position.Y + lims.Size.Y) * tilemap.CellQuadrantSize;
 		camera.LimitLeft = lims.Position.X * tilemap.CellQuadrantSize;

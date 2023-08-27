@@ -63,6 +63,7 @@ position = Vector2(247, 175)
 position = Vector2(-15, -193)
 sceneName = "TownNorth"
 entryPoint = Vector2(1534, -104)
+facingDirection = Vector2(0, 1)
 autoTrigger = true
 
 [node name="CollisionShape2D" parent="RoomTrigger" index="0"]

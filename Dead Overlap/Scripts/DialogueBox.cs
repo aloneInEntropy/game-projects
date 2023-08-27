@@ -33,7 +33,15 @@ public partial class DialogueBox : Control
 	/// The TextureRect used to display the portrait of the presently-speaking NPC.
 	/// </summary>
 	public TextureRect portrait = new();
+
+	/// <summary>
+	/// Is the dialogue box displayed?
+	/// </summary>
 	public bool isOpen = false;
+
+	/// <summary>
+	/// Are the buttons ready to be clicked?
+	/// </summary>
 	private bool buttonsReady = false;
 
 	// Called when the node enters the scene tree for the first time.
@@ -117,6 +125,9 @@ public partial class DialogueBox : Control
 		DialogueManager.SetDialogueToUpdate(this, frames_before_updating:2);
 	}
 	
+	/// <summary>
+	/// Display the choices for the current DialogueObject if there are any and ready them for usage.
+	/// </summary>
 	public void WriteChoices() {
 		choiceControl.Visible = true;
 		foreach (var b in choiceButtons) {
@@ -232,7 +243,7 @@ public partial class DialogueBox : Control
 	}
 
 	/// <summary>
-	/// Run all dialogue functions for the DialogueObject stored in this DialogueBox.
+	/// Run all reponse functions for the DialogueObject stored in this DialogueBox.
 	/// </summary>
 	public void DisplayResponseResult(Variant s) {
 		// If dialogue file set to end, IMMEDIATELY DISCARD DIALOGUE FILE to prevent dialogue cancel loop.

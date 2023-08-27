@@ -7,7 +7,7 @@
 ~3
     O-oh, I can't help you there, I'm still on the clock. If you're looking for flashlights though, we've recently gone on sale. Actually, they're free. We ordered about 40,000 by mistake and now we're in severe debt. Welcome to S-Mart, how can I help you!? *twitches* ||f Modify Marie | SetPVar hasLight true
 ~4
-    At 8 p.m.? ||c Marceline
+    Still on the clock? At 8 p.m.? ||c Marceline
 ~5
     Yes? Is that odd? ||c Marie
 ~6
