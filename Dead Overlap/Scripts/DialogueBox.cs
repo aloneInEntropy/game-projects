@@ -43,6 +43,16 @@ public partial class DialogueBox : Control
 	/// Are the buttons ready to be clicked?
 	/// </summary>
 	private bool buttonsReady = false;
+	
+	/// <summary>
+	/// Does the current DialogueObject have choices to display?
+	/// </summary>
+	public bool hasChoices = false;
+	
+	/// <summary>
+	/// Is the current DialogueObject displaying its choices?
+	/// </summary>
+	public bool displayingChoices = false;
 
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
@@ -78,12 +88,22 @@ public partial class DialogueBox : Control
 		dialogue = d;
 		nameLabel.Text = Globals.talkingNPC.Name;
 	}
+	
+	/// <summary>
+	/// Load the DialogueObject for the dialogue box
+	/// </summary>
+	/// <param name="d"></param>
+	public void LoadDialogue(DialogueObject d, string nameLabelText) {
+		dialogue = d;
+		nameLabel.Text = nameLabelText;
+		Modify(nameLabelText);
+	}
 
 	/// <summary>
 	/// Write custom strings. For custom dialogue, use Write(string).
 	/// </summary>
 	/// <param name="d"></param>
-	public void WriteCustom(string d, string nameLabelTitle = "Narrator", string voicePath = "null", string portraitPath = "null") {
+	public void WriteCustom(string d, string nameLabelTitle = "Narrator", string voicePath = "Mark.wav", string portraitPath = "NarratorPortrait.png") {
 		choiceControl.Visible = false;
 		WriteDialogue(d);
 		Modify(nameLabelTitle, voicePath, portraitPath);
@@ -135,7 +155,10 @@ public partial class DialogueBox : Control
 		}
 		choiceButtons.Clear();
 
+		hasChoices = dialogue.choices.Count > 0;
+
 		for (int i = 0; i < dialogue.choices.Count; i++) {
+			displayingChoices = true;
 			GetParent<GUI>().canProgressDialogue = false;
 			string c = dialogue.choices[i];
             Button nb = new() {
@@ -197,6 +220,7 @@ public partial class DialogueBox : Control
 	/// </summary>
 	public void DisplayChoiceResponse(Variant s) {
 		GetParent<GUI>().canProgressDialogue = true; // Allow progression after making a choice.
+		displayingChoices = false;
 		// If dialogue file set to end, IMMEDIATELY DISCARD DIALOGUE FILE to prevent dialogue cancel loop.
 		// Since this will end the dialogue, do NOT save the previous dialogue position and restart it instead.
 		if (dialogue.originFilePath == "end.txt") {
@@ -287,11 +311,11 @@ public partial class DialogueBox : Control
 	/// <param name="nameTitle"></param>
 	/// <param name="voicePath"></param>
 	/// <param name="portraitPath"></param>
-	public void Modify(string nameTitle, string voicePath = "Narrator.wav", string portraitPath = "null") {
+	public void Modify(string nameTitle, string voicePath = "Narrator.wav", string portraitPath = "NarratorPortrait.png") {
 		if (nameTitle == "Narrator") {
 			nameLabel.Text = "";
-			Globals.talkingNPC.SetVoice("Narrator.wav");
-			portrait.Texture = GD.Load<Texture2D>("res://Assets/Sprites/Blank.png");
+			Globals.talkingNPC.SetVoice(voicePath);
+			portrait.Texture = GD.Load<Texture2D>("res://Assets/Sprites/Portraits/NarratorPortrait.png");
 		} else {
 			nameLabel.Text = nameTitle;
 			Globals.talkingNPC.SetVoice(Globals.GetNPC(nameTitle).voicePath);

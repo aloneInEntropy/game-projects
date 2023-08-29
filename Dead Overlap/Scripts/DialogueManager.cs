@@ -113,17 +113,58 @@ public partial class DialogueManager : Node
 	///		A <c>List</c> of <c>DialogueObject</c>s for the dialogue file that was parsed.
 	/// 	</p>
 	/// </returns>
-	public static List<DialogueObject> Parse(string txtPath) {
+	public static List<DialogueObject> ParsePath(string txtPath) {
+		try {
+			FileAccess file = FileAccess.Open(Globals.resPathToDialogue + txtPath, FileAccess.ModeFlags.Read);
+			string fileString = file.GetAsText();
+			file.Close();
+			return Parse(fileString, txtPath);
+		} catch (Exception e) {
+			GD.Print(e);
+			return null;
+		}
+	}
+	
+	/// <summary>
+	/// Parse the text file at <c>txtPath</c> as dialogue.
+	/// Non-static version of <c>ParsePath</c>.
+	/// </summary>
+	/// <param name="txtPath">
+	/// description
+	/// </param>
+	/// <returns>
+	/// 	<p>
+	///		A <c>List</c> of <c>DialogueObject</c>s for the dialogue file that was parsed.
+	/// 	</p>
+	/// </returns>
+	public List<DialogueObject> ParseB(string txt_path) {
+		return ParsePath(txt_path);
+	}
+
+	/// <summary>
+	/// Parse the string in <c>textString</c> and return it as a List of DialogueObjects.
+	/// </summary>
+	/// <param name="txtPath">
+	/// description
+	/// </param>
+	/// <returns>
+	/// 	<p>
+	///		A <c>List</c> of <c>DialogueObject</c>s for the dialogue file that was parsed.
+	/// 	</p>
+	/// </returns>
+	public static List<DialogueObject> Parse(string textString, string txtPath = "")
+	{
 		List<DialogueObject> dobjs = new();
-		FileAccess file = FileAccess.Open(Globals.resPathToDialogue + txtPath, FileAccess.ModeFlags.Read);
+		string[] textStringLines = textString.Split("\n");
 		bool adding_reg_dialogue = false; // are you adding regular dialogue? (~x marker)
 		int reg_dialogue_marker = 0; // which regular dialogue are you currently parsing?
 		bool adding_choice_dialogue = false; // are you adding choice dialogue? (~~x marker)
 		int choice_dialogue_marker = 0; // which choice dialogue are you currently parsing?
 		bool adding_response_dialogue = false; // are you adding response dialogue? (~#@x marker)
 		int response_dialogue_marker = 0; // which response dialogue are you currently parsing?
-		while (file.GetPosition() < file.GetLength()) {
-			string line = file.GetLine().StripEdges();
+		// while (file.GetPosition() < file.GetLength()) {
+		foreach (string str in textStringLines) {
+			string line = str.StripEdges();
 			if (line.StartsWith('~')) {
 				adding_reg_dialogue = false;
 				adding_choice_dialogue = false;
@@ -156,6 +197,7 @@ public partial class DialogueManager : Node
 					// GD.Print("choice dialogue end");
 				} else if (fn == ".") {
 					// GD.Print("dialogue end");
+					break;
 				}
 			} else if (!line.StartsWith("//")) {
 				var fnc_find = line.Find("||"); // does this line have a function to run alonside it?
@@ -279,24 +321,7 @@ public partial class DialogueManager : Node
 				}
 			}
 		}
-		file.Close();
 		return dobjs;
-	}
-	
-	/// <summary>
-	/// Parse the text file at <c>txtPath</c> as dialogue.
-	/// Non-static version of <c>Parse</c>.
-	/// </summary>
-	/// <param name="txtPath">
-	/// description
-	/// </param>
-	/// <returns>
-	/// 	<p>
-	///		A <c>List</c> of <c>DialogueObject</c>s for the dialogue file that was parsed.
-	/// 	</p>
-	/// </returns>
-	public List<DialogueObject> ParseB(string txt_path) {
-		return Parse(txt_path);
 	}
 
 	/// <summary>
@@ -374,9 +399,7 @@ public partial class DialogueManager : Node
 	}
 
 	public void SetPVar(string varName, string val) {
-		if (varName == "hasLight") {
-			PlayerVariables.hasLight = bool.Parse(val);
-		}
+		PlayerVariables.SetVar(varName, val);
 	}
 	
 	public void CompleteMission(string missionName) {

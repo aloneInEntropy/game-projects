@@ -4,16 +4,16 @@
 [ext_resource type="TileSet" uid="uid://co0avnwfudox" path="res://Resources/TownTileset.tres" id="3_l6aq2"]
 [ext_resource type="PackedScene" uid="uid://6wwwvpsqguwa" path="res://Scenes/GUI.tscn" id="4_rgsbu"]
 [ext_resource type="PackedScene" uid="uid://bocidko04r36c" path="res://Scenes/Player.tscn" id="6_c5tb4"]
-[ext_resource type="Script" path="res://Scripts/RoomTriggerShack.cs" id="7_8klw0"]
 [ext_resource type="PackedScene" uid="uid://cnnt7msd0tt44" path="res://Scenes/Interactable.tscn" id="7_iwmtx"]
 [ext_resource type="PackedScene" uid="uid://7agyq5ghpobi" path="res://Scenes/RoomTrigger.tscn" id="8_al5ej"]
+[ext_resource type="PackedScene" uid="uid://bxerldx3p5hi6" path="res://Scenes/Farah.tscn" id="9_4et67"]
 [ext_resource type="Texture2D" uid="uid://dv8du4yk1nqy4" path="res://Assets/Sprites/SpotLight.png" id="9_ynd56"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ir2jo"]
+size = Vector2(114.5, 64)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_agto7"]
 size = Vector2(114.5, 244)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_1qfib"]
-size = Vector2(76, 62)
 
 [node name="TownEast" type="Node2D"]
 script = ExtResource("1_ho607")
@@ -71,7 +71,7 @@ color = Color(0.572549, 0.541176, 0.439216, 1)
 
 [node name="FloatingTree" parent="Interactables" instance=ExtResource("7_iwmtx")]
 position = Vector2(828, -196)
-description = "A floating tree. For some reason, you feel like this will make some people very angry."
+descriptionPath = "town_east_tree.txt"
 
 [node name="CollisionPolygon2D" parent="Interactables/FloatingTree" index="0"]
 position = Vector2(0, -15)
@@ -79,7 +79,7 @@ scale = Vector2(4.4375, 5.3125)
 
 [node name="Shack" parent="Interactables" instance=ExtResource("7_iwmtx")]
 position = Vector2(828, -196)
-description = "An decrepit old house. This seems to be the shack everyone is talking about."
+descriptionPath = "town_east_shack_front.txt"
 
 [node name="CollisionPolygon2D" parent="Interactables/Shack" index="0"]
 position = Vector2(-857, -601)
@@ -89,13 +89,26 @@ scale = Vector2(4.4375, 9.34375)
 position = Vector2(828, -196)
 monitoring = false
 monitorable = false
-description = "A side door to the shack. It's too dark to see inside."
+descriptionPath = "town_east_shack_side.txt"
+canInteractWith = false
 
 [node name="CollisionPolygon2D" parent="Interactables/ShackDoor" index="0"]
 position = Vector2(-620, -522)
 scale = Vector2(5.5, 3.375)
 
 [node name="RoomTriggers" type="Node2D" parent="."]
+
+[node name="RoomTriggerShack" parent="RoomTriggers" instance=ExtResource("8_al5ej")]
+sceneName = "Shack"
+entryPoint = Vector2(470, 560)
+facingDirection = Vector2(0, -1)
+entryRequirementVariableName = "hasLight"
+entryRequirementVariableValue = true
+entryDeniedTextSource = "town_east_shack_side.txt"
+
+[node name="CollisionShape2D" parent="RoomTriggers/RoomTriggerShack" index="0"]
+position = Vector2(206, -697)
+shape = SubResource("RectangleShape2D_ir2jo")
 
 [node name="RoomTriggerCentre" parent="RoomTriggers" instance=ExtResource("8_al5ej")]
 position = Vector2(-1162, -896)
@@ -108,17 +121,6 @@ keepYPosition = true
 [node name="CollisionShape2D" parent="RoomTriggers/RoomTriggerCentre" index="0"]
 position = Vector2(-77, -1)
 shape = SubResource("RectangleShape2D_agto7")
-
-[node name="Shack" type="Area2D" parent="RoomTriggers"]
-collision_layer = 4
-collision_mask = 4
-script = ExtResource("7_8klw0")
-sceneName = "Shack"
-entryPoint = Vector2(470, 560)
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="RoomTriggers/Shack"]
-position = Vector2(206, -706)
-shape = SubResource("RectangleShape2D_1qfib")
 
 [node name="Node2D" type="Node2D" parent="."]
 
@@ -137,7 +139,12 @@ position = Vector2(-45, -687)
 color = Color(1, 1, 0.85098, 1)
 texture = ExtResource("9_ynd56")
 
+[node name="Farah" parent="." instance=ExtResource("9_4et67")]
+position = Vector2(-995, -847)
+diagPath = "d0.txt"
+
 [editable path="Interactables/FloatingTree"]
 [editable path="Interactables/Shack"]
 [editable path="Interactables/ShackDoor"]
+[editable path="RoomTriggers/RoomTriggerShack"]
 [editable path="RoomTriggers/RoomTriggerCentre"]

@@ -16,3 +16,9 @@ If the `target speaker name` is "null", hide the name and picture label.
 
 ## Room Traversal
 Keep track of whether or not the Player is inside a building and, if so, keep track of the position they were at before entering in the GameManager. Then load the scene of that particular building, maybe making use of an Area2D RoomTrigger node or something similar.
+
+## RoomTrigger Conditionals
+Add conditions to RoomTrigger nodes to check whether or not to accept traversal.
+
+## ActionTrigger class
+Consider implementing an ActionTrigger class that combines the effects of the Interactable class and RoomTrigger class into one. This would require replacing all Interactable and RoomTrigger nodes.

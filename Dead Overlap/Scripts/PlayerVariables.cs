@@ -19,6 +19,29 @@ public partial class PlayerVariables : Node
         SetMissionsJSON("missions.json");
     }
 
+	/// <summary>
+	/// Set a player variable <c>varName</c> to the value <c>val</c>. <c>val</c> will be determined depending on <c>varName</c>.
+	/// </summary>
+	/// <param name="varName"></param>
+	/// <param name="val"></param>
+	public static void SetVar(string varName, string val) {
+		if (varName == "hasLight") {
+			hasLight = bool.Parse(val);
+		}
+	}
+
+	/// <summary>
+	/// Get a player variable <c>varName</c>.
+	/// </summary>
+	/// <param name="varName"></param>
+	/// <param name="val"></param>
+	public static object GetVar(string varName) {
+		if (varName == "hasLight") {
+			return hasLight;
+		}
+		return null;
+	}
+
     /// <summary>
 	/// Set the missions of the NPC using the path <c>missionPath</c> to a JSON file. All files are assumed to be in the folder "res://Assets/Text/Missions".
 	/// </summary>

@@ -11,8 +11,8 @@ public partial class Marceline : NPC
 		trueName = "Marceline";
 		Globals.AddNPC(this);
 
-		diagPath = "d1.txt";
-		LoadDialogue(diagPath);
+		// diagPath = "d1.txt";
+		// LoadDialogue(diagPath);
 
 		voicePath = "Marceline.wav";
 		SetVoice(voicePath);

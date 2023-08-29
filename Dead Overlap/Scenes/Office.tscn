@@ -84,7 +84,7 @@ shape = SubResource("RectangleShape2D_uhtm2")
 
 [node name="Bathroom" parent="Interactables" instance=ExtResource("7_0m2f6")]
 position = Vector2(-1158, -933)
-description = "The mayor's private bathroom. You refuse to enter."
+descriptionPath = "office_f0_toilet.txt"
 metadata/_edit_group_ = true
 
 [node name="CollisionPolygon2D" parent="Interactables/Bathroom" index="0"]
@@ -94,7 +94,7 @@ polygon = PackedVector2Array(-10, -10, 10, -10, 10, 10, 1.34193, 10, -10, 10)
 
 [node name="Plant" parent="Interactables" instance=ExtResource("7_0m2f6")]
 position = Vector2(-1450, -821)
-description = "A sad, dying little plant. O, how you could have thrived! How easily it would be to save you! O, mourn, all! Fall to your knees and weep for this pathetic little thing! Cry to the gods for their mercy against this disgusting, vapid, shrivelled-up excuse of life! O, mourn! O, O!!!"
+descriptionPath = "office_f0_plant.txt"
 metadata/_edit_group_ = true
 
 [node name="CollisionPolygon2D" parent="Interactables/Plant" index="0"]
@@ -103,7 +103,7 @@ polygon = PackedVector2Array(-10, -10, 10, -10, 10, 10, 1.34193, 10, -10, 10)
 
 [node name="Elevator" parent="Interactables" instance=ExtResource("7_0m2f6")]
 position = Vector2(-638, -708)
-description = "An elevator. It doesn't seem to be working."
+descriptionPath = "office_f0_elevator.txt"
 metadata/_edit_group_ = true
 
 [node name="CollisionPolygon2D" parent="Interactables/Elevator" index="0"]
@@ -112,7 +112,7 @@ polygon = PackedVector2Array(-10, -10, 10, -10, 10, 10, 1.34193, 10, -10, 10)
 
 [node name="TableFood" parent="Interactables" instance=ExtResource("7_0m2f6")]
 position = Vector2(552, -538)
-description = "Tables with food. Seems like there was just a party of some sort."
+descriptionPath = "office_f0_table_food.txt"
 metadata/_edit_group_ = true
 
 [node name="CollisionPolygon2D" parent="Interactables/TableFood" index="0"]
@@ -122,7 +122,7 @@ polygon = PackedVector2Array(-10, -10, 10, -10, 10, 10, 1.34193, 10, -10, 10)
 
 [node name="TableDrinks" parent="Interactables" instance=ExtResource("7_0m2f6")]
 position = Vector2(531, -882)
-description = "A table with drinks on it. You unfortunately cannot drink on the job, no matter how fictional the company you work for actually is."
+descriptionPath = "office_f0_table_drink.txt"
 metadata/_edit_group_ = true
 
 [node name="CollisionPolygon2D" parent="Interactables/TableDrinks" index="0"]
@@ -132,7 +132,7 @@ polygon = PackedVector2Array(-10, -10, 10, -10, 10, 10, 1.34193, 10, -10, 10)
 
 [node name="Screen" parent="Interactables" instance=ExtResource("7_0m2f6")]
 position = Vector2(1104, -854)
-description = "A projector screen. There are some graphs and stuff on it. God, capitalism sucks."
+descriptionPath = "office_f0_screen.txt"
 metadata/_edit_group_ = true
 
 [node name="CollisionPolygon2D" parent="Interactables/Screen" index="0"]
@@ -147,7 +147,6 @@ diagPath = "d6.txt"
 [node name="CollisionShape2D" parent="Patrick/InteractBox" index="0"]
 position = Vector2(45, -1)
 shape = SubResource("CircleShape2D_e3gds")
-debug_color = Color(0.803922, 0.403922, 0.266667, 1)
 
 [node name="Player" parent="." instance=ExtResource("2_fdunc")]
 position = Vector2(3, -54)

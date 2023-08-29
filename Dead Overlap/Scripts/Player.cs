@@ -28,6 +28,7 @@ public partial class Player : CharacterBody2D
 	/// </summary>
 	public Vector2 lastDirection;
 
+	public Area2D interactBox;
 	RayCast2D rayCast;
 	Area2D attackBox;
 	CollisionShape2D attackBoxColl;
@@ -42,6 +43,7 @@ public partial class Player : CharacterBody2D
 		Globals.player = this;
         rayCast = GetNodeOrNull<RayCast2D>("RayCast2D");
         sprite2D = GetNodeOrNull<AnimatedSprite2D>("Sprite");
+		interactBox = GetNodeOrNull<Area2D>("InteractBox");
 		attackBox = GetNodeOrNull<Area2D>("AttackBox");
 		attackBoxColl = GetNodeOrNull<CollisionShape2D>("AttackBox/CollisionShape2D");
         animationPlayer = GetNodeOrNull<AnimationPlayer>("AnimationPlayer");
@@ -70,6 +72,7 @@ public partial class Player : CharacterBody2D
 			facingObj = overlapping.Count == 1 ?
 				overlapping[0] :
 				(Node2D)rayCast.GetCollider() // cast Object to Node2D
+				// overlapping[^1]
 			;
 
 			if (facingObj is not null) {
@@ -94,7 +97,12 @@ public partial class Player : CharacterBody2D
 					}
 				} else if (GameManager.IsSameOrSubclass(typeof(RoomTrigger), facingObj.GetType())) {
 					// ((RoomTrigger)facingObj).facingDirection = lastDirection;
-					((RoomTrigger)facingObj).Change();
+					if (DialogueManager.isDialogueReading) {
+						// if dialogue is currently being typed out
+						DialogueManager.UpdateVisibleText(true);
+					} else {
+						((RoomTrigger)facingObj).Change();
+					}
 				}
 			}
 		}

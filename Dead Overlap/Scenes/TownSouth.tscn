@@ -81,11 +81,10 @@ metadata/_edit_group_ = true
 [node name="Camera2D" type="Camera2D" parent="Player"]
 
 [node name="Interactables" type="Node2D" parent="."]
-visible = false
 
 [node name="NoEntryHouse" parent="Interactables" instance=ExtResource("20_ei3yf")]
 position = Vector2(494, 183)
-description = "Someone's house. It's locked, but you of course don't try breaking in. That would be a crime!"
+descriptionPath = "town_south_locked_door.txt"
 metadata/_edit_group_ = true
 
 [node name="CollisionPolygon2D" parent="Interactables/NoEntryHouse" index="0"]
@@ -94,7 +93,7 @@ scale = Vector2(2.71875, 2.4375)
 
 [node name="GarbageCan" parent="Interactables" instance=ExtResource("20_ei3yf")]
 position = Vector2(657, 232)
-description = "A garbage can. There's pieces of newspaper in it."
+descriptionPath = "town_south_bin_2.txt"
 metadata/_edit_group_ = true
 
 [node name="CollisionPolygon2D" parent="Interactables/GarbageCan" index="0"]
@@ -104,6 +103,7 @@ scale = Vector2(2.71875, 2.4375)
 [node name="GarbageCan2" parent="Interactables" instance=ExtResource("20_ei3yf")]
 position = Vector2(367, 232)
 description = "A garbage can. "
+descriptionPath = "town_south_bin_1.txt"
 metadata/_edit_group_ = true
 
 [node name="CollisionPolygon2D" parent="Interactables/GarbageCan2" index="0"]
@@ -112,7 +112,7 @@ scale = Vector2(2.71875, 2.4375)
 
 [node name="GarbageCan3" parent="Interactables" instance=ExtResource("20_ei3yf")]
 position = Vector2(-82, 230)
-description = "A garbage can. There's something red and wet inside it. You don't look at it closer."
+descriptionPath = "town_south_bin_3.txt"
 metadata/_edit_group_ = true
 
 [node name="CollisionPolygon2D" parent="Interactables/GarbageCan3" index="0"]
@@ -121,7 +121,7 @@ scale = Vector2(2.71875, 2.4375)
 
 [node name="NoEntryHouse2" parent="Interactables" instance=ExtResource("20_ei3yf")]
 position = Vector2(109, 174)
-description = "Someone's house. It's locked, but you of course don't try breaking in. That would be a crime!"
+descriptionPath = "town_south_locked_door.txt"
 metadata/_edit_group_ = true
 
 [node name="CollisionPolygon2D" parent="Interactables/NoEntryHouse2" index="0"]
@@ -130,7 +130,7 @@ scale = Vector2(2.71875, 2.4375)
 
 [node name="NoEntryHouse3" parent="Interactables" instance=ExtResource("20_ei3yf")]
 position = Vector2(-206, 173)
-description = "Someone's house. It's locked, but you of course don't try breaking in. That would be a crime!"
+descriptionPath = "town_south_locked_door.txt"
 metadata/_edit_group_ = true
 
 [node name="CollisionPolygon2D" parent="Interactables/NoEntryHouse3" index="0"]
@@ -139,7 +139,7 @@ scale = Vector2(2.71875, 2.4375)
 
 [node name="NoEntryHouse4" parent="Interactables" instance=ExtResource("20_ei3yf")]
 position = Vector2(-257, 645)
-description = "Someone's house. It's locked, but you of course don't try breaking in. That would be a crime!"
+descriptionPath = "town_south_locked_door.txt"
 metadata/_edit_group_ = true
 
 [node name="CollisionPolygon2D" parent="Interactables/NoEntryHouse4" index="0"]
@@ -148,7 +148,7 @@ scale = Vector2(8.3125, 2.4375)
 
 [node name="NoEntryHouse5" parent="Interactables" instance=ExtResource("20_ei3yf")]
 position = Vector2(61, 654)
-description = "Someone's house. It's locked, but you of course don't try breaking in. That would be a crime!"
+descriptionPath = "town_south_locked_door.txt"
 metadata/_edit_group_ = true
 
 [node name="CollisionPolygon2D" parent="Interactables/NoEntryHouse5" index="0"]
@@ -157,7 +157,7 @@ scale = Vector2(8.3125, 2.4375)
 
 [node name="NoEntryHouse6" parent="Interactables" instance=ExtResource("20_ei3yf")]
 position = Vector2(450, 654)
-description = "Someone's house. You ring the doorbell in desperation, but no one answers. You bang on the door, and still, nothing. You consider breaking in, but that would be a crime, of course!"
+descriptionPath = "town_south_locked_door_2.txt"
 metadata/_edit_group_ = true
 
 [node name="CollisionPolygon2D" parent="Interactables/NoEntryHouse6" index="0"]
@@ -166,7 +166,7 @@ scale = Vector2(8.3125, 2.4375)
 
 [node name="NoEntryHouse7" parent="Interactables" instance=ExtResource("20_ei3yf")]
 position = Vector2(764, 651)
-description = "Someone's house. It's locked, but you of course don't try breaking in. That would be a crime!"
+descriptionPath = "town_south_locked_door.txt"
 metadata/_edit_group_ = true
 
 [node name="CollisionPolygon2D" parent="Interactables/NoEntryHouse7" index="0"]
@@ -175,7 +175,7 @@ scale = Vector2(8.3125, 2.4375)
 
 [node name="NoEntryHouse8" parent="Interactables" instance=ExtResource("20_ei3yf")]
 position = Vector2(1098, 658)
-description = "Someone's house. It's locked, but you of course don't try breaking in. That would be a crime!"
+descriptionPath = "town_south_locked_door.txt"
 metadata/_edit_group_ = true
 
 [node name="CollisionPolygon2D" parent="Interactables/NoEntryHouse8" index="0"]
@@ -184,7 +184,7 @@ scale = Vector2(8.3125, 2.4375)
 
 [node name="NoEntryHouse9" parent="Interactables" instance=ExtResource("20_ei3yf")]
 position = Vector2(1692, 664)
-description = "Someone's house. It's locked, but you of course don't try breaking in. That would be a crime!"
+descriptionPath = "town_south_locked_door.txt"
 metadata/_edit_group_ = true
 
 [node name="CollisionPolygon2D" parent="Interactables/NoEntryHouse9" index="0"]
@@ -193,7 +193,7 @@ scale = Vector2(3.0625, 6.375)
 
 [node name="NoEntryHouse10" parent="Interactables" instance=ExtResource("20_ei3yf")]
 position = Vector2(1689, 292)
-description = "Someone's house. It's locked, but you of course don't try breaking in. That would be a crime!"
+descriptionPath = "town_south_locked_door.txt"
 metadata/_edit_group_ = true
 
 [node name="CollisionPolygon2D" parent="Interactables/NoEntryHouse10" index="0"]
@@ -202,7 +202,7 @@ scale = Vector2(3.0625, 6.375)
 
 [node name="NoEntryHouse11" parent="Interactables" instance=ExtResource("20_ei3yf")]
 position = Vector2(1690, -57)
-description = "Someone's house. It's locked, but you of course don't try breaking in. That would be a crime!"
+descriptionPath = "town_south_locked_door.txt"
 metadata/_edit_group_ = true
 
 [node name="CollisionPolygon2D" parent="Interactables/NoEntryHouse11" index="0"]
@@ -211,7 +211,7 @@ scale = Vector2(3.0625, 6.375)
 
 [node name="NoEntryHouse12" parent="Interactables" instance=ExtResource("20_ei3yf")]
 position = Vector2(1689, -405)
-description = "Someone's house. It's locked, but you of course don't try breaking in. That would be a crime!"
+descriptionPath = "town_south_locked_door.txt"
 metadata/_edit_group_ = true
 
 [node name="CollisionPolygon2D" parent="Interactables/NoEntryHouse12" index="0"]
@@ -220,7 +220,7 @@ scale = Vector2(3.0625, 6.375)
 
 [node name="NoEntryHouse13" parent="Interactables" instance=ExtResource("20_ei3yf")]
 position = Vector2(1331, -404)
-description = "Someone's house. It's locked, but you of course don't try breaking in. That would be a crime!"
+descriptionPath = "town_south_locked_door.txt"
 metadata/_edit_group_ = true
 
 [node name="CollisionPolygon2D" parent="Interactables/NoEntryHouse13" index="0"]
@@ -229,18 +229,18 @@ scale = Vector2(3.0625, 6.375)
 
 [node name="NoEntryHouse14" parent="Interactables" instance=ExtResource("20_ei3yf")]
 position = Vector2(1339, -51)
-description = "Someone's house. It's locked, but you of course don't try breaking in. That would be a crime!"
+descriptionPath = "town_south_locked_door.txt"
 metadata/_edit_group_ = true
 
 [node name="CollisionPolygon2D" parent="Interactables/NoEntryHouse14" index="0"]
 position = Vector2(6.00003, 71)
 scale = Vector2(3.0625, 6.375)
 
-[node name="Mototbike" parent="Interactables" instance=ExtResource("20_ei3yf")]
+[node name="Motorbike" parent="Interactables" instance=ExtResource("20_ei3yf")]
 position = Vector2(-269, 432)
-description = "A sick-ass motorcycle. You wonder how much they cost, but then remember that being a private detective working for a time-travel company doesn't pay all that well."
+descriptionPath = "town_south_motorbike.txt"
 
-[node name="CollisionPolygon2D" parent="Interactables/Mototbike" index="0"]
+[node name="CollisionPolygon2D" parent="Interactables/Motorbike" index="0"]
 position = Vector2(-37.5, -4.50001)
 scale = Vector2(3.65625, 2.34375)
 
@@ -452,6 +452,6 @@ texture_scale = 0.5
 [editable path="Interactables/NoEntryHouse12"]
 [editable path="Interactables/NoEntryHouse13"]
 [editable path="Interactables/NoEntryHouse14"]
-[editable path="Interactables/Mototbike"]
+[editable path="Interactables/Motorbike"]
 [editable path="RoomTriggers/RoomTriggerCentre"]
 [editable path="RoomTriggers/RoomTriggerHouse"]

@@ -92,10 +92,10 @@ public partial class Notebook : Control
 	{
 		if (Visible) {
 			if (@event.IsActionPressed("ui_left")) {
-				tabContainer.CurrentTab = Mathf.Clamp(tabContainer.CurrentTab - 1, 0, tabContainer.GetTabCount());
+				tabContainer.CurrentTab = Mathf.PosMod(tabContainer.CurrentTab - 1, tabContainer.GetTabCount());
 			}
 			if (@event.IsActionPressed("ui_right")) {
-				tabContainer.CurrentTab = Mathf.Clamp(tabContainer.CurrentTab + 1, 0, tabContainer.GetTabCount());
+				tabContainer.CurrentTab = (tabContainer.CurrentTab + 1) % tabContainer.GetTabCount();
 			}
 		}
 	}

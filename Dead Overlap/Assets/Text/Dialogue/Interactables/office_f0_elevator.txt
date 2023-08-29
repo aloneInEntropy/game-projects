@@ -1,0 +1,16 @@
+~~0
+	An elevator. Which floor would you like to access?
+	~##4
+		~@0	
+				Ground Floor.
+				~#@0
+					You're already here!
+		~@1
+				First Floor. ||f Test1 First
+		~@2
+				Second Floor. ||f Test1 Second
+		~@3
+				Third Floor. ||f Test1 Third
+		~##.
+	~~.
+~.

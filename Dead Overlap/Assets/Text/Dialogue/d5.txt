@@ -5,7 +5,7 @@
 ~2
     (How stupid does this guy think I am?) ||c Marceline
 ~~3
-    Well, that's... fine, I just wasn't expecting to see you here. ||f SetPVar hasLight true
+    Well, that's... fine, I just wasn't expecting to see you here. ||f Modify Marceline | SetPVar hasLight true
     ~##2
         ~@0
             Why are you in a shack?

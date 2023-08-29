@@ -110,11 +110,11 @@ shape = SubResource("RectangleShape2D_t17lk")
 
 [node name="Interactables" type="Node2D" parent="."]
 
-[node name="Morotbike2" parent="Interactables" instance=ExtResource("6_h6ikn")]
+[node name="Motorbike" parent="Interactables" instance=ExtResource("6_h6ikn")]
 position = Vector2(-304, 425)
-description = "Yet another sick-ass motorcycle. If only you had a real job."
+descriptionPath = "town_north_motorbike.txt"
 
-[node name="CollisionPolygon2D" parent="Interactables/Morotbike2" index="0"]
+[node name="CollisionPolygon2D" parent="Interactables/Motorbike" index="0"]
 position = Vector2(4, 4)
 scale = Vector2(3.15625, 2.53125)
 
@@ -206,4 +206,4 @@ texture = ExtResource("7_xxyap")
 [editable path="RoomTriggers/RoomTriggerMarketL"]
 [editable path="RoomTriggers/RoomTriggerMarketR"]
 [editable path="RoomTriggers/RoomTriggerCentre"]
-[editable path="Interactables/Morotbike2"]
+[editable path="Interactables/Motorbike"]

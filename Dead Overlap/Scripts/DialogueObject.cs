@@ -214,7 +214,7 @@ public partial class DialogueObject
 				}
 
 				parseRes = new List<object> {
-					DialogueManager.Parse(dfile),
+					DialogueManager.ParsePath(dfile),
 					dload,
 					dpos,
 					dsave

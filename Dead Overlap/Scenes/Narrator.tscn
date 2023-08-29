@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://hfo0tlwgf4nj"]
+[gd_scene load_steps=4 format=3 uid="uid://hfo0tlwgf4nj"]
 
 [ext_resource type="PackedScene" uid="uid://cp8831bvwwy6t" path="res://Scenes/NPC.tscn" id="1_gwmxm"]
 [ext_resource type="Script" path="res://Scripts/Narrator.cs" id="2_lqpac"]
+[ext_resource type="Texture2D" uid="uid://cxeiycag6661c" path="res://Assets/Sprites/Blank.png" id="3_nwa3u"]
 
 [node name="Narrator" instance=ExtResource("1_gwmxm")]
 collision_layer = 0
@@ -14,3 +15,6 @@ collision_mask = 0
 
 [node name="Hitbox" parent="." index="1"]
 disabled = true
+
+[node name="Sprite2D" parent="." index="3"]
+texture = ExtResource("3_nwa3u")

@@ -24,7 +24,6 @@ public partial class GUI : CanvasLayer
 	/// Boolean checking if the player can progress dialogue using keyboard keys.
 	/// </summary>
 	public bool canProgressDialogue = true;
-	private readonly PackedScene dialogue_box = GD.Load<PackedScene>("res://Scenes/DialogueBox.tscn");
 
 	public override void _Ready()
 	{
@@ -60,18 +59,24 @@ public partial class GUI : CanvasLayer
 	/// Displays and progresses the dialogue spoken by the NPC. If there is no more dialogue for the NPC to speak, the dialogue box is closed.
 	/// </summary>
 	/// <param name="npc"></param>
-	public void ProgressDialogue(NPC npc) {
+	/// <returns> 
+	/// A boolean from whether or not the dialogue box is open.
+	/// </returns>
+	public bool ProgressDialogue(NPC npc) {
 		talkingNPC = npc;
 		if (canProgressDialogue) {
 			DialogueObject d = npc.GetNextDialogue();
 			if (d is null) {
 				CloseDialogue();
+				return false;
 			} else {
 				SetDialogue(d);
 				OpenDialogue();
 				db.DisplayDialogueResult();
+				return true;
 			}
 		}
+		return false;
 	}
 
 	void SetDialogue(DialogueObject dialogue) {

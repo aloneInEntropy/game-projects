@@ -108,7 +108,7 @@ public partial class NPC : StaticBody2D
 			SetTemporaryDialogue(diagPath, currentDiag);
 		}
 		// GD.Print(strPath);
-		dialogue = DialogueManager.Parse(strPath);
+		dialogue = DialogueManager.ParsePath(strPath);
 		diagPath = strPath;
 		currentDiag = diagStart;
 	}
@@ -207,6 +207,7 @@ public partial class NPC : StaticBody2D
 			wasRecentWaiting = false;
 			recentWaitingStart = 0;
 		} else {
+			if (str_path == "" || str_path is null) LoadDialogue(dialogue);
 			LoadDialogue(str_path);
 			currentDiag = 0;
 		}

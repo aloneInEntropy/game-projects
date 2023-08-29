@@ -9,3 +9,5 @@ script = ExtResource("1_tmpey")
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
 polygon = PackedVector2Array(-10, -10, 10, -10, 10, 10, -10, 10)
+
+[connection signal="area_entered" from="." to="." method="OnAreaEntered"]
