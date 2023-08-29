@@ -1,0 +1,13 @@
+[gd_scene load_steps=2 format=3 uid="uid://b1o7yp3j3yynn"]
+
+[ext_resource type="Script" path="res://Scripts/ActionTrigger.cs" id="1_p3g0e"]
+
+[node name="Trigger" type="Area2D"]
+collision_layer = 4
+collision_mask = 4
+script = ExtResource("1_p3g0e")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+polygon = PackedVector2Array(-10, -10, 10, -10, 10, 10, -10, 10)
+
+[connection signal="area_entered" from="." to="." method="OnAreaEntered"]

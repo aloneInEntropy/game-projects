@@ -5,7 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://6wwwvpsqguwa" path="res://Scenes/GUI.tscn" id="3_4wplh"]
 [ext_resource type="PackedScene" uid="uid://7agyq5ghpobi" path="res://Scenes/RoomTrigger.tscn" id="4_1kg5f"]
 [ext_resource type="TileSet" uid="uid://be7t5i2cwyj3" path="res://Resources/IndoorHouseTileset.tres" id="6_34eyt"]
-[ext_resource type="PackedScene" uid="uid://cnnt7msd0tt44" path="res://Scenes/Interactable.tscn" id="7_046d6"]
+[ext_resource type="PackedScene" uid="uid://b1o7yp3j3yynn" path="res://Scenes/Trigger.tscn" id="7_ovw0u"]
 [ext_resource type="PackedScene" uid="uid://bocidko04r36c" path="res://Scenes/Player.tscn" id="7_ykhrt"]
 [ext_resource type="PackedScene" uid="uid://cd68ejdj6cmcv" path="res://Scenes/Johnny.tscn" id="8_kujqk"]
 
@@ -65,13 +65,14 @@ layer_2/tile_data = PackedInt32Array(327703, 5, 0, -131069, 5, 0, -131068, 5, 0,
 
 [node name="Interactables" type="Node2D" parent="."]
 
-[node name="DrugBarrels" parent="Interactables" instance=ExtResource("7_046d6")]
-position = Vector2(-36, 310)
-description = "Two wooden barrels. When you look inside, you can see a few bags of white powder."
+[node name="Barrels" parent="Interactables" instance=ExtResource("7_ovw0u")]
+position = Vector2(-24, 310)
+interactable = true
+descriptionPath = "shack_fb_barrels.txt"
+metadata/_edit_group_ = true
 
-[node name="CollisionPolygon2D" parent="Interactables/DrugBarrels" index="0"]
-position = Vector2(7, 10)
-scale = Vector2(4.32813, 3.5)
+[node name="CollisionPolygon2D" parent="Interactables/Barrels" index="0"]
+scale = Vector2(4.9375, 4.875)
 
 [node name="Johnny" parent="." instance=ExtResource("8_kujqk")]
 position = Vector2(433, 160)
@@ -87,4 +88,4 @@ editor_draw_limits = true
 [node name="Lights" type="Node2D" parent="."]
 
 [editable path="RoomTriggerEast"]
-[editable path="Interactables/DrugBarrels"]
+[editable path="Interactables/Barrels"]

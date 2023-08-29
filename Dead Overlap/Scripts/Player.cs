@@ -95,6 +95,14 @@ public partial class Player : CharacterBody2D
 						// if dialogue has finished being typed out
 						((Interactable)facingObj).OpenDescription();
 					}
+				} else if (facingObj.GetType() == typeof(ActionTrigger)) {
+					if (DialogueManager.isDialogueReading) {
+						// if dialogue is currently being typed out
+						DialogueManager.UpdateVisibleText(true);
+					} else {
+						// if dialogue has finished being typed out
+						((ActionTrigger)facingObj).Trigger();
+					}
 				} else if (GameManager.IsSameOrSubclass(typeof(RoomTrigger), facingObj.GetType())) {
 					// ((RoomTrigger)facingObj).facingDirection = lastDirection;
 					if (DialogueManager.isDialogueReading) {
@@ -170,6 +178,8 @@ public partial class Player : CharacterBody2D
 			// GD.Print(string.Format("{0} entered {1}", Name, area.GetParent<Node2D>().Name));
 		} else if (area.GetType() == typeof(Interactable)) {
 			if (!overlapping.Contains(area)) overlapping.Add(area);
+		} else if (area.GetType() == typeof(ActionTrigger)) {
+			if (!overlapping.Contains(area)) overlapping.Add(area);
 		} else if (GameManager.IsSameOrSubclass(typeof(RoomTrigger), area.GetType())) {
 			if (((RoomTrigger)area).autoTrigger) {
 				((RoomTrigger)area).TryUpdateFacingPos(lastDirection);
@@ -192,6 +202,9 @@ public partial class Player : CharacterBody2D
 			if (overlapping.Contains(area.GetParent<NPC>())) overlapping.Remove(area.GetParent<NPC>());
 		} else if (area.GetType() == typeof(Interactable)) {
 			// if the node is an Interactable
+			if (overlapping.Contains(area)) overlapping.Remove(area);
+		} else if (area.GetType() == typeof(ActionTrigger)) {
+			// if the node is an ActionTrigger
 			if (overlapping.Contains(area)) overlapping.Remove(area);
 		} else if (GameManager.IsSameOrSubclass(typeof(RoomTrigger), area.GetType())) {
 			// if the node is a RoomTrigger

@@ -4,6 +4,11 @@ using Godot;
 
 public partial class PlayerVariables : Node
 {
+	/// <summary>
+	/// Choose whether pr not to save the Player's data.
+	/// </summary>
+	public static bool saveData = false;
+
     /// <summary>
     /// Does the player have a light source?
     /// </summary>
