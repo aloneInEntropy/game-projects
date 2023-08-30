@@ -66,14 +66,19 @@ public partial class Globals : Node
 	public static string resPathToMissions = "res://Assets/Text/Missions/";
 	
 	/// <summary>
-	/// The path to the missions file folder in Godot format (prepended with "res://")
+	/// The path to the voice file folder in Godot format (prepended with "res://")
 	/// </summary>
 	public static string resPathToVoice = "res://Assets/Audio/Voices/";
 	
 	/// <summary>
-	/// The path to the missions file folder in Godot format (prepended with "res://")
+	/// The path to the portrait file folder in Godot format (prepended with "res://")
 	/// </summary>
 	public static string resPathToPortraits = "res://Assets/Sprites/Portraits/";
+	
+	/// <summary>
+	/// The path to the showcase file folder in Godot format (prepended with "res://")
+	/// </summary>
+	public static string resPathToShowcases = "res://Assets/Sprites/Showcases/";
 
 	/// <summary>
 	/// The timeline of days the events take place. Use dayToDate[day] to get the string date of that day.

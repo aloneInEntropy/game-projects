@@ -33,6 +33,13 @@ public partial class DialogueBox : Control
 	/// The TextureRect used to display the portrait of the presently-speaking NPC.
 	/// </summary>
 	public TextureRect portrait = new();
+	
+	/// <summary>
+	/// The TextureRect used to display the showcased image.
+	/// </summary>
+	public TextureRect showcase = new();
+
+	public AnimationPlayer animationPlayer = new();
 
 	/// <summary>
 	/// Is the dialogue box displayed?
@@ -53,6 +60,11 @@ public partial class DialogueBox : Control
 	/// Is the current DialogueObject displaying its choices?
 	/// </summary>
 	public bool displayingChoices = false;
+	
+	/// <summary>
+	/// Is the DialogueBox displaying its showcase?
+	/// </summary>
+	public bool displayingShowcase = false;
 
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
@@ -65,6 +77,8 @@ public partial class DialogueBox : Control
 		finishedMarker = (TextureRect)GetNode("FinishedMarker");
 		choiceControl = (VBoxContainer)GetNode("ChoiceControl");
 		portrait = (TextureRect)GetNode("Portrait");
+		showcase = (TextureRect)GetNode("Showcase");
+		animationPlayer = GetNode<AnimationPlayer>("AnimationPlayer");
 		txt.Text = "";
 		txt.VisibleRatio = 0;
 	}
@@ -76,7 +90,7 @@ public partial class DialogueBox : Control
 			if (choiceButtons.Count > 0 && buttonsReady) {
 				choiceButtons[0].GrabFocus();
 				buttonsReady = false;
-			} 
+			}
 		}
 	}
 
@@ -321,6 +335,26 @@ public partial class DialogueBox : Control
 			Globals.talkingNPC.SetVoice(Globals.GetNPC(nameTitle).voicePath);
 			portrait.Texture = GD.Load<Texture2D>(Globals.resPathToPortraits + Globals.GetNPC(nameTitle).portraitPath);
 		}
+	}
+
+	/// <summary>
+	/// Open the DialogueBox's Showcase Texture. If <c>show</c> is true, the Texture is set to Visible.
+	/// </summary>
+	/// <param name="imagePath"></param>
+	/// <param name="show"></param>
+	public void OpenShowcase(string imagePath, bool show = true) {
+		displayingShowcase = true;
+		showcase.Texture = GD.Load<Texture2D>(Globals.resPathToShowcases + imagePath);
+		showcase.Visible = show;
+		animationPlayer.Play("showcase");
+	}
+	
+	/// <summary>
+	/// Hide the DialogueBox's Showcase Texture.
+	/// </summary>
+	public void CloseShowcase() {
+		displayingShowcase = false;
+		showcase.Visible = false;
 	}
 
 	/// <summary>

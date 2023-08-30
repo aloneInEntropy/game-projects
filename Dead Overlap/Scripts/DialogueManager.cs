@@ -421,4 +421,20 @@ public partial class DialogueManager : Node
 	public void SaveClue(string clue) {
 		GD.Print("new clue");
 	}
+
+	/// <summary>
+	/// Open the DialogueBox's Showcase Texture. If <c>show</c> is true, the Texture is set to Visible.
+	/// </summary>
+	/// <param name="imagePath"></param>
+	/// <param name="show"></param>
+	public void OpenImage(string imagePath) {
+		Globals.gui.db.OpenShowcase(imagePath);
+	}
+	
+	/// <summary>
+	/// Hide the DialogueBox's Showcase Texture.
+	/// </summary>
+	public void CloseImage() {
+		Globals.gui.db.CloseShowcase();
+	}
 }
