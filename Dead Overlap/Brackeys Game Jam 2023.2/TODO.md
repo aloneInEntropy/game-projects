@@ -97,3 +97,16 @@ i'm gonna do what i want
 	- [ ] Adora not present until spoken to all other characters once
 		- [ ] Lock Adora's house until spoken to all other characters, then going to station to collect warrant
 		- [ ] Explosives found at the house
+
+- [x] Replace all Interactable and RoomTrigger classes with an ActionTrigger
+	- [x] Centre
+		- [x] Office
+	- [x] East
+		- [x] Shack
+	- [x] West
+	- [x] North
+		- [x] Market
+		- [x] Station
+	- [x] South
+		- [x] Adora's house
+

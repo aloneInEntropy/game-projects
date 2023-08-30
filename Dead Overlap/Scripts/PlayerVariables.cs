@@ -13,6 +13,11 @@ public partial class PlayerVariables : Node
     /// Does the player have a light source?
     /// </summary>
     public static bool hasLight = false;
+    
+	/// <summary>
+    /// Does Marceline have a warrant for Adora Aga's house?
+    /// </summary>
+    public static bool hasWarrant = false;
 
     /// <summary>
 	/// The list of missions given to the Player by this NPC.
@@ -30,8 +35,16 @@ public partial class PlayerVariables : Node
 	/// <param name="varName"></param>
 	/// <param name="val"></param>
 	public static void SetVar(string varName, string val) {
-		if (varName == "hasLight") {
-			hasLight = bool.Parse(val);
+		switch (varName)
+		{
+			case "hasLight":
+				hasLight = bool.Parse(val);
+				break;
+			case "hasWarrant":
+				hasWarrant = bool.Parse(val);
+				break;
+			default:
+				break;
 		}
 	}
 
@@ -41,11 +54,13 @@ public partial class PlayerVariables : Node
 	/// <param name="varName"></param>
 	/// <param name="val"></param>
 	public static object GetVar(string varName) {
-		if (varName == "hasLight") {
-			return hasLight;
-		}
-		return null;
-	}
+        return varName switch
+        {
+            "hasLight" => hasLight,
+            "hasWarrant" => hasWarrant,
+            _ => null,
+        };
+    }
 
     /// <summary>
 	/// Set the missions of the NPC using the path <c>missionPath</c> to a JSON file. All files are assumed to be in the folder "res://Assets/Text/Missions".

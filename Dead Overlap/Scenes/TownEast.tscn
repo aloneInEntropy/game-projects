@@ -94,7 +94,6 @@ position = Vector2(-36, -811)
 interactable = true
 descriptionPath = "town_east_shack_front.txt"
 describer = "Marceline"
-metadata/_edit_group_ = true
 
 [node name="CollisionPolygon2D" parent="Triggers/Interactables/Shack" index="0"]
 scale = Vector2(4.75, 10.375)
@@ -110,7 +109,6 @@ facingDirection = Vector2(0, -1)
 entryRequirementVariableName = "hasLight"
 entryRequirementVariableValue = true
 entryDeniedTextSource = "town_east_shack_side.txt"
-metadata/_edit_group_ = true
 
 [node name="CollisionPolygon2D" parent="Triggers/RoomTriggers/ShackSideDoor" index="0"]
 scale = Vector2(5.6875, 2.40625)
@@ -123,7 +121,6 @@ sceneName = "TownCentre"
 entryPoint = Vector2(2050, 0)
 facingDirection = Vector2(-1, 0)
 keepYPosition = true
-metadata/_edit_group_ = true
 
 [node name="CollisionPolygon2D" parent="Triggers/RoomTriggers/ToTownCentre" index="0"]
 scale = Vector2(5.375, 14.5625)

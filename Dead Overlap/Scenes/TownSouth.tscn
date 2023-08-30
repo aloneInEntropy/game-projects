@@ -1,21 +1,14 @@
-[gd_scene load_steps=13 format=3 uid="uid://d1sgxaxy1cuk4"]
+[gd_scene load_steps=10 format=3 uid="uid://d1sgxaxy1cuk4"]
 
 [ext_resource type="Script" path="res://Scripts/Location.cs" id="1_eq7ke"]
 [ext_resource type="Texture2D" uid="uid://dmrdwi1vlycw4" path="res://quad_128.png" id="2_ifk6b"]
 [ext_resource type="TileSet" uid="uid://co0avnwfudox" path="res://Resources/TownTileset.tres" id="3_yl3e8"]
 [ext_resource type="Texture2D" uid="uid://dv8du4yk1nqy4" path="res://Assets/Sprites/SpotLight.png" id="9_qlhyy"]
 [ext_resource type="Texture2D" uid="uid://coq70vxuv65o6" path="res://Assets/Sprites/DirLight.png" id="10_lxewf"]
+[ext_resource type="PackedScene" uid="uid://b1o7yp3j3yynn" path="res://Scenes/Trigger.tscn" id="11_qy1h4"]
 [ext_resource type="PackedScene" uid="uid://6wwwvpsqguwa" path="res://Scenes/GUI.tscn" id="15_uqkku"]
 [ext_resource type="PackedScene" uid="uid://cd68ejdj6cmcv" path="res://Scenes/Johnny.tscn" id="16_8h88m"]
 [ext_resource type="PackedScene" uid="uid://bocidko04r36c" path="res://Scenes/Player.tscn" id="18_lms2f"]
-[ext_resource type="PackedScene" uid="uid://7agyq5ghpobi" path="res://Scenes/RoomTrigger.tscn" id="19_lmc56"]
-[ext_resource type="PackedScene" uid="uid://cnnt7msd0tt44" path="res://Scenes/Interactable.tscn" id="20_ei3yf"]
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_j17ph"]
-size = Vector2(303, 48)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_htkot"]
-size = Vector2(66, 66)
 
 [node name="TownSouth" type="Node2D"]
 script = ExtResource("1_eq7ke")
@@ -41,6 +34,7 @@ centered = false
 y_sort_enabled = true
 tile_set = ExtResource("3_yl3e8")
 cell_quadrant_size = 32
+collision_visibility_mode = 1
 format = 2
 layer_0/name = "Ground"
 layer_0/y_sort_enabled = true
@@ -72,202 +66,13 @@ visible = false
 
 [node name="Johnny" parent="." instance=ExtResource("16_8h88m")]
 position = Vector2(1135, 234)
-diagPath = "d1.txt"
+diagPath = "d0.txt"
 
 [node name="Player" parent="." instance=ExtResource("18_lms2f")]
 position = Vector2(952, 369)
 metadata/_edit_group_ = true
 
 [node name="Camera2D" type="Camera2D" parent="Player"]
-
-[node name="Interactables" type="Node2D" parent="."]
-
-[node name="NoEntryHouse" parent="Interactables" instance=ExtResource("20_ei3yf")]
-position = Vector2(494, 183)
-descriptionPath = "town_south_locked_door.txt"
-metadata/_edit_group_ = true
-
-[node name="CollisionPolygon2D" parent="Interactables/NoEntryHouse" index="0"]
-position = Vector2(0.500011, 8)
-scale = Vector2(2.71875, 2.4375)
-
-[node name="GarbageCan" parent="Interactables" instance=ExtResource("20_ei3yf")]
-position = Vector2(657, 232)
-descriptionPath = "town_south_bin_2.txt"
-metadata/_edit_group_ = true
-
-[node name="CollisionPolygon2D" parent="Interactables/GarbageCan" index="0"]
-position = Vector2(0.500011, 8)
-scale = Vector2(2.71875, 2.4375)
-
-[node name="GarbageCan2" parent="Interactables" instance=ExtResource("20_ei3yf")]
-position = Vector2(367, 232)
-description = "A garbage can. "
-descriptionPath = "town_south_bin_1.txt"
-metadata/_edit_group_ = true
-
-[node name="CollisionPolygon2D" parent="Interactables/GarbageCan2" index="0"]
-position = Vector2(0.500011, 8)
-scale = Vector2(2.71875, 2.4375)
-
-[node name="GarbageCan3" parent="Interactables" instance=ExtResource("20_ei3yf")]
-position = Vector2(-82, 230)
-descriptionPath = "town_south_bin_3.txt"
-metadata/_edit_group_ = true
-
-[node name="CollisionPolygon2D" parent="Interactables/GarbageCan3" index="0"]
-position = Vector2(0.500011, 8)
-scale = Vector2(2.71875, 2.4375)
-
-[node name="NoEntryHouse2" parent="Interactables" instance=ExtResource("20_ei3yf")]
-position = Vector2(109, 174)
-descriptionPath = "town_south_locked_door.txt"
-metadata/_edit_group_ = true
-
-[node name="CollisionPolygon2D" parent="Interactables/NoEntryHouse2" index="0"]
-position = Vector2(0.500011, 8)
-scale = Vector2(2.71875, 2.4375)
-
-[node name="NoEntryHouse3" parent="Interactables" instance=ExtResource("20_ei3yf")]
-position = Vector2(-206, 173)
-descriptionPath = "town_south_locked_door.txt"
-metadata/_edit_group_ = true
-
-[node name="CollisionPolygon2D" parent="Interactables/NoEntryHouse3" index="0"]
-position = Vector2(0.500011, 8)
-scale = Vector2(2.71875, 2.4375)
-
-[node name="NoEntryHouse4" parent="Interactables" instance=ExtResource("20_ei3yf")]
-position = Vector2(-257, 645)
-descriptionPath = "town_south_locked_door.txt"
-metadata/_edit_group_ = true
-
-[node name="CollisionPolygon2D" parent="Interactables/NoEntryHouse4" index="0"]
-position = Vector2(90, 8)
-scale = Vector2(8.3125, 2.4375)
-
-[node name="NoEntryHouse5" parent="Interactables" instance=ExtResource("20_ei3yf")]
-position = Vector2(61, 654)
-descriptionPath = "town_south_locked_door.txt"
-metadata/_edit_group_ = true
-
-[node name="CollisionPolygon2D" parent="Interactables/NoEntryHouse5" index="0"]
-position = Vector2(90, 8)
-scale = Vector2(8.3125, 2.4375)
-
-[node name="NoEntryHouse6" parent="Interactables" instance=ExtResource("20_ei3yf")]
-position = Vector2(450, 654)
-descriptionPath = "town_south_locked_door_2.txt"
-metadata/_edit_group_ = true
-
-[node name="CollisionPolygon2D" parent="Interactables/NoEntryHouse6" index="0"]
-position = Vector2(90, 8)
-scale = Vector2(8.3125, 2.4375)
-
-[node name="NoEntryHouse7" parent="Interactables" instance=ExtResource("20_ei3yf")]
-position = Vector2(764, 651)
-descriptionPath = "town_south_locked_door.txt"
-metadata/_edit_group_ = true
-
-[node name="CollisionPolygon2D" parent="Interactables/NoEntryHouse7" index="0"]
-position = Vector2(90, 8)
-scale = Vector2(8.3125, 2.4375)
-
-[node name="NoEntryHouse8" parent="Interactables" instance=ExtResource("20_ei3yf")]
-position = Vector2(1098, 658)
-descriptionPath = "town_south_locked_door.txt"
-metadata/_edit_group_ = true
-
-[node name="CollisionPolygon2D" parent="Interactables/NoEntryHouse8" index="0"]
-position = Vector2(90, 8)
-scale = Vector2(8.3125, 2.4375)
-
-[node name="NoEntryHouse9" parent="Interactables" instance=ExtResource("20_ei3yf")]
-position = Vector2(1692, 664)
-descriptionPath = "town_south_locked_door.txt"
-metadata/_edit_group_ = true
-
-[node name="CollisionPolygon2D" parent="Interactables/NoEntryHouse9" index="0"]
-position = Vector2(6.00003, 71)
-scale = Vector2(3.0625, 6.375)
-
-[node name="NoEntryHouse10" parent="Interactables" instance=ExtResource("20_ei3yf")]
-position = Vector2(1689, 292)
-descriptionPath = "town_south_locked_door.txt"
-metadata/_edit_group_ = true
-
-[node name="CollisionPolygon2D" parent="Interactables/NoEntryHouse10" index="0"]
-position = Vector2(6.00003, 71)
-scale = Vector2(3.0625, 6.375)
-
-[node name="NoEntryHouse11" parent="Interactables" instance=ExtResource("20_ei3yf")]
-position = Vector2(1690, -57)
-descriptionPath = "town_south_locked_door.txt"
-metadata/_edit_group_ = true
-
-[node name="CollisionPolygon2D" parent="Interactables/NoEntryHouse11" index="0"]
-position = Vector2(6.00003, 71)
-scale = Vector2(3.0625, 6.375)
-
-[node name="NoEntryHouse12" parent="Interactables" instance=ExtResource("20_ei3yf")]
-position = Vector2(1689, -405)
-descriptionPath = "town_south_locked_door.txt"
-metadata/_edit_group_ = true
-
-[node name="CollisionPolygon2D" parent="Interactables/NoEntryHouse12" index="0"]
-position = Vector2(6.00003, 71)
-scale = Vector2(3.0625, 6.375)
-
-[node name="NoEntryHouse13" parent="Interactables" instance=ExtResource("20_ei3yf")]
-position = Vector2(1331, -404)
-descriptionPath = "town_south_locked_door.txt"
-metadata/_edit_group_ = true
-
-[node name="CollisionPolygon2D" parent="Interactables/NoEntryHouse13" index="0"]
-position = Vector2(6.00003, 71)
-scale = Vector2(3.0625, 6.375)
-
-[node name="NoEntryHouse14" parent="Interactables" instance=ExtResource("20_ei3yf")]
-position = Vector2(1339, -51)
-descriptionPath = "town_south_locked_door.txt"
-metadata/_edit_group_ = true
-
-[node name="CollisionPolygon2D" parent="Interactables/NoEntryHouse14" index="0"]
-position = Vector2(6.00003, 71)
-scale = Vector2(3.0625, 6.375)
-
-[node name="Motorbike" parent="Interactables" instance=ExtResource("20_ei3yf")]
-position = Vector2(-269, 432)
-descriptionPath = "town_south_motorbike.txt"
-
-[node name="CollisionPolygon2D" parent="Interactables/Motorbike" index="0"]
-position = Vector2(-37.5, -4.50001)
-scale = Vector2(3.65625, 2.34375)
-
-[node name="RoomTriggers" type="Node2D" parent="."]
-metadata/_edit_lock_ = true
-
-[node name="RoomTriggerCentre" parent="RoomTriggers" instance=ExtResource("19_lmc56")]
-position = Vector2(1426, -446)
-sceneName = "TownCentre"
-entryPoint = Vector2(0, -40)
-autoTrigger = true
-keepXPosition = true
-metadata/_edit_group_ = true
-
-[node name="CollisionShape2D" parent="RoomTriggers/RoomTriggerCentre" index="0"]
-position = Vector2(92.5, 0)
-shape = SubResource("RectangleShape2D_j17ph")
-
-[node name="RoomTriggerHouse" parent="RoomTriggers" instance=ExtResource("19_lmc56")]
-position = Vector2(671, 471)
-sceneName = "House"
-entryPoint = Vector2(470, 504)
-metadata/_edit_group_ = true
-
-[node name="CollisionShape2D" parent="RoomTriggers/RoomTriggerHouse" index="0"]
-position = Vector2(271, -288)
-shape = SubResource("RectangleShape2D_htkot")
 
 [node name="CanvasModulate" type="CanvasModulate" parent="."]
 color = Color(0.572549, 0.541176, 0.439216, 1)
@@ -435,23 +240,211 @@ color = Color(1, 0.0980392, 0.0588235, 1)
 texture = ExtResource("10_lxewf")
 texture_scale = 0.5
 
-[editable path="Interactables/NoEntryHouse"]
-[editable path="Interactables/GarbageCan"]
-[editable path="Interactables/GarbageCan2"]
-[editable path="Interactables/GarbageCan3"]
-[editable path="Interactables/NoEntryHouse2"]
-[editable path="Interactables/NoEntryHouse3"]
-[editable path="Interactables/NoEntryHouse4"]
-[editable path="Interactables/NoEntryHouse5"]
-[editable path="Interactables/NoEntryHouse6"]
-[editable path="Interactables/NoEntryHouse7"]
-[editable path="Interactables/NoEntryHouse8"]
-[editable path="Interactables/NoEntryHouse9"]
-[editable path="Interactables/NoEntryHouse10"]
-[editable path="Interactables/NoEntryHouse11"]
-[editable path="Interactables/NoEntryHouse12"]
-[editable path="Interactables/NoEntryHouse13"]
-[editable path="Interactables/NoEntryHouse14"]
-[editable path="Interactables/Motorbike"]
-[editable path="RoomTriggers/RoomTriggerCentre"]
-[editable path="RoomTriggers/RoomTriggerHouse"]
+[node name="Triggers" type="Node2D" parent="."]
+
+[node name="Interactables" type="Node2D" parent="Triggers"]
+
+[node name="Bin3" parent="Triggers/Interactables" instance=ExtResource("11_qy1h4")]
+position = Vector2(-84, 237)
+interactable = true
+descriptionPath = "town_south_bin_3.txt"
+
+[node name="CollisionPolygon2D" parent="Triggers/Interactables/Bin3" index="0"]
+scale = Vector2(2.5, 2.5)
+
+[node name="Bin1" parent="Triggers/Interactables" instance=ExtResource("11_qy1h4")]
+position = Vector2(368, 244)
+interactable = true
+descriptionPath = "town_south_bin_1.txt"
+
+[node name="CollisionPolygon2D" parent="Triggers/Interactables/Bin1" index="0"]
+scale = Vector2(2.5, 2.5)
+
+[node name="Bin2" parent="Triggers/Interactables" instance=ExtResource("11_qy1h4")]
+position = Vector2(655, 238)
+interactable = true
+descriptionPath = "town_south_bin_2.txt"
+
+[node name="CollisionPolygon2D" parent="Triggers/Interactables/Bin2" index="0"]
+scale = Vector2(2.5, 2.5)
+
+[node name="Motorbike" parent="Triggers/Interactables" instance=ExtResource("11_qy1h4")]
+position = Vector2(-322, 426)
+
+[node name="CollisionPolygon2D" parent="Triggers/Interactables/Motorbike" index="0"]
+scale = Vector2(3.9375, 2.5625)
+
+[node name="Door" parent="Triggers/Interactables" instance=ExtResource("11_qy1h4")]
+position = Vector2(165, 663)
+interactable = true
+descriptionPath = "town_south_locked_door.txt"
+
+[node name="CollisionPolygon2D" parent="Triggers/Interactables/Door" index="0"]
+position = Vector2(-5.5, 0)
+scale = Vector2(9.71875, 2.625)
+
+[node name="Door2" parent="Triggers/Interactables" instance=ExtResource("11_qy1h4")]
+position = Vector2(-165, 662)
+interactable = true
+descriptionPath = "town_south_locked_door.txt"
+
+[node name="CollisionPolygon2D" parent="Triggers/Interactables/Door2" index="0"]
+position = Vector2(5.5, 0)
+scale = Vector2(9.71875, 2.625)
+
+[node name="Door3" parent="Triggers/Interactables" instance=ExtResource("11_qy1h4")]
+position = Vector2(842, 663)
+interactable = true
+descriptionPath = "town_south_locked_door.txt"
+
+[node name="CollisionPolygon2D" parent="Triggers/Interactables/Door3" index="0"]
+position = Vector2(23.5, 0)
+scale = Vector2(9.21875, 2.625)
+
+[node name="Door4" parent="Triggers/Interactables" instance=ExtResource("11_qy1h4")]
+position = Vector2(1177, 663)
+interactable = true
+descriptionPath = "town_south_locked_door.txt"
+
+[node name="CollisionPolygon2D" parent="Triggers/Interactables/Door4" index="0"]
+position = Vector2(8.49998, 0)
+scale = Vector2(9.53125, 2.625)
+
+[node name="Door5" parent="Triggers/Interactables" instance=ExtResource("11_qy1h4")]
+position = Vector2(1707, 724)
+interactable = true
+descriptionPath = "town_south_locked_door.txt"
+
+[node name="CollisionPolygon2D" parent="Triggers/Interactables/Door5" index="0"]
+position = Vector2(0, -6.00002)
+scale = Vector2(3.625, 4.75)
+
+[node name="Door6" parent="Triggers/Interactables" instance=ExtResource("11_qy1h4")]
+position = Vector2(1707, -324)
+interactable = true
+descriptionPath = "town_south_locked_door.txt"
+
+[node name="CollisionPolygon2D" parent="Triggers/Interactables/Door6" index="0"]
+position = Vector2(0, -6.00002)
+scale = Vector2(3.625, 4.75)
+
+[node name="Door7" parent="Triggers/Interactables" instance=ExtResource("11_qy1h4")]
+position = Vector2(1707, 23)
+interactable = true
+descriptionPath = "town_south_locked_door.txt"
+
+[node name="CollisionPolygon2D" parent="Triggers/Interactables/Door7" index="0"]
+position = Vector2(0, -6.00002)
+scale = Vector2(3.625, 4.75)
+
+[node name="Door8" parent="Triggers/Interactables" instance=ExtResource("11_qy1h4")]
+position = Vector2(1707, 381)
+interactable = true
+descriptionPath = "town_south_locked_door.txt"
+
+[node name="CollisionPolygon2D" parent="Triggers/Interactables/Door8" index="0"]
+position = Vector2(0, -6.00002)
+scale = Vector2(3.625, 4.75)
+
+[node name="Door9" parent="Triggers/Interactables" instance=ExtResource("11_qy1h4")]
+position = Vector2(1333, 23)
+interactable = true
+descriptionPath = "town_south_locked_door.txt"
+
+[node name="CollisionPolygon2D" parent="Triggers/Interactables/Door9" index="0"]
+position = Vector2(0, -6.00002)
+scale = Vector2(3.625, 4.75)
+
+[node name="Door10" parent="Triggers/Interactables" instance=ExtResource("11_qy1h4")]
+position = Vector2(1333, -323)
+interactable = true
+descriptionPath = "town_south_locked_door.txt"
+
+[node name="CollisionPolygon2D" parent="Triggers/Interactables/Door10" index="0"]
+position = Vector2(0, -6.00002)
+scale = Vector2(3.625, 4.75)
+
+[node name="Door11" parent="Triggers/Interactables" instance=ExtResource("11_qy1h4")]
+position = Vector2(-166, 184)
+interactable = true
+descriptionPath = "town_south_locked_door.txt"
+
+[node name="CollisionPolygon2D" parent="Triggers/Interactables/Door11" index="0"]
+position = Vector2(-40.5, -3.5)
+scale = Vector2(3.28125, 2.40625)
+
+[node name="Door12" parent="Triggers/Interactables" instance=ExtResource("11_qy1h4")]
+position = Vector2(151, 184)
+interactable = true
+descriptionPath = "town_south_locked_door.txt"
+
+[node name="CollisionPolygon2D" parent="Triggers/Interactables/Door12" index="0"]
+position = Vector2(-40.5, -3.5)
+scale = Vector2(3.28125, 2.40625)
+
+[node name="Door13" parent="Triggers/Interactables" instance=ExtResource("11_qy1h4")]
+position = Vector2(533, 184)
+interactable = true
+descriptionPath = "town_south_locked_door.txt"
+
+[node name="CollisionPolygon2D" parent="Triggers/Interactables/Door13" index="0"]
+position = Vector2(-40.5, -3.5)
+scale = Vector2(3.28125, 2.40625)
+
+[node name="DoorSpecial" parent="Triggers/Interactables" instance=ExtResource("11_qy1h4")]
+position = Vector2(538, 660)
+interactable = true
+descriptionPath = "town_south_locked_door_2.txt"
+
+[node name="CollisionPolygon2D" parent="Triggers/Interactables/DoorSpecial" index="0"]
+position = Vector2(7, 0)
+scale = Vector2(9.625, 2.625)
+
+[node name="RoomTriggers" type="Node2D" parent="Triggers"]
+metadata/_edit_lock_ = true
+
+[node name="ToHouse" parent="Triggers/RoomTriggers" instance=ExtResource("11_qy1h4")]
+position = Vector2(942, 183)
+roomTrigger = true
+sceneName = "House"
+entryPoint = Vector2(470, 504)
+facingDirection = Vector2(0, -1)
+entryRequirementVariableName = "hasWarrant"
+entryRequirementVariableValue = true
+entryDeniedTextSource = "town_south_house_nw.txt"
+entryDeniedTextSpeaker = "Marceline"
+
+[node name="CollisionPolygon2D" parent="Triggers/RoomTriggers/ToHouse" index="0"]
+scale = Vector2(3, 3.125)
+
+[node name="ToCentre" parent="Triggers/RoomTriggers" instance=ExtResource("11_qy1h4")]
+position = Vector2(1520, -454)
+roomTrigger = true
+autoTrigger = true
+sceneName = "TownCentre"
+entryPoint = Vector2(0, -40)
+keepXPosition = true
+
+[node name="CollisionPolygon2D" parent="Triggers/RoomTriggers/ToCentre" index="0"]
+scale = Vector2(17.625, 2.5)
+
+[editable path="Triggers/Interactables/Bin3"]
+[editable path="Triggers/Interactables/Bin1"]
+[editable path="Triggers/Interactables/Bin2"]
+[editable path="Triggers/Interactables/Motorbike"]
+[editable path="Triggers/Interactables/Door"]
+[editable path="Triggers/Interactables/Door2"]
+[editable path="Triggers/Interactables/Door3"]
+[editable path="Triggers/Interactables/Door4"]
+[editable path="Triggers/Interactables/Door5"]
+[editable path="Triggers/Interactables/Door6"]
+[editable path="Triggers/Interactables/Door7"]
+[editable path="Triggers/Interactables/Door8"]
+[editable path="Triggers/Interactables/Door9"]
+[editable path="Triggers/Interactables/Door10"]
+[editable path="Triggers/Interactables/Door11"]
+[editable path="Triggers/Interactables/Door12"]
+[editable path="Triggers/Interactables/Door13"]
+[editable path="Triggers/Interactables/DoorSpecial"]
+[editable path="Triggers/RoomTriggers/ToHouse"]
+[editable path="Triggers/RoomTriggers/ToCentre"]

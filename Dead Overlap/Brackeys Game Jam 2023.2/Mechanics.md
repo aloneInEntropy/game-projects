@@ -22,3 +22,12 @@ Add conditions to RoomTrigger nodes to check whether or not to accept traversal.
 
 ## ActionTrigger class
 Consider implementing an ActionTrigger class that combines the effects of the Interactable class and RoomTrigger class into one. This would require replacing all Interactable and RoomTrigger nodes.
+
+## Fade to black
+Fade the screen to black and back to transparent on room change
+
+## Texture Showcase
+Show a specified texture through dialogue
+
+## Clues Menu
+A menu in the notebook for saved clues where the Player may have missed anything. The Player cannot save dialogue from interactables.

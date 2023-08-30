@@ -1,16 +1,12 @@
-[gd_scene load_steps=10 format=3 uid="uid://c2368siug1von"]
+[gd_scene load_steps=8 format=3 uid="uid://c2368siug1von"]
 
 [ext_resource type="Script" path="res://Scripts/Location.cs" id="1_6g1am"]
 [ext_resource type="Texture2D" uid="uid://dmrdwi1vlycw4" path="res://quad_128.png" id="2_0lcox"]
 [ext_resource type="PackedScene" uid="uid://6wwwvpsqguwa" path="res://Scenes/GUI.tscn" id="3_4wplh"]
-[ext_resource type="PackedScene" uid="uid://7agyq5ghpobi" path="res://Scenes/RoomTrigger.tscn" id="4_1kg5f"]
 [ext_resource type="TileSet" uid="uid://be7t5i2cwyj3" path="res://Resources/IndoorHouseTileset.tres" id="6_34eyt"]
 [ext_resource type="PackedScene" uid="uid://b1o7yp3j3yynn" path="res://Scenes/Trigger.tscn" id="7_ovw0u"]
 [ext_resource type="PackedScene" uid="uid://bocidko04r36c" path="res://Scenes/Player.tscn" id="7_ykhrt"]
 [ext_resource type="PackedScene" uid="uid://cd68ejdj6cmcv" path="res://Scenes/Johnny.tscn" id="8_kujqk"]
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_3f3gn"]
-size = Vector2(222.5, 62.75)
 
 [node name="Shack" type="Node2D"]
 script = ExtResource("1_6g1am")
@@ -28,16 +24,6 @@ metadata/_edit_group_ = true
 
 [node name="GUI" parent="." instance=ExtResource("3_4wplh")]
 visible = false
-
-[node name="RoomTriggerEast" parent="." instance=ExtResource("4_1kg5f")]
-position = Vector2(475, 611)
-sceneName = "TownEast"
-entryPoint = Vector2(205, -683)
-autoTrigger = true
-
-[node name="CollisionShape2D" parent="RoomTriggerEast" index="0"]
-position = Vector2(-7, 37)
-shape = SubResource("RectangleShape2D_3f3gn")
 
 [node name="TileMap" type="TileMap" parent="."]
 z_index = -1
@@ -63,17 +49,6 @@ layer_2/y_sort_origin = 0
 layer_2/z_index = 0
 layer_2/tile_data = PackedInt32Array(327703, 5, 0, -131069, 5, 0, -131068, 5, 0, -131054, 5, 0, -131053, 5, 0, 262145, 5, 0)
 
-[node name="Interactables" type="Node2D" parent="."]
-
-[node name="Barrels" parent="Interactables" instance=ExtResource("7_ovw0u")]
-position = Vector2(-24, 310)
-interactable = true
-descriptionPath = "shack_fb_barrels.txt"
-metadata/_edit_group_ = true
-
-[node name="CollisionPolygon2D" parent="Interactables/Barrels" index="0"]
-scale = Vector2(4.9375, 4.875)
-
 [node name="Johnny" parent="." instance=ExtResource("8_kujqk")]
 position = Vector2(433, 160)
 diagPath = "d5.txt"
@@ -87,5 +62,25 @@ editor_draw_limits = true
 
 [node name="Lights" type="Node2D" parent="."]
 
-[editable path="RoomTriggerEast"]
-[editable path="Interactables/Barrels"]
+[node name="Triggers" type="Node2D" parent="."]
+
+[node name="Barrels" parent="Triggers" instance=ExtResource("7_ovw0u")]
+position = Vector2(-24, 310)
+interactable = true
+descriptionPath = "shack_fb_barrels.txt"
+
+[node name="CollisionPolygon2D" parent="Triggers/Barrels" index="0"]
+scale = Vector2(4.9375, 4.875)
+
+[node name="ToEast" parent="Triggers" instance=ExtResource("7_ovw0u")]
+position = Vector2(461, 657)
+roomTrigger = true
+autoTrigger = true
+sceneName = "TownEast"
+entryPoint = Vector2(205, -683)
+
+[node name="CollisionPolygon2D" parent="Triggers/ToEast" index="0"]
+scale = Vector2(15.0625, 2.5625)
+
+[editable path="Triggers/Barrels"]
+[editable path="Triggers/ToEast"]

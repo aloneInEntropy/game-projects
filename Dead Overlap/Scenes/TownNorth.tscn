@@ -1,24 +1,11 @@
-[gd_scene load_steps=12 format=3 uid="uid://c2356rv8ovfpk"]
+[gd_scene load_steps=7 format=3 uid="uid://c2356rv8ovfpk"]
 
 [ext_resource type="PackedScene" uid="uid://6wwwvpsqguwa" path="res://Scenes/GUI.tscn" id="1_3nvea"]
 [ext_resource type="Script" path="res://Scripts/Location.cs" id="1_df3fq"]
 [ext_resource type="PackedScene" uid="uid://bocidko04r36c" path="res://Scenes/Player.tscn" id="2_c1m01"]
 [ext_resource type="TileSet" uid="uid://co0avnwfudox" path="res://Resources/TownTileset.tres" id="3_5xi87"]
-[ext_resource type="PackedScene" uid="uid://7agyq5ghpobi" path="res://Scenes/RoomTrigger.tscn" id="5_0so8q"]
-[ext_resource type="PackedScene" uid="uid://cnnt7msd0tt44" path="res://Scenes/Interactable.tscn" id="6_h6ikn"]
 [ext_resource type="Texture2D" uid="uid://dv8du4yk1nqy4" path="res://Assets/Sprites/SpotLight.png" id="7_xxyap"]
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_3fg51"]
-size = Vector2(114.5, 48)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_17mig"]
-size = Vector2(114.5, 82)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_6q67y"]
-size = Vector2(114.5, 82)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_t17lk"]
-size = Vector2(288, 48)
+[ext_resource type="PackedScene" uid="uid://b1o7yp3j3yynn" path="res://Scenes/Trigger.tscn" id="8_5p207"]
 
 [node name="TownNorth" type="Node2D"]
 script = ExtResource("1_df3fq")
@@ -65,58 +52,6 @@ layer_3/tile_data = PackedInt32Array(262171, 11, 0, 327707, 11, 0, 327708, 11, 0
 
 [node name="CanvasModulate" type="CanvasModulate" parent="."]
 color = Color(0.572549, 0.541176, 0.439216, 1)
-
-[node name="RoomTriggers" type="Node2D" parent="."]
-
-[node name="RoomTriggerStation" parent="RoomTriggers" instance=ExtResource("5_0so8q")]
-position = Vector2(1538, -124)
-sceneName = "Station"
-entryPoint = Vector2(0, -20)
-facingDirection = Vector2(0, 1)
-
-[node name="CollisionShape2D" parent="RoomTriggers/RoomTriggerStation" index="0"]
-shape = SubResource("RectangleShape2D_3fg51")
-
-[node name="RoomTriggerMarketL" parent="RoomTriggers" instance=ExtResource("5_0so8q")]
-position = Vector2(0, 166)
-sceneName = "Market"
-entryPoint = Vector2(-195, 0)
-facingDirection = Vector2(0, -1)
-
-[node name="CollisionShape2D" parent="RoomTriggers/RoomTriggerMarketL" index="0"]
-position = Vector2(0, -13)
-shape = SubResource("RectangleShape2D_17mig")
-
-[node name="RoomTriggerMarketR" parent="RoomTriggers" instance=ExtResource("5_0so8q")]
-position = Vector2(350, 166)
-sceneName = "Market"
-entryPoint = Vector2(485, 2)
-facingDirection = Vector2(0, -1)
-
-[node name="CollisionShape2D" parent="RoomTriggers/RoomTriggerMarketR" index="0"]
-position = Vector2(0, -13)
-shape = SubResource("RectangleShape2D_6q67y")
-
-[node name="RoomTriggerCentre" parent="RoomTriggers" instance=ExtResource("5_0so8q")]
-position = Vector2(1501, 960)
-sceneName = "TownCentre"
-entryPoint = Vector2(1522, -1741)
-autoTrigger = true
-keepXPosition = true
-
-[node name="CollisionShape2D" parent="RoomTriggers/RoomTriggerCentre" index="0"]
-position = Vector2(19, -5)
-shape = SubResource("RectangleShape2D_t17lk")
-
-[node name="Interactables" type="Node2D" parent="."]
-
-[node name="Motorbike" parent="Interactables" instance=ExtResource("6_h6ikn")]
-position = Vector2(-304, 425)
-descriptionPath = "town_north_motorbike.txt"
-
-[node name="CollisionPolygon2D" parent="Interactables/Motorbike" index="0"]
-position = Vector2(4, 4)
-scale = Vector2(3.15625, 2.53125)
 
 [node name="Lights" type="Node2D" parent="."]
 position = Vector2(-14, 240)
@@ -202,8 +137,63 @@ texture = ExtResource("7_xxyap")
 position = Vector2(18, -91)
 texture = ExtResource("7_xxyap")
 
-[editable path="RoomTriggers/RoomTriggerStation"]
-[editable path="RoomTriggers/RoomTriggerMarketL"]
-[editable path="RoomTriggers/RoomTriggerMarketR"]
-[editable path="RoomTriggers/RoomTriggerCentre"]
-[editable path="Interactables/Motorbike"]
+[node name="Triggers" type="Node2D" parent="."]
+
+[node name="RoomTriggers" type="Node2D" parent="Triggers"]
+
+[node name="MarketL" parent="Triggers/RoomTriggers" instance=ExtResource("8_5p207")]
+position = Vector2(-1, 152)
+roomTrigger = true
+sceneName = "Market"
+entryPoint = Vector2(-195, 0)
+facingDirection = Vector2(0, -1)
+
+[node name="CollisionPolygon2D" parent="Triggers/RoomTriggers/MarketL" index="0"]
+scale = Vector2(5.5625, 4.0625)
+
+[node name="MarketR" parent="Triggers/RoomTriggers" instance=ExtResource("8_5p207")]
+position = Vector2(348, 149)
+roomTrigger = true
+sceneName = "Market"
+entryPoint = Vector2(485, 2)
+facingDirection = Vector2(0, -1)
+
+[node name="CollisionPolygon2D" parent="Triggers/RoomTriggers/MarketR" index="0"]
+scale = Vector2(5.5625, 4.0625)
+
+[node name="Station" parent="Triggers/RoomTriggers" instance=ExtResource("8_5p207")]
+position = Vector2(1537, -124)
+roomTrigger = true
+sceneName = "Station"
+entryPoint = Vector2(0, -96)
+facingDirection = Vector2(0, 1)
+
+[node name="CollisionPolygon2D" parent="Triggers/RoomTriggers/Station" index="0"]
+scale = Vector2(6.875, 2.5)
+
+[node name="ToCentre" parent="Triggers/RoomTriggers" instance=ExtResource("8_5p207")]
+position = Vector2(1526, 970)
+roomTrigger = true
+autoTrigger = true
+sceneName = "TownCentre"
+entryPoint = Vector2(1522, -1741)
+keepXPosition = true
+
+[node name="CollisionPolygon2D" parent="Triggers/RoomTriggers/ToCentre" index="0"]
+scale = Vector2(16.4375, 3.3125)
+
+[node name="Interactables" type="Node2D" parent="Triggers"]
+
+[node name="Motorbike" parent="Triggers/Interactables" instance=ExtResource("8_5p207")]
+position = Vector2(-311, 429)
+interactable = true
+descriptionPath = "town_north_motorbike.txt"
+
+[node name="CollisionPolygon2D" parent="Triggers/Interactables/Motorbike" index="0"]
+scale = Vector2(4.125, 2.875)
+
+[editable path="Triggers/RoomTriggers/MarketL"]
+[editable path="Triggers/RoomTriggers/MarketR"]
+[editable path="Triggers/RoomTriggers/Station"]
+[editable path="Triggers/RoomTriggers/ToCentre"]
+[editable path="Triggers/Interactables/Motorbike"]

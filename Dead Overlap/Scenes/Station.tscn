@@ -1,22 +1,21 @@
-[gd_scene load_steps=8 format=3 uid="uid://x2cv3241td4n"]
+[gd_scene load_steps=7 format=3 uid="uid://x2cv3241td4n"]
 
 [ext_resource type="Script" path="res://Scripts/Location.cs" id="1_lhaa7"]
 [ext_resource type="PackedScene" uid="uid://6wwwvpsqguwa" path="res://Scenes/GUI.tscn" id="1_tojuf"]
 [ext_resource type="PackedScene" uid="uid://bocidko04r36c" path="res://Scenes/Player.tscn" id="2_kw7ua"]
 [ext_resource type="TileSet" uid="uid://co0avnwfudox" path="res://Resources/TownTileset.tres" id="3_6ymft"]
 [ext_resource type="PackedScene" uid="uid://dvdpid84c1ak8" path="res://Scenes/Ignacio.tscn" id="4_etpsy"]
-[ext_resource type="PackedScene" uid="uid://7agyq5ghpobi" path="res://Scenes/RoomTrigger.tscn" id="5_uiwcx"]
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_mjke1"]
-size = Vector2(202, 48)
+[ext_resource type="PackedScene" uid="uid://b1o7yp3j3yynn" path="res://Scenes/Trigger.tscn" id="7_02rlv"]
 
 [node name="Station" type="Node2D"]
 script = ExtResource("1_lhaa7")
+defaultEntryPoint = Vector2(0, -96)
 
 [node name="GUI" parent="." instance=ExtResource("1_tojuf")]
 visible = false
 
 [node name="Player" parent="." instance=ExtResource("2_kw7ua")]
+position = Vector2(0, -96)
 
 [node name="Camera2D" type="Camera2D" parent="Player"]
 
@@ -59,15 +58,15 @@ layer_4/tile_data = PackedInt32Array(327685, 11, 0, 393221, 11, 0, 327686, 11, 0
 [node name="Ignacio" parent="." instance=ExtResource("4_etpsy")]
 position = Vector2(247, 175)
 
-[node name="RoomTrigger" parent="." instance=ExtResource("5_uiwcx")]
-position = Vector2(-15, -193)
+[node name="ToNorth" parent="." instance=ExtResource("7_02rlv")]
+position = Vector2(1, -196)
+roomTrigger = true
+autoTrigger = true
 sceneName = "TownNorth"
 entryPoint = Vector2(1534, -104)
 facingDirection = Vector2(0, 1)
-autoTrigger = true
 
-[node name="CollisionShape2D" parent="RoomTrigger" index="0"]
-position = Vector2(16, 7)
-shape = SubResource("RectangleShape2D_mjke1")
+[node name="CollisionPolygon2D" parent="ToNorth" index="0"]
+scale = Vector2(10.25, 2.625)
 
-[editable path="RoomTrigger"]
+[editable path="ToNorth"]

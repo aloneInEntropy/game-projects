@@ -1,18 +1,11 @@
-[gd_scene load_steps=11 format=3 uid="uid://dfg0er4ct4t6i"]
+[gd_scene load_steps=8 format=3 uid="uid://dfg0er4ct4t6i"]
 
 [ext_resource type="Script" path="res://Scripts/Location.cs" id="1_77pob"]
 [ext_resource type="TileSet" uid="uid://co0avnwfudox" path="res://Resources/TownTileset.tres" id="1_adrfn"]
 [ext_resource type="PackedScene" uid="uid://bocidko04r36c" path="res://Scenes/Player.tscn" id="2_fdunc"]
 [ext_resource type="PackedScene" uid="uid://6wwwvpsqguwa" path="res://Scenes/GUI.tscn" id="3_r7u4q"]
-[ext_resource type="PackedScene" uid="uid://7agyq5ghpobi" path="res://Scenes/RoomTrigger.tscn" id="5_gl24c"]
 [ext_resource type="PackedScene" uid="uid://bgu84ublqueox" path="res://Scenes/Patrick.tscn" id="6_recjh"]
-[ext_resource type="PackedScene" uid="uid://cnnt7msd0tt44" path="res://Scenes/Interactable.tscn" id="7_0m2f6"]
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_dnnni"]
-size = Vector2(268, 48)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_uhtm2"]
-size = Vector2(114.5, 48)
+[ext_resource type="PackedScene" uid="uid://b1o7yp3j3yynn" path="res://Scenes/Trigger.tscn" id="9_bu5lk"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_e3gds"]
 radius = 76.0066
@@ -59,87 +52,6 @@ layer_4/tile_data = PackedInt32Array(-4, 11, 0, -655364, 11, 0, -589828, 11, 0, 
 [node name="GUI" parent="." instance=ExtResource("3_r7u4q")]
 visible = false
 
-[node name="RoomTriggers" type="Node2D" parent="."]
-metadata/_edit_group_ = true
-
-[node name="RoomTriggerCentre" parent="RoomTriggers" instance=ExtResource("5_gl24c")]
-position = Vector2(-6, 46)
-sceneName = "TownCentre"
-entryPoint = Vector2(-434, -890)
-autoTrigger = true
-
-[node name="CollisionShape2D" parent="RoomTriggers/RoomTriggerCentre" index="0"]
-position = Vector2(6, -22)
-shape = SubResource("RectangleShape2D_dnnni")
-
-[node name="RoomTriggerHUB" parent="RoomTriggers" instance=ExtResource("5_gl24c")]
-position = Vector2(-1, -975)
-sceneName = "Hub"
-facingDirection = Vector2(0, 1)
-
-[node name="CollisionShape2D" parent="RoomTriggers/RoomTriggerHUB" index="0"]
-shape = SubResource("RectangleShape2D_uhtm2")
-
-[node name="Interactables" type="Node2D" parent="."]
-
-[node name="Bathroom" parent="Interactables" instance=ExtResource("7_0m2f6")]
-position = Vector2(-1158, -933)
-descriptionPath = "office_f0_toilet.txt"
-metadata/_edit_group_ = true
-
-[node name="CollisionPolygon2D" parent="Interactables/Bathroom" index="0"]
-position = Vector2(4, -4)
-scale = Vector2(3.5, 3.5)
-polygon = PackedVector2Array(-10, -10, 10, -10, 10, 10, 1.34193, 10, -10, 10)
-
-[node name="Plant" parent="Interactables" instance=ExtResource("7_0m2f6")]
-position = Vector2(-1450, -821)
-descriptionPath = "office_f0_plant.txt"
-metadata/_edit_group_ = true
-
-[node name="CollisionPolygon2D" parent="Interactables/Plant" index="0"]
-scale = Vector2(3.5, 3.5)
-polygon = PackedVector2Array(-10, -10, 10, -10, 10, 10, 1.34193, 10, -10, 10)
-
-[node name="Elevator" parent="Interactables" instance=ExtResource("7_0m2f6")]
-position = Vector2(-638, -708)
-descriptionPath = "office_f0_elevator.txt"
-metadata/_edit_group_ = true
-
-[node name="CollisionPolygon2D" parent="Interactables/Elevator" index="0"]
-scale = Vector2(3.5, 3.5)
-polygon = PackedVector2Array(-10, -10, 10, -10, 10, 10, 1.34193, 10, -10, 10)
-
-[node name="TableFood" parent="Interactables" instance=ExtResource("7_0m2f6")]
-position = Vector2(552, -538)
-descriptionPath = "office_f0_table_food.txt"
-metadata/_edit_group_ = true
-
-[node name="CollisionPolygon2D" parent="Interactables/TableFood" index="0"]
-position = Vector2(90, 74.5)
-scale = Vector2(9.125, 8.15625)
-polygon = PackedVector2Array(-10, -10, 10, -10, 10, 10, 1.34193, 10, -10, 10)
-
-[node name="TableDrinks" parent="Interactables" instance=ExtResource("7_0m2f6")]
-position = Vector2(531, -882)
-descriptionPath = "office_f0_table_drink.txt"
-metadata/_edit_group_ = true
-
-[node name="CollisionPolygon2D" parent="Interactables/TableDrinks" index="0"]
-position = Vector2(63.5, 64)
-scale = Vector2(7.46875, 7.5)
-polygon = PackedVector2Array(-10, -10, 10, -10, 10, 10, 1.34193, 10, -10, 10)
-
-[node name="Screen" parent="Interactables" instance=ExtResource("7_0m2f6")]
-position = Vector2(1104, -854)
-descriptionPath = "office_f0_screen.txt"
-metadata/_edit_group_ = true
-
-[node name="CollisionPolygon2D" parent="Interactables/Screen" index="0"]
-position = Vector2(63.5, 193)
-scale = Vector2(7.46875, 15.5625)
-polygon = PackedVector2Array(-10, -10, 10, -10, 10, 10, 1.34193, 10, -10, 10)
-
 [node name="Patrick" parent="." instance=ExtResource("6_recjh")]
 position = Vector2(-1411, -701)
 diagPath = "d6.txt"
@@ -153,12 +65,89 @@ position = Vector2(3, -54)
 
 [node name="Camera2D" type="Camera2D" parent="Player"]
 
-[editable path="RoomTriggers/RoomTriggerCentre"]
-[editable path="RoomTriggers/RoomTriggerHUB"]
-[editable path="Interactables/Bathroom"]
-[editable path="Interactables/Plant"]
-[editable path="Interactables/Elevator"]
-[editable path="Interactables/TableFood"]
-[editable path="Interactables/TableDrinks"]
-[editable path="Interactables/Screen"]
+[node name="Triggers" type="Node2D" parent="."]
+
+[node name="RoomTriggers" type="Node2D" parent="Triggers"]
+metadata/_edit_group_ = true
+
+[node name="ToCentre" parent="Triggers/RoomTriggers" instance=ExtResource("9_bu5lk")]
+position = Vector2(2, 54)
+roomTrigger = true
+autoTrigger = true
+sceneName = "TownCentre"
+entryPoint = Vector2(-434, -890)
+facingDirection = Vector2(1, 0)
+
+[node name="CollisionPolygon2D" parent="Triggers/RoomTriggers/ToCentre" index="0"]
+scale = Vector2(13.0625, 4.1875)
+
+[node name="ToHub" parent="Triggers/RoomTriggers" instance=ExtResource("9_bu5lk")]
+position = Vector2(-1, -976)
+roomTrigger = true
+sceneName = "Hub"
+facingDirection = Vector2(0, 1)
+
+[node name="CollisionPolygon2D" parent="Triggers/RoomTriggers/ToHub" index="0"]
+scale = Vector2(5.8125, 2.5625)
+
+[node name="Interactables" type="Node2D" parent="Triggers"]
+metadata/_edit_group_ = true
+
+[node name="Bathroom" parent="Triggers/Interactables" instance=ExtResource("9_bu5lk")]
+position = Vector2(-1154, -941)
+interactable = true
+descriptionPath = "office_f0_toilet.txt"
+
+[node name="CollisionPolygon2D" parent="Triggers/Interactables/Bathroom" index="0"]
+scale = Vector2(5.6875, 4.1875)
+
+[node name="Elevator" parent="Triggers/Interactables" instance=ExtResource("9_bu5lk")]
+position = Vector2(-639, -724)
+interactable = true
+descriptionPath = "office_f0_elevator.txt"
+
+[node name="CollisionPolygon2D" parent="Triggers/Interactables/Elevator" index="0"]
+scale = Vector2(6.875, 4.25)
+
+[node name="Plant" parent="Triggers/Interactables" instance=ExtResource("9_bu5lk")]
+position = Vector2(-1450, -824)
+interactable = true
+descriptionPath = "office_f0_plant.txt"
+
+[node name="CollisionPolygon2D" parent="Triggers/Interactables/Plant" index="0"]
+scale = Vector2(4, 3.4375)
+
+[node name="TableDrinks" parent="Triggers/Interactables" instance=ExtResource("9_bu5lk")]
+position = Vector2(611, -803)
+interactable = true
+descriptionPath = "office_f0_table_drink.txt"
+
+[node name="CollisionPolygon2D" parent="Triggers/Interactables/TableDrinks" index="0"]
+position = Vector2(0, -12.5)
+scale = Vector2(6.4375, 7.65625)
+
+[node name="TableFood" parent="Triggers/Interactables" instance=ExtResource("9_bu5lk")]
+position = Vector2(649, -464)
+interactable = true
+descriptionPath = "office_f0_table_food.txt"
+
+[node name="CollisionPolygon2D" parent="Triggers/Interactables/TableFood" index="0"]
+scale = Vector2(8.3125, 7)
+
+[node name="Screen" parent="Triggers/Interactables" instance=ExtResource("9_bu5lk")]
+position = Vector2(1154, -629)
+interactable = true
+descriptionPath = "office_f0_screen.txt"
+
+[node name="CollisionPolygon2D" parent="Triggers/Interactables/Screen" index="0"]
+scale = Vector2(6.5, 21.75)
+
 [editable path="Patrick"]
+[editable path="Triggers/RoomTriggers/ToCentre"]
+[editable path="Triggers/RoomTriggers/ToHub"]
+[editable path="Triggers/Interactables/Bathroom"]
+[editable path="Triggers/Interactables/Elevator"]
+[editable path="Triggers/Interactables/Plant"]
+[editable path="Triggers/Interactables/TableDrinks"]
+[editable path="Triggers/Interactables/TableFood"]
+[editable path="Triggers/Interactables/Screen"]

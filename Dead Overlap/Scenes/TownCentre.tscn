@@ -1,26 +1,11 @@
-[gd_scene load_steps=12 format=3 uid="uid://ccgguei4m68g2"]
+[gd_scene load_steps=7 format=3 uid="uid://ccgguei4m68g2"]
 
 [ext_resource type="Script" path="res://Scripts/Location.cs" id="1_g3p10"]
 [ext_resource type="TileSet" uid="uid://co0avnwfudox" path="res://Resources/TownTileset.tres" id="2_5jarp"]
-[ext_resource type="PackedScene" uid="uid://7agyq5ghpobi" path="res://Scenes/RoomTrigger.tscn" id="3_oaw13"]
 [ext_resource type="PackedScene" uid="uid://bocidko04r36c" path="res://Scenes/Player.tscn" id="4_ax7v3"]
 [ext_resource type="PackedScene" uid="uid://6wwwvpsqguwa" path="res://Scenes/GUI.tscn" id="5_dw4k2"]
 [ext_resource type="Texture2D" uid="uid://dv8du4yk1nqy4" path="res://Assets/Sprites/SpotLight.png" id="6_751v4"]
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_34ede"]
-size = Vector2(114.5, 231)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_ufual"]
-size = Vector2(289, 68)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_7eui5"]
-size = Vector2(92, 132)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_ygbhs"]
-size = Vector2(282, 132)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_xveu6"]
-size = Vector2(164, 298)
+[ext_resource type="PackedScene" uid="uid://b1o7yp3j3yynn" path="res://Scenes/Trigger.tscn" id="7_rip3l"]
 
 [node name="TownCentre" type="Node2D"]
 script = ExtResource("1_g3p10")
@@ -73,65 +58,63 @@ visible = false
 
 [node name="RoomTriggers" type="Node2D" parent="."]
 
-[node name="RoomTriggerWest" parent="RoomTriggers" instance=ExtResource("3_oaw13")]
-position = Vector2(-1260, -854)
-sceneName = "TownWest"
-entryPoint = Vector2(-1044, -844)
-autoTrigger = true
-keepYPosition = true
-metadata/_edit_group_ = true
-
-[node name="CollisionShape2D" parent="RoomTriggers/RoomTriggerWest" index="0"]
-position = Vector2(15, 5.5)
-shape = SubResource("RectangleShape2D_34ede")
-
-[node name="RoomTriggerSouth" parent="RoomTriggers" instance=ExtResource("3_oaw13")]
-position = Vector2(1466, 32)
-sceneName = "TownSouth"
-entryPoint = Vector2(0, -360)
-autoTrigger = true
-keepXPosition = true
-metadata/_edit_group_ = true
-
-[node name="CollisionShape2D" parent="RoomTriggers/RoomTriggerSouth" index="0"]
-position = Vector2(56.5, 10)
-shape = SubResource("RectangleShape2D_ufual")
-
-[node name="RoomTriggerMayor" parent="RoomTriggers" instance=ExtResource("3_oaw13")]
-position = Vector2(-434, -862)
+[node name="Office" parent="RoomTriggers" instance=ExtResource("7_rip3l")]
+position = Vector2(-434, -868)
+roomTrigger = true
 sceneName = "Office"
 entryPoint = Vector2(3, -54)
 facingDirection = Vector2(0, -1)
-metadata/_edit_group_ = true
 
-[node name="CollisionShape2D" parent="RoomTriggers/RoomTriggerMayor" index="0"]
-position = Vector2(-28, -4)
-shape = SubResource("RectangleShape2D_7eui5")
+[node name="CollisionPolygon2D" parent="RoomTriggers/Office" index="0"]
+scale = Vector2(1.6875, 6.8125)
 
-[node name="RoomTriggerNorth" parent="RoomTriggers" instance=ExtResource("3_oaw13")]
-position = Vector2(1453, -1861)
+[node name="ToWest" parent="RoomTriggers" instance=ExtResource("7_rip3l")]
+position = Vector2(-1269, -850)
+roomTrigger = true
+autoTrigger = true
+sceneName = "TownWest"
+entryPoint = Vector2(-1044, -844)
+facingDirection = Vector2(0, -1)
+keepYPosition = true
+
+[node name="CollisionPolygon2D" parent="RoomTriggers/ToWest" index="0"]
+scale = Vector2(6.9375, 13.8125)
+
+[node name="ToNorth" parent="RoomTriggers" instance=ExtResource("7_rip3l")]
+position = Vector2(1498, -1842)
+roomTrigger = true
+autoTrigger = true
 sceneName = "TownNorth"
 entryPoint = Vector2(1506, 865)
-autoTrigger = true
+facingDirection = Vector2(0, -1)
 keepXPosition = true
-metadata/_edit_group_ = true
 
-[node name="CollisionShape2D" parent="RoomTriggers/RoomTriggerNorth" index="0"]
-position = Vector2(67, -4)
-shape = SubResource("RectangleShape2D_ygbhs")
+[node name="CollisionPolygon2D" parent="RoomTriggers/ToNorth" index="0"]
+scale = Vector2(18.375, 3.3125)
 
-[node name="RoomTriggerEast" parent="RoomTriggers" instance=ExtResource("3_oaw13")]
-position = Vector2(2193, -1018)
+[node name="ToEast" parent="RoomTriggers" instance=ExtResource("7_rip3l")]
+position = Vector2(2176, -882)
+roomTrigger = true
+autoTrigger = true
 sceneName = "TownEast"
 entryPoint = Vector2(-1130, 0)
 facingDirection = Vector2(1, 0)
-autoTrigger = true
 keepYPosition = true
-metadata/_edit_group_ = true
 
-[node name="CollisionShape2D" parent="RoomTriggers/RoomTriggerEast" index="0"]
-position = Vector2(8, 142)
-shape = SubResource("RectangleShape2D_xveu6")
+[node name="CollisionPolygon2D" parent="RoomTriggers/ToEast" index="0"]
+scale = Vector2(4.1875, 15.8125)
+
+[node name="ToSouth" parent="RoomTriggers" instance=ExtResource("7_rip3l")]
+position = Vector2(1511, 52)
+roomTrigger = true
+autoTrigger = true
+sceneName = "TownSouth"
+entryPoint = Vector2(0, -360)
+facingDirection = Vector2(0, 1)
+keepXPosition = true
+
+[node name="CollisionPolygon2D" parent="RoomTriggers/ToSouth" index="0"]
+scale = Vector2(19.625, 3.6875)
 
 [node name="CanvasModulate" type="CanvasModulate" parent="."]
 color = Color(0.572549, 0.541176, 0.439216, 1)
@@ -368,8 +351,8 @@ color = Color(0.231373, 1, 0.219608, 1)
 texture = ExtResource("6_751v4")
 texture_scale = 0.3
 
-[editable path="RoomTriggers/RoomTriggerWest"]
-[editable path="RoomTriggers/RoomTriggerSouth"]
-[editable path="RoomTriggers/RoomTriggerMayor"]
-[editable path="RoomTriggers/RoomTriggerNorth"]
-[editable path="RoomTriggers/RoomTriggerEast"]
+[editable path="RoomTriggers/Office"]
+[editable path="RoomTriggers/ToWest"]
+[editable path="RoomTriggers/ToNorth"]
+[editable path="RoomTriggers/ToEast"]
+[editable path="RoomTriggers/ToSouth"]

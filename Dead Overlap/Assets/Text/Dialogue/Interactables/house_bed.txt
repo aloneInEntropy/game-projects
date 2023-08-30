@@ -1,0 +1,3 @@
+~0
+    A single bed. There are two of them instead of one double bed for some reason.
+~.

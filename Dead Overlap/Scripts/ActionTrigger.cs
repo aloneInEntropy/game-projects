@@ -84,6 +84,8 @@ public partial class ActionTrigger : Area2D
     [Export]
     public string entryDeniedTextSpeaker;
 
+    bool firstShown = false;
+
 
     /// <summary>
     /// Trigger this ActionTrigger object, depending on whether it is an interactable (displays a dialogue box) or a room trigger (changes rooms).
@@ -106,8 +108,11 @@ public partial class ActionTrigger : Area2D
     /// <param name="describer"></param>
     public void OpenDescription() {
         Globals.talkingNPC = Globals.GetNPC("Narrator");
-        Globals.gui.ProgressDialogue(Globals.GetNPC("Narrator"));
-        Globals.gui.db.Modify(describer ?? "Narrator");
+        if (!firstShown) {
+            Globals.gui.db.Modify(describer ?? "Narrator");
+            firstShown = true;
+        }
+        if (!Globals.gui.ProgressDialogue(Globals.GetNPC("Narrator"))) firstShown = false;
     }
 
 
@@ -128,7 +133,11 @@ public partial class ActionTrigger : Area2D
 			// GD.Print("cant go in");
 			Globals.talkingNPC = Globals.GetNPC("Narrator");
             Globals.gui.ProgressDialogue(Globals.GetNPC("Narrator"));
-            Globals.gui.db.Modify(entryDeniedTextSpeaker ?? "Narrator");
+            if (!Globals.gui.ProgressDialogue(Globals.GetNPC("Narrator"))) firstShown = false;
+            if (!firstShown) {
+                Globals.gui.db.Modify(entryDeniedTextSpeaker ?? "Narrator");
+                firstShown = true;
+            }
 		}
 	}
 
@@ -146,9 +155,14 @@ public partial class ActionTrigger : Area2D
 
     public void OnAreaEntered(Area2D area) {
         if (area.GetParent().GetType() == typeof(Player)) {
-            if (interactable) Globals.GetNPC("Narrator").LoadDialogue("Interactables/" + descriptionPath);
-            if (entryRequirementVariableName is not null) Globals.GetNPC("Narrator").LoadDialogue("Interactables/" + entryDeniedTextSource);
-            // else GD.Print("Nothing in this interactable");
+            if (interactable) {
+                Globals.GetNPC("Narrator").LoadDialogue("Interactables/" + descriptionPath);
+                Globals.gui.db.Modify(describer ?? "Narrator");
+            }
+
+            if (entryRequirementVariableName is not null) {
+                Globals.GetNPC("Narrator").LoadDialogue("Interactables/" + entryDeniedTextSource);
+            }
 
             if (autoTrigger) {
                 Globals.player.Velocity = Vector2.Zero;

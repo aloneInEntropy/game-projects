@@ -86,11 +86,11 @@ public partial class DialogueBox : Control
 	/// <param name="d"></param>
 	public void LoadDialogue(DialogueObject d) {
 		dialogue = d;
-		nameLabel.Text = Globals.talkingNPC.Name;
+		nameLabel.Text = Globals.talkingNPC.Name == "Narrator" ? "" : Globals.talkingNPC.Name;
 	}
 	
 	/// <summary>
-	/// Load the DialogueObject for the dialogue box
+	/// Load the DialogueObject for the dialogue box from a certain speaker.
 	/// </summary>
 	/// <param name="d"></param>
 	public void LoadDialogue(DialogueObject d, string nameLabelText) {

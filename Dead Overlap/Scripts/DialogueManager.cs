@@ -405,7 +405,7 @@ public partial class DialogueManager : Node
 	public void CompleteMission(string missionName) {
 		// Globals.gui.notebook.RemoveMission(PlayerVariables.GetMission(missionName));
 		// GD.Print(missionName);
-		if (!PlayerVariables.GetMission(missionName).Completed) {
+		if (PlayerVariables.GetMission(missionName).Active && !PlayerVariables.GetMission(missionName).Completed) {
 			PlayerVariables.GetMission(missionName).Complete();
 			Globals.gui.notebook.CompleteMission(PlayerVariables.GetMission(missionName));
 		}
@@ -416,5 +416,9 @@ public partial class DialogueManager : Node
 		PlayerVariables.GetMission(missionName).Activate();
 		Globals.gui.notebook.AddMission(PlayerVariables.GetMission(missionName));
 		// GD.Print(missionName);
+	}
+
+	public void SaveClue(string clue) {
+		GD.Print("new clue");
 	}
 }

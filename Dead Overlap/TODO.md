@@ -1,14 +1,15 @@
+
 (If anything is not finished on the intended date(s), forward it to the following day and reduce its scale. Writing and time travel mechanics are to be given priority.)
 
 21/08/2023
 - [x] Work on Notebook menu and Dialogue Switching mechanics
-- [ ] Finish writing about all characters and events
+- [x] Finish writing about all characters and events
 	- [x] Makoto Bourdain
 	- [x] Adora Aga
 	- [x] Johnny Lawn
 	- [x] Ignacio Pascal
 	- [x] Patrick Cuno
-	- [ ] Jordan Cuno
+	- [x] Jordan Cuno
 	- [x] Farah Sal-Cuno
 	- [x] Marie Bornstein
 
@@ -30,21 +31,69 @@
 
 23/08
 - [x] Item interaction
-- [ ] Tilemap setup
-	- [x] Adora's house
-	- [ ] Mayor's office
-	- [ ] The market
-	- [ ] The Hub
-	- [ ] Shune
+- [x] Tilemap setup
+	- [x] Shune
+		- [x] South
+			- [x] Adora's house
+		- [x] Centre
+			- [x] Mayor's office
+				- [x] The Hub
+		- [x] North
+			- [x] Police station
+			- [x] The Market
+		- [x] East
+			- [x] The Shack
 - [x] Room traversal
 - [ ] Pause menu and ability to return to the present time
 
 24/08 - 25/08
-- [ ] Ability to call multiple commands at once.
-- [ ] Music and sound effects
+- [x] Music and sound effects
 - [ ] Writing the mystery
+- [x] Finishing tilemap
+- [ ] Figuring out how to make the game more fun to play
 
 26/08
 - [ ] Polish
-	- [ ] Extra UI effects, such as a pop-up when dialogue is saved or deleted.
+	- [x] Extra UI effects, such as a pop-up when dialogue is saved or deleted.
 	- [ ] Different design for the notebook.
+- [ ] Farah and Jordan's house
+	- [ ] Speaking to Jordan before Farah's confession
+- [ ] Access Adora's house last
+
+---
+
+fuck it
+i'm gonna do what i want
+
+---
+
+- [ ] North
+	- [ ] Market
+		- [ ] More NPCs
+		- [ ] Item descriptions
+		- [ ] Flashlight section
+		- [ ] Marie Bornstein progressive dialogue
+	- [ ] Police Station
+		- [ ] Jail cells
+		- [ ] Holding cells
+			- [ ] Johnny Lawn progressive dialogue
+- [ ] Centre
+	- [ ] Hub
+		- [ ] Add functionality
+	- [ ] Mayor's office
+		- [ ] Different floors
+			- [ ] Patrick Cuno on fifth floor
+		- [ ] Working elevator
+		- [ ] Patrick Cuno progressive dialogue
+		- [ ] Melissa (secretary) progressive dialogue
+	- [ ] Farah and Jordan's house
+	- [ ] Cars
+- [ ] West
+	- [ ] Expand slightly
+- [ ] East
+	- [ ] Expand shack
+		- [ ] More floors
+- [ ] South
+	- [ ] Adora not present until spoken to all other characters once
+		- [ ] Lock Adora's house until spoken to all other characters, then going to station to collect warrant
+		- [ ] Explosives found at the house

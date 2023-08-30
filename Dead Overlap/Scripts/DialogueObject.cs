@@ -131,9 +131,9 @@ public partial class DialogueObject
 	/// Call all functions specified for the `choice`.
 	public void CallChoiceFunctions(int choice) {
 		if (choiceFunctions[choice] != "") {
-			var ress = CallFunctions(choiceFunctions[choice]);
-			parseResult = ress.parseRes;
-			functionResult = ress.funcRes;
+			var (parseRes, funcRes) = CallFunctions(choiceFunctions[choice]);
+			parseResult = parseRes;
+			functionResult = funcRes;
 		} else {
 			// GD.Print("No available functions for this choice.");
 		}
@@ -146,9 +146,9 @@ public partial class DialogueObject
 		// GD.Print(d);
 		foreach (var d in dialogueFunctions) {
 			if (d != "") {
-				var ress = CallFunctions(d);
-				parseResult = ress.parseRes;
-				functionResult = ress.funcRes;
+				var (parseRes, funcRes) = CallFunctions(d);
+				parseResult = parseRes;
+				functionResult = funcRes;
 			} else {
 				// GD.Print("No available functions for this line.");
 			}
@@ -161,9 +161,9 @@ public partial class DialogueObject
 	public void CallResponseFunctions(int resp) {
 		// GD.Print(d);
 		if (responseFunctions[resp] != "") {
-			var ress = CallFunctions(responseFunctions[resp]);
-			parseResult = ress.parseRes;
-			functionResult = ress.funcRes;
+			var (parseRes, funcRes) = CallFunctions(responseFunctions[resp]);
+			parseResult = parseRes;
+			functionResult = funcRes;
 		} else {
 			// GD.Print("No available functions for this line.");
 		}
