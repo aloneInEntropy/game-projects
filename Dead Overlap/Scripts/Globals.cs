@@ -11,9 +11,9 @@ using System;
 public partial class Globals : Node
 {
 	/// <summary>
-	/// The current scene.
+	/// The current Location the Player is in.
 	/// </summary>
-	public static PackedScene currentScene = new();
+	public static Location currentLocation = new();
 
 	/// <summary>
 	/// The global onscreen GUI.
@@ -38,7 +38,7 @@ public partial class Globals : Node
 	/// <summary>
 	/// The current day the Player is exploring in.
 	/// </summary>
-	public static int day = new();
+	public static int day = 0;
 
 	/// <summary>
     /// Static JSON serializer options.
@@ -92,13 +92,11 @@ public partial class Globals : Node
 		"September 12th"
 	};
 
-	public static string currentRoom = "";
-
 
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
-		day = 0;
+        day = 0;
 	}
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -121,6 +119,25 @@ public partial class Globals : Node
 	/// <returns></returns>
 	public static NPC GetNPC(string n) {
 		return nPCs.FirstOrDefault(m => m.trueName == n);
+	}
+
+	/// <summary>
+	/// Load a scene asyncronously. This uses the FadeOut animation in the current Location to work. <br/>
+	/// If you need to load a scene statically, use ChangeScene.
+	/// </summary>
+	/// <param name="sceneName"></param>
+	public async void LoadScene(string sceneName) {
+		currentLocation.Leave();
+		await ToSignal(currentLocation.animationPlayer, "animation_finished");
+		currentLocation.GetTree().ChangeSceneToFile("res://Scenes/" + sceneName + ".tscn");
+	}
+
+	/// <summary>
+	/// Load a scene <c>sceneName</c>.
+	/// </summary>
+	/// <param name="sceneName"></param>
+	public static void ChangeScene(string sceneName) {
+		currentLocation.GetTree().ChangeSceneToFile("res://Scenes/" + sceneName + ".tscn");
 	}
 }
 

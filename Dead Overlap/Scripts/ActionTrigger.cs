@@ -74,7 +74,7 @@ public partial class ActionTrigger : Area2D
     [Export]
     public bool keepYPosition = false;
 
-    [ExportSubgroup("Interaction")]
+    [ExportSubgroup("Requirements")]
     [Export]
     public string entryRequirementVariableName;
     [Export]
@@ -123,21 +123,22 @@ public partial class ActionTrigger : Area2D
 	public void Change() {
 		if ((entryRequirementVariableName is null) || 
 			(entryRequirementVariableName is not null && (bool)PlayerVariables.GetVar(entryRequirementVariableName) == entryRequirementVariableValue)) {
-			GameManager.sceneChangeFacing = facingDirection;
+            GameManager.sceneChangeFacing = facingDirection;
 			GameManager.sceneChangePosition = new Vector2(
 				keepXPosition ? Globals.player.Position.X : entryPoint.X,
 				keepYPosition ? Globals.player.Position.Y : entryPoint.Y
 			);
-			GetTree().ChangeSceneToFile("res://Scenes/" + sceneName + ".tscn");
+            Globals g = new();
+            g.LoadScene(sceneName);
+            // Globals.LoadScene(sceneName);
 		} else {
 			// GD.Print("cant go in");
 			Globals.talkingNPC = Globals.GetNPC("Narrator");
-            Globals.gui.ProgressDialogue(Globals.GetNPC("Narrator"));
-            if (!Globals.gui.ProgressDialogue(Globals.GetNPC("Narrator"))) firstShown = false;
             if (!firstShown) {
                 Globals.gui.db.Modify(entryDeniedTextSpeaker ?? "Narrator");
                 firstShown = true;
             }
+            if (!Globals.gui.ProgressDialogue(Globals.GetNPC("Narrator"))) firstShown = false;
 		}
 	}
 

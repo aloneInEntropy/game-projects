@@ -1,15 +1,84 @@
-[gd_scene load_steps=7 format=3 uid="uid://c2356rv8ovfpk"]
+[gd_scene load_steps=12 format=3 uid="uid://c2356rv8ovfpk"]
 
 [ext_resource type="PackedScene" uid="uid://6wwwvpsqguwa" path="res://Scenes/GUI.tscn" id="1_3nvea"]
 [ext_resource type="Script" path="res://Scripts/Location.cs" id="1_df3fq"]
 [ext_resource type="PackedScene" uid="uid://bocidko04r36c" path="res://Scenes/Player.tscn" id="2_c1m01"]
 [ext_resource type="TileSet" uid="uid://co0avnwfudox" path="res://Resources/TownTileset.tres" id="3_5xi87"]
+[ext_resource type="Animation" uid="uid://itk702l2v47e" path="res://Resources/Animations/FadeOut.res" id="7_kr5ys"]
+[ext_resource type="Texture2D" uid="uid://dmrdwi1vlycw4" path="res://quad_128.png" id="7_okgmm"]
 [ext_resource type="Texture2D" uid="uid://dv8du4yk1nqy4" path="res://Assets/Sprites/SpotLight.png" id="7_xxyap"]
 [ext_resource type="PackedScene" uid="uid://b1o7yp3j3yynn" path="res://Scenes/Trigger.tscn" id="8_5p207"]
+[ext_resource type="Animation" uid="uid://omjcu0jeaa6a" path="res://Resources/Animations/FadeIn.res" id="8_ielih"]
+
+[sub_resource type="Animation" id="Animation_5vdex"]
+length = 0.001
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Foreground:modulate:r")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/1/type = "bezier"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Foreground:modulate:g")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/2/type = "bezier"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Foreground:modulate:b")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/3/type = "bezier"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Foreground:modulate:a")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Foreground:visible")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_5j36a"]
+_data = {
+"FadeIn": ExtResource("8_ielih"),
+"FadeOut": ExtResource("7_kr5ys"),
+"RESET": SubResource("Animation_5vdex")
+}
 
 [node name="TownNorth" type="Node2D"]
 script = ExtResource("1_df3fq")
-defaultEntryPoint = Vector2(1530, 353)
+defaultEntryPoint = Vector2(352, 359)
 
 [node name="GUI" parent="." instance=ExtResource("1_3nvea")]
 visible = false
@@ -191,6 +260,20 @@ descriptionPath = "town_north_motorbike.txt"
 
 [node name="CollisionPolygon2D" parent="Triggers/Interactables/Motorbike" index="0"]
 scale = Vector2(4.125, 2.875)
+
+[node name="Foreground" type="Sprite2D" parent="."]
+modulate = Color(0, 0, 0, 0)
+z_index = 14
+y_sort_enabled = true
+position = Vector2(-799, -465)
+scale = Vector2(23.9219, 13.0156)
+texture = ExtResource("7_okgmm")
+centered = false
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_5j36a")
+}
 
 [editable path="Triggers/RoomTriggers/MarketL"]
 [editable path="Triggers/RoomTriggers/MarketR"]

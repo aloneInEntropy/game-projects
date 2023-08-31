@@ -45,6 +45,8 @@ public partial class Notebook : Control
 
 	List<RichTextLabel> missionLabels = new();
 
+	public bool newClue = false;
+
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
@@ -53,6 +55,7 @@ public partial class Notebook : Control
 		tabContainer.SetTabTitle(1, "Saved Notes");
 		tabContainer.SetTabTitle(2, "Victim");
 		tabContainer.SetTabTitle(3, "Tasks");
+		tabContainer.SetTabTitle(4, "Clues");
 		suspectWindow = GetNodeOrNull<Control>("TabContainer/SuspectWindow");
 		suspectDescription = GetNodeOrNull<RichTextLabel>("TabContainer/SuspectWindow/Description");
 		noteWindow = GetNodeOrNull<ScrollContainer>("TabContainer/NoteWindow");

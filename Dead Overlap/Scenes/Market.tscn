@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://dp77b2bosmyhw"]
+[gd_scene load_steps=13 format=3 uid="uid://dp77b2bosmyhw"]
 
 [ext_resource type="Script" path="res://Scripts/Location.cs" id="1_ehgsr"]
 [ext_resource type="PackedScene" uid="uid://6wwwvpsqguwa" path="res://Scenes/GUI.tscn" id="1_mg374"]
@@ -6,13 +6,69 @@
 [ext_resource type="TileSet" uid="uid://co0avnwfudox" path="res://Resources/TownTileset.tres" id="3_dqc6i"]
 [ext_resource type="PackedScene" uid="uid://d2fcsegb8ryob" path="res://Scenes/Marie.tscn" id="4_e7r4i"]
 [ext_resource type="PackedScene" uid="uid://b1o7yp3j3yynn" path="res://Scenes/Trigger.tscn" id="7_3yhxf"]
+[ext_resource type="Texture2D" uid="uid://dmrdwi1vlycw4" path="res://quad_128.png" id="7_63x3o"]
+[ext_resource type="Animation" uid="uid://itk702l2v47e" path="res://Resources/Animations/FadeOut.res" id="8_cy20k"]
+[ext_resource type="Animation" uid="uid://omjcu0jeaa6a" path="res://Resources/Animations/FadeIn.res" id="9_iapbf"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_ohda5"]
 radius = 73.1095
 
+[sub_resource type="Animation" id="Animation_5vdex"]
+length = 0.001
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Foreground:modulate:r")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/1/type = "bezier"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Foreground:modulate:g")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/2/type = "bezier"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Foreground:modulate:b")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/3/type = "bezier"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Foreground:modulate:a")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_5j36a"]
+_data = {
+"FadeIn": ExtResource("9_iapbf"),
+"FadeOut": ExtResource("8_cy20k"),
+"RESET": SubResource("Animation_5vdex")
+}
+
 [node name="Market" type="Node2D"]
 script = ExtResource("1_ehgsr")
-defaultEntryPoint = Vector2(145, -123)
 
 [node name="GUI" parent="." instance=ExtResource("1_mg374")]
 visible = false
@@ -97,6 +153,20 @@ facingDirection = Vector2(0, 1)
 
 [node name="CollisionPolygon2D" parent="RoomTriggers/ToNorthR" index="0"]
 scale = Vector2(10.625, 3.125)
+
+[node name="Foreground" type="Sprite2D" parent="."]
+modulate = Color(0, 0, 0, 0)
+z_index = 14
+y_sort_enabled = true
+position = Vector2(-1078, -1310)
+scale = Vector2(18.3984, 12.4531)
+texture = ExtResource("7_63x3o")
+centered = false
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_5j36a")
+}
 
 [editable path="Marie"]
 [editable path="RoomTriggers/ToNorthL"]

@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://b3lnclwd7qrxb"]
+[gd_scene load_steps=15 format=3 uid="uid://b3lnclwd7qrxb"]
 
 [ext_resource type="Script" path="res://Scripts/Location.cs" id="1_tgh3m"]
 [ext_resource type="Texture2D" uid="uid://dmrdwi1vlycw4" path="res://quad_128.png" id="2_l3su2"]
@@ -9,13 +9,81 @@
 [ext_resource type="PackedScene" uid="uid://hfo0tlwgf4nj" path="res://Scenes/Narrator.tscn" id="9_rehn5"]
 [ext_resource type="Texture2D" uid="uid://coq70vxuv65o6" path="res://Assets/Sprites/DirLight.png" id="10_b0nas"]
 [ext_resource type="PackedScene" uid="uid://b1o7yp3j3yynn" path="res://Scenes/Trigger.tscn" id="10_k88pl"]
+[ext_resource type="Animation" uid="uid://itk702l2v47e" path="res://Resources/Animations/FadeOut.res" id="10_rcqw6"]
+[ext_resource type="Animation" uid="uid://omjcu0jeaa6a" path="res://Resources/Animations/FadeIn.res" id="11_n2ejv"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_cf4nn"]
 radius = 50.0
 
+[sub_resource type="Animation" id="Animation_5vdex"]
+length = 0.001
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Foreground:modulate:r")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/1/type = "bezier"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Foreground:modulate:g")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/2/type = "bezier"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Foreground:modulate:b")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/3/type = "bezier"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Foreground:modulate:a")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Foreground:visible")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_5j36a"]
+_data = {
+"FadeIn": ExtResource("11_n2ejv"),
+"FadeOut": ExtResource("10_rcqw6"),
+"RESET": SubResource("Animation_5vdex")
+}
+
 [node name="House" type="Node2D"]
 script = ExtResource("1_tgh3m")
-defaultEntryPoint = Vector2(486, 534)
+defaultEntryPoint = Vector2(470, 504)
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 modulate = Color(0, 0, 0, 1)
@@ -97,7 +165,6 @@ shape = SubResource("CircleShape2D_cf4nn")
 polygon = PackedVector2Array(1181, 449, 1319, 449, 1319, 383, 1184, 385, 1184, 356, 1335, 356, 1338, 465, 1181, 468)
 
 [node name="Lights" type="Node2D" parent="."]
-metadata/_edit_lock_ = true
 
 [node name="PointLight2D" type="PointLight2D" parent="Lights"]
 position = Vector2(1057, 524)
@@ -171,20 +238,20 @@ descriptionPath = "house_bed.txt"
 scale = Vector2(4.9375, 4.3125)
 
 [node name="Letter" parent="Triggers/Interactables" instance=ExtResource("10_k88pl")]
-position = Vector2(560, -273)
+position = Vector2(559, -289)
 interactable = true
 descriptionPath = "house_letter.txt"
 
 [node name="CollisionPolygon2D" parent="Triggers/Interactables/Letter" index="0"]
-scale = Vector2(4, 3.875)
+scale = Vector2(4, 2.125)
 
 [node name="Eye" parent="Triggers/Interactables" instance=ExtResource("10_k88pl")]
-position = Vector2(671, -270)
+position = Vector2(676, -276)
 interactable = true
 descriptionPath = "house_eye.txt"
 
 [node name="CollisionPolygon2D" parent="Triggers/Interactables/Eye" index="0"]
-scale = Vector2(2.4375, 2.25)
+scale = Vector2(1.0625, 0.999999)
 
 [node name="Bowl" parent="Triggers/Interactables" instance=ExtResource("10_k88pl")]
 position = Vector2(304, 222)
@@ -209,6 +276,20 @@ descriptionPath = "house_tv.txt"
 
 [node name="CollisionPolygon2D" parent="Triggers/Interactables/TV" index="0"]
 scale = Vector2(2.4375, 3.875)
+
+[node name="Foreground" type="Sprite2D" parent="."]
+modulate = Color(0, 0, 0, 0)
+z_index = 14
+y_sort_enabled = true
+position = Vector2(-799, -465)
+scale = Vector2(23.9219, 13.0156)
+texture = ExtResource("2_l3su2")
+centered = false
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_5j36a")
+}
 
 [editable path="Narrator"]
 [editable path="Triggers/RoomTriggers/ToSouth"]

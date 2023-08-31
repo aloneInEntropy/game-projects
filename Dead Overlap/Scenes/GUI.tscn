@@ -1,9 +1,10 @@
-[gd_scene load_steps=5 format=3 uid="uid://6wwwvpsqguwa"]
+[gd_scene load_steps=6 format=3 uid="uid://6wwwvpsqguwa"]
 
 [ext_resource type="Script" path="res://Scripts/GUI.cs" id="1_h7svq"]
 [ext_resource type="PackedScene" uid="uid://cqpj6a45n36qi" path="res://Scenes/DialogueBox.tscn" id="2_5syqh"]
 [ext_resource type="FontFile" uid="uid://brtoretp4o0u6" path="res://Assets/Fonts/Futura Extra Black font.ttf" id="4_227b2"]
 [ext_resource type="PackedScene" uid="uid://r4i21wc007bo" path="res://Scenes/Notebook.tscn" id="4_qealq"]
+[ext_resource type="FontFile" uid="uid://cy02rq8ibiqx8" path="res://Assets/Fonts/futur.ttf" id="5_bs3sn"]
 
 [node name="GUI" type="CanvasLayer"]
 script = ExtResource("1_h7svq")
@@ -23,6 +24,18 @@ bbcode_enabled = true
 text = "[center]Note saved!"
 fit_content = true
 scroll_active = false
+
+[node name="ClueFindNotif" type="RichTextLabel" parent="."]
+offset_left = 218.0
+offset_top = 73.0
+offset_right = 807.0
+offset_bottom = 129.0
+theme_override_fonts/normal_font = ExtResource("5_bs3sn")
+theme_override_fonts/bold_font = ExtResource("4_227b2")
+theme_override_font_sizes/normal_font_size = 40
+theme_override_font_sizes/bold_font_size = 40
+bbcode_enabled = true
+text = "[center][b]Clue Found!"
 
 [node name="Notebook" parent="." instance=ExtResource("4_qealq")]
 visible = false

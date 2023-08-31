@@ -1,14 +1,82 @@
-[gd_scene load_steps=10 format=3 uid="uid://d1sgxaxy1cuk4"]
+[gd_scene load_steps=14 format=3 uid="uid://d1sgxaxy1cuk4"]
 
 [ext_resource type="Script" path="res://Scripts/Location.cs" id="1_eq7ke"]
 [ext_resource type="Texture2D" uid="uid://dmrdwi1vlycw4" path="res://quad_128.png" id="2_ifk6b"]
 [ext_resource type="TileSet" uid="uid://co0avnwfudox" path="res://Resources/TownTileset.tres" id="3_yl3e8"]
 [ext_resource type="Texture2D" uid="uid://dv8du4yk1nqy4" path="res://Assets/Sprites/SpotLight.png" id="9_qlhyy"]
+[ext_resource type="Animation" uid="uid://itk702l2v47e" path="res://Resources/Animations/FadeOut.res" id="10_7xq61"]
 [ext_resource type="Texture2D" uid="uid://coq70vxuv65o6" path="res://Assets/Sprites/DirLight.png" id="10_lxewf"]
+[ext_resource type="Animation" uid="uid://omjcu0jeaa6a" path="res://Resources/Animations/FadeIn.res" id="11_gbl2a"]
 [ext_resource type="PackedScene" uid="uid://b1o7yp3j3yynn" path="res://Scenes/Trigger.tscn" id="11_qy1h4"]
 [ext_resource type="PackedScene" uid="uid://6wwwvpsqguwa" path="res://Scenes/GUI.tscn" id="15_uqkku"]
 [ext_resource type="PackedScene" uid="uid://cd68ejdj6cmcv" path="res://Scenes/Johnny.tscn" id="16_8h88m"]
 [ext_resource type="PackedScene" uid="uid://bocidko04r36c" path="res://Scenes/Player.tscn" id="18_lms2f"]
+
+[sub_resource type="Animation" id="Animation_5vdex"]
+length = 0.001
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Foreground:modulate:r")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/1/type = "bezier"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Foreground:modulate:g")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/2/type = "bezier"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Foreground:modulate:b")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/3/type = "bezier"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Foreground:modulate:a")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Foreground:visible")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_5j36a"]
+_data = {
+"FadeIn": ExtResource("11_gbl2a"),
+"FadeOut": ExtResource("10_7xq61"),
+"RESET": SubResource("Animation_5vdex")
+}
 
 [node name="TownSouth" type="Node2D"]
 script = ExtResource("1_eq7ke")
@@ -20,21 +88,10 @@ defaultEntryPoint = Vector2(952, 369)
 position = Vector2(-352, -416)
 polygon = PackedVector2Array(-4, 7.00002, -2, 1340, 2331, 1340, 2335, 1, 2495, -1, 2522, 1602, -389, 1623, -378, 7)
 
-[node name="Background" type="Sprite2D" parent="."]
-visible = false
-modulate = Color(0.823529, 0.74902, 0.709804, 1)
-z_index = -2
-y_sort_enabled = true
-position = Vector2(-16, -15)
-scale = Vector2(10.625, 7.02344)
-texture = ExtResource("2_ifk6b")
-centered = false
-
 [node name="TileMap" type="TileMap" parent="."]
 y_sort_enabled = true
 tile_set = ExtResource("3_yl3e8")
 cell_quadrant_size = 32
-collision_visibility_mode = 1
 format = 2
 layer_0/name = "Ground"
 layer_0/y_sort_enabled = true
@@ -241,6 +298,9 @@ texture = ExtResource("10_lxewf")
 texture_scale = 0.5
 
 [node name="Triggers" type="Node2D" parent="."]
+visible = false
+metadata/_edit_group_ = true
+metadata/_edit_lock_ = true
 
 [node name="Interactables" type="Node2D" parent="Triggers"]
 
@@ -427,6 +487,20 @@ keepXPosition = true
 
 [node name="CollisionPolygon2D" parent="Triggers/RoomTriggers/ToCentre" index="0"]
 scale = Vector2(17.625, 2.5)
+
+[node name="Foreground" type="Sprite2D" parent="."]
+modulate = Color(0, 0, 0, 0)
+z_index = 14
+y_sort_enabled = true
+position = Vector2(-799, -465)
+scale = Vector2(23.9219, 13.0156)
+texture = ExtResource("2_ifk6b")
+centered = false
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_5j36a")
+}
 
 [editable path="Triggers/Interactables/Bin3"]
 [editable path="Triggers/Interactables/Bin1"]

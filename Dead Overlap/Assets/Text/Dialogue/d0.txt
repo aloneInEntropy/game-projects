@@ -1,5 +1,8 @@
 // an example script. this shows how dialogue can run functions and immediately close without actually showing the dialogue box.
 // not sure what use this has, but it is possible.
 ~0
-    ||f SetPVar hasWarrant true | EndDialogueB
+    // ||f SetPVar hasWarrant true | EndDialogueB 
+    here's the warrant fam||f SetPVar hasWarrant true | Modify Johnny
+~1
+    ay thanks blud ||c Marceline
 ~.

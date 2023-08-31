@@ -31,7 +31,7 @@ public partial class AudioManager : Node
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
 	public override void _Process(double delta)
 	{
-		if (Globals.currentRoom == "Hub") {
+		if (Globals.currentLocation.Name == "Hub") {
 			bgMusicPlayer.Stop();
 		} else {
 			if (!bgMusicPlayer.Playing) {

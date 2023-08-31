@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://r4i21wc007bo"]
+[gd_scene load_steps=14 format=3 uid="uid://r4i21wc007bo"]
 
 [ext_resource type="Script" path="res://Scripts/Notebook.cs" id="1_g6qov"]
 [ext_resource type="FontFile" uid="uid://bhtiplwjrbpc7" path="res://Assets/Fonts/futura light bt.ttf" id="1_qt1ux"]
@@ -12,6 +12,7 @@
 [ext_resource type="Texture2D" uid="uid://da4nessks0ntn" path="res://Assets/Sprites/Portraits/MakotoPortrait.png" id="6_clrcp"]
 [ext_resource type="Texture2D" uid="uid://dvg7yadwauv4y" path="res://Assets/Sprites/Portraits/FarahPortrait.png" id="6_t5fkt"]
 [ext_resource type="Texture2D" uid="uid://b0a2mbekg1cri" path="res://Assets/Sprites/Portraits/MariePortrait.png" id="7_241wt"]
+[ext_resource type="Texture2D" uid="uid://d1nound1syy3g" path="res://Assets/Sprites/Showcases/Letter.png" id="13_x610q"]
 
 [node name="Notebook" type="Control"]
 layout_mode = 3
@@ -34,6 +35,7 @@ theme_override_fonts/font = ExtResource("1_qt1ux")
 tab_alignment = 1
 
 [node name="SuspectWindow" type="Control" parent="TabContainer"]
+visible = false
 layout_mode = 2
 
 [node name="GridContainer" type="GridContainer" parent="TabContainer/SuspectWindow"]
@@ -319,6 +321,19 @@ layout_mode = 2
 
 [node name="HSeparator2" type="HSeparator" parent="TabContainer/MissionWindow/MarginContainer/MissionList"]
 layout_mode = 2
+
+[node name="ClueWindow" type="Control" parent="TabContainer"]
+layout_mode = 2
+
+[node name="GridContainer" type="GridContainer" parent="TabContainer/ClueWindow"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="TextureButton" type="TextureButton" parent="TabContainer/ClueWindow/GridContainer"]
+layout_mode = 2
+texture_normal = ExtResource("13_x610q")
+stretch_mode = 0
 
 [connection signal="tab_button_pressed" from="TabContainer" to="." method="_on_tab_container_tab_button_pressed"]
 [connection signal="tab_changed" from="TabContainer" to="." method="_on_tab_container_tab_changed"]

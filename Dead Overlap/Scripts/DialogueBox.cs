@@ -81,6 +81,7 @@ public partial class DialogueBox : Control
 		animationPlayer = GetNode<AnimationPlayer>("AnimationPlayer");
 		txt.Text = "";
 		txt.VisibleRatio = 0;
+		showcase.Visible = false;
 	}
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.

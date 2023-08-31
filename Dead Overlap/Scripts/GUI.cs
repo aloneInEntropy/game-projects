@@ -7,6 +7,7 @@ using Godot;
 public partial class GUI : CanvasLayer
 {
 	public RichTextLabel noteSaveNotif = new();
+	public RichTextLabel clueFindNotif = new();
 	public DialogueBox db = new();
 	public Notebook notebook = new();
 
@@ -30,6 +31,8 @@ public partial class GUI : CanvasLayer
 		Globals.gui = this;
 		noteSaveNotif = (RichTextLabel)GetNode("NoteSaveNotif");
 		noteSaveNotif.Modulate = new Color(1, 1, 1, 0);
+		clueFindNotif = (RichTextLabel)GetNode("ClueFindNotif");
+		clueFindNotif.Modulate = new Color(1, 1, 1, 0);
 		db = (DialogueBox)GetNode("DialogueBox");
 		db.Visible = false;
 		notebook = (Notebook)GetNode("Notebook");
@@ -40,6 +43,7 @@ public partial class GUI : CanvasLayer
 	public override void _Process(double delta)
 	{
 		noteSaveNotif.Modulate = new Color(1, 1, 1, Mathf.Clamp(noteSaveNotif.Modulate.A - 0.02f, 0, 1));
+		clueFindNotif.Modulate = new Color(1, 1, 1, Mathf.Clamp(clueFindNotif.Modulate.A - 0.01f, 0, 1));
 	}
 
 	public override void _Input(InputEvent @event) {
@@ -107,6 +111,10 @@ public partial class GUI : CanvasLayer
 
 	public void CloseDialogue() {
 		db.Close();
+		if (notebook.newClue) {
+			clueFindNotif.Modulate = new Color(1, 1, 1, 1);
+			notebook.newClue = false;
+		}
 		if (IsInstanceValid(talkingNPC)) {
 			talkingNPC.ResetDialogue(talkingNPC.diagPath);
 			talkingNPC = null;
