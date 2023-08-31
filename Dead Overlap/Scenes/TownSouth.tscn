@@ -298,7 +298,6 @@ texture = ExtResource("10_lxewf")
 texture_scale = 0.5
 
 [node name="Triggers" type="Node2D" parent="."]
-visible = false
 metadata/_edit_group_ = true
 metadata/_edit_lock_ = true
 
@@ -461,7 +460,6 @@ position = Vector2(7, 0)
 scale = Vector2(9.625, 2.625)
 
 [node name="RoomTriggers" type="Node2D" parent="Triggers"]
-metadata/_edit_lock_ = true
 
 [node name="ToHouse" parent="Triggers/RoomTriggers" instance=ExtResource("11_qy1h4")]
 position = Vector2(942, 183)
@@ -469,10 +467,9 @@ roomTrigger = true
 sceneName = "House"
 entryPoint = Vector2(470, 504)
 facingDirection = Vector2(0, -1)
-entryRequirementVariableName = "hasWarrant"
-entryRequirementVariableValue = true
-entryDeniedTextSource = "town_south_house_nw.txt"
-entryDeniedTextSpeaker = "Marceline"
+triggerRequirementVariableName = "hasWarrant"
+triggerRequirementVariableValue = true
+triggerDeniedTextSource = "town_south_house_nw.txt"
 
 [node name="CollisionPolygon2D" parent="Triggers/RoomTriggers/ToHouse" index="0"]
 scale = Vector2(3, 3.125)
@@ -496,6 +493,8 @@ position = Vector2(-799, -465)
 scale = Vector2(23.9219, 13.0156)
 texture = ExtResource("2_ifk6b")
 centered = false
+metadata/_edit_lock_ = true
+metadata/_edit_group_ = true
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {

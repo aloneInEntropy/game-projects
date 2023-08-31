@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://r4i21wc007bo"]
+[gd_scene load_steps=15 format=3 uid="uid://r4i21wc007bo"]
 
 [ext_resource type="Script" path="res://Scripts/Notebook.cs" id="1_g6qov"]
 [ext_resource type="FontFile" uid="uid://bhtiplwjrbpc7" path="res://Assets/Fonts/futura light bt.ttf" id="1_qt1ux"]
@@ -13,6 +13,7 @@
 [ext_resource type="Texture2D" uid="uid://dvg7yadwauv4y" path="res://Assets/Sprites/Portraits/FarahPortrait.png" id="6_t5fkt"]
 [ext_resource type="Texture2D" uid="uid://b0a2mbekg1cri" path="res://Assets/Sprites/Portraits/MariePortrait.png" id="7_241wt"]
 [ext_resource type="Texture2D" uid="uid://d1nound1syy3g" path="res://Assets/Sprites/Showcases/Letter.png" id="13_x610q"]
+[ext_resource type="Texture2D" uid="uid://dbgh2rpwijtl5" path="res://Assets/Sprites/Showcases/MariePen.png" id="14_t151l"]
 
 [node name="Notebook" type="Control"]
 layout_mode = 3
@@ -326,13 +327,27 @@ layout_mode = 2
 layout_mode = 2
 
 [node name="GridContainer" type="GridContainer" parent="TabContainer/ClueWindow"]
-layout_mode = 0
-offset_right = 40.0
-offset_bottom = 40.0
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 128.0
+grow_horizontal = 2
+columns = 7
 
 [node name="TextureButton" type="TextureButton" parent="TabContainer/ClueWindow/GridContainer"]
 layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
 texture_normal = ExtResource("13_x610q")
+ignore_texture_size = true
+stretch_mode = 0
+
+[node name="TextureButton2" type="TextureButton" parent="TabContainer/ClueWindow/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+texture_normal = ExtResource("14_t151l")
+ignore_texture_size = true
 stretch_mode = 0
 
 [connection signal="tab_button_pressed" from="TabContainer" to="." method="_on_tab_container_tab_button_pressed"]

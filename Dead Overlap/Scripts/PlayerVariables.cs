@@ -19,6 +19,16 @@ public partial class PlayerVariables : Node
     /// </summary>
     public static bool hasWarrant = false;
 
+	/// <summary>
+	/// Has Marie told Marceline about her poisoned pen?
+	/// </summary>
+	public static bool knowsPenMarie = false;
+	
+	/// <summary>
+	/// Has Patrick told Marceline about his poisoned pen?
+	/// </summary>
+	public static bool knowsPenPatrick = false;
+
     /// <summary>
 	/// The list of missions given to the Player by this NPC.
 	/// </summary>
@@ -43,6 +53,12 @@ public partial class PlayerVariables : Node
 			case "hasWarrant":
 				hasWarrant = bool.Parse(val);
 				break;
+			case "knowsPenMarie":
+				knowsPenMarie = bool.Parse(val);
+				break;
+			case "knowsPenPatrick":
+				knowsPenPatrick = bool.Parse(val);
+				break;
 			default:
 				break;
 		}
@@ -58,6 +74,8 @@ public partial class PlayerVariables : Node
         {
             "hasLight" => hasLight,
             "hasWarrant" => hasWarrant,
+            "knowsPenMarie" => knowsPenMarie,
+            "knowsPenPatrick" => knowsPenPatrick,
             _ => null,
         };
     }

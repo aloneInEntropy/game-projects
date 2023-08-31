@@ -1,3 +1,3 @@
 # Godot 4+ specific ignores
 .godot/
-Scripts/Notes/notes.json
+Assets/Text/Notes/notes.json

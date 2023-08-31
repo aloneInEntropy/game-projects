@@ -1,3 +1,3 @@
 ~0
-    A side door to the shack. It's too dark to see inside.
+    A side door? It's too dark to see inside, though... It'd be dangerous to go inside without a light. ||c Marceline
 ~.

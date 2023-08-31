@@ -9,7 +9,7 @@ public partial class Mark : NPC
 		trueName = "Mark";
 		Globals.AddNPC(this);
 
-		diagPath = "d3.txt";
+		// diagPath = "d3.txt";
 		LoadDialogue(diagPath);
 
 		voicePath = "Mark.wav";

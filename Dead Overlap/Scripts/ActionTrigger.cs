@@ -74,45 +74,54 @@ public partial class ActionTrigger : Area2D
     [Export]
     public bool keepYPosition = false;
 
-    [ExportSubgroup("Requirements")]
+    [ExportGroup("Requirements")]
     [Export]
-    public string entryRequirementVariableName;
+    public string triggerRequirementVariableName;
     [Export]
-    public bool entryRequirementVariableValue;
+    public bool triggerRequirementVariableValue;
     [Export]
-    public string entryDeniedTextSource;
+    public string triggerDeniedTextSource;
     [Export]
-    public string entryDeniedTextSpeaker;
+    public string triggerDeniedTextSpeaker;
 
     bool firstShown = false;
 
 
     /// <summary>
-    /// Trigger this ActionTrigger object, depending on whether it is an interactable (displays a dialogue box) or a room trigger (changes rooms).
+    /// Trigger this ActionTrigger object.
     /// </summary>
     public void Trigger() {
-        if (interactable) {
-            OpenDescription();
-        } else if (roomTrigger) {
-            TryUpdateFacingPos(Globals.player.lastDirection);
-            Change();
-        } else {
-            GD.Print($"Empty trigger {Name} @ {GetParent().Name}");
+        if ((triggerRequirementVariableName is null) || 
+			(triggerRequirementVariableName is not null && (bool)PlayerVariables.GetVar(triggerRequirementVariableName) == triggerRequirementVariableValue)) {
+            if (interactable) {
+                OpenDescription(describer, descriptionPath);
+            } else if (roomTrigger) {
+                TryUpdateFacingPos(Globals.player.lastDirection);
+                Change();
+            } else {
+                GD.Print($"Empty trigger {Name} @ {GetParent().Name}");
+            }
+		} else {
+            OpenDescription(triggerDeniedTextSpeaker, triggerDeniedTextSource);
         }
     }
 
     /// <summary>
     /// Open the description for this Trigger's Interactable settings and describe it. <br/>
-    /// The voice and portrait for the dialogue box when opened is the Narrator by default.
+    /// If <c>source</c> is null, dialogue won't be displayed on requirement failure. <br/>
+    /// The <c><paramref name="speaker"/></c> voice and portrait for the dialogue box when opened is the Narrator by default.
     /// </summary>
     /// <param name="describer"></param>
-    public void OpenDescription() {
-        Globals.talkingNPC = Globals.GetNPC("Narrator");
-        if (!firstShown) {
-            Globals.gui.db.Modify(describer ?? "Narrator");
-            firstShown = true;
+    public void OpenDescription(string speaker, string source) {
+        if (source is not null) {
+            Globals.talkingNPC = Globals.GetNPC("Narrator");
+            if (!firstShown) {
+                Globals.GetNPC("Narrator").LoadDialogue("Interactables/" + source);
+                Globals.gui.db.Modify(speaker ?? "Narrator");
+                firstShown = true;
+            }
+            if (!Globals.gui.ProgressDialogue(Globals.GetNPC("Narrator"))) firstShown = false;
         }
-        if (!Globals.gui.ProgressDialogue(Globals.GetNPC("Narrator"))) firstShown = false;
     }
 
 
@@ -121,25 +130,13 @@ public partial class ActionTrigger : Area2D
 	/// If <c>keepXPosition</c> or <c>keepYPosition</c> are set to <c>true</c>, the <c>entryPoint</c> will be ignored.
 	/// </summary>
 	public void Change() {
-		if ((entryRequirementVariableName is null) || 
-			(entryRequirementVariableName is not null && (bool)PlayerVariables.GetVar(entryRequirementVariableName) == entryRequirementVariableValue)) {
-            GameManager.sceneChangeFacing = facingDirection;
-			GameManager.sceneChangePosition = new Vector2(
-				keepXPosition ? Globals.player.Position.X : entryPoint.X,
-				keepYPosition ? Globals.player.Position.Y : entryPoint.Y
-			);
-            Globals g = new();
-            g.LoadScene(sceneName);
-            // Globals.LoadScene(sceneName);
-		} else {
-			// GD.Print("cant go in");
-			Globals.talkingNPC = Globals.GetNPC("Narrator");
-            if (!firstShown) {
-                Globals.gui.db.Modify(entryDeniedTextSpeaker ?? "Narrator");
-                firstShown = true;
-            }
-            if (!Globals.gui.ProgressDialogue(Globals.GetNPC("Narrator"))) firstShown = false;
-		}
+        GameManager.sceneChangeFacing = facingDirection;
+        GameManager.sceneChangePosition = new Vector2(
+            keepXPosition ? Globals.player.Position.X : entryPoint.X,
+            keepYPosition ? Globals.player.Position.Y : entryPoint.Y
+        );
+		Globals g = new();
+        g.LoadScene(sceneName);
 	}
 
 	/// <summary>
@@ -154,17 +151,9 @@ public partial class ActionTrigger : Area2D
 		if (facingDirection == Vector2.Zero) facingDirection = facing;
 	}
 
+
     public void OnAreaEntered(Area2D area) {
         if (area.GetParent().GetType() == typeof(Player)) {
-            if (interactable) {
-                Globals.GetNPC("Narrator").LoadDialogue("Interactables/" + descriptionPath);
-                Globals.gui.db.Modify(describer ?? "Narrator");
-            }
-
-            if (entryRequirementVariableName is not null) {
-                Globals.GetNPC("Narrator").LoadDialogue("Interactables/" + entryDeniedTextSource);
-            }
-
             if (autoTrigger) {
                 Globals.player.Velocity = Vector2.Zero;
                 Trigger();

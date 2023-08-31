@@ -51,7 +51,7 @@
 ~25
     That was... sufficiently succint; thank you, Marie. Can I ask where the pens you used are? ||c Marceline
 ~26
-    We threw them away. I didn't do the best job of that, I admit it, but I'm not really experienced with this sort of thing. I threw mine behind the building. ||c Marie
+    We threw them away. I didn't do the best job of that, I admit it, but I'm not really experienced with this sort of thing. I threw mine behind the building. ||f Modify Marie | SetPVar knowsPenMarie true
 ~27
     ...Right. Thank you, Marie. ||c Marceline
 ~28

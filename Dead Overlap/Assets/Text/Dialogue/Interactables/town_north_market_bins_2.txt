@@ -1,0 +1,4 @@
+~0
+    S-Mart's garbage bins. Looking closer, you can see a broken pen in two halves on the ground. The ink has seeped out of it and there are bite marks around the ends. ||f OpenImage MariePen.png
+~1
+    She was telling the truth. But... bite marks? On a poisoned pen? ||f Modify Marceline | SaveClue Pen_Marie | CloseImage
