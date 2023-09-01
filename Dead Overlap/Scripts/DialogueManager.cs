@@ -60,8 +60,9 @@ public partial class DialogueManager : Node
 		/* 
 		This is a fix for a bug caused by a few disconnected factors.
 		
-		When loading a file using Parse(file_name), the method strips each line's end whitespace before continuing. The file end.txt has no characters to display and so returns an empty string.
+		When loading a file using ParsePath(file_name), the method strips each line's end whitespace before continuing. The file end.txt and others with no characters to display return an empty string.
 		Due to some weird fuckery surrounding the RichTextLabel's visible character and ratio fields, this allows it to set visible characters to 0 (the total amount of characters) and visible ratio to 1 (all characters are being displayed). Somehow, this carries over in the dialogue box because it is no longer being deleted and recreated every time it closes, only reset manually.
+		In the end, this makes it so that the first (or first few) DialogueObjects don't display properly in the DialogueBox. It seems to appear inconsistently, sometimes hiding the first DialogueObject, or the first few, or none at all. If the dialogue is retriggered after finishing, the bug does not reappear. 
 
 		As for why this bug didn't appear consistently, I can only assume it had something to do with load times.
 		 */
@@ -77,14 +78,11 @@ public partial class DialogueManager : Node
 
 		if (!GameManager.isGamePaused) {
 			if (isDialogueReading) {
-				// GD.Print(activeDialogueBox.txt.Text.Length);
 				if (activeDialogueBox.txt.VisibleRatio != 1 && Array.Exists(sentenceEnds, element => element == activeDialogueBox.txt.Text[activeDialogueBox.txt.VisibleCharacters].ToString())) {
-					// GD.Print("pause here");
 					sentenceEndPauseRate = sentenceEndPause;
 					UpdateVisibleText(); // display text one more time to flush character and avoid loop
 				}
 				if (activeDialogueBox.txt.VisibleRatio != 1 && Array.Exists(sentencePauses, element => element == activeDialogueBox.txt.Text[activeDialogueBox.txt.VisibleCharacters].ToString())) {
-					// GD.Print("break here");
 					sentenceBreakPauseRate = sentenceBreakPause;
 					UpdateVisibleText(); // display text one more time to flush character and avoid loop
 				}
@@ -93,12 +91,7 @@ public partial class DialogueManager : Node
 				if (sentenceEndPauseRate <= 0 && sentenceBreakPauseRate <= 0) {
 					UpdateVisibleText(); // only update visible text when there are no pauses.
 				}
-			} 
-			// else {
-			// 	if (GameManager.frame - d == 20) {
-			// 		isDialogueReading = true;
-			// 	}
-			// }
+			}
 		}
 	}
 
@@ -276,7 +269,6 @@ public partial class DialogueManager : Node
 							default:
 								break;
 						}
-						// GD.Print(fnc);
 					} else {
 						tdo.AddChoice(line, reg_dialogue_marker);
 					}
@@ -307,17 +299,14 @@ public partial class DialogueManager : Node
 								tdo.AddResponseFunction(line[(fnc_find + 4)..], response_dialogue_marker);
 								break;
 							case "s":
-								// tdo.AddChoiceSignal(line[(fnc_find + 4)..], response_dialogue_marker);
 								GD.Print("Response signal" + line[(fnc_find + 4)..]);
 								break;
 							default:
 								break;
 						}
-						// GD.Print(fnc);
 					} else {
 						tdo.AddResponse(line, response_dialogue_marker);
 					}
-					// tdo.AddResponse(line, response_dialogue_marker);
 				}
 			}
 		}
@@ -390,6 +379,10 @@ public partial class DialogueManager : Node
 		// activeDialogue = null;
 	}
 
+	public void SetNPCDiag(string npcname, string diag_path) {
+		Globals.GetNPC(npcname).LoadDialogue(diag_path);
+	}
+
 	public void Modify(string nameTitle) {
 		activeDialogueBox.Modify(nameTitle);
 	}
@@ -398,8 +391,8 @@ public partial class DialogueManager : Node
 		activeDialogueBox.Modify(nameTitle, voicePath, portraitPath);
 	}
 
-	public void SetPVar(string varName, string val) {
-		PlayerVariables.SetVar(varName, val);
+	public void SetCheck(string varName, string val) {
+		PlayerVariables.SetCheck(varName, bool.Parse(val));
 	}
 	
 	public void CompleteMission(string missionName) {

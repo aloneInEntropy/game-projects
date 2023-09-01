@@ -5,7 +5,7 @@
 ~2
     Hi, Marie, I just wondered if I could ask you a few questions, if you can spare the time? ||c Marceline
 ~3
-    O-oh, I can't help you there, I'm still on the clock. If you're looking for flashlights though, we've recently gone on sale. Actually, they're free. We ordered about 40,000 by mistake and now we're in severe debt. Welcome to S-Mart, how can I help you!? *twitches* ||f Modify Marie | SetPVar hasLight true
+    O-oh, I can't help you there, I'm still on the clock. If you're looking for flashlights though, we've recently gone on sale. Actually, they're free. We ordered about 40,000 by mistake and now we're in severe debt. Welcome to S-Mart, how can I help you!? *twitches* ||f Modify Marie | SetCheck hasLight true
 ~4
     Still on the clock? At 8 p.m.? ||c Marceline
 ~5

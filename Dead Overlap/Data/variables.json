@@ -1,0 +1,13 @@
+{
+    "checks": {
+        "hasLight": false,
+        "hasWarrant": false,
+        "knowsPenMarie": false,
+        "knowsPenPatrick": false,
+        "foundLetterWriter": false
+    },
+    "stuff": {
+        "a": 1,
+        "b": 2
+    }
+}

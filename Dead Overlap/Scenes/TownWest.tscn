@@ -184,5 +184,17 @@ scale = Vector2(18.6178, 12.0469)
 texture = ExtResource("10_oy8wd")
 centered = false
 
+[node name="Trigger" parent="." instance=ExtResource("9_xhvb0")]
+position = Vector2(-1142, -870)
+interactable = true
+autoTrigger = true
+descriptionPath = "fnew.txt"
+triggerRequirementVariableName = "foundLetterWriter"
+triggerRequirementVariableValue = true
+
+[node name="CollisionPolygon2D" parent="Trigger" index="0"]
+scale = Vector2(3.875, 39.5)
+
 [editable path="Triggers/Bench"]
 [editable path="Triggers/ToCentre"]
+[editable path="Trigger"]

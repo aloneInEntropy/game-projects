@@ -4,30 +4,9 @@ using Godot;
 
 public partial class PlayerVariables : Node
 {
-	/// <summary>
-	/// Choose whether pr not to save the Player's data.
-	/// </summary>
-	public static bool saveData = false;
-
-    /// <summary>
-    /// Does the player have a light source?
-    /// </summary>
-    public static bool hasLight = false;
-    
-	/// <summary>
-    /// Does Marceline have a warrant for Adora Aga's house?
-    /// </summary>
-    public static bool hasWarrant = false;
-
-	/// <summary>
-	/// Has Marie told Marceline about her poisoned pen?
-	/// </summary>
-	public static bool knowsPenMarie = false;
-	
-	/// <summary>
-	/// Has Patrick told Marceline about his poisoned pen?
-	/// </summary>
-	public static bool knowsPenPatrick = false;
+	public static Dictionary<string, object> playerVals = new();
+	public static Dictionary<string, bool> checks = new();
+	public static Dictionary<string, int> stuff = new();
 
     /// <summary>
 	/// The list of missions given to the Player by this NPC.
@@ -37,6 +16,7 @@ public partial class PlayerVariables : Node
 
     public override void _Ready() {
         SetMissionsJSON("missions.json");
+		LoadPlayerVariables("variables.json");
     }
 
 	/// <summary>
@@ -44,48 +24,37 @@ public partial class PlayerVariables : Node
 	/// </summary>
 	/// <param name="varName"></param>
 	/// <param name="val"></param>
-	public static void SetVar(string varName, string val) {
-		switch (varName)
-		{
-			case "hasLight":
-				hasLight = bool.Parse(val);
-				break;
-			case "hasWarrant":
-				hasWarrant = bool.Parse(val);
-				break;
-			case "knowsPenMarie":
-				knowsPenMarie = bool.Parse(val);
-				break;
-			case "knowsPenPatrick":
-				knowsPenPatrick = bool.Parse(val);
-				break;
-			default:
-				break;
-		}
+	public static void SetCheck(string varName, bool val) {
+		checks[varName] = val;
 	}
 
 	/// <summary>
-	/// Get a player variable <c>varName</c>.
+	/// Get a player variable boolean <c>varName</c>.
 	/// </summary>
 	/// <param name="varName"></param>
 	/// <param name="val"></param>
-	public static object GetVar(string varName) {
-        return varName switch
-        {
-            "hasLight" => hasLight,
-            "hasWarrant" => hasWarrant,
-            "knowsPenMarie" => knowsPenMarie,
-            "knowsPenPatrick" => knowsPenPatrick,
-            _ => null,
-        };
+	public static bool GetCheck(string varName) {
+		return checks[varName];
     }
 
     /// <summary>
-	/// Set the missions of the NPC using the path <c>missionPath</c> to a JSON file. All files are assumed to be in the folder "res://Assets/Text/Missions".
+	/// Load the Player variables from a JSON file <c>variablesPath</c>.
+	/// </summary>
+	/// <param name="missionPath"></param>
+	public void LoadPlayerVariables(string variablesPath) {
+		FileAccess file = FileAccess.Open(Globals.resPathToData + variablesPath, FileAccess.ModeFlags.Read);
+		playerVals = JsonSerializer.Deserialize<Dictionary<string, object>>(file.GetAsText(), Globals.options);
+		checks = JsonSerializer.Deserialize<Dictionary<string, bool>>(playerVals["checks"].ToString());
+		stuff = JsonSerializer.Deserialize<Dictionary<string, int>>(playerVals["stuff"].ToString());
+		file.Close();
+	}
+
+    /// <summary>
+	/// Set the missions of the NPC using the <c>missionPath</c> to a JSON file.
 	/// </summary>
 	/// <param name="missionPath"></param>
 	public void SetMissionsJSON(string missionPath) {
-		FileAccess file = FileAccess.Open(Globals.resPathToMissions + missionPath, FileAccess.ModeFlags.Read);
+		FileAccess file = FileAccess.Open(Globals.resPathToData + missionPath, FileAccess.ModeFlags.Read);
 		string jsonString = file.GetAsText();
 		Missions = JsonSerializer.Deserialize<List<Mission>>(jsonString, Globals.options);
 		foreach (Mission m in Missions) m.MType.Init();

@@ -1,0 +1,29 @@
+/// <summary>
+/// Choose whether pr not to save the Player's data.
+/// </summary>
+public static bool saveData = false;
+
+/// <summary>
+/// Does the player have a light source?
+/// </summary>
+public static bool hasLight = false;
+
+/// <summary>
+/// Does Marceline have a warrant for Adora Aga's house?
+/// </summary>
+public static bool hasWarrant = false;
+
+/// <summary>
+/// Has Marie told Marceline about her poisoned pen?
+/// </summary>
+public static bool knowsPenMarie = false;
+
+/// <summary>
+/// Has Patrick told Marceline about his poisoned pen?
+/// </summary>
+public static bool knowsPenPatrick = false;
+
+/// <summary>
+/// Has Marceline found who wrote the letter?
+/// </summary>
+public static bool foundLetterWriter = false;

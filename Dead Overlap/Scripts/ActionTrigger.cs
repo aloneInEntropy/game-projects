@@ -92,7 +92,7 @@ public partial class ActionTrigger : Area2D
     /// </summary>
     public void Trigger() {
         if ((triggerRequirementVariableName is null) || 
-			(triggerRequirementVariableName is not null && (bool)PlayerVariables.GetVar(triggerRequirementVariableName) == triggerRequirementVariableValue)) {
+			(triggerRequirementVariableName is not null && PlayerVariables.GetCheck(triggerRequirementVariableName) == triggerRequirementVariableValue)) {
             if (interactable) {
                 OpenDescription(describer, descriptionPath);
             } else if (roomTrigger) {
@@ -155,7 +155,6 @@ public partial class ActionTrigger : Area2D
     public void OnAreaEntered(Area2D area) {
         if (area.GetParent().GetType() == typeof(Player)) {
             if (autoTrigger) {
-                Globals.player.Velocity = Vector2.Zero;
                 Trigger();
             }
         }

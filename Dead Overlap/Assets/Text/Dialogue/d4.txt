@@ -1,5 +1,5 @@
 ~0
-    Alright Farah, what did you want to tell me? What was up with that letter? ||f Modify Marceline | CompleteMission Speak to the writer of the note.
+    Alright Farah, what did you want to tell me? What was up with that letter? ||f Modify Marceline | CompleteMission Speak to the writer of the note. | SetCheck foundLetterWriter true
 ~1 
     I... I just couldn't keep it a secret anymore. I didn't want to get Jordan in trouble, you have to believe me! I just... I didn't know... I [i]never[/i] know what they're thinking! It's infuriating how they just never ask what [i]I[/i] want or what I think or... or... ||c Farah
 ~2
@@ -31,8 +31,10 @@
     We heard the dog hacking and coughing, and when we looked inside, Makoto was holding knives. I don't know where he got them from, but he was covered in blood. I ran in to grab the dog and get it out but Makoto looked at me, and he...
 ~12
     He had this... look... in his eyes. I don't know what it was, but I felt confident at the time that if I stayed there a moment longer, he was going to kill me. I ran out with the dog, threw it in the boot of our car in a bag, and we got the hell out of there. 
-~~13
-    That's it, really. Did you get all that?
+~13
+    Um... actually, one of the dog's... legs fell off. I don't remember what we did with it. I think Jordan threw it in a bush or something? I'm unsure.
+~~14
+    ...But that's it, really. Did you get all that?
         ~##2
             ~@0
                 Tell me again. ||c Marceline
@@ -44,6 +46,6 @@
                     That's enough, thank you.
         ~##.
     ~~.
-~14
+~15
     ...Right. ||f Modify Farah | ParseB d4_re_2.txt l=false | ActivateMission Talk to Patrick.
 ~.

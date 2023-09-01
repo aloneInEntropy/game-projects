@@ -1,5 +1,5 @@
 using Godot;
-using System.Text.Json;
+using System;
 using System.Collections.Generic;
 
 
@@ -94,6 +94,7 @@ public partial class NPC : StaticBody2D
 		dialogue = d;
 		diagPath = d[0].originFilePath; // pick any dialogue object and get its dialogue file
 		currentDiag = diagStart;
+		Globals.UpdateNPCInt(this);
 	}
 	
 	/// <summary>
@@ -111,6 +112,7 @@ public partial class NPC : StaticBody2D
 		dialogue = DialogueManager.ParsePath(strPath);
 		diagPath = strPath;
 		currentDiag = diagStart;
+		Globals.UpdateNPCInt(this);
 	}
 
 	/// <summary>
@@ -242,4 +244,49 @@ public partial class NPC : StaticBody2D
 			// GD.Print(String.Format("{0} entered {1}", Name, body.Name));
 		}
 	}
+
+    public bool Equals(NPC obj)
+    {
+		return base.Equals(obj) &&
+				trueName == obj.trueName &&
+				portraitPath == obj.portraitPath &&
+				voicePath == obj.voicePath &&
+				voice == obj.voice &&
+				dialogue == obj.dialogue &&
+				diagPath == obj.diagPath &&
+				currentDiag == obj.currentDiag &&
+				secondaryDiagPath == obj.secondaryDiagPath &&
+				secondaryDiagStart == obj.secondaryDiagStart &&
+				tempDiagPath == obj.tempDiagPath &&
+				tempDiagStart == obj.tempDiagStart &&
+				isTalking == obj.isTalking &&
+				wasRecentWaiting == obj.wasRecentWaiting &&
+				recentWaitingStart == obj.recentWaitingStart;
+    }
+
+    public override int GetHashCode()
+    {
+		return
+		HashCode.Combine(
+			HashCode.Combine(
+				base.GetHashCode(),
+				trueName,
+				portraitPath,
+				voicePath,
+				voice,
+				dialogue,
+				diagPath,
+				currentDiag
+			),
+			HashCode.Combine(
+				secondaryDiagPath,
+				secondaryDiagStart,
+				tempDiagPath,
+				tempDiagStart,
+				isTalking,
+				wasRecentWaiting,
+				recentWaitingStart
+			)
+		);
+    }
 }

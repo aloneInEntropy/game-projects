@@ -71,7 +71,7 @@
 ~35
     A pen. From your desk? I like to collect them, see. ||c Marceline
 ~36
-    I- what? No. No! Get out! ||f Modify Patrick | SetPVar knowsPenPatrick true
+    I- what? No. No! Get out! ||f Modify Patrick | SetCheck knowsPenPatrick true
 ~37
     Jeez, alright. No need to poison the mood. ||c Marceline
 ~38

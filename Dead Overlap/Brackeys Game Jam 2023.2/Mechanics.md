@@ -30,7 +30,8 @@ Fade the screen to black and back to transparent on room change
 Show a specified texture through dialogue.
 
 ## Clues Menu
-A menu in the notebook for saved clues where the Player may have missed anything. The Player cannot save dialogue from interactables.
+A menu in the notebook for saved clues where the Player may have missed anything. The Player cannot save dialogue from narrated interactables.
 
 ## Dialogue Persistence
 NPC dialogue should persist between scene changes.
+

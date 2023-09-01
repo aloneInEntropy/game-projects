@@ -87,14 +87,6 @@ public partial class Player : CharacterBody2D
 						// if dialogue has finished being typed out
 						gui.ProgressDialogue((NPC)facingObj);
 					}
-				} else if (facingObj.GetType() == typeof(Interactable)) {
-					if (DialogueManager.isDialogueReading) {
-						// if dialogue is currently being typed out
-						DialogueManager.UpdateVisibleText(true);
-					} else {
-						// if dialogue has finished being typed out
-						((Interactable)facingObj).OpenDescription();
-					}
 				} else if (facingObj.GetType() == typeof(ActionTrigger)) {
 					if (DialogueManager.isDialogueReading) {
 						// if dialogue is currently being typed out
@@ -102,14 +94,6 @@ public partial class Player : CharacterBody2D
 					} else {
 						// if dialogue has finished being typed out
 						((ActionTrigger)facingObj).Trigger();
-					}
-				} else if (GameManager.IsSameOrSubclass(typeof(RoomTrigger), facingObj.GetType())) {
-					// ((RoomTrigger)facingObj).facingDirection = lastDirection;
-					if (DialogueManager.isDialogueReading) {
-						// if dialogue is currently being typed out
-						DialogueManager.UpdateVisibleText(true);
-					} else {
-						((RoomTrigger)facingObj).Change();
 					}
 				}
 			}
@@ -169,25 +153,13 @@ public partial class Player : CharacterBody2D
 	void _on_interact_box_area_entered(Area2D area) {
 #pragma warning restore IDE0051 // restore the INFO (they're still useful after all)
 #pragma warning restore IDE1006 // ditto
-		// GD.Print(area.GetParent().Name);
 		if (area.GetParent().GetType().IsSubclassOf(typeof(NPC))) {
-			// if the node is an NPC, start it's dialogue from the beginning
-			// var p = (NPC)area.GetParent();
-			// p.ResetDialogue();
+			// if the node is an NPC
 			if (!overlapping.Contains(area.GetParent<NPC>())) overlapping.Add(area.GetParent<NPC>());
-			// GD.Print(string.Format("{0} entered {1}", Name, area.GetParent<Node2D>().Name));
-		} else if (area.GetType() == typeof(Interactable)) {
-			if (!overlapping.Contains(area)) overlapping.Add(area);
 		} else if (area.GetType() == typeof(ActionTrigger)) {
+			// if the node is an ActionTrigger
 			if (!overlapping.Contains(area)) overlapping.Add(area);
-		} else if (GameManager.IsSameOrSubclass(typeof(RoomTrigger), area.GetType())) {
-			if (((RoomTrigger)area).autoTrigger) {
-				((RoomTrigger)area).TryUpdateFacingPos(lastDirection);
-				((RoomTrigger)area).Change();
-			} else {
-				if (!overlapping.Contains(area)) overlapping.Add(area);
-			}
-		}
+		} 
 	}
 	
 	#pragma warning disable IDE0051
@@ -200,14 +172,8 @@ public partial class Player : CharacterBody2D
 			gui.CloseDialogue();
 			// if the node is an NPC
 			if (overlapping.Contains(area.GetParent<NPC>())) overlapping.Remove(area.GetParent<NPC>());
-		} else if (area.GetType() == typeof(Interactable)) {
-			// if the node is an Interactable
-			if (overlapping.Contains(area)) overlapping.Remove(area);
 		} else if (area.GetType() == typeof(ActionTrigger)) {
 			// if the node is an ActionTrigger
-			if (overlapping.Contains(area)) overlapping.Remove(area);
-		} else if (GameManager.IsSameOrSubclass(typeof(RoomTrigger), area.GetType())) {
-			// if the node is a RoomTrigger
 			if (overlapping.Contains(area)) overlapping.Remove(area);
 		}
 	}

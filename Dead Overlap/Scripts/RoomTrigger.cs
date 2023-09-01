@@ -61,7 +61,7 @@ public partial class RoomTrigger : Area2D
 		// );
 		// GetTree().ChangeSceneToFile("res://Scenes/" + sceneName + ".tscn");
 		if ((entryRequirementVariableName is null) || 
-			(entryRequirementVariableName is not null && (bool)PlayerVariables.GetVar(entryRequirementVariableName) == entryRequirementVariableValue)) {
+			(entryRequirementVariableName is not null && PlayerVariables.GetCheck(entryRequirementVariableName) == entryRequirementVariableValue)) {
 			GameManager.sceneChangeFacing = facingDirection;
 			GameManager.sceneChangePosition = new Vector2(
 				keepXPosition ? Globals.player.Position.X : entryPoint.X,

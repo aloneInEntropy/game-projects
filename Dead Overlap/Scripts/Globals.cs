@@ -46,14 +46,24 @@ public partial class Globals : Node
     public static JsonSerializerOptions options = new() { IncludeFields = true, WriteIndented = true };
 
 	/// <summary>
+	/// The path to the player Data folder in standard format.
+	/// </summary>
+	public static string pathToData = "Data/";
+
+	/// <summary>
+	/// The path to the player Data folder in Godot format (prepended with "res://)
+	/// </summary>
+	public static string resPathToData = "res://Data/";
+
+	/// <summary>
 	/// The path to the notes.json file in standard format.
 	/// </summary>
-	public static string pathToNotes = "Assets/Text/Notes/notes.json";
+	public static string pathToNotes = "Data/notes.json";
 	
 	/// <summary>
 	/// The path to the missions.json file in standard format.
 	/// </summary>
-	public static string pathToMissions = "Assets/Text/Missions/missions.json";
+	public static string pathToMissions = "Data/missions.json";
 
 	/// <summary>
 	/// The path to the dialogue file folder in Godot format (prepended with "res://")
@@ -63,7 +73,7 @@ public partial class Globals : Node
 	/// <summary>
 	/// The path to the missions file folder in Godot format (prepended with "res://")
 	/// </summary>
-	public static string resPathToMissions = "res://Assets/Text/Missions/";
+	public static string resPathToMissions = "res://Data/";
 	
 	/// <summary>
 	/// The path to the voice file folder in Godot format (prepended with "res://")
@@ -109,7 +119,12 @@ public partial class Globals : Node
 	/// </summary>
 	/// <param name="n"></param>
 	public static void AddNPC(NPC n) {
-		nPCs.Add(n);
+		_ = GetNPC(n.trueName) is null ? nPCs.Add(n) : UpdateNPCExt(n);
+		/* if (GetNPC(n.trueName) is null) {
+			nPCs.Add(n);
+		} else {
+			UpdateNPCExt(n);
+		} */
 	}
 	
 	/// <summary>
@@ -119,6 +134,32 @@ public partial class Globals : Node
 	/// <returns></returns>
 	public static NPC GetNPC(string n) {
 		return nPCs.FirstOrDefault(m => m.trueName == n);
+	}
+
+	/// <summary>
+	/// Update the NPC in the internal Global list of NPCs. Returns <c>true</c> if the internal NPC was updated.
+	/// </summary>
+	/// <param name="n"></param>
+	public static bool UpdateNPCInt(NPC externalNPC) {
+		var m = GetNPC(externalNPC.trueName);
+		if (m is not null) {
+			m.diagPath = externalNPC.diagPath;
+			return true;
+		}
+		return false;
+	}
+	
+	/// <summary>
+	/// Update the given NPC by applying the values from the NPC in the internal Global list of NPCs. Returns <c>true</c> if the external NPC was updated.
+	/// </summary>
+	/// <param name="n"></param>
+	public static bool UpdateNPCExt(NPC externalNPC) {
+		var m = GetNPC(externalNPC.trueName);
+		if (m is not null) {
+			externalNPC.diagPath = m.diagPath;
+			return true;
+		}
+		return false;
 	}
 
 	/// <summary>

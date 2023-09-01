@@ -38,15 +38,6 @@ public partial class GameManager : Node
 	}
 
 	/// <summary>
-	/// Load the location scene <c>location</c>.
-	/// </summary>
-	public void LoadLocationB(PackedScene location, Vector2 pos) {
-        
-    }
-	
-	
-
-	/// <summary>
 	/// Check if a Type `potentialDescendant` is inherited from or equal to a class `potentialBase` <br/>
 	/// https://stackoverflow.com/questions/2742276/how-do-i-check-if-a-type-is-a-subtype-or-the-type-of-an-object
 	/// </summary>

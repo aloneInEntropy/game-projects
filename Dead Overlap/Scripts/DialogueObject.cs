@@ -48,6 +48,7 @@ public partial class DialogueObject
 	/// parseResult[0] = <c>[DialogueObject]</c> : the list of dialogue objects to load in<br/>
 	///	parseResult[1] = <c>bool</c>: choose whether or not to immediately load parseResult[0]<br/>
 	///	parseResult[2] = <c>int</c>: the dialogue number to start the above list from<br/>
+	///	parseResult[3] = <c>bool</c>: choose whether or not to save parseResult[0] to the NPC
 	/// </summary>
 	public List<object> parseResult;
 	/// <summary>

@@ -1,0 +1,9 @@
+~0
+    By the way, Farah, what model of car do you own? ||c Marceline
+~1
+    A 1989 Toyota Camry. ||c Farah
+~2
+    do those exist yet ||c Marceline
+~3
+    idk lol ask jordy ||c Farah
+~.
