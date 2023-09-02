@@ -101,7 +101,7 @@ public partial class DialogueBox : Control
 	/// <param name="d"></param>
 	public void LoadDialogue(DialogueObject d) {
 		dialogue = d;
-		nameLabel.Text = Globals.talkingNPC.Name == "Narrator" ? "" : Globals.talkingNPC.Name;
+		nameLabel.Text = Globals.talkingNPCName == "Narrator" ? "" : Globals.talkingNPCName;
 	}
 	
 	/// <summary>
@@ -327,6 +327,7 @@ public partial class DialogueBox : Control
 	/// <param name="voicePath"></param>
 	/// <param name="portraitPath"></param>
 	public void Modify(string nameTitle, string voicePath = "Narrator.wav", string portraitPath = "NarratorPortrait.png") {
+		Globals.talkingNPCName = nameTitle;
 		if (nameTitle == "Narrator") {
 			nameLabel.Text = "";
 			Globals.talkingNPC.SetVoice(voicePath);

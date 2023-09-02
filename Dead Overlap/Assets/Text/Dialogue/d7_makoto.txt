@@ -43,11 +43,11 @@
 ~21
     ...I... we... ||c Marie
 ~22
-    It was... Patrick and I. I didn't like the way he was using his money, and Patrick, well... everyone knows how Paddy feels about Makoto. I found this bag of drugs in the shack in the east and we used it on our plan.
+    It was... Patrick and I. I didn't like the way he was using his money, and Patrick, well... everyone knows how Paddy feels about Makoto. I found this bag of drugs in the shack in the east and we used it on our plan. ||c Marie
 ~23
-    First, Patrick would make Makoto go into his office for some law thing. There, he would poison a pen tip and poke him with it. Then, because he always comes here in the mornings, I would do the same thing and poke him again. That's why he was agitated and why he bought bandages.
+    First, Patrick would make Makoto go into his office for some law thing. There, he would poison a pen tip and poke him with it. Then, because he always comes here in the mornings, I would do the same thing and poke him again. That's why he was agitated and why he bought bandages. ||c Marie
 ~24
-    ...For what it's worth, he bought specifically four bandages, but we only pricked him twice. Maybe there was someone else...?
+    ...For what it's worth, he bought specifically four bandages, but we only pricked him twice. Maybe there was someone else...? ||c Marie
 ~25
     That was... sufficiently succint; thank you, Marie. Can I ask where the pens you used are? ||c Marceline
 ~26

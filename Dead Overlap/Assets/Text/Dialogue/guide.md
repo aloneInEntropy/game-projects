@@ -1,8 +1,9 @@
 The text parser is still under construction, but the basics work like below. All text will be fed into Godot's bbcode system, to handle more complex/annoying cases dealing with things like bold and italic fonts. 
 
-Please note that **ALL NUMBERS ARE *ZERO-INDEXED***. Assume that not following this **exact structure** will crash the dialogue parser.
-Also note that the dialogue box can currently fit 342 characters before overflowing.
+Please note that **ALL NUMBERS ARE *ZERO-INDEXED*** and ***ALL PATHS/NAMES ARE CASE-SENSITIVE***. Assume that not following this **exact structure** will crash the dialogue parser.
+Also note that the dialogue box can currently fit 342 characters before overflowing. Make sure to compensate for longer words that may break onto the next line.
 
+# Dialogue
 ## Cheat Sheet
 ### Syntax
 `// ...`: Comment the whole line\
@@ -217,3 +218,58 @@ Hello world.
 Hello world 2.
 ```
 
+
+
+
+# Action Triggers
+The ActionTrigger class is a class that allows methods to be run depending on the Player's actions. The actions are run from **dialogue scripts** in the Assets/Text/Dialogue folder. These actions are methods that must exist in a non-static context within the DialogueManager class in the Scripts folder. You can see the above Dialogue section for more information on how to use the dialogue parser. 
+
+There are also optional conditions that must be met for the actions that, if not met, can trigger other actions. Additionally, triggers can be set to run automatically, without direct interaction. Right now, there are two types:
+	- Interactable
+	- Room Trigger
+One of these two options must checked when using the ActionTrigger class.
+
+## Interactables
+Interactable objects are any object the Player can interact with. 
+
+### Description Path (string)
+When triggered, a specified dialogue script in the `descriptionPath` field will be run. The file location defaults to `Assets/Text/Dialogue/Interactables` and can be navigated out of using `../`.
+
+### Describer (string)
+Optionally, a chosen NPC can speak when the `describer` field is provided with that NPC's name. If not, it defaults to the Narrator NPC. This field has very little use in most cases, as the `||c` command in the given dialogue script will override anything entered into the field. Regardless, it exists if modifiying the dialogue box through the dialogue script is undesired.
+
+## Room Trigger
+Room triggers are triggers that change the current scene when triggered. 
+
+### Scene Name (string)
+The scene name is the name of the room (scene) you would like to switch to. This corresponds to the name of the .tscn file in the Scenes folder.
+
+### Entry Point (Vector2)
+The entry point is the location the Player starts in when the room is loaded. If an entry point is not specified (`entryPoint == Vector2.Inf`), the Player's spawn point will default to the `defaultEntryPoint` of that scene (see the Location class).
+
+### Facing Direction (Vector2)
+The position the Player is facing when the room is loaded. If a direction is not specified (`facingDirection == Vector2.Zero`, see `TryUpdateFacingPos()` in the ActionTrigger class) the direction defaults to the Player's facing direction upon trigger.
+
+### Keep X Position (bool)
+A boolean that decides whether or not to keep the Player's position on the x-axis when changing rooms. This is useful when the trigger is set to change rooms vertically and the current and next rooms are aligned. 
+
+### Keep Y Position (bool)
+A boolean that decides whether or not to keep the Player's position on the y-axis when changing rooms. This is useful when the trigger is set to change rooms horizontally and the current and next rooms are aligned. 
+
+## Requirements
+As previously mentioned, there are optional conditions that must be met for the trigger to work. If these conditions exist and are not met, this can in turn trigger other actions. At the moment, only one condition can be checked to determine validity.
+
+### Trigger Requirement Variable Name (string)
+The name of the variable to be checked when determining validity. This is stored in `Data/variables.json` under the `checks` field.
+
+### Trigger Requirement Variable Value (bool)
+The value of the variable to be checked when determining validity. If `true`, the above variable must be true for the check to be valid, and vice versa.
+
+### Trigger Denied Text Source (string)
+The path to the dialogue script to run if the above check fails. If left blank, no dialogue file is run. This is analogous to the Interactable description path.
+
+### Trigger Denied Text Speaker (string)
+The name of the chosen NPC to speak when the trigger requirement check fails. This is again optional and secondary to any modifications made in the dialogue script using the `||c` command. This too is analogous to the Interactable description path.
+
+## Auto Triggers
+If the `autoTrigger` field is true, then the Interactable or Room Trigger will trigger immediately when the Player's interact box touches this ActionTrigger's CollisionPolygon2D.

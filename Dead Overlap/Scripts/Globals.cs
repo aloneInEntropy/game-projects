@@ -29,6 +29,11 @@ public partial class Globals : Node
 	/// The presently-talking NPC.
 	/// </summary>
 	public static NPC talkingNPC = new();
+	
+	/// <summary>
+	/// The name of the presently-talking NPC. Not necessarily the actual talking NPC.
+	/// </summary>
+	public static string talkingNPCName;
 
 	/// <summary>
 	/// The global HashSet of NPCs.

@@ -13,7 +13,7 @@
 ~5
     I... ||c Farah
 ~6
-    O-okay. I'll trust you. And I'll try to get Jordan to help you, too. Sorry for the other day, by the way.
+    O-okay. I'll trust you. And I'll try to get Jordan to help you, too. Sorry for the other day, by the way. ||c Farah
 ~7
     It's no biggie. People tend to think I'm weird, anyway. ||c Marceline
 ~8

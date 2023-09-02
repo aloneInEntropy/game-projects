@@ -67,6 +67,7 @@ public partial class GUI : CanvasLayer
 	/// A boolean from whether or not the dialogue box is open.
 	/// </returns>
 	public bool ProgressDialogue(NPC npc) {
+		Globals.talkingNPCName ??= npc.Name;
 		talkingNPC = npc;
 		if (canProgressDialogue) {
 			DialogueObject d = npc.GetNextDialogue();
@@ -80,7 +81,7 @@ public partial class GUI : CanvasLayer
 				return true;
 			}
 		}
-		return false;
+		return true;
 	}
 
 	void SetDialogue(DialogueObject dialogue) {

@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://b3lnclwd7qrxb"]
+[gd_scene load_steps=13 format=3 uid="uid://b3lnclwd7qrxb"]
 
 [ext_resource type="Script" path="res://Scripts/Location.cs" id="1_tgh3m"]
 [ext_resource type="Texture2D" uid="uid://dmrdwi1vlycw4" path="res://quad_128.png" id="2_l3su2"]
@@ -6,14 +6,10 @@
 [ext_resource type="PackedScene" uid="uid://bxerldx3p5hi6" path="res://Scenes/Farah.tscn" id="4_58p41"]
 [ext_resource type="TileSet" uid="uid://be7t5i2cwyj3" path="res://Resources/IndoorHouseTileset.tres" id="5_qkoyn"]
 [ext_resource type="PackedScene" uid="uid://bocidko04r36c" path="res://Scenes/Player.tscn" id="7_dhspa"]
-[ext_resource type="PackedScene" uid="uid://hfo0tlwgf4nj" path="res://Scenes/Narrator.tscn" id="9_rehn5"]
 [ext_resource type="Texture2D" uid="uid://coq70vxuv65o6" path="res://Assets/Sprites/DirLight.png" id="10_b0nas"]
 [ext_resource type="PackedScene" uid="uid://b1o7yp3j3yynn" path="res://Scenes/Trigger.tscn" id="10_k88pl"]
 [ext_resource type="Animation" uid="uid://itk702l2v47e" path="res://Resources/Animations/FadeOut.res" id="10_rcqw6"]
 [ext_resource type="Animation" uid="uid://omjcu0jeaa6a" path="res://Resources/Animations/FadeIn.res" id="11_n2ejv"]
-
-[sub_resource type="CircleShape2D" id="CircleShape2D_cf4nn"]
-radius = 50.0
 
 [sub_resource type="Animation" id="Animation_5vdex"]
 length = 0.001
@@ -145,19 +141,6 @@ position = Vector2(470, 504)
 [node name="Camera2D" type="Camera2D" parent="Player"]
 limit_smoothed = true
 editor_draw_limits = true
-
-[node name="Narrator" parent="." instance=ExtResource("9_rehn5")]
-position = Vector2(1339, 413)
-collision_layer = 4
-collision_mask = 4
-diagPath = "secret.txt"
-
-[node name="InteractBox" parent="Narrator" index="0"]
-collision_layer = 4
-collision_mask = 4
-
-[node name="CollisionShape2D" parent="Narrator/InteractBox" index="0"]
-shape = SubResource("CircleShape2D_cf4nn")
 
 [node name="Secret" type="StaticBody2D" parent="."]
 
@@ -291,7 +274,14 @@ libraries = {
 "": SubResource("AnimationLibrary_5j36a")
 }
 
-[editable path="Narrator"]
+[node name="Trigger" parent="." instance=ExtResource("10_k88pl")]
+position = Vector2(1318, 417)
+interactable = true
+descriptionPath = "../secret.txt"
+
+[node name="CollisionPolygon2D" parent="Trigger" index="0"]
+scale = Vector2(3, 6.875)
+
 [editable path="Triggers/RoomTriggers/ToSouth"]
 [editable path="Triggers/Interactables/Certificate"]
 [editable path="Triggers/Interactables/Paper1"]
@@ -303,3 +293,4 @@ libraries = {
 [editable path="Triggers/Interactables/Bowl"]
 [editable path="Triggers/Interactables/Hole"]
 [editable path="Triggers/Interactables/TV"]
+[editable path="Trigger"]

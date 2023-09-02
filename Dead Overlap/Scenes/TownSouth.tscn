@@ -329,6 +329,8 @@ scale = Vector2(2.5, 2.5)
 
 [node name="Motorbike" parent="Triggers/Interactables" instance=ExtResource("11_qy1h4")]
 position = Vector2(-322, 426)
+interactable = true
+descriptionPath = "town_south_motorbike.txt"
 
 [node name="CollisionPolygon2D" parent="Triggers/Interactables/Motorbike" index="0"]
 scale = Vector2(3.9375, 2.5625)

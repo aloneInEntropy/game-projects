@@ -35,3 +35,12 @@ A menu in the notebook for saved clues where the Player may have missed anything
 ## Dialogue Persistence
 NPC dialogue should persist between scene changes.
 
+## Time Machine
+A way to change the day, but only from the Hub. When changing the day, all dialogue from all NPCs are reset for that day, but Player variables and data remain.
+
+## everything else
+- [ ] Time Machine
+	- [ ] Separate notes by date
+- [ ] Clues Menu
+- [ ] Hide dialogue box without closing or resetting
+- [ ] change music in different rooms

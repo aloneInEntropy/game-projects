@@ -220,7 +220,7 @@ public partial class DialogueObject
 					dpos,
 					dsave
 				};
-			} else if (paras[0] == "CompleteMission" || paras[0] == "ActivateMission") {
+			} else if (paras[0] is "CompleteMission" or "ActivateMission") {
 				DialogueManager dm = new();
 				funcRes.Add(dm.Call(paras[0], paras[1..].Join(" ")));
 			} else {

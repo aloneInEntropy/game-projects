@@ -37,11 +37,6 @@ public partial class ActionTrigger : Area2D
     [Export]
     public string describer;
 
-    [Export]
-    public Texture showcase;
-
-    public bool displayShowcase = false;
-
     /// <summary>
 	/// The path to the PackedScene to load when this RoomTrigger is activated.
 	/// </summary>
@@ -114,13 +109,17 @@ public partial class ActionTrigger : Area2D
     /// <param name="describer"></param>
     public void OpenDescription(string speaker, string source) {
         if (source is not null) {
-            Globals.talkingNPC = Globals.GetNPC("Narrator");
+            Globals.player.Velocity = Vector2.Zero;
+            Globals.talkingNPCName = speaker ?? "Narrator";
+            Globals.talkingNPC = Globals.GetNPC(speaker) ?? Globals.GetNPC("Narrator");
             if (!firstShown) {
-                Globals.GetNPC("Narrator").LoadDialogue("Interactables/" + source);
+                (Globals.GetNPC(speaker) ?? Globals.GetNPC("Narrator")).LoadDialogue("Interactables/" + source);
                 Globals.gui.db.Modify(speaker ?? "Narrator");
                 firstShown = true;
             }
-            if (!Globals.gui.ProgressDialogue(Globals.GetNPC("Narrator"))) firstShown = false;
+            if (!Globals.gui.ProgressDialogue(Globals.GetNPC(speaker) ?? Globals.GetNPC("Narrator"))) {
+                firstShown = false;
+            }
         }
     }
 

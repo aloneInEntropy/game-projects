@@ -183,6 +183,8 @@ position = Vector2(-2734, -1659)
 scale = Vector2(18.6178, 12.0469)
 texture = ExtResource("10_oy8wd")
 centered = false
+metadata/_edit_lock_ = true
+metadata/_edit_group_ = true
 
 [node name="Trigger" parent="." instance=ExtResource("9_xhvb0")]
 position = Vector2(-1142, -870)
@@ -195,6 +197,17 @@ triggerRequirementVariableValue = true
 [node name="CollisionPolygon2D" parent="Trigger" index="0"]
 scale = Vector2(3.875, 39.5)
 
+[node name="Trigger2" parent="." instance=ExtResource("9_xhvb0")]
+position = Vector2(-1548, -928)
+interactable = true
+autoTrigger = true
+descriptionPath = "../d4.txt"
+
+[node name="CollisionPolygon2D" parent="Trigger2" index="0"]
+position = Vector2(62, 15.5)
+scale = Vector2(4.875, 1.96875)
+
 [editable path="Triggers/Bench"]
 [editable path="Triggers/ToCentre"]
 [editable path="Trigger"]
+[editable path="Trigger2"]
