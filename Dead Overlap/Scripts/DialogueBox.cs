@@ -178,7 +178,7 @@ public partial class DialogueBox : Control
 			string c = dialogue.choices[i];
             Button nb = new() {
                 Text = c,
-				Theme = GD.Load<Theme>("res://Resources/ButtonTheme.tres"),
+				Theme = GameManager.buttonTheme,
 				FocusMode = FocusModeEnum.All
             };
 			// some lambda thing. 

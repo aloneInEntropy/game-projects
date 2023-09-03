@@ -12,10 +12,16 @@ public partial class PlayerVariables : Node
 	/// The list of missions given to the Player by this NPC.
 	/// </summary>
 	public static List<Mission> Missions { set;  get; }
+    
+	/// <summary>
+	/// The list of clues found by the Player.
+	/// </summary>
+	public static List<Clue> Clues { set;  get; }
 
 
     public override void _Ready() {
         SetMissionsJSON("missions.json");
+        SetCluesJSON("clues.json");
 		LoadPlayerVariables("variables.json");
     }
 
@@ -73,21 +79,6 @@ public partial class PlayerVariables : Node
 		return null;
 	}
 
-    public static void printMissions() {
-        foreach (var m in GetUncompletedMissions()) {
-            GD.Print(m.Name);
-        }
-    }
-	
-	/// <summary>
-	/// Get a mission at position <c>n</c> in the stored list of missions.
-	/// </summary>
-	/// <param name="n"></param>
-	/// <returns>The mission at position <c>n</c>.</returns>
-	public static Mission GetMission(int n) {
-		return Missions[n];
-	}
-	
 	/// <summary>
 	/// Get all missions not yet completed.
 	/// </summary>
@@ -110,5 +101,49 @@ public partial class PlayerVariables : Node
 	/// <returns>The list of missions to next be completed.</returns>
 	public static List<Mission> GetNextMissions() {
 		return Missions.FindAll(m => !m.Completed && m.Active);
+	}
+
+	/// <summary>
+	/// Set the clues found by the Player using the <c>cluesPath</c> to a JSON file.
+	/// </summary>
+	/// <param name="cluesPath"></param>
+	public void SetCluesJSON(string cluePath) {
+		FileAccess file = FileAccess.Open(Globals.resPathToData + cluePath, FileAccess.ModeFlags.Read);
+		string jsonString = file.GetAsText();
+		Clues = JsonSerializer.Deserialize<List<Clue>>(jsonString, Globals.options);
+		file.Close();
+	}
+
+	/// <summary>
+	/// Get a clue given its name <c>n</c>.
+	/// </summary>
+	/// <param name="n"></param>
+	/// <returns>The clue with the title <c>n</c>.</returns>
+	public static Clue GetClue(string n) {
+		foreach (var m in Clues) {
+			if (m.Title == n) return m;
+		}
+		return null;
+	}
+	
+	/// <summary>
+	/// Get a clue given its shorthand name <c>n</c>.
+	/// </summary>
+	/// <param name="n"></param>
+	/// <returns>The clue with the shorthand name <c>n</c>.</returns>
+	public static Clue GetClueQ(string n) {
+		foreach (var m in Clues) {
+			if (m.Shorthand == n) return m;
+		}
+		return null;
+	}
+	
+	/// <summary>
+	/// Get all clues that have been found.
+	/// </summary>
+	/// <param name="n"></param>
+	/// <returns>All clues found by the Player.</returns>
+	public static List<Clue> GetFoundClues() {
+		return Clues.FindAll(m => m.Found);
 	}
 }

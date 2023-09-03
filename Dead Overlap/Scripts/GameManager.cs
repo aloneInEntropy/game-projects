@@ -19,6 +19,7 @@ public partial class GameManager : Node
 	public static bool isGamePaused = false;
 
 	public static Font normalFont, boldFont, lightFont;
+	public static Theme buttonTheme;
 
 	public static Vector2 sceneChangePosition = Vector2.Inf;
 	public static Vector2 sceneChangeFacing;
@@ -29,6 +30,7 @@ public partial class GameManager : Node
 		normalFont = GD.Load<Font>("res://Assets/Fonts/futur.ttf");
 		boldFont = GD.Load<Font>("res://Assets/Fonts/Futura Extra Black font.ttf");
 		lightFont = GD.Load<Font>("res://Assets/Fonts/futura light bt.ttf");
+		buttonTheme = GD.Load<Theme>("res://Resources/ButtonTheme.tres");
 	}
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.

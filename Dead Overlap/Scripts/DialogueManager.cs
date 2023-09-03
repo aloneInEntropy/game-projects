@@ -413,7 +413,7 @@ public partial class DialogueManager : Node
 
 	public void SaveClue(string clue) {
 		GD.Print($"new clue: {clue}");
-		Globals.gui.notebook.newClue = true;
+		Globals.gui.notebook.AddClue(PlayerVariables.GetClueQ(clue));
 	}
 
 	/// <summary>

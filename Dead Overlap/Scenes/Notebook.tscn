@@ -13,7 +13,7 @@
 [ext_resource type="Texture2D" uid="uid://dvg7yadwauv4y" path="res://Assets/Sprites/Portraits/FarahPortrait.png" id="6_t5fkt"]
 [ext_resource type="Texture2D" uid="uid://b0a2mbekg1cri" path="res://Assets/Sprites/Portraits/MariePortrait.png" id="7_241wt"]
 [ext_resource type="Texture2D" uid="uid://d1nound1syy3g" path="res://Assets/Sprites/Showcases/Letter.png" id="13_x610q"]
-[ext_resource type="Texture2D" uid="uid://dbgh2rpwijtl5" path="res://Assets/Sprites/Showcases/MariePen.png" id="14_t151l"]
+[ext_resource type="Texture2D" uid="uid://dmrdwi1vlycw4" path="res://quad_128.png" id="16_p0eph"]
 
 [node name="Notebook" type="Control"]
 layout_mode = 3
@@ -36,6 +36,7 @@ theme_override_fonts/font = ExtResource("1_qt1ux")
 tab_alignment = 1
 
 [node name="SuspectWindow" type="Control" parent="TabContainer"]
+visible = false
 layout_mode = 2
 
 [node name="GridContainer" type="GridContainer" parent="TabContainer/SuspectWindow"]
@@ -323,7 +324,6 @@ layout_mode = 2
 layout_mode = 2
 
 [node name="ClueWindow" type="Control" parent="TabContainer"]
-visible = false
 layout_mode = 2
 
 [node name="GridContainer" type="GridContainer" parent="TabContainer/ClueWindow"]
@@ -334,21 +334,47 @@ offset_bottom = 128.0
 grow_horizontal = 2
 columns = 7
 
-[node name="TextureButton" type="TextureButton" parent="TabContainer/ClueWindow/GridContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-texture_normal = ExtResource("13_x610q")
-ignore_texture_size = true
-stretch_mode = 0
+[node name="SelectedClue" type="Control" parent="TabContainer/ClueWindow"]
+anchors_preset = 0
+offset_right = 944.0
+offset_bottom = 556.0
 
-[node name="TextureButton2" type="TextureButton" parent="TabContainer/ClueWindow/GridContainer"]
+[node name="TextureRect" type="TextureRect" parent="TabContainer/ClueWindow/SelectedClue"]
+modulate = Color(0, 0, 0, 0.65098)
+layout_mode = 0
+offset_right = 944.0
+offset_bottom = 556.0
+texture = ExtResource("16_p0eph")
+
+[node name="Modal" type="GridContainer" parent="TabContainer/ClueWindow/SelectedClue"]
+layout_mode = 2
+offset_left = 112.0
+offset_top = 111.0
+offset_right = 832.0
+offset_bottom = 445.0
+theme_override_constants/h_separation = 32
+columns = 2
+
+[node name="TextureRect" type="TextureRect" parent="TabContainer/ClueWindow/SelectedClue/Modal"]
+layout_mode = 2
+size_flags_horizontal = 3
+texture = ExtResource("13_x610q")
+stretch_mode = 2
+
+[node name="RichTextLabel" type="RichTextLabel" parent="TabContainer/ClueWindow/SelectedClue/Modal"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
-texture_normal = ExtResource("14_t151l")
-ignore_texture_size = true
-stretch_mode = 0
+theme_override_fonts/normal_font = ExtResource("4_ng4ob")
+theme_override_fonts/bold_font = ExtResource("5_rjhec")
+bbcode_enabled = true
+text = "
+[center][font_size=40]Simon O'Hare[/font_size]
+
+
+
+Simon was a young boy, whose father took him to the city to see a marching band"
+scroll_active = false
 
 [connection signal="tab_button_pressed" from="TabContainer" to="." method="_on_tab_container_tab_button_pressed"]
 [connection signal="tab_changed" from="TabContainer" to="." method="_on_tab_container_tab_changed"]

@@ -79,7 +79,7 @@ A syringe of heroin was found in a men's changing room. In spite of the numerous
 An improvised explosive was found behind Makoto's house. 
 
 ### Missing dog
-The German Shepard of Farah's cousin, Juno, had gone missing on September 7th. He has not been found since.
+The German Shepard of Farah's cousin, Chaz, had gone missing on September 7th. He has not been found since.
 
 ### Cut-out letter
 A cut-out letter was delivered to Makoto's household at some point on September 8th. It was discovered during Marceline Ren's search of the house on September 12th. It reads:

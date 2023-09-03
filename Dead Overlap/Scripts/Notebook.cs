@@ -17,6 +17,7 @@ public partial class Notebook : Control
 	Control victimWindow = new();
 	ScrollContainer noteWindow = new();
 	ScrollContainer missionWindow = new();
+	Control clueWindow = new();
 
 	/// <summary>
 	/// The RichTextLabel containing the description of the selected suspect.
@@ -27,25 +28,47 @@ public partial class Notebook : Control
 	/// The VBoxContainer storing all saved notes as RichTextLabels and their respective HSeparators.
 	/// </summary>
 	VBoxContainer savedDialogueContainer = new();
-	
+
 	/// <summary>
 	/// The VBoxContainer storing all missions as RichTextLabels and their respective HSeparators.
 	/// </summary>
 	VBoxContainer missionContainer = new();
 
-    /// <summary>
-    /// The List of Note objects the player stores. Can be checked using a keyboard command and read.
-    /// </summary>
-    List<Note> notes = new();
-    
 	/// <summary>
-    /// The List of Mission objects the player stores.
-    /// </summary>
-    List<Mission> missions = new();
+	/// The GridContainer storing all clues as buttons.
+	/// </summary>
+	GridContainer clueContainer = new();
+	
+	/// <summary>
+	/// The Control container storing the clue modal.
+	/// </summary>
+	Control clueModalContainer = new();
+	
+	/// <summary>
+	/// The GridContainer modal storing information about a clue.
+	/// </summary>
+	GridContainer clueModal = new();
+
+	/// <summary>
+	/// The List of Note objects the player stores. Can be checked using a keyboard command and read.
+	/// </summary>
+	List<Note> notes = new();
+
+	/// <summary>
+	/// The List of Clue objects the player stores.
+	/// </summary>
+	List<Clue> clues = new();
+
+	/// <summary>
+	/// The List of Mission objects the player stores.
+	/// </summary>
+	List<Mission> missions = new();
 
 	List<RichTextLabel> missionLabels = new();
 
 	public bool newClue = false;
+
+	bool clueModalOpen = false;
 
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
@@ -65,12 +88,18 @@ public partial class Notebook : Control
 		victimWindow.GetNode<RichTextLabel>("Description").Text = Godot.FileAccess.Open("res://Assets/Text/Descriptions/MakotoBourdain.txt", Godot.FileAccess.ModeFlags.Read).GetAsText();
 		missionWindow = GetNodeOrNull<ScrollContainer>("TabContainer/MissionWindow");
 		missionContainer = GetNodeOrNull<VBoxContainer>("TabContainer/MissionWindow/MarginContainer/MissionList");
+		clueWindow = GetNodeOrNull<Control>("TabContainer/ClueWindow");
+		clueContainer = GetNode<GridContainer>("TabContainer/ClueWindow/GridContainer");
+		clueModalContainer = GetNode<Control>("TabContainer/ClueWindow/SelectedClue");
+		clueModalContainer.GuiInput += @event => CloseClue(@event);
+		clueModalContainer.Visible = false;
+		clueModal = GetNode<GridContainer>("TabContainer/ClueWindow/SelectedClue/Modal");
 
 		try {
 			SetNotes(JsonSerializer.Deserialize<List<Note>>(
 				Godot.FileAccess.Open(Globals.pathToNotes, Godot.FileAccess.ModeFlags.Read).GetAsText(),
 				Globals.options
-			));	
+			));
 		} catch (JsonException) {
 			// JsonSerialiser.Deserialise() throws an exception if there's nothing in the target file to deserialize. 
 			// This catches and ignores the exception.
@@ -78,11 +107,19 @@ public partial class Notebook : Control
 		}
 
 		try {
-			SetMissions(PlayerVariables.GetNextMissions());	
+			SetMissions(PlayerVariables.GetNextMissions());
 		} catch (JsonException) {
 			// JsonSerialiser.Deserialise() throws an exception if there's nothing in the target file to deserialize. 
 			// This catches and ignores the exception.
 			GD.Print("No missions from last load.");
+		}
+		
+		try {
+			SetClues(PlayerVariables.GetFoundClues());
+		} catch (JsonException) {
+			// JsonSerialiser.Deserialise() throws an exception if there's nothing in the target file to deserialize. 
+			// This catches and ignores the exception.
+			GD.Print("No clues from last load.");
 		}
 	}
 
@@ -90,7 +127,7 @@ public partial class Notebook : Control
 	public override void _Process(double delta)
 	{
 	}
-	
+
 	public override void _Input(InputEvent @event)
 	{
 		if (Visible) {
@@ -144,7 +181,7 @@ public partial class Notebook : Control
 
 		if (!notes.Contains(nn)) {
 			notes.Add(nn);
-			
+
 			string newNote = JsonSerializer.Serialize(notes, Globals.options);
 			File.WriteAllText(Globals.pathToNotes, newNote);
 
@@ -180,13 +217,13 @@ public partial class Notebook : Control
 				var chs = savedDialogueContainer.GetChildren();
 				int tbd = chs.IndexOf(rtl);
 				chs[tbd].QueueFree();
-				chs[tbd+1].QueueFree();
+				chs[tbd + 1].QueueFree();
 				notes.Remove(n);
 
 				string newNote = JsonSerializer.Serialize(notes, Globals.options);
 				File.WriteAllText(Globals.pathToNotes, newNote);
-            }
-        }
+			}
+		}
 	}
 
 	public void SetMissions(List<Mission> mms) {
@@ -203,7 +240,7 @@ public partial class Notebook : Control
 	public void AddMission(Mission m) {
 		if (!missions.Contains(m)) {
 			missions.Add(m);
-			
+
 			RichTextLabel rtl = new()
 			{
 				BbcodeEnabled = true,
@@ -215,8 +252,8 @@ public partial class Notebook : Control
 			rtl.AddThemeFontOverride("normal_font", GameManager.normalFont);
 			rtl.AddThemeFontOverride("bold_font", GameManager.boldFont);
 
-			rtl.Text = m.Completed ? 
-				$"[fgcolor=#00000088][i]{m.Name}[/i][/fgcolor]\n\n[fgcolor=#00000088]{m.Description}[/fgcolor]":
+			rtl.Text = m.Completed ?
+				$"[fgcolor=#00000088][i]{m.Name}[/i][/fgcolor]\n\n[fgcolor=#00000088]{m.Description}[/fgcolor]" :
 				$"[b][i]{m.Name}[/i][/b]\n\n{m.Description}"
 			;
 			missionContainer.AddChild(rtl);
@@ -226,7 +263,7 @@ public partial class Notebook : Control
 			missionContainer.AddChild(hs1);
 		}
 	}
-	
+
 	/// <summary>
 	/// Mark a mission as completed.
 	/// </summary>
@@ -251,6 +288,72 @@ public partial class Notebook : Control
 					chs[tbd].QueueFree();
 					chs[tbd + 1].QueueFree();
 					missions.Remove(m);
+				}
+			}
+		}
+	}
+
+	public void SetClues(List<Clue> cs) {
+		foreach (Clue c in cs) {
+			AddClue(c);
+		}
+	}
+
+	public void AddClue(Clue c) {
+		if (!clues.Contains(c)) {
+			clues.Add(c);
+			c.Found = true;
+			newClue = true;
+
+			BaseButton button;
+			if (c.Texture is null) {
+				button = new Button
+				{
+					Text = $"{c.Title}",
+					SizeFlagsHorizontal = SizeFlags.ExpandFill,
+					SizeFlagsVertical = SizeFlags.ExpandFill,
+					Theme = GameManager.buttonTheme
+				};
+			} else {
+				button = new TextureButton
+				{
+					IgnoreTextureSize = true,
+					StretchMode = TextureButton.StretchModeEnum.Scale,
+					TextureNormal = GD.Load<Texture2D>(Globals.resPathToShowcases + c.Texture),
+					SizeFlagsHorizontal = SizeFlags.ExpandFill,
+					SizeFlagsVertical = SizeFlags.ExpandFill
+				};
+			}
+			button.Pressed += () => OpenClue(c);
+			clueContainer.AddChild(button);
+		}
+	}
+
+	public void OpenClue(Clue c) {
+		clueModalOpen = true;
+		clueModalContainer.Visible = true;
+		clueModal.GetNode<RichTextLabel>("RichTextLabel").Text = $"\n[center][b][font_size=40]{c.Title}[/font_size][/b]\n\n\n{c.Description}\n";
+		if (c.Texture is not null) {
+			clueModal.Columns = 2;
+			clueModal.GetNode<TextureRect>("TextureRect").Visible = true;
+			clueModal.GetNode<TextureRect>("TextureRect").Texture = GD.Load<Texture2D>(Globals.resPathToShowcases + c.Texture);
+		} else {
+			clueModal.Columns = 1;
+			clueModal.GetNode<TextureRect>("TextureRect").Visible = false;
+		}
+	}
+
+	/// <summary>
+	/// Remove a mission from the Notebook when it is completed.
+	/// </summary>
+	/// <param name="event"></param>
+	/// <param name="pos"></param>
+	void CloseClue(InputEvent @event) {
+		if (@event is InputEventMouseButton mb) {
+			if (mb.ButtonMask == MouseButtonMask.Left && mb.Pressed) {
+				if (clueModalOpen) {
+					clueModalOpen = false;
+					clueModalContainer.Visible = false;
 				}
 			}
 		}
@@ -325,4 +428,36 @@ public partial class Note : IEquatable<Note> {
 	public override int GetHashCode() {
 		return HashCode.Combine(Text, Day, NPCName);
 	}
+}
+
+/// <summary>
+/// The Clue class. Contains information about clues that will be displayed in the Clue Window of the Notebook.
+/// </summary>
+public partial class Clue : IEquatable<Clue> {
+	[JsonPropertyName("Title")]
+	public string Title { set; get; }
+	
+	[JsonPropertyName("Shorthand")]
+	public string Shorthand { set; get; }
+	
+	[JsonPropertyName("Description")]
+	public string Description { set; get; }
+	
+	[JsonPropertyName("Texture")]
+	public string Texture { set; get; }
+	
+	[JsonPropertyName("Found")]
+	public bool Found { set; get; }
+
+	public bool Equals(Clue n) {
+		return Title == n.Title &&
+				Shorthand == n.Shorthand &&
+				Description == n.Description &&
+				Texture == n.Texture && 
+				Found == n.Found;
+	}
+	public override int GetHashCode() {
+		return HashCode.Combine(Title, Shorthand, Description, Texture, Found);
+	}
+
 }
