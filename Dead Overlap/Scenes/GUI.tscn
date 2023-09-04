@@ -1,10 +1,201 @@
-[gd_scene load_steps=6 format=3 uid="uid://6wwwvpsqguwa"]
+[gd_scene load_steps=10 format=3 uid="uid://6wwwvpsqguwa"]
 
 [ext_resource type="Script" path="res://Scripts/GUI.cs" id="1_h7svq"]
 [ext_resource type="PackedScene" uid="uid://cqpj6a45n36qi" path="res://Scenes/DialogueBox.tscn" id="2_5syqh"]
 [ext_resource type="FontFile" uid="uid://brtoretp4o0u6" path="res://Assets/Fonts/Futura Extra Black font.ttf" id="4_227b2"]
 [ext_resource type="PackedScene" uid="uid://r4i21wc007bo" path="res://Scenes/Notebook.tscn" id="4_qealq"]
 [ext_resource type="FontFile" uid="uid://cy02rq8ibiqx8" path="res://Assets/Fonts/futur.ttf" id="5_bs3sn"]
+[ext_resource type="Texture2D" uid="uid://dmrdwi1vlycw4" path="res://quad_128.png" id="5_wlssw"]
+
+[sub_resource type="Animation" id="Animation_s2in4"]
+resource_name = "ClueFound"
+length = 3.0
+step = 0.05
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ClueFind/ClueFindNotif:modulate:r")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0, 0, 0, 0),
+"points": PackedFloat32Array(1, -0.25, 0, 0.25, 0, 1, -0.25, 0, 0.25, 0, 1, -0.25, 0, 0.25, 0, 1, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0, 0.2, 2, 3)
+}
+tracks/1/type = "bezier"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("ClueFind/ClueFindNotif:modulate:g")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"handle_modes": PackedInt32Array(0, 0, 0, 0),
+"points": PackedFloat32Array(1, -0.25, 0, 0.25, 0, 1, -0.25, 0, 0.25, 0, 1, -0.25, 0, 0.25, 0, 1, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0, 0.2, 2, 3)
+}
+tracks/2/type = "bezier"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("ClueFind/ClueFindNotif:modulate:b")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"handle_modes": PackedInt32Array(0, 0, 0, 0),
+"points": PackedFloat32Array(1, -0.25, 0, 0.25, 0, 1, -0.25, 0, 0.25, 0, 1, -0.25, 0, 0.25, 0, 1, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0, 0.2, 2, 3)
+}
+tracks/3/type = "bezier"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("ClueFind/ClueFindNotif:modulate:a")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"handle_modes": PackedInt32Array(0, 0, 0, 0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0, 1, -0.25, 0, 0.25, 0, 1, -0.25, 0, 0.25, 0, 0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0, 0.55, 2, 3)
+}
+tracks/4/type = "bezier"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("ClueFind/BarBelowL:size:x")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"handle_modes": PackedInt32Array(0, 0, 0, 0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0, 200, -0.25, 0, 0.25, 0, 200, -0.25, 0, 0.25, 0, 0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0, 1, 2, 3)
+}
+tracks/5/type = "bezier"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("ClueFind/BarBelowL:size:y")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"handle_modes": PackedInt32Array(0, 0, 0, 0),
+"points": PackedFloat32Array(2, -0.25, 0, 0.25, 0, 2, -0.25, 0, 0.25, 0, 2, -0.25, 0, 0.25, 0, 2, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0, 1, 2, 3)
+}
+tracks/6/type = "bezier"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("ClueFind/BarBelowR:size:x")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"handle_modes": PackedInt32Array(0, 0, 0, 0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0, 200, -0.25, 0, 0.25, 0, 200, -0.25, 0, 0.25, 0, 0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0, 1, 2, 3)
+}
+tracks/7/type = "bezier"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("ClueFind/BarBelowR:size:y")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"handle_modes": PackedInt32Array(0, 0, 0, 0),
+"points": PackedFloat32Array(2, -0.25, 0, 0.25, 0, 2, -0.25, 0, 0.25, 0, 2, -0.25, 0, 0.25, 0, 2, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0, 1, 2, 3)
+}
+
+[sub_resource type="Animation" id="Animation_8p8pl"]
+length = 0.001
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ClueFind/ClueFindNotif:modulate:r")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(1, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/1/type = "bezier"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("ClueFind/ClueFindNotif:modulate:g")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(1, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/2/type = "bezier"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("ClueFind/ClueFindNotif:modulate:b")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(1, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/3/type = "bezier"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("ClueFind/ClueFindNotif:modulate:a")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/4/type = "bezier"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("ClueFind/BarBelowL:size:x")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/5/type = "bezier"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("ClueFind/BarBelowL:size:y")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/6/type = "bezier"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("ClueFind/BarBelowR:size:x")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/7/type = "bezier"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("ClueFind/BarBelowR:size:y")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_6fp6d"]
+_data = {
+"ClueFound": SubResource("Animation_s2in4"),
+"RESET": SubResource("Animation_8p8pl")
+}
 
 [node name="GUI" type="CanvasLayer"]
 script = ExtResource("1_h7svq")
@@ -25,10 +216,19 @@ text = "[center]Note saved!"
 fit_content = true
 scroll_active = false
 
-[node name="ClueFindNotif" type="RichTextLabel" parent="."]
-offset_left = 218.0
+[node name="ClueFind" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 961.0
+offset_bottom = 603.0
+metadata/_edit_lock_ = true
+
+[node name="ClueFindNotif" type="RichTextLabel" parent="ClueFind"]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 0
+offset_left = 186.0
 offset_top = 73.0
-offset_right = 807.0
+offset_right = 775.0
 offset_bottom = 129.0
 theme_override_fonts/normal_font = ExtResource("5_bs3sn")
 theme_override_fonts/bold_font = ExtResource("4_227b2")
@@ -37,7 +237,31 @@ theme_override_font_sizes/bold_font_size = 40
 bbcode_enabled = true
 text = "[center][b]Clue Found!"
 
+[node name="BarBelowL" type="TextureRect" parent="ClueFind"]
+layout_mode = 0
+offset_left = 480.0
+offset_top = 122.0
+offset_right = 480.0
+offset_bottom = 122.0
+scale = Vector2(-1, 1)
+texture = ExtResource("5_wlssw")
+expand_mode = 1
+
+[node name="BarBelowR" type="TextureRect" parent="ClueFind"]
+layout_mode = 0
+offset_left = 480.0
+offset_top = 122.0
+offset_right = 480.0
+offset_bottom = 122.0
+texture = ExtResource("5_wlssw")
+expand_mode = 1
+
 [node name="Notebook" parent="." instance=ExtResource("4_qealq")]
 visible = false
 y_sort_enabled = true
 metadata/_edit_lock_ = true
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_6fp6d")
+}

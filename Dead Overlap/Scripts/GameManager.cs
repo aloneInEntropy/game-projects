@@ -17,6 +17,11 @@ public partial class GameManager : Node
 	/// Has the player paused the game?
 	/// </summary>
 	public static bool isGamePaused = false;
+	
+	/// <summary>
+	/// Can the player pause the game?
+	/// </summary>
+	public static bool canPauseGame = true;
 
 	public static Font normalFont, boldFont, lightFont;
 	public static Theme buttonTheme;

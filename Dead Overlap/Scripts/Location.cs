@@ -47,7 +47,8 @@ public partial class Location : Node2D
 		camera.LimitBottom = (lims.Position.Y + lims.Size.Y) * tilemap.CellQuadrantSize;
 		camera.LimitLeft = lims.Position.X * tilemap.CellQuadrantSize;
 		camera.LimitRight = (lims.Position.X + lims.Size.X) * tilemap.CellQuadrantSize;
-
+		
+		GameManager.canPauseGame = true;
 	}
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.

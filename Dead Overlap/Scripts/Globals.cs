@@ -173,6 +173,8 @@ public partial class Globals : Node
 	/// </summary>
 	/// <param name="sceneName"></param>
 	public async void LoadScene(string sceneName) {
+		GameManager.isGamePaused = false;
+		GameManager.canPauseGame = false;
 		currentLocation.Leave();
 		await ToSignal(currentLocation.animationPlayer, "animation_finished");
 		currentLocation.GetTree().ChangeSceneToFile("res://Scenes/" + sceneName + ".tscn");

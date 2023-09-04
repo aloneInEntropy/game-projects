@@ -11,6 +11,8 @@ public partial class GUI : CanvasLayer
 	public DialogueBox db = new();
 	public Notebook notebook = new();
 
+	public AnimationPlayer animationPlayer = new();
+
 	/// <summary>
 	/// The NPC currently speaking.
 	/// </summary>
@@ -31,23 +33,24 @@ public partial class GUI : CanvasLayer
 		Globals.gui = this;
 		noteSaveNotif = (RichTextLabel)GetNode("NoteSaveNotif");
 		noteSaveNotif.Modulate = new Color(1, 1, 1, 0);
-		clueFindNotif = (RichTextLabel)GetNode("ClueFindNotif");
+		clueFindNotif = (RichTextLabel)GetNode("ClueFind/ClueFindNotif");
 		clueFindNotif.Modulate = new Color(1, 1, 1, 0);
 		db = (DialogueBox)GetNode("DialogueBox");
 		db.Visible = false;
 		notebook = (Notebook)GetNode("Notebook");
 		notebook.Visible = false;
+		animationPlayer = GetNode<AnimationPlayer>("AnimationPlayer");
 	}
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
 	public override void _Process(double delta)
 	{
 		noteSaveNotif.Modulate = new Color(1, 1, 1, Mathf.Clamp(noteSaveNotif.Modulate.A - 0.02f, 0, 1));
-		clueFindNotif.Modulate = new Color(1, 1, 1, Mathf.Clamp(clueFindNotif.Modulate.A - 0.01f, 0, 1));
+		// clueFindNotif.Modulate = new Color(1, 1, 1, Mathf.Clamp(clueFindNotif.Modulate.A - 0.01f, 0, 1));
 	}
 
 	public override void _Input(InputEvent @event) {
-		if (@event.IsActionPressed("pause")) {
+		if (@event.IsActionPressed("pause") && GameManager.canPauseGame) {
 			notebook.Visible = !notebook.Visible;
 			GameManager.isGamePaused = !GameManager.isGamePaused;
 		}
@@ -113,7 +116,7 @@ public partial class GUI : CanvasLayer
 	public void CloseDialogue() {
 		db.Close();
 		if (notebook.newClue) {
-			clueFindNotif.Modulate = new Color(1, 1, 1, 1);
+			animationPlayer.Play("ClueFound");
 			notebook.newClue = false;
 		}
 		if (IsInstanceValid(talkingNPC)) {

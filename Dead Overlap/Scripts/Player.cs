@@ -59,8 +59,8 @@ public partial class Player : CharacterBody2D
 		if (!GameManager.isGamePaused) {
 			rayCast.TargetPosition = lastDirection * 32;
 			attackBoxColl.Position = lastDirection * 64;
-			UpdateAnimationParameters();
 		}
+		UpdateAnimationParameters();
     }
 
     public override void _Input(InputEvent @event)
@@ -105,29 +105,19 @@ public partial class Player : CharacterBody2D
 	{
 		_velocity = Velocity;
 
-		if (Input.IsActionPressed("sprint")) {
-			Speed = 450f;
-			// AudioManager.stepTimer.WaitTime = 0.11;
-			// animationPlayer.SpeedScale = 5f;
-		} else {
-			Speed = 200f;
-			// AudioManager.stepTimer.WaitTime = 0.4;
-			// animationPlayer.SpeedScale = 1f;
-		}
+		Speed = Input.IsActionPressed("sprint") ? 850f : 200f;
 
-		// Get the input direction and handle the movement/deceleration.
-		// As good practice, you should replace UI actions with custom gameplay actions.
-		direction = gui.isDialogueActive || GameManager.isGamePaused ? 
+        direction = (gui.isDialogueActive || GameManager.isGamePaused) ? 
 			Vector2.Zero :	
 			Input.GetVector("ui_left", "ui_right", "ui_up", "ui_down");
-		
+				
 		// Velocity handling
 		if (direction == Vector2.Zero) {
-			_velocity = _velocity.MoveToward(Vector2.Zero, _friction * (float)delta);
+			_velocity = Vector2.Zero;
 		} else {
 			AudioManager.PlayStep();
 			lastDirection = direction;
-			_velocity = _velocity.MoveToward(direction * Speed, _acceleration * (float)delta);
+			_velocity = direction * Speed;
 		}
 
 		Velocity = _velocity;
@@ -141,10 +131,8 @@ public partial class Player : CharacterBody2D
 		animationPlayer.SpeedScale = 2.5f;
 		animationTree.Set("parameters/conditions/idle", Velocity == Vector2.Zero);
 		animationTree.Set("parameters/conditions/isMoving", Velocity != Vector2.Zero);
-		// animationTree.Set("parameters/conditions/attack", Input.IsActionJustPressed("attack"));
 		animationTree.Set("parameters/Idle/blend_position", lastDirection);
 		animationTree.Set("parameters/Walk/blend_position", lastDirection);
-		// animationTree.Set("parameters/Attack/blend_position", lastDirection);
 	}
 
 

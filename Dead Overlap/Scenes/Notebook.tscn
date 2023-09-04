@@ -36,7 +36,6 @@ theme_override_fonts/font = ExtResource("1_qt1ux")
 tab_alignment = 1
 
 [node name="SuspectWindow" type="Control" parent="TabContainer"]
-visible = false
 layout_mode = 2
 
 [node name="GridContainer" type="GridContainer" parent="TabContainer/SuspectWindow"]
@@ -324,6 +323,7 @@ layout_mode = 2
 layout_mode = 2
 
 [node name="ClueWindow" type="Control" parent="TabContainer"]
+visible = false
 layout_mode = 2
 
 [node name="GridContainer" type="GridContainer" parent="TabContainer/ClueWindow"]
