@@ -270,8 +270,8 @@ triggerRequirementVariableValue = true
 triggerDeniedTextSource = "town_north_market_bins.txt"
 
 [node name="CollisionPolygon2D" parent="Triggers/Interactables/Pen" index="0"]
-position = Vector2(15, -9.53674e-07)
-scale = Vector2(1.9375, 1)
+position = Vector2(-30.5, -9.53674e-07)
+scale = Vector2(9.53125, 1)
 
 [node name="Foreground" type="Sprite2D" parent="."]
 modulate = Color(0, 0, 0, 0)

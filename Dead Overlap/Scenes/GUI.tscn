@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://6wwwvpsqguwa"]
+[gd_scene load_steps=11 format=3 uid="uid://6wwwvpsqguwa"]
 
 [ext_resource type="Script" path="res://Scripts/GUI.cs" id="1_h7svq"]
 [ext_resource type="PackedScene" uid="uid://cqpj6a45n36qi" path="res://Scenes/DialogueBox.tscn" id="2_5syqh"]
@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://r4i21wc007bo" path="res://Scenes/Notebook.tscn" id="4_qealq"]
 [ext_resource type="FontFile" uid="uid://cy02rq8ibiqx8" path="res://Assets/Fonts/futur.ttf" id="5_bs3sn"]
 [ext_resource type="Texture2D" uid="uid://dmrdwi1vlycw4" path="res://quad_128.png" id="5_wlssw"]
+[ext_resource type="PackedScene" uid="uid://b8cxtfylm4aew" path="res://Scenes/PauseMenu.tscn" id="7_8qab7"]
 
 [sub_resource type="Animation" id="Animation_s2in4"]
 resource_name = "ClueFound"
@@ -260,6 +261,9 @@ expand_mode = 1
 visible = false
 y_sort_enabled = true
 metadata/_edit_lock_ = true
+
+[node name="PauseMenu" parent="." instance=ExtResource("7_8qab7")]
+visible = false
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {

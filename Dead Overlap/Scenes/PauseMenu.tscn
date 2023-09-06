@@ -1,0 +1,202 @@
+[gd_scene load_steps=6 format=3 uid="uid://b8cxtfylm4aew"]
+
+[ext_resource type="Script" path="res://Scripts/PauseMenu.cs" id="1_kyetd"]
+[ext_resource type="Texture2D" uid="uid://dmrdwi1vlycw4" path="res://quad_128.png" id="1_swhw3"]
+[ext_resource type="Theme" uid="uid://iljwyttmd4hb" path="res://Resources/ButtonTheme.tres" id="2_tbvmy"]
+[ext_resource type="FontFile" uid="uid://cy02rq8ibiqx8" path="res://Assets/Fonts/futur.ttf" id="4_807g2"]
+[ext_resource type="FontFile" uid="uid://brtoretp4o0u6" path="res://Assets/Fonts/Futura Extra Black font.ttf" id="4_jawe6"]
+
+[node name="PauseMenu" type="Control"]
+z_index = 3
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_kyetd")
+
+[node name="BG" type="TextureRect" parent="."]
+modulate = Color(0.231373, 0, 0.411765, 1)
+layout_mode = 0
+offset_left = 293.0
+offset_top = 46.0
+offset_right = 679.0
+offset_bottom = 537.0
+texture = ExtResource("1_swhw3")
+
+[node name="Buttons" type="Control" parent="."]
+anchors_preset = 0
+offset_right = 966.0
+offset_bottom = 599.0
+
+[node name="ResumeButton" type="Button" parent="Buttons"]
+layout_mode = 0
+offset_left = 449.0
+offset_top = 109.0
+offset_right = 530.0
+offset_bottom = 142.0
+theme = ExtResource("2_tbvmy")
+text = "Resume"
+
+[node name="SettingsButton" type="Button" parent="Buttons"]
+layout_mode = 0
+offset_left = 449.0
+offset_top = 165.0
+offset_right = 530.0
+offset_bottom = 198.0
+theme = ExtResource("2_tbvmy")
+text = "Settings
+"
+
+[node name="QuitButton" type="Button" parent="Buttons"]
+layout_mode = 0
+offset_left = 449.0
+offset_top = 230.0
+offset_right = 530.0
+offset_bottom = 263.0
+theme = ExtResource("2_tbvmy")
+text = "Quit"
+
+[node name="Settings" type="Control" parent="."]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="BG" type="TextureRect" parent="Settings"]
+modulate = Color(0.0784314, 0, 0.258824, 0.890196)
+layout_mode = 0
+offset_left = 232.0
+offset_top = 22.0
+offset_right = 735.0
+offset_bottom = 558.0
+texture = ExtResource("1_swhw3")
+
+[node name="SettingsContainer" type="VBoxContainer" parent="Settings"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Volume" type="HBoxContainer" parent="Settings/SettingsContainer"]
+layout_mode = 2
+
+[node name="Control" type="Control" parent="Settings/SettingsContainer/Volume"]
+layout_mode = 2
+
+[node name="HSlider" type="HSlider" parent="Settings/SettingsContainer/Volume/Control"]
+layout_mode = 2
+offset_left = 531.0
+offset_top = 99.0
+offset_right = 699.0
+offset_bottom = 115.0
+max_value = 5.0
+step = 0.25
+value = 3.0
+
+[node name="Amount" type="RichTextLabel" parent="Settings/SettingsContainer/Volume/Control"]
+layout_mode = 0
+offset_left = 530.0
+offset_top = 66.0
+offset_right = 570.0
+offset_bottom = 106.0
+theme_override_fonts/normal_font = ExtResource("4_jawe6")
+bbcode_enabled = true
+text = "0"
+fit_content = true
+scroll_active = false
+
+[node name="Label" type="RichTextLabel" parent="Settings/SettingsContainer/Volume/Control"]
+layout_mode = 0
+offset_left = 304.0
+offset_top = 92.0
+offset_right = 459.0
+offset_bottom = 121.0
+theme_override_fonts/normal_font = ExtResource("4_807g2")
+bbcode_enabled = true
+text = "[center]Global Volume"
+fit_content = true
+scroll_active = false
+
+[node name="MusicVolume" type="HBoxContainer" parent="Settings/SettingsContainer"]
+layout_mode = 2
+
+[node name="Control" type="Control" parent="Settings/SettingsContainer/MusicVolume"]
+layout_mode = 2
+
+[node name="HSlider" type="HSlider" parent="Settings/SettingsContainer/MusicVolume/Control"]
+layout_mode = 2
+offset_left = 531.0
+offset_top = 196.0
+offset_right = 699.0
+offset_bottom = 212.0
+max_value = 5.0
+step = 0.25
+value = 3.0
+editable = false
+
+[node name="Amount" type="RichTextLabel" parent="Settings/SettingsContainer/MusicVolume/Control"]
+layout_mode = 0
+offset_left = 530.0
+offset_top = 163.0
+offset_right = 570.0
+offset_bottom = 203.0
+theme_override_fonts/normal_font = ExtResource("4_jawe6")
+bbcode_enabled = true
+text = "0"
+fit_content = true
+scroll_active = false
+
+[node name="Label" type="RichTextLabel" parent="Settings/SettingsContainer/MusicVolume/Control"]
+layout_mode = 0
+offset_left = 304.0
+offset_top = 189.0
+offset_right = 459.0
+offset_bottom = 218.0
+theme_override_fonts/normal_font = ExtResource("4_807g2")
+bbcode_enabled = true
+text = "[center]Music Volume"
+fit_content = true
+scroll_active = false
+
+[node name="Brightness" type="HBoxContainer" parent="Settings/SettingsContainer"]
+layout_mode = 2
+
+[node name="Control" type="Control" parent="Settings/SettingsContainer/Brightness"]
+layout_mode = 2
+
+[node name="HSlider" type="HSlider" parent="Settings/SettingsContainer/Brightness/Control"]
+layout_mode = 2
+offset_left = 531.0
+offset_top = 281.0
+offset_right = 699.0
+offset_bottom = 297.0
+
+[node name="Amount" type="RichTextLabel" parent="Settings/SettingsContainer/Brightness/Control"]
+layout_mode = 0
+offset_left = 530.0
+offset_top = 245.0
+offset_right = 570.0
+offset_bottom = 285.0
+theme_override_fonts/normal_font = ExtResource("4_jawe6")
+bbcode_enabled = true
+text = "0"
+fit_content = true
+scroll_active = false
+
+[node name="Label" type="RichTextLabel" parent="Settings/SettingsContainer/Brightness/Control"]
+layout_mode = 0
+offset_left = 304.0
+offset_top = 268.0
+offset_right = 431.0
+offset_bottom = 297.0
+theme_override_fonts/normal_font = ExtResource("4_807g2")
+bbcode_enabled = true
+text = "[center]Brightness"
+fit_content = true
+scroll_active = false
+
+[connection signal="pressed" from="Buttons/ResumeButton" to="." method="OnResumeButtonPressed"]
+[connection signal="pressed" from="Buttons/SettingsButton" to="." method="OnSettingsButtonPressed"]
+[connection signal="pressed" from="Buttons/QuitButton" to="." method="OnQuitButtonPressed"]
+[connection signal="value_changed" from="Settings/SettingsContainer/Volume/Control/HSlider" to="." method="OnGlobalVolumeValueChanged"]
+[connection signal="value_changed" from="Settings/SettingsContainer/MusicVolume/Control/HSlider" to="." method="OnMusicVolumeValueChanged"]

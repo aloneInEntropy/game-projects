@@ -6,6 +6,7 @@ using Godot;
 /// </summary>
 public partial class GUI : CanvasLayer
 {
+	public PauseMenu pauseMenu = new();
 	public RichTextLabel noteSaveNotif = new();
 	public RichTextLabel clueFindNotif = new();
 	public DialogueBox db = new();
@@ -31,14 +32,15 @@ public partial class GUI : CanvasLayer
 	public override void _Ready()
 	{
 		Globals.gui = this;
-		noteSaveNotif = (RichTextLabel)GetNode("NoteSaveNotif");
+		noteSaveNotif = GetNode<RichTextLabel>("NoteSaveNotif");
 		noteSaveNotif.Modulate = new Color(1, 1, 1, 0);
-		clueFindNotif = (RichTextLabel)GetNode("ClueFind/ClueFindNotif");
+		clueFindNotif = GetNode<RichTextLabel>("ClueFind/ClueFindNotif");
 		clueFindNotif.Modulate = new Color(1, 1, 1, 0);
-		db = (DialogueBox)GetNode("DialogueBox");
+		db = GetNode<DialogueBox>("DialogueBox");
 		db.Visible = false;
-		notebook = (Notebook)GetNode("Notebook");
+		notebook = GetNode<Notebook>("Notebook");
 		notebook.Visible = false;
+		pauseMenu = GetNode<PauseMenu>("PauseMenu");
 		animationPlayer = GetNode<AnimationPlayer>("AnimationPlayer");
 	}
 
@@ -50,9 +52,14 @@ public partial class GUI : CanvasLayer
 	}
 
 	public override void _Input(InputEvent @event) {
-		if (@event.IsActionPressed("pause") && GameManager.canPauseGame) {
-			notebook.Visible = !notebook.Visible;
-			GameManager.isGamePaused = !GameManager.isGamePaused;
+		if (GameManager.canPauseGame) {
+			if (@event.IsActionPressed("pause")) {
+				GameManager.TogglePause();
+			}
+			
+			if (@event.IsActionPressed("notebook")) {
+				GameManager.TogglePause(GameManager.GAME_PAUSE_MODE_NOTEBOOK);
+			}
 		}
 
 		if (isDialogueActive && IsInstanceValid(db) && @event.IsActionPressed("save_dialogue")) {

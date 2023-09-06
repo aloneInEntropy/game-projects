@@ -199,6 +199,7 @@ texture = ExtResource("6_thw6s")
 [node name="Showcase" type="TextureRect" parent="."]
 visible = false
 z_index = 1
+y_sort_enabled = true
 layout_mode = 0
 offset_left = 502.0
 offset_top = 353.0

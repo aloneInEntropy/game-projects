@@ -22,5 +22,6 @@ one_shot = true
 [node name="BGMusic" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("3_ph6su")
 volume_db = -25.0
+bus = &"Music"
 
 [connection signal="timeout" from="StepTimer" to="." method="OnTimerTimeout"]

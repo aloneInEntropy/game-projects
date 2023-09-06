@@ -18,6 +18,33 @@ public partial class AudioManager : Node
 	/// </summary>
 	public static float updateVoiceSpeed = 4;
 
+	/// <summary>
+	/// The name of the global (master) audio bus.
+	/// </summary>
+	[Export]
+	public static string globalAudioBusName = "Master";
+
+	/// <summary>
+	/// The index of the global (master) audio bus.
+	/// </summary>
+	public static int globalAudioBusIndex = AudioServer.GetBusIndex(globalAudioBusName);
+	
+	/// <summary>
+	/// The name of the music audio bus.
+	/// </summary>
+	[Export]
+	public static string musicAudioBusName = "Music";
+
+	/// <summary>
+	/// The index of the master audio bus.
+	/// </summary>
+	public static int musicAudioBusIndex = AudioServer.GetBusIndex(globalAudioBusName);
+
+	/// <summary>
+	/// The value of the master volume on a scale of 0-100.
+	/// </summary>
+	public static float masterVolume = 90f;
+
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
@@ -26,6 +53,7 @@ public partial class AudioManager : Node
 		oneShotPlayer = GetNode<AudioStreamPlayer>("OneShotOther");
 		bgMusicPlayer = GetNode<AudioStreamPlayer>("BGMusic");
 		stepTimer = GetNode<Timer>("StepTimer");
+		masterVolume = Mathf.DbToLinear(AudioServer.GetBusVolumeDb(globalAudioBusIndex));
 	}
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
