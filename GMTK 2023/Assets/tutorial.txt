@@ -1,0 +1,50 @@
+----------------------------- PART 1 ----------------------------- 
+This is Ai. She is the [b]FAULTY ROBOT[/b] you created. She wants to save all the princesses, and you must help her.
+
+You have the ability to edit the level by either [b]CUTTING[/b] or [b]PLACING[/b] tiles.
+
+Press [b]RIGHT CLICK to destroy a tile.[/b]
+
+----------------------------- PART 2 ----------------------------- 
+
+Ai will jump over gaps and obstacles whenever necessary to reach her goal. This includes staircases such as this.
+
+Press [b]RIGHT CLICK[/b] to destroy a tile and proceed.
+
+----------------------------- PART 3 ----------------------------- 
+
+You can move the camera around by dragging your mouse while holding the [b]MIDDLE MOUSE BUTTON[/b] or [b]CTRL + LEFT MOUSE BUTTON[/b].
+
+Alternatively, you can press the [b]SPACEBAR[/b] to automatically move the camera to Ai.
+
+----------------------------- PART 4 ----------------------------- 
+
+You can place tiles by pressing [b]LEFT MOUSE BUTTON[/b].
+
+Try to place a tile underneath Ai so she can jump over.
+
+----------------------------- PART 5 ----------------------------- 
+
+The line onscreen is a [b]guide line[/b] leading directly to the nearest [b]target[/b]. You can disable it in the [b]settings.[/b]
+
+It turns red when where is no available path towards any target. When this happens, Ai will move towards the nearest target, even if she can't reach it.
+
+----------------------------- PART 6 ----------------------------- 
+
+When Ai reaches a target, you gain one cut and one place (usually). The target becomes a physical block you can cut and Ai can touch.
+
+When Ai is in range of multiple targets, she may get confused on which one to get. You can [b]DOUBLE LEFT CLICK[/b] on a target to [b]highlight[/b] it. Ai will attempt move towards that target singularly, even if she can't reach it, and she won't be able to collect any other targets. You can disable the targeting by doubleclicking on the target again or highlighting another target, and Ai will recalibrate.
+
+----------------------------- PART 7 ----------------------------- 
+
+You can press [b]ESCAPE[/b] or [b]ENTER[/b] to open the [b]pause menu[/b], or press the icon in the top left corner.
+
+Pressing [b]R[/b] will restart the current level from the beginning. This is accessible from the pause menu.
+
+Pressing [b]TAB[/b] will open the minimap. Clicking the targets in the minimap will highlight them once the menu is closed. The guide line in the minimap can be toggled in the settings. This is also accessible from the pause menu.
+
+----------------------------- PART 8 ----------------------------- 
+
+Please enjoy the game! Help Ai achieve her goals, and maybe you can achieve your goals too!
+
+----------------------------- PART 9 ----------------------------- 

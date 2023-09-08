@@ -1,11 +1,11 @@
 Welcome to Faulty Robot! The goal of this game is to help this poor, delusional little robot reach its goal and save the princess!
 
-Unfortunately, the robot was created by a computer science student and, as a result, has some pretty poor AI. Your goal is to aid the robot by becoming God. :)
+Unfortunately, the robot was created by a computer science student and, as a result, has some pretty poor AI. Your goal is to aid the robot by becoming editing the level itself.
 
-Your goal as God is to alter the dungeon the robot is in to allow it to pass through certain obstacles and reach its goals. There are multiple goals (princesses I swear) and the robot must reach them all.
+You must alter the dungeon the robot is in to allow it to pass through certain obstacles and reach its goals. There are multiple goals ("princesses" I swear) and the robot must reach them all.
 
-However, because God isn't real, you have a limited ability. You have a limited number of tiles to place and destroy, and this amount only refils every so often. Additionally, tiles you place and break will break and be replaced after a period of time, so you won't be able to sit back and relax while your devoted servant is busy doing all the work :(
+However, your abilities aren't absolute. You have a limited number of tiles to place and destroy, and this amount only refils every so often and when goals are reached. Additionally, tiles you place and break will break and be replaced after a period of time, so you won't be able to sit back and relax while your devoted servant is busy doing all the work :(
 
-You can LEFT CLICK to place this tiles and RIGHT CLICK to destroy tiles, but NOT your own placed tiles.
+You can LEFT CLICK to place tiles and RIGHT CLICK to destroy tiles, but NOT your own placed tiles.
 
-The robot will be dropped into a random location within the dungeon. You have a set amount of time between reaching goals. Reach every goal before your time runs out! (You wouldn't want to break its heart...)
+The robot will be dropped into a random location within the dungeon. You have a set amount of time between reaching goals, and gain small amounts of time when goals are reached. Reach every goal before your time runs out! (You wouldn't want to break its heart...)
