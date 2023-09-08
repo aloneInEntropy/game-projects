@@ -36,9 +36,31 @@ public partial class AudioManager : Node
 	public static string musicAudioBusName = "Music";
 
 	/// <summary>
-	/// The index of the master audio bus.
+	/// The index of the music audio bus.
 	/// </summary>
-	public static int musicAudioBusIndex = AudioServer.GetBusIndex(globalAudioBusName);
+	public static int musicAudioBusIndex = AudioServer.GetBusIndex(musicAudioBusName);
+	
+	/// <summary>
+	/// The name of the SFX audio bus.
+	/// </summary>
+	[Export]
+	public static string SFXAudioBusName = "SFX";
+
+	/// <summary>
+	/// The index of the SFX audio bus.
+	/// </summary>
+	public static int SFXAudioBusIndex = AudioServer.GetBusIndex(SFXAudioBusName);
+	
+	/// <summary>
+	/// The name of the Voice audio bus.
+	/// </summary>
+	[Export]
+	public static string voiceAudioBusName = "Voice";
+
+	/// <summary>
+	/// The index of the voice audio bus.
+	/// </summary>
+	public static int voiceAudioBusIndex = AudioServer.GetBusIndex(voiceAudioBusName);
 
 	/// <summary>
 	/// The value of the master volume on a scale of 0-100.

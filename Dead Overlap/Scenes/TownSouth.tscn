@@ -82,12 +82,6 @@ _data = {
 script = ExtResource("1_eq7ke")
 defaultEntryPoint = Vector2(952, 369)
 
-[node name="Boundary" type="StaticBody2D" parent="."]
-
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Boundary"]
-position = Vector2(-352, -416)
-polygon = PackedVector2Array(-4, 7.00002, -2, 1340, 2331, 1340, 2335, 1, 2495, -1, 2522, 1602, -389, 1623, -378, 7)
-
 [node name="TileMap" type="TileMap" parent="."]
 y_sort_enabled = true
 tile_set = ExtResource("3_yl3e8")

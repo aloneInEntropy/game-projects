@@ -9,9 +9,11 @@ script = ExtResource("1_hp76l")
 
 [node name="VoicePlayer" type="AudioStreamPlayer" parent="."]
 volume_db = -15.0
+bus = &"Voice"
 
 [node name="StepAudio" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("2_i4jsh")
+bus = &"SFX"
 
 [node name="StepTimer" type="Timer" parent="."]
 wait_time = 0.4
