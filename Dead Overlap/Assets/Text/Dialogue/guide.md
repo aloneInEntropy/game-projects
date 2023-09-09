@@ -14,20 +14,20 @@ Also note that the dialogue box can currently fit 342 characters before overflow
 `~##.`: End of choice section\
 `~#@[choice number]`: Response to choice number\
 `~~.`: End of choice dialogue\
-`~.`: End of dialogue\
+`~.`: End of dialogue
 
 ### Commands
-For the following commands, anything involving parsing a file (i.e., `||l`, `||j`) will require parameter signifiers for each parameter. File paths will require extensions as well (e.g., `||l f=first.txt`). (I cannot be bothered to add multiple commands to a line, so just use `||f` whenever you want to do that.)
+For the following commands, anything involving parsing a file (i.e., `||l`, `||j`) will require parameter signifiers for each parameter. File paths will require extensions as well (e.g., `||l f=first.txt`).
 
 `... ||f [function name] [parameter1] [parameter2]`: call function during dialogue\
 `... ||s [signal name] [parameter1] [parameter2]`: call signal during dialogue\
-`... ||f/s [function/signal name] [parameter1] [parameter2] | [function/signal name] [parameter1]`: call multiple functions/signals during dialogue\
+`... ||f/s [function/signal name] [parameter1] [parameter2] | [function/signal name] [parameter1]`: call multiple functions/signals during dialogue
 
 `... ||l f=[file path] l=[load immediately?] p=[dialogue number] s=[save path?]`\
-`file path` (`str`) - path to file from `"Globals.dialoguePath"`\
-`load immediately?` (`bool`) - should the new dialogue be read immediately next or after the current DialogueObject's dialogue is finished? When used at the end of a dialogue file, setting this to `false` waits for the dialogue box to close before loading it in. Otherwise, it is loaded in as the next dialogue object. (defaults to `true`)\
-`dialogue number` (`int`) - the position in the `file path` to load dialogue from (defaults to `0`)\
-`save path?`  (`bool`) -  should the new path be saved to the NPC's current dialogue or switch back afterwards? (defaults to `true`)
+`f` (`str`) - path to file from `"Assets/Text/Dialogue/"`\
+`l` (`bool`) - should the new dialogue be read immediately next or after the current DialogueObject's dialogue is finished? When used at the end of a dialogue file, setting this to `false` waits for the dialogue box to close before loading it in. Otherwise, it is loaded in as the next dialogue object. (defaults to `true`)\
+`p` (`int`) - the position in the `file path` to load dialogue from (defaults to `0`)\
+`s`  (`bool`) -  should the new path be saved to the NPC's current dialogue or switch back afterwards? (defaults to `true`)
 
 `... ||j f=[file path] l=[load immediately?] p=[dialogue number]` (***BROKEN! DO NOT USE.***)\
 Command to jump to dialogue line without saving path. Shorthand for `||l f=[file path] l=[load immediately?] p=[dialogue number] s=false`
@@ -40,7 +40,7 @@ Command to end dialogue immediately. Shorthand for `||f EndDialogueB`
 
 `||c [chara name]`: Command to switch characters.\
 The name `chara name` will be the "true name" of an NPC. If "null", the box title will be an empty string. Short hand for `||f Modify chara_name`.\
-Note that this will cause an error if the NPC `chara_name` is not loaded in the scene.
+Note that this will cause an error if the NPC `chara_name` has not yet been loaded in any previous scene. Once loaded, they persist between scenes.
 
 
 
@@ -80,10 +80,9 @@ What would you like for dinner?
 ```
 
 ### Choices
-***[Note that all functions here are explicitly preceded by a tilde, but are not shown in explanations.]***
 
 
-Choices are dictated using two hashtags (`##`) followed by the number of choices present. On the next line, each choice is written using the `@` symbol followed by the choice number. The choice section is then ended with another double hashtag followed by a period. 
+Choices are dictated using two hashtags (`~##`) followed by the number of choices present. On the next line, each choice is written using the `~@` symbol followed by the choice number. The choice section is then ended with another double hashtag followed by a period. 
 
 To run a function during the dialogue, append the choice text with `||f` followed by a space and the name of the function. Separate parameters with spaces and further functions with another bar (`|`).
 To call a signal during the dialogue, append the choice text with `||s` followed by a space and the name of the signal. Separate parameters with spaces and further signals with another bar (`|`).
@@ -107,7 +106,7 @@ So, for example,
 ```
 
 ### Responses
-After choices have been made, there may be dialogue following each choice. This is on the line immediately after the choices as a (`~`) followed by a hashtag (`#`) and an `@` and the choice the dialogue is in response to.
+After choices have been made, there may be non-branching dialogue (a single immediate dialogue line too insignificant to warrant another dialogue file) following each choice. This is on the line immediately after the choices as a (`~#@`) and the choice the dialogue is in response to.
 
 So, for example.
 ```
@@ -135,7 +134,7 @@ So, for example.
 ```
 
 ### End choices
-Finally, to end the choice section, simply add a tilde, hash, and period (`~#.`) to the line after the Response section (if there is one) and continue as normal.
+Finally, to end the choice section, simply add a tilde, hash, and period (`~##.`) to the line after the Response section (if there is one) and continue as normal.
 
 All in all, the dialogue for choices will look like this:
 ```
