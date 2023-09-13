@@ -166,26 +166,5 @@ public partial class Globals : Node
 		}
 		return false;
 	}
-
-	/// <summary>
-	/// Load a scene asyncronously. This uses the FadeOut animation in the current Location to work. <br/>
-	/// If you need to load a scene statically, use ChangeScene.
-	/// </summary>
-	/// <param name="sceneName"></param>
-	public async void LoadScene(string sceneName) {
-		GameManager.isGamePaused = false;
-		GameManager.canPauseGame = false;
-		currentLocation.Leave();
-		await ToSignal(currentLocation.animationPlayer, "animation_finished");
-		currentLocation.GetTree().ChangeSceneToFile("res://Scenes/" + sceneName + ".tscn");
-	}
-
-	/// <summary>
-	/// Load a scene <c>sceneName</c>.
-	/// </summary>
-	/// <param name="sceneName"></param>
-	public static void ChangeScene(string sceneName) {
-		currentLocation.GetTree().ChangeSceneToFile("res://Scenes/" + sceneName + ".tscn");
-	}
 }
 

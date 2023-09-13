@@ -1,0 +1,78 @@
+[gd_scene load_steps=5 format=3 uid="uid://dp3cm8e2vtpwk"]
+
+[ext_resource type="FontFile" uid="uid://brtoretp4o0u6" path="res://Assets/Fonts/Futura Extra Black font.ttf" id="1_1cuh2"]
+[ext_resource type="Script" path="res://Scripts/Title.cs" id="1_lgpkl"]
+[ext_resource type="Texture2D" uid="uid://dmrdwi1vlycw4" path="res://quad_128.png" id="1_vhb3u"]
+[ext_resource type="Theme" uid="uid://iljwyttmd4hb" path="res://Resources/ButtonTheme.tres" id="2_i2eio"]
+
+[node name="Title" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_lgpkl")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+modulate = Color(0.258824, 0, 0.0980392, 0.745098)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_vhb3u")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="."]
+layout_mode = 0
+offset_right = 954.0
+offset_bottom = 482.0
+theme_override_fonts/normal_font = ExtResource("1_1cuh2")
+theme_override_font_sizes/normal_font_size = 200
+bbcode_enabled = true
+text = "[center]Dead Overlap"
+fit_content = true
+scroll_active = false
+
+[node name="NGButton" type="Button" parent="."]
+layout_mode = 0
+offset_left = 279.0
+offset_top = 546.0
+offset_right = 349.0
+offset_bottom = 574.0
+theme = ExtResource("2_i2eio")
+text = "New Game"
+
+[node name="ResumeButton" type="Button" parent="."]
+layout_mode = 0
+offset_left = 414.0
+offset_top = 546.0
+offset_right = 526.0
+offset_bottom = 579.0
+theme = ExtResource("2_i2eio")
+text = "Resume"
+
+[node name="QuitButton" type="Button" parent="."]
+layout_mode = 0
+offset_left = 549.0
+offset_top = 546.0
+offset_right = 661.0
+offset_bottom = 579.0
+theme = ExtResource("2_i2eio")
+text = "Quit
+"
+
+[node name="SettingsButton" type="Button" parent="."]
+layout_mode = 0
+offset_left = 838.0
+offset_top = 546.0
+offset_right = 950.0
+offset_bottom = 579.0
+theme = ExtResource("2_i2eio")
+text = "Settings"
+
+[connection signal="pressed" from="NGButton" to="." method="OnNGButtonPressed"]
+[connection signal="pressed" from="ResumeButton" to="." method="OnResumeButtonPressed"]
+[connection signal="pressed" from="QuitButton" to="." method="OnQuitButtonPressed"]
+[connection signal="pressed" from="SettingsButton" to="." method="OnSettingsButtonPressed"]

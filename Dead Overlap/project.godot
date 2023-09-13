@@ -12,18 +12,19 @@ config_version=5
 
 config/name="Dead Overlap"
 config/tags=PackedStringArray("game_jam", "has_git_repo")
+run/main_scene="res://Scenes/Title.tscn"
 config/features=PackedStringArray("4.1", "C#", "GL Compatibility")
 config/icon="res://icon.svg"
 
 [autoload]
 
-AudioManager="*res://Scenes/AudioManager.tscn"
-DialogueManager="*res://Scenes/DialogueManager.tscn"
 GameManager="*res://Scenes/GameManager.tscn"
 Globals="*res://Scripts/Globals.cs"
+PlayerVariables="*res://Scripts/PlayerVariables.cs"
+DialogueManager="*res://Scenes/DialogueManager.tscn"
+AudioManager="*res://Scenes/AudioManager.tscn"
 Narrator="*res://Scripts/Narrator.cs"
 Marceline="*res://Scenes/Marceline.tscn"
-PlayerVariables="*res://Scripts/PlayerVariables.cs"
 
 [display]
 

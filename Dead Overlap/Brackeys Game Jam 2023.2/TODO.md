@@ -110,3 +110,9 @@ i'm gonna do what i want
 	- [x] South
 		- [x] Adora's house
 
+
+- [ ] Saving data
+	- [ ] Saving player data (position, facing direction, notes, missions)
+	- [ ] Saving NPC data (dialogue spoken)
+	- [ ] Saving settings
+- [x] Title screen

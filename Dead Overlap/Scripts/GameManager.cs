@@ -56,6 +56,9 @@ public partial class GameManager : Node
 	/// </summary>
 	public static int GamePauseMode = GAME_PAUSE_MODE_NEG;
 
+	// [Signal]
+	// public delegate void DataLoadedSignalHandler();
+
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
@@ -63,6 +66,8 @@ public partial class GameManager : Node
 		boldFont = GD.Load<Font>("res://Assets/Fonts/Futura Extra Black font.ttf");
 		lightFont = GD.Load<Font>("res://Assets/Fonts/futura light bt.ttf");
 		buttonTheme = GD.Load<Theme>("res://Resources/ButtonTheme.tres");
+
+		// DataLoaded += () => LoadData;
 	}
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -177,5 +182,33 @@ public partial class GameManager : Node
 	/// <returns>The string with all BBCode tags removed.</returns>
 	public static string RemoveBBCTags(string s) {
 		return Regex.Replace(s, "\\[.*?\\]", "");
+	}
+
+	/// <summary>
+	/// Load a scene asyncronously. This uses the FadeOut animation in the current Location to work. <br/>
+	/// If you need to load a scene statically, use ChangeScene.
+	/// </summary>
+	/// <param name="sceneName"></param>
+	public async void LoadScene(string sceneName) {
+		isGamePaused = false;
+		canPauseGame = false;
+		Globals.currentLocation.Leave();
+		await ToSignal(Globals.currentLocation.animationPlayer, "animation_finished");
+		Globals.currentLocation.GetTree().ChangeSceneToFile("res://Scenes/" + sceneName + ".tscn");
+	}
+
+	/// <summary>
+	/// Load a scene <c>sceneName</c>.
+	/// </summary>
+	/// <param name="sceneName"></param>
+	public static void ChangeScene(string sceneName) {
+		Globals.currentLocation.GetTree().ChangeSceneToFile("res://Scenes/" + sceneName + ".tscn");
+	}
+
+	/// <summary>
+	/// Loads saved Player and game data into Global and Player variables.
+	/// </summary>
+	public static void LoadData() {
+		// EmitSignal(SignalName.DataLoaded);
 	}
 }
