@@ -1,13 +1,18 @@
 {
-    "checks": {
-        "hasLight": false,
-        "hasWarrant": false,
-        "knowsPenMarie": false,
-        "knowsPenPatrick": false,
-        "foundLetterWriter": false
-    },
-    "stuff": {
-        "a": 1,
-        "b": 2
-    }
+  "checks": {
+    "hasLight": true,
+    "hasWarrant": true,
+    "knowsPenMarie": true,
+    "knowsPenPatrick": false,
+    "foundLetterWriter": false
+  },
+  "player": {
+    "xpos": 353,
+    "ypos": 188,
+    "xdir": 0,
+    "ydir": 1
+  },
+  "location": {
+    "locationName": "TownNorth"
+  }
 }

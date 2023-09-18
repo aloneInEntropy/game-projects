@@ -1,12 +1,14 @@
 using System.Collections.Generic;
 using System.Text.Json;
 using Godot;
+using System.IO;
 
 public partial class PlayerVariables : Node
 {
 	public static Dictionary<string, object> playerVals = new();
 	public static Dictionary<string, bool> checks = new();
-	public static Dictionary<string, int> stuff = new();
+	public static Dictionary<string, int> playerInfo = new();
+	public static Dictionary<string, string> locationInfo = new();
 
     /// <summary>
 	/// The list of missions given to the Player by this NPC.
@@ -20,10 +22,17 @@ public partial class PlayerVariables : Node
 
 
     public override void _Ready() {
-        SetMissionsJSON("missions.json");
-        SetCluesJSON("clues.json");
-		LoadPlayerVariables("variables.json");
+        LoadMissions("missions.json");
+        LoadClues("clues.json");
     }
+
+	/// <summary>
+	/// Save all game data.
+	/// </summary>
+	public static void Save() {
+		SavePlayerVariables("variables.json");
+		SaveMissions("missions.json");
+	}
 
 	/// <summary>
 	/// Set a player variable <c>varName</c> to the value <c>val</c>. <c>val</c> will be determined depending on <c>varName</c>.
@@ -44,14 +53,51 @@ public partial class PlayerVariables : Node
     }
 
     /// <summary>
-	/// Load the Player variables from a JSON file <c>variablesPath</c>.
+	/// Load the Player variables from a JSON file <c>variablesPath</c>. Uses a Node <c>tether</c> to access the current SceneTree.
 	/// </summary>
-	/// <param name="missionPath"></param>
-	public void LoadPlayerVariables(string variablesPath) {
-		FileAccess file = FileAccess.Open(Globals.resPathToData + variablesPath, FileAccess.ModeFlags.Read);
+	public static void LoadPlayerVariables(Node tether, string variablesPath) {
+		Godot.FileAccess file = Godot.FileAccess.Open(Globals.resPathToData + variablesPath, Godot.FileAccess.ModeFlags.Read);
 		playerVals = JsonSerializer.Deserialize<Dictionary<string, object>>(file.GetAsText(), Globals.options);
 		checks = JsonSerializer.Deserialize<Dictionary<string, bool>>(playerVals["checks"].ToString());
-		stuff = JsonSerializer.Deserialize<Dictionary<string, int>>(playerVals["stuff"].ToString());
+		playerInfo = JsonSerializer.Deserialize<Dictionary<string, int>>(playerVals["player"].ToString());
+		locationInfo = JsonSerializer.Deserialize<Dictionary<string, string>>(playerVals["location"].ToString());
+		GameManager.sceneChangePosition = new Vector2(	
+			playerInfo["xpos"],
+			playerInfo["ypos"]
+		);
+		GameManager.sceneChangeFacing = new Vector2(	
+			playerInfo["xdir"],
+			playerInfo["ydir"]
+		);
+		SceneManager.SetScene(tether, locationInfo["locationName"]);
+
+		file.Close();
+	}
+
+    /// <summary>
+	/// Save the Player variables from a JSON file <c>variablesPath</c>. Uses a Node <c>tether</c> to access the current SceneTree.
+	/// </summary>
+	public static void SavePlayerVariables(string variablesPath) {
+		Godot.FileAccess file = Godot.FileAccess.Open(Globals.resPathToData + variablesPath, Godot.FileAccess.ModeFlags.Read);
+		
+		// Saving PlayerInfo
+		playerInfo["xpos"] = (int)Globals.player.Position.X;
+		playerInfo["ypos"] = (int)Globals.player.Position.Y;
+		playerInfo["xdir"] = (int)Globals.player.lastDirection.X;
+		playerInfo["ydir"] = (int)Globals.player.lastDirection.Y;
+
+		// Saving LocationInfo
+		locationInfo["locationName"] = Globals.currentLocation.Name;
+
+		// Saving PlayerVariables (Checks)
+		// Checks are saved automatically.
+
+		playerVals["checks"] = checks;
+		playerVals["player"] = playerInfo;
+		playerVals["location"] = locationInfo;
+		string d = JsonSerializer.Serialize(playerVals, Globals.options);
+		File.WriteAllText("Data/variables.json", d);
+		// GD.Print(d);
 		file.Close();
 	}
 
@@ -59,11 +105,29 @@ public partial class PlayerVariables : Node
 	/// Set the missions of the NPC using the <c>missionPath</c> to a JSON file.
 	/// </summary>
 	/// <param name="missionPath"></param>
-	public void SetMissionsJSON(string missionPath) {
-		FileAccess file = FileAccess.Open(Globals.resPathToData + missionPath, FileAccess.ModeFlags.Read);
+	public static void LoadMissions(string missionPath) {
+		Godot.FileAccess file = Godot.FileAccess.Open(Globals.resPathToData + missionPath, Godot.FileAccess.ModeFlags.Read);
 		string jsonString = file.GetAsText();
 		Missions = JsonSerializer.Deserialize<List<Mission>>(jsonString, Globals.options);
 		foreach (Mission m in Missions) m.MType.Init();
+		file.Close();
+	}
+    
+	/// <summary>
+	/// Save the missions of the NPC using the <c>missionPath</c> to a JSON file.
+	/// </summary>
+	/// <param name="missionPath"></param>
+	public static void SaveMissions(string missionPath) {
+		Godot.FileAccess file = Godot.FileAccess.Open(Globals.resPathToData + missionPath, Godot.FileAccess.ModeFlags.Read);
+		string jsonString = file.GetAsText();
+		var tmissions = JsonSerializer.Deserialize<List<Mission>>(jsonString, Globals.options);
+		foreach (Mission m in tmissions) {
+			m.Active = GetMission(m.Name).Active;
+			m.Completed = GetMission(m.Name).Completed;
+		}
+		string d = JsonSerializer.Serialize(Missions, Globals.options);
+		File.WriteAllText("Data/missions.json", d);
+		// GD.Print(d);
 		file.Close();
 	}
 
@@ -107,8 +171,8 @@ public partial class PlayerVariables : Node
 	/// Set the clues found by the Player using the <c>cluesPath</c> to a JSON file.
 	/// </summary>
 	/// <param name="cluesPath"></param>
-	public void SetCluesJSON(string cluePath) {
-		FileAccess file = FileAccess.Open(Globals.resPathToData + cluePath, FileAccess.ModeFlags.Read);
+	public void LoadClues(string cluePath) {
+		Godot.FileAccess file = Godot.FileAccess.Open(Globals.resPathToData + cluePath, Godot.FileAccess.ModeFlags.Read);
 		string jsonString = file.GetAsText();
 		Clues = JsonSerializer.Deserialize<List<Clue>>(jsonString, Globals.options);
 		file.Close();
@@ -131,7 +195,7 @@ public partial class PlayerVariables : Node
 	/// </summary>
 	/// <param name="n"></param>
 	/// <returns>The clue with the shorthand name <c>n</c>.</returns>
-	public static Clue GetClueQ(string n) {
+	public static Clue GetClueSH(string n) {
 		foreach (var m in Clues) {
 			if (m.Shorthand == n) return m;
 		}

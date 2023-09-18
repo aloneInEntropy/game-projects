@@ -1,46 +1,41 @@
 [
-    {
-        "MType": {
-            "Name": "Talk",
-            "TargetNPCName": "Farah"
-        },
-        "Name": "Speak to the writer of the note.",
-        "Description": "Talk to the mysterious person that handed you the note in the crowd. The note read, \"I want to confess. Meet me behind the mayor's building.\"",
-        "WinConditionDescription": "The Player speaks to the note writer.",
-        "Active": false,
-        "Completed": false
+  {
+    "MType": {
+      "Name": "Talk",
+      "TargetNPCName": "Farah",
+      "Location": null,
+      "TargetNPC": null
     },
-    {
-        "MType": {
-            "Name": "Talk",
-            "TargetNPCName": "Marie"
-        },
-        "Name": "Talk to Marie Bornstein.",
-        "Description": "Talk to Marie Bornstein at the market in the north of town.",
-        "WinConditionDescription": "The Player speaks to Marie.",
-        "Active": true,
-        "Completed": false
+    "Name": "Speak to the writer of the note.",
+    "Description": "Talk to the mysterious person that handed you the note in the crowd. The note read, \u0022I want to confess. Meet me behind the mayor\u0027s building.\u0022",
+    "WinConditionDescription": "The Player speaks to the note writer.",
+    "Active": false,
+    "Completed": false
+  },
+  {
+    "MType": {
+      "Name": "Talk",
+      "TargetNPCName": "Marie",
+      "Location": null,
+      "TargetNPC": null
     },
-    {
-        "MType": {
-            "Name": "Talk",
-            "TargetNPCName": "Mark"
-        },
-        "Name": "Ask Mark about Khana.",
-        "Description": "Ask Mark about Khana and about the one you saw.",
-        "WinConditionDescription": "The correct dialogue option is selected.",
-        "Active": false,
-        "Completed": true
+    "Name": "Talk to Marie Bornstein.",
+    "Description": "Talk to Marie Bornstein at the market in the north of town.",
+    "WinConditionDescription": "The Player speaks to Marie.",
+    "Active": true,
+    "Completed": true
+  },
+  {
+    "MType": {
+      "Name": "Talk",
+      "TargetNPCName": "Patrick",
+      "Location": null,
+      "TargetNPC": null
     },
-    {
-        "MType": {
-            "Name": "Talk",
-            "TargetNPCName": "Patrick"
-        },
-        "Name": "Talk to Patrick.",
-        "Description": "Ask Mark about Khana and about the one you saw.",
-        "WinConditionDescription": "The correct dialogue option is selected.",
-        "Active": false,
-        "Completed": false
-    }
+    "Name": "Talk to Patrick.",
+    "Description": "Ask Mark about Khana and about the one you saw.",
+    "WinConditionDescription": "The correct dialogue option is selected.",
+    "Active": false,
+    "Completed": false
+  }
 ]

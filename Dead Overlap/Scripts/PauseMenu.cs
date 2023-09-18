@@ -63,6 +63,7 @@ public partial class PauseMenu : Control
 	}
 	
 	void OnQuitButtonPressed() {
+		PlayerVariables.Save();
 		GetTree().Quit();
 	}
 

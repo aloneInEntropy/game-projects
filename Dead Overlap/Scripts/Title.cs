@@ -19,9 +19,6 @@ public partial class Title : Control
 	}
 
 	void Resume() {
-		// await GameManager.LoadData();
-		// GameManager g = new();
-		// g.LoadScene("TownSouth");
-		GetTree().ChangeSceneToFile("res://Scenes/" + "TownSouth" + ".tscn");
+		PlayerVariables.LoadPlayerVariables(this, "variables.json");
 	}
 }

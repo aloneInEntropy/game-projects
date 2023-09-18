@@ -134,8 +134,8 @@ public partial class ActionTrigger : Area2D
             keepXPosition ? Globals.player.Position.X : entryPoint.X,
             keepYPosition ? Globals.player.Position.Y : entryPoint.Y
         );
-		GameManager g = new();
-        g.LoadScene(sceneName);
+		SceneManager s = new();
+        s.LoadScene(sceneName);
 	}
 
 	/// <summary>

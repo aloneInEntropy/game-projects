@@ -326,6 +326,7 @@ public partial class Notebook : Control
 			}
 			button.Pressed += () => OpenClue(c);
 			clueContainer.AddChild(button);
+			
 		}
 	}
 

@@ -69,6 +69,11 @@ public partial class Globals : Node
 	/// The path to the missions.json file in standard format.
 	/// </summary>
 	public static string pathToMissions = "Data/missions.json";
+	
+	/// <summary>
+	/// The path to the variables.json file in standard format.
+	/// </summary>
+	public static string pathToVariables = "Data/variables.json";
 
 	/// <summary>
 	/// The path to the dialogue file folder in Godot format (prepended with "res://")

@@ -116,18 +116,3 @@ public partial class MissionType
 		return HashCode.Combine(Name, TargetNPCName, Location, TargetNPC);
 	}
 }
-
-public struct MissionLocation
-{
-    public object Value;
-    public MissionLocation(NPC n)
-    {
-        Value = n;
-    }
-
-    public MissionLocation(string loc)
-    {
-        Value = loc;
-    }
-
-}
