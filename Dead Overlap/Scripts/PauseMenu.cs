@@ -1,5 +1,6 @@
 using Godot;
 using System;
+using System.Text.Json;
 using System.Collections.Generic;
 
 public partial class PauseMenu : Control
@@ -15,43 +16,104 @@ public partial class PauseMenu : Control
 	public HBoxContainer VoiceVolumeContainer = new();
 	public HSlider VoiceVolumeSlider = new();
 
-	List<double> volumes = new();
+	List<float> volumes = new();
+	public bool allVolumeMuted = false;
 
 	public override void _Ready()
 	{
+		/* Nodes */
 		Visible = false;
+		// Settings containter
 		settings = GetNode<Control>("Settings");
 		settingsContainer = settings.GetNode<VBoxContainer>("SettingsContainer");
+		// Mute all volume check box
+		globalVolumeContainer = settingsContainer.GetNode<HBoxContainer>("GlobalVolume");
+		globalVolumeMuteButton = globalVolumeContainer.GetNode<CheckButton>("Control/CheckButton");
+		// Music volume slider 
+		MusicVolumeContainer = settingsContainer.GetNode<HBoxContainer>("MusicVolume");
+		MusicVolumeSlider = MusicVolumeContainer.GetNode<HSlider>("Control/HSlider");
+		// SFX volume slider 
+		SFXVolumeContainer = settingsContainer.GetNode<HBoxContainer>("SFXVolume");
+		SFXVolumeSlider = SFXVolumeContainer.GetNode<HSlider>("Control/HSlider");
+		// NPC Voice volume slider 
+		VoiceVolumeContainer = settingsContainer.GetNode<HBoxContainer>("VoiceVolume");
+		VoiceVolumeSlider = VoiceVolumeContainer.GetNode<HSlider>("Control/HSlider");
 		volumes.Add(Mathf.DbToLinear(AudioServer.GetBusVolumeDb(AudioManager.musicAudioBusIndex)));
 		volumes.Add(Mathf.DbToLinear(AudioServer.GetBusVolumeDb(AudioManager.SFXAudioBusIndex)));
 		volumes.Add(Mathf.DbToLinear(AudioServer.GetBusVolumeDb(AudioManager.voiceAudioBusIndex)));
 
-		// Mute all volume check box
-		globalVolumeContainer = settingsContainer.GetNode<HBoxContainer>("GlobalVolume");
-		globalVolumeMuteButton = globalVolumeContainer.GetNode<CheckButton>("Control/CheckButton");
-		
-		// Music volume slider 
-		MusicVolumeContainer = settingsContainer.GetNode<HBoxContainer>("MusicVolume");
-		MusicVolumeSlider = MusicVolumeContainer.GetNode<HSlider>("Control/HSlider");
-		MusicVolumeSlider.Value = Mathf.DbToLinear(AudioServer.GetBusVolumeDb(AudioManager.musicAudioBusIndex));
-		MusicVolumeContainer.GetNode<RichTextLabel>("Control/Amount").Text = $"[center]{Mathf.Abs(MusicVolumeSlider.Value)}[/center]";
-		
-		// SFX volume slider 
-		SFXVolumeContainer = settingsContainer.GetNode<HBoxContainer>("SFXVolume");
-		SFXVolumeSlider = SFXVolumeContainer.GetNode<HSlider>("Control/HSlider");
-		SFXVolumeSlider.Value = Mathf.DbToLinear(AudioServer.GetBusVolumeDb(AudioManager.SFXAudioBusIndex));
-		SFXVolumeContainer.GetNode<RichTextLabel>("Control/Amount").Text = $"[center]{Mathf.Abs(SFXVolumeSlider.Value)}[/center]";
-		
-		// NPC Voice volume slider 
-		VoiceVolumeContainer = settingsContainer.GetNode<HBoxContainer>("VoiceVolume");
-		VoiceVolumeSlider = VoiceVolumeContainer.GetNode<HSlider>("Control/HSlider");
-		VoiceVolumeSlider.Value = Mathf.DbToLinear(AudioServer.GetBusVolumeDb(AudioManager.voiceAudioBusIndex));
-		VoiceVolumeContainer.GetNode<RichTextLabel>("Control/Amount").Text = $"[center]{Mathf.Abs(VoiceVolumeSlider.Value)}[/center]";
+		// Load saved settings
+		Godot.FileAccess file = Godot.FileAccess.Open(Globals.resPathToData + "settings.json", Godot.FileAccess.ModeFlags.Read);
+		var settingsData = JsonSerializer.Deserialize<Dictionary<string, object>>(file.GetAsText(), Globals.options);
+		ChangeVolume("music", int.Parse(settingsData["MusicVolume"].ToString()));
+		ChangeVolume("sfx", int.Parse(settingsData["SFXVolume"].ToString()));
+		ChangeVolume("voice", int.Parse(settingsData["VoiceVolume"].ToString()));
+		ChangeMute(bool.Parse(settingsData["VolumeMuted"].ToString()));
+		GD.Print(allVolumeMuted);
+		file.Close();
 	}
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
 	public override void _Process(double delta)
 	{
+	}
+
+	/// <summary>
+	/// Change the value of the volume mute state to <c>mvalue</c>.
+	/// </summary>
+	/// <param name="mvalue"></param>
+	public void ChangeMute(bool mvalue) {
+		allVolumeMuted = mvalue;
+		globalVolumeMuteButton.ButtonPressed = mvalue;
+		MusicVolumeSlider.Editable = !mvalue;
+		SFXVolumeSlider.Editable = !mvalue;
+		VoiceVolumeSlider.Editable = !mvalue;
+
+		// If mvalue is true, set the volume to 0.
+		// Otherwise, scale volume quadratically if larger than 1, and normally otherwise.
+		AudioServer.SetBusVolumeDb(AudioManager.musicAudioBusIndex, Mathf.LinearToDb(mvalue ? 
+			0 : 
+			volumes[0] >= 1 ? volumes[0] * volumes[0] : volumes[0]));
+		AudioServer.SetBusVolumeDb(AudioManager.SFXAudioBusIndex, Mathf.LinearToDb(mvalue ? 
+			0 : 
+			volumes[1] >= 1 ? volumes[1] * volumes[1] : volumes[1]));
+		AudioServer.SetBusVolumeDb(AudioManager.voiceAudioBusIndex, Mathf.LinearToDb(mvalue ? 
+			0 : 
+			volumes[2] >= 1 ? volumes[2] * volumes[2] : volumes[2]));
+	}
+
+	/// <summary>
+	/// Change the <c>type</c> volume level to <c>value</c>.
+	/// </summary>
+	/// <param name="type"></param>
+	/// <param name="value"></param>
+	public void ChangeVolume(string type, float value) {
+		switch (type)
+		{
+			case "music":
+				// Scale volume quadratically if larger than 1, and normally otherwise.
+				AudioServer.SetBusVolumeDb(AudioManager.musicAudioBusIndex, Mathf.LinearToDb(value >= 1 ? value * value : value));
+				MusicVolumeSlider.Value = value;
+				volumes[0] = value;
+				MusicVolumeContainer.GetNode<RichTextLabel>("Control/Amount").Text = $"[center]{Mathf.Abs(value)}[/center]";
+				break;
+			case "sfx":
+				// Scale volume quadratically if larger than 1, and normally otherwise.
+				AudioServer.SetBusVolumeDb(AudioManager.SFXAudioBusIndex, Mathf.LinearToDb(value >= 1 ? value * value : value));
+				SFXVolumeSlider.Value = value;
+				volumes[1] = value;
+				SFXVolumeContainer.GetNode<RichTextLabel>("Control/Amount").Text = $"[center]{Mathf.Abs(value)}[/center]";
+				break;
+			case "voice":
+				// Scale volume quadratically if larger than 1, and normally otherwise.
+				AudioServer.SetBusVolumeDb(AudioManager.voiceAudioBusIndex, Mathf.LinearToDb(value >= 1 ? value * value : value));
+				VoiceVolumeSlider.Value = value;
+				volumes[2] = value;
+				VoiceVolumeContainer.GetNode<RichTextLabel>("Control/Amount").Text = $"[center]{Mathf.Abs(value)}[/center]";
+				break;
+			default:
+				break;
+		}	
 	}
 
 	void OnResumeButtonPressed() {
@@ -63,49 +125,23 @@ public partial class PauseMenu : Control
 	}
 	
 	void OnQuitButtonPressed() {
-		PlayerVariables.Save();
+		GameManager.SaveGameData();
 		GetTree().Quit();
 	}
 
 	void OnMuteButtonToggled(bool button_pressed) {
-		if (button_pressed) {
-			AudioServer.SetBusVolumeDb(AudioManager.musicAudioBusIndex, Mathf.LinearToDb(0));
-			AudioServer.SetBusVolumeDb(AudioManager.SFXAudioBusIndex, Mathf.LinearToDb(0));
-			AudioServer.SetBusVolumeDb(AudioManager.voiceAudioBusIndex, Mathf.LinearToDb(0));
-			MusicVolumeSlider.Editable = false;
-			SFXVolumeSlider.Editable = false;
-			VoiceVolumeSlider.Editable = false;
-		} else {
-			AudioServer.SetBusVolumeDb(AudioManager.musicAudioBusIndex, Mathf.LinearToDb((float)(volumes[0] >= 1 ? volumes[0]*volumes[0] : volumes[0])));
-			AudioServer.SetBusVolumeDb(AudioManager.SFXAudioBusIndex, Mathf.LinearToDb((float)(volumes[1] >= 1 ? volumes[1]*volumes[1] : volumes[1])));
-			AudioServer.SetBusVolumeDb(AudioManager.voiceAudioBusIndex, Mathf.LinearToDb((float)(volumes[2] >= 1 ? volumes[2]*volumes[2] : volumes[2])));
-			MusicVolumeSlider.Editable = true;
-			SFXVolumeSlider.Editable = true;
-			VoiceVolumeSlider.Editable = true;
-		}
+		ChangeMute(button_pressed);
 	}
 
 	void OnMusicVolumeValueChanged(float value) {
-		// Scale volume quadratically if larger than 1, and normally otherwise.
-		AudioServer.SetBusVolumeDb(AudioManager.musicAudioBusIndex, Mathf.LinearToDb(value >= 1 ? value * value : value));
-		MusicVolumeSlider.Value = value;
-		volumes[0] = value;
-		MusicVolumeContainer.GetNode<RichTextLabel>("Control/Amount").Text = $"[center]{Mathf.Abs(value)}[/center]";
+		ChangeVolume("music", value);
 	}
 
 	void OnSFXVolumeValueChanged(float value) {
-		// Scale volume quadratically if larger than 1, and normally otherwise.
-		AudioServer.SetBusVolumeDb(AudioManager.SFXAudioBusIndex, Mathf.LinearToDb(value >= 1 ? value * value : value));
-		SFXVolumeSlider.Value = value;
-		volumes[1] = value;
-		SFXVolumeContainer.GetNode<RichTextLabel>("Control/Amount").Text = $"[center]{Mathf.Abs(value)}[/center]";
+		ChangeVolume("sfx", value);
 	}
 	
 	void OnVoiceVolumeValueChanged(float value) {
-		// Scale volume quadratically if larger than 1, and normally otherwise.
-		AudioServer.SetBusVolumeDb(AudioManager.voiceAudioBusIndex, Mathf.LinearToDb(value >= 1 ? value * value : value));
-		VoiceVolumeSlider.Value = value;
-		volumes[2] = value;
-		VoiceVolumeContainer.GetNode<RichTextLabel>("Control/Amount").Text = $"[center]{Mathf.Abs(value)}[/center]";
+		ChangeVolume("voice", value);
 	}
 }

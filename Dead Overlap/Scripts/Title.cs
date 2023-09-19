@@ -4,7 +4,7 @@ using System;
 public partial class Title : Control
 {
 	void OnResumeButtonPressed() {
-		GD.Print("resuming");
+		// GD.Print("resuming");
 		Resume();
 	}
 
@@ -19,6 +19,6 @@ public partial class Title : Control
 	}
 
 	void Resume() {
-		PlayerVariables.LoadPlayerVariables(this, "variables.json");
+		GameManager.LoadGameData(this);
 	}
 }

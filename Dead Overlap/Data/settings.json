@@ -1,6 +1,6 @@
 {
-    "MusicVolumeContainer": 1,
-    "SFXVolumeContainer": 1,
-    "VoiceVolumeContainer": 1,
-    "VolumeMuted": false
+    "MusicVolume": 1,
+    "SFXVolume": 1,
+    "VoiceVolume": 1,
+    "VolumeMuted": true
 }

@@ -43,7 +43,7 @@
 ~21
     ...I... we... ||c Marie
 ~22
-    It was... Patrick and I. I didn't like the way he was using his money, and Patrick, well... everyone knows how Paddy feels about Makoto. I found this bag of drugs in the shack in the east and we used it on our plan. ||c Marie
+    It was... Patrick and I. I didn't like the way he was using his money, and Patrick, well... everyone knows how Paddy feels about Makoto. I found this bag of drugs in the shack in the east and we used it on our plan. ||f Modify Marie | ActivateMission Talk to Patrick
 ~23
     First, Patrick would make Makoto go into his office for some law thing. There, he would poison a pen tip and poke him with it. Then, because he always comes here in the mornings, I would do the same thing and poke him again. That's why he was agitated and why he bought bandages. ||c Marie
 ~24

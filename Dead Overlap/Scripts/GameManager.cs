@@ -193,14 +193,22 @@ public partial class GameManager : Node
 	/// <summary>
 	/// Loads saved Player and game data into Global and Player variables.
 	/// </summary>
-	public static void LoadData() {
-		// EmitSignal(SignalName.DataLoaded);
+	public static void LoadGameData(Node tether) {
+		PlayerVariables.LoadPlayerVariables(tether, "variables.json");
+		PlayerVariables.LoadMissions("missions.json");
+        PlayerVariables.LoadClues("clues.json");
 	}
 	
 	/// <summary>
-	/// Saves Player and game data.
+	/// Save all Player and game data.
 	/// </summary>
-	public static void SaveData() {
-		// EmitSignal(SignalName.DataLoaded);
+	public static void SaveGameData() {
+		PlayerVariables.SavePlayerVariables("variables.json");
+		PlayerVariables.SaveMissions("missions.json");
+		PlayerVariables.SaveClues("clues.json");
+	}
+
+	public static void LoadSettings() {
+		
 	}
 }

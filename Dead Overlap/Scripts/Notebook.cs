@@ -70,6 +70,7 @@ public partial class Notebook : Control
 
 	bool clueModalOpen = false;
 
+
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
@@ -295,15 +296,15 @@ public partial class Notebook : Control
 
 	public void SetClues(List<Clue> cs) {
 		foreach (Clue c in cs) {
-			AddClue(c);
+			AddClue(c, false);
 		}
 	}
 
-	public void AddClue(Clue c) {
+	public void AddClue(Clue c, bool showNewClue = true) {
 		if (!clues.Contains(c)) {
 			clues.Add(c);
 			c.Found = true;
-			newClue = true;
+			newClue = showNewClue;
 
 			BaseButton button;
 			if (c.Texture is null) {

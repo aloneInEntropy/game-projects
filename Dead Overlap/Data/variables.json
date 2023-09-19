@@ -3,16 +3,16 @@
     "hasLight": true,
     "hasWarrant": true,
     "knowsPenMarie": true,
-    "knowsPenPatrick": false,
-    "foundLetterWriter": false
+    "knowsPenPatrick": true,
+    "foundLetterWriter": true
   },
   "player": {
-    "xpos": 353,
-    "ypos": 188,
-    "xdir": 0,
-    "ydir": 1
+    "xpos": 1040,
+    "ypos": 302,
+    "xdir": 1,
+    "ydir": 0
   },
   "location": {
-    "locationName": "TownNorth"
+    "locationName": "TownSouth"
   }
 }

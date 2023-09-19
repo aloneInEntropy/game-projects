@@ -35,7 +35,7 @@
     "Name": "Talk to Patrick.",
     "Description": "Ask Mark about Khana and about the one you saw.",
     "WinConditionDescription": "The correct dialogue option is selected.",
-    "Active": false,
+    "Active": true,
     "Completed": false
   }
 ]

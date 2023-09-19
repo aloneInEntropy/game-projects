@@ -47,5 +47,5 @@
         ~##.
     ~~.
 ~15
-    ...Right. ||f Modify Farah | ParseB d4_re_2.txt l=false | ActivateMission Talk to Patrick.
+    ...Right. ||f Modify Farah | ParseB d4_re_2.txt l=false.
 ~.

@@ -21,18 +21,7 @@ public partial class PlayerVariables : Node
 	public static List<Clue> Clues { set;  get; }
 
 
-    public override void _Ready() {
-        LoadMissions("missions.json");
-        LoadClues("clues.json");
-    }
-
-	/// <summary>
-	/// Save all game data.
-	/// </summary>
-	public static void Save() {
-		SavePlayerVariables("variables.json");
-		SaveMissions("missions.json");
-	}
+    public override void _Ready() {}
 
 	/// <summary>
 	/// Set a player variable <c>varName</c> to the value <c>val</c>. <c>val</c> will be determined depending on <c>varName</c>.
@@ -171,10 +160,26 @@ public partial class PlayerVariables : Node
 	/// Set the clues found by the Player using the <c>cluesPath</c> to a JSON file.
 	/// </summary>
 	/// <param name="cluesPath"></param>
-	public void LoadClues(string cluePath) {
+	public static void LoadClues(string cluePath) {
 		Godot.FileAccess file = Godot.FileAccess.Open(Globals.resPathToData + cluePath, Godot.FileAccess.ModeFlags.Read);
 		string jsonString = file.GetAsText();
 		Clues = JsonSerializer.Deserialize<List<Clue>>(jsonString, Globals.options);
+		file.Close();
+	}
+    
+	/// <summary>
+	/// Save the clues the Player has found using the <c>cluePath</c> to a JSON file.
+	/// </summary>
+	/// <param name="missionPath"></param>
+	public static void SaveClues(string cluePath) {
+		Godot.FileAccess file = Godot.FileAccess.Open(Globals.resPathToData + cluePath, Godot.FileAccess.ModeFlags.Read);
+		string jsonString = file.GetAsText();
+		var tclues = JsonSerializer.Deserialize<List<Clue>>(jsonString, Globals.options);
+		foreach (Clue c in tclues) {
+			c.Found = GetClueSH(c.Shorthand).Found;
+		}
+		string d = JsonSerializer.Serialize(Clues, Globals.options);
+		File.WriteAllText("Data/clues.json", d);
 		file.Close();
 	}
 

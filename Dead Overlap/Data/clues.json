@@ -1,30 +1,37 @@
 [
-    {
-        "Title": "Simon O'Hare",
-        "Shorthand": "Simon",
-        "Description": "A 12-year-old boy that sadly passed away after ingesting an unknown poison. He was known to pick up items from the ground to bite or suck on, and had been hospitalised several times prior.",
-        "Texture": null,
-        "Found": false
-    },
-    {
-        "Title": "Cut-out letter",
-        "Shorthand": "Letter",
-        "Description": "A cut-out letter found in the bedroom of the house of Adora Aga and Makoto Bourdain. It reads: \"WE KNOW WHAT YOU DID. LEAVE €10,000 IN CASH UNDERNEATH THE OLD BARN BY 11 P.M. OR WE WILL LEAK THE FOOTAGE\".",
-        "Texture": "Letter.png",
-        "Found": false
-    },
-    {
-        "Title": "Marie's poisoned pen",
-        "Shorthand": "Pen_Marie",
-        "Description": "A discarded pen used to poison Makoto with an unknown drug. It was found by S-Mart's bins broken in two pieces, with bite marks around the broken ends of either piece.",
-        "Texture": "MariePen.png",
-        "Found": false
-    },
-    {
-        "Title": "Missing dog",
-        "Shorthand": "MissingDog",
-        "Description": "A German Shepard owned by Chaz Sal, cousin of Farah Sal, had gone missing on Septmeber 7th. He has not been found.",
-        "Texture": null,
-        "Found": false
-    }
+  {
+    "Title": "Simon O\u0027Hare",
+    "Shorthand": "Simon",
+    "Description": "A 12-year-old boy that sadly passed away after ingesting an unknown poison. He was known to pick up items from the ground to bite or suck on, and had been hospitalised several times prior.",
+    "Texture": null,
+    "Found": false
+  },
+  {
+    "Title": "Cut-out letter",
+    "Shorthand": "Letter",
+    "Description": "A cut-out letter found in the bedroom of the house of Adora Aga and Makoto Bourdain. It reads: \u0022WE KNOW WHAT YOU DID. LEAVE \u20AC10,000 IN CASH UNDERNEATH THE OLD BARN BY 11 P.M. OR WE WILL LEAK THE FOOTAGE\u0022.",
+    "Texture": "Letter.png",
+    "Found": true
+  },
+  {
+    "Title": "Marie\u0027s poisoned pen",
+    "Shorthand": "Pen_Marie",
+    "Description": "A discarded pen used to poison Makoto with an unknown drug. It was found by S-Mart\u0027s bins broken in two pieces, with bite marks around the broken ends of either piece.",
+    "Texture": "MariePen.png",
+    "Found": true
+  },
+  {
+    "Title": "Patrick\u0027s poisoned pen",
+    "Shorthand": "Pen_Patrick",
+    "Description": "A discarded pen used to poison Makoto with an unknown drug. It was found by S-Mart\u0027s bins broken in two pieces, with bite marks around the broken ends of either piece.",
+    "Texture": null,
+    "Found": true
+  },
+  {
+    "Title": "Missing dog",
+    "Shorthand": "MissingDog",
+    "Description": "A German Shepard owned by Chaz Sal, cousin of Farah Sal, had gone missing on Septmeber 7th. He has not been found.",
+    "Texture": null,
+    "Found": false
+  }
 ]
