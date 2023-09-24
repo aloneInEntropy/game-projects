@@ -136,11 +136,7 @@ public partial class Player : CharacterBody2D
 	}
 
 
-	#pragma warning disable IDE0051 // remove unused function INFO (this is ran by Godot internally anyway)
-	#pragma warning disable IDE1006 // remove naming style INFO ("should start with a capital letter" stuff)
 	void _on_interact_box_area_entered(Area2D area) {
-#pragma warning restore IDE0051 // restore the INFO (they're still useful after all)
-#pragma warning restore IDE1006 // ditto
 		if (area.GetParent().GetType().IsSubclassOf(typeof(NPC))) {
 			// if the node is an NPC
 			if (!overlapping.Contains(area.GetParent<NPC>())) overlapping.Add(area.GetParent<NPC>());
@@ -150,11 +146,7 @@ public partial class Player : CharacterBody2D
 		} 
 	}
 	
-	#pragma warning disable IDE0051
-	#pragma warning disable IDE1006
 	void _on_interact_box_area_exited(Area2D area) {
-#pragma warning restore IDE0051
-#pragma warning restore IDE1006
 		// GD.Print(area.GetParent<Node2D>().Name);
 		if (area.GetParent().GetType().IsSubclassOf(typeof(NPC))) {
 			gui.CloseDialogue();

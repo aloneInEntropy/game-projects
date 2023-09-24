@@ -1,4 +1,7 @@
 using Godot;
+using System.Collections.Generic;
+using System.Text.Json;
+using System.IO;
 
 
 /// <summary>
@@ -33,12 +36,12 @@ public partial class AudioManager : Node
 	/// The name of the music audio bus.
 	/// </summary>
 	[Export]
-	public static string musicAudioBusName = "Music";
+	public static string MusicAudioBusName = "Music";
 
 	/// <summary>
 	/// The index of the music audio bus.
 	/// </summary>
-	public static int musicAudioBusIndex = AudioServer.GetBusIndex(musicAudioBusName);
+	public static int MusicAudioBusIndex = AudioServer.GetBusIndex(MusicAudioBusName);
 	
 	/// <summary>
 	/// The name of the SFX audio bus.
@@ -55,17 +58,15 @@ public partial class AudioManager : Node
 	/// The name of the Voice audio bus.
 	/// </summary>
 	[Export]
-	public static string voiceAudioBusName = "Voice";
+	public static string VoiceAudioBusName = "Voice";
 
 	/// <summary>
 	/// The index of the voice audio bus.
 	/// </summary>
-	public static int voiceAudioBusIndex = AudioServer.GetBusIndex(voiceAudioBusName);
+	public static int VoiceAudioBusIndex = AudioServer.GetBusIndex(VoiceAudioBusName);
 
-	/// <summary>
-	/// The value of the master volume on a scale of 0-100.
-	/// </summary>
-	public static float masterVolume = 90f;
+	public static float MusicVolume, SFXVolume, VoiceVolume;
+	public static bool allVolumeMuted = false;
 
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
@@ -75,7 +76,7 @@ public partial class AudioManager : Node
 		oneShotPlayer = GetNode<AudioStreamPlayer>("OneShotOther");
 		bgMusicPlayer = GetNode<AudioStreamPlayer>("BGMusic");
 		stepTimer = GetNode<Timer>("StepTimer");
-		masterVolume = Mathf.DbToLinear(AudioServer.GetBusVolumeDb(globalAudioBusIndex));
+		LoadAudioSettings();
 	}
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -113,6 +114,89 @@ public partial class AudioManager : Node
 			footstepPlayer.Play();
 			stepTimer.Start();
 		}
+	}
+
+	/// <summary>
+	/// Change the value of the volume mute state to <c>mvalue</c>.
+	/// </summary>
+	/// <param name="mvalue"></param>
+	public static void ChangeMute(bool mvalue) {
+		allVolumeMuted = mvalue;
+		
+		// If mvalue is true, set the volume to 0.
+		// Otherwise, scale volume quadratically if larger than 1, and normally otherwise.
+		AudioServer.SetBusVolumeDb(MusicAudioBusIndex, Mathf.LinearToDb(mvalue ? 
+			0 : 
+			MusicVolume >= 1 ? MusicVolume * MusicVolume : MusicVolume));
+		AudioServer.SetBusVolumeDb(SFXAudioBusIndex, Mathf.LinearToDb(mvalue ? 
+			0 : 
+			SFXVolume >= 1 ? SFXVolume * SFXVolume : SFXVolume));
+		AudioServer.SetBusVolumeDb(VoiceAudioBusIndex, Mathf.LinearToDb(mvalue ? 
+			0 : 
+			VoiceVolume >= 1 ? VoiceVolume * VoiceVolume : VoiceVolume));
+		
+		SaveAudioSettings();
+	}
+
+	/// <summary>
+	/// Change the <c>type</c> volume level to <c>value</c>.
+	/// </summary>
+	/// <param name="type"></param>
+	/// <param name="value"></param>
+	public static void ChangeVolume(string type, float value) {
+		float nvolume = Mathf.LinearToDb(value >= 1 ? value * value : value);
+		switch (type)
+		{
+			case "music":
+				// Scale volume quadratically if larger than 1, and normally otherwise.
+				AudioServer.SetBusVolumeDb(MusicAudioBusIndex, nvolume);
+				MusicVolume = value;
+				break;
+			case "sfx":
+				// Scale volume quadratically if larger than 1, and normally otherwise.
+				AudioServer.SetBusVolumeDb(SFXAudioBusIndex, nvolume);
+				SFXVolume = value;
+				break;
+			case "voice":
+				// Scale volume quadratically if larger than 1, and normally otherwise.
+				AudioServer.SetBusVolumeDb(VoiceAudioBusIndex, nvolume);
+				VoiceVolume = value;
+				break;
+			default:
+				break;
+		}
+		SaveAudioSettings();
+	}
+
+	/// <summary>
+	/// Load audio settings for the game.
+	/// </summary>
+	public static void LoadAudioSettings() {
+		Godot.FileAccess file = Godot.FileAccess.Open(Globals.resPathToData + "settings.json", Godot.FileAccess.ModeFlags.Read);
+		var settingsData = JsonSerializer.Deserialize<Dictionary<string, object>>(file.GetAsText(), Globals.options);
+		ChangeVolume("music", float.Parse(settingsData["MusicVolume"].ToString()));
+		ChangeVolume("sfx", float.Parse(settingsData["SFXVolume"].ToString()));
+		ChangeVolume("voice", float.Parse(settingsData["VoiceVolume"].ToString()));
+		ChangeMute(bool.Parse(settingsData["VolumeMuted"].ToString()));
+		// GD.Print(allVolumeMuted);
+		file.Close();
+	}
+	
+	/// <summary>
+	/// Save audio settings for the game.
+	/// </summary>
+	public static void SaveAudioSettings() {
+		Godot.FileAccess file = Godot.FileAccess.Open(Globals.resPathToData + "settings.json", Godot.FileAccess.ModeFlags.Read);
+		Dictionary<string, object> settingsData = new()
+        {
+            ["MusicVolume"] = MusicVolume,
+            ["SFXVolume"] = SFXVolume,
+            ["VoiceVolume"] = VoiceVolume,
+            ["VolumeMuted"] = allVolumeMuted
+        };
+		string d = JsonSerializer.Serialize(settingsData, Globals.options);
+		File.WriteAllText("Data/settings.json", d);
+		file.Close();
 	}
 
 	void OnTimerTimeout() {

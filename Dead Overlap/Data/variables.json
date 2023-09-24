@@ -7,10 +7,10 @@
     "foundLetterWriter": true
   },
   "player": {
-    "xpos": 1040,
-    "ypos": 302,
-    "xdir": 1,
-    "ydir": 0
+    "xpos": 1554,
+    "ypos": -288,
+    "xdir": 0,
+    "ydir": 1
   },
   "location": {
     "locationName": "TownSouth"

@@ -26,6 +26,7 @@ DialogueManager="*res://Scenes/DialogueManager.tscn"
 AudioManager="*res://Scenes/AudioManager.tscn"
 Narrator="*res://Scripts/Narrator.cs"
 Marceline="*res://Scenes/Marceline.tscn"
+SignalBus="*res://Scripts/SignalBus.cs"
 
 [display]
 

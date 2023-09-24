@@ -5,7 +5,7 @@ public partial class SceneManager : Node
 {
     /// <summary>
 	/// Load a scene asyncronously. This uses the FadeOut animation in the current Location to work. <br/>
-	/// If you need to load a scene statically, use ChangeScene.
+	/// If you need to load a scene statically, use SetScene.
 	/// </summary>
 	/// <param name="sceneName"></param>
 	public async void LoadScene(string sceneName) {
@@ -17,16 +17,14 @@ public partial class SceneManager : Node
 	}
 	
 	/// <summary>
-	/// Load a scene asyncronously. This uses the FadeOut animation in the current Location to work. <br/>
+	/// Load a scene. Uses a tether node to access the SceneTree. <br/>
 	/// </summary>
 	/// <param name="sceneName"></param>
 	public static void SetScene(Node tether, string sceneName) {
-		// var cscene = GD.Load<PackedScene>("res://Scenes/" + sceneName + ".tscn");
-		// var tl = (Location)cscene.GetScript();
-		// GD.Print(tl.defaultEntryPoint);
-		// Globals.currentLocation = (Location)cscene.GetScript();
-		tether.GetTree().ChangeSceneToFile("res://Scenes/" + sceneName + ".tscn");
-		GameManager.gameResumed = true;
+		if (tether.IsInsideTree()) {
+			tether.GetTree().ChangeSceneToFile("res://Scenes/" + sceneName + ".tscn");
+			GameManager.gameResumed = true;
+		}
 	}
 
 	/// <summary>

@@ -19,6 +19,7 @@ public partial class Title : Control
 	}
 
 	void Resume() {
-		GameManager.LoadGameData(this);
+		GameManager gm = new(); 
+		gm.LoadGameData(this);
 	}
 }

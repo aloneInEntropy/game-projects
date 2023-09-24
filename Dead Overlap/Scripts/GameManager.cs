@@ -1,6 +1,8 @@
 using Godot;
 using System;
+using System.Diagnostics.CodeAnalysis;
 using System.Text.RegularExpressions;
+using System.Threading.Tasks;
 
 
 /// <summary>
@@ -61,8 +63,14 @@ public partial class GameManager : Node
 	/// </summary>
 	public static bool gameResumed = false;
 
+	SignalBus sb = new();
+
 	// [Signal]
-	// public delegate void DataLoadedSignalHandler();
+	// public delegate void DataLoadedEventHandler();
+	// [Signal]
+	// public delegate void DataSavedEventHandler();
+	[Signal]
+	public delegate void SHEventHandler(string n);
 
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
@@ -72,7 +80,11 @@ public partial class GameManager : Node
 		lightFont = GD.Load<Font>("res://Assets/Fonts/futura light bt.ttf");
 		buttonTheme = GD.Load<Theme>("res://Resources/ButtonTheme.tres");
 
-		// DataLoaded += () => LoadData;
+		SH += SayHello;
+		EmitSignal(SignalName.SH, "first");
+		EmitSignal(SignalName.SH, "second");
+		// AddUserSignal("SayHelloAgain");
+		// DataSaved += () => GD.Print("Data Saved");
 	}
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -145,20 +157,20 @@ public partial class GameManager : Node
 				Globals.gui.notebook.Visible = false;
 				Globals.gui.pauseMenu.Visible = false;
 				GamePauseMode = GAME_PAUSE_MODE_NEG;
-				GD.Print("unpaused");
+				// GD.Print("unpaused");
 				break;
 			case GAME_PAUSE_MODE_MENU:
-				GD.Print("pause menu open");
+				// GD.Print("pause menu open");
 				Globals.gui.pauseMenu.Visible = true;
 				Globals.gui.pauseMenu.settings.Visible = false;
 				break;
 			case GAME_PAUSE_MODE_SETTINGS:
 				Globals.gui.pauseMenu.settings.Visible = true;
-				GD.Print("settings open");
+				// GD.Print("settings open");
 				break;
 			case GAME_PAUSE_MODE_NOTEBOOK:
 				Globals.gui.notebook.Visible = true;
-				GD.Print("notebook open");
+				// GD.Print("notebook open");
 				break;
 			default:
 				break;
@@ -193,22 +205,45 @@ public partial class GameManager : Node
 	/// <summary>
 	/// Loads saved Player and game data into Global and Player variables.
 	/// </summary>
-	public static void LoadGameData(Node tether) {
+	public void LoadGameData(Node tether) {
+		sb.DataLoaded += ConfirmLoad;
 		PlayerVariables.LoadPlayerVariables(tether, "variables.json");
 		PlayerVariables.LoadMissions("missions.json");
         PlayerVariables.LoadClues("clues.json");
+		sb.EmitSignal("DataLoaded");
 	}
 	
 	/// <summary>
 	/// Save all Player and game data.
 	/// </summary>
-	public static void SaveGameData() {
+	public void SaveGameData() {
+		sb.DataSaved += ConfirmSave;
 		PlayerVariables.SavePlayerVariables("variables.json");
 		PlayerVariables.SaveMissions("missions.json");
 		PlayerVariables.SaveClues("clues.json");
+		sb.EmitSignal("DataSaved");
+		// @ts-ignore
+		// EmitSignal(SignalName.DataSaved);
+		// GD.Print("saved");
 	}
 
-	public static void LoadSettings() {
-		
+	/// <summary>
+	/// Save and quit the game.
+	/// </summary>
+	public void SaveAndQuit(Node tether) {
+		SaveGameData();
+		// await ToSignal(eb, "DataSaved");
+		tether.GetTree().Quit();
+	}
+
+	public void SayHello(string name) {
+		GD.Print($"hello {name}");
+	}
+
+	public void ConfirmLoad() {
+		GD.Print("loaded");
+	}
+	public void ConfirmSave() {
+		GD.Print("saved");
 	}
 }

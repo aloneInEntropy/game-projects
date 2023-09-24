@@ -1,6 +1,6 @@
 {
-    "MusicVolume": 1,
-    "SFXVolume": 1,
-    "VoiceVolume": 1,
-    "VolumeMuted": true
+  "MusicVolume": 1.25,
+  "SFXVolume": 1.75,
+  "VoiceVolume": 0,
+  "VolumeMuted": true
 }

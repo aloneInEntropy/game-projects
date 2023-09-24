@@ -16,8 +16,7 @@ public partial class PauseMenu : Control
 	public HBoxContainer VoiceVolumeContainer = new();
 	public HSlider VoiceVolumeSlider = new();
 
-	List<float> volumes = new();
-	public bool allVolumeMuted = false;
+	
 
 	public override void _Ready()
 	{
@@ -38,19 +37,10 @@ public partial class PauseMenu : Control
 		// NPC Voice volume slider 
 		VoiceVolumeContainer = settingsContainer.GetNode<HBoxContainer>("VoiceVolume");
 		VoiceVolumeSlider = VoiceVolumeContainer.GetNode<HSlider>("Control/HSlider");
-		volumes.Add(Mathf.DbToLinear(AudioServer.GetBusVolumeDb(AudioManager.musicAudioBusIndex)));
-		volumes.Add(Mathf.DbToLinear(AudioServer.GetBusVolumeDb(AudioManager.SFXAudioBusIndex)));
-		volumes.Add(Mathf.DbToLinear(AudioServer.GetBusVolumeDb(AudioManager.voiceAudioBusIndex)));
+		
 
 		// Load saved settings
-		Godot.FileAccess file = Godot.FileAccess.Open(Globals.resPathToData + "settings.json", Godot.FileAccess.ModeFlags.Read);
-		var settingsData = JsonSerializer.Deserialize<Dictionary<string, object>>(file.GetAsText(), Globals.options);
-		ChangeVolume("music", int.Parse(settingsData["MusicVolume"].ToString()));
-		ChangeVolume("sfx", int.Parse(settingsData["SFXVolume"].ToString()));
-		ChangeVolume("voice", int.Parse(settingsData["VoiceVolume"].ToString()));
-		ChangeMute(bool.Parse(settingsData["VolumeMuted"].ToString()));
-		GD.Print(allVolumeMuted);
-		file.Close();
+		LoadSettings();
 	}
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -63,23 +53,11 @@ public partial class PauseMenu : Control
 	/// </summary>
 	/// <param name="mvalue"></param>
 	public void ChangeMute(bool mvalue) {
-		allVolumeMuted = mvalue;
+		AudioManager.ChangeMute(mvalue);
 		globalVolumeMuteButton.ButtonPressed = mvalue;
 		MusicVolumeSlider.Editable = !mvalue;
 		SFXVolumeSlider.Editable = !mvalue;
 		VoiceVolumeSlider.Editable = !mvalue;
-
-		// If mvalue is true, set the volume to 0.
-		// Otherwise, scale volume quadratically if larger than 1, and normally otherwise.
-		AudioServer.SetBusVolumeDb(AudioManager.musicAudioBusIndex, Mathf.LinearToDb(mvalue ? 
-			0 : 
-			volumes[0] >= 1 ? volumes[0] * volumes[0] : volumes[0]));
-		AudioServer.SetBusVolumeDb(AudioManager.SFXAudioBusIndex, Mathf.LinearToDb(mvalue ? 
-			0 : 
-			volumes[1] >= 1 ? volumes[1] * volumes[1] : volumes[1]));
-		AudioServer.SetBusVolumeDb(AudioManager.voiceAudioBusIndex, Mathf.LinearToDb(mvalue ? 
-			0 : 
-			volumes[2] >= 1 ? volumes[2] * volumes[2] : volumes[2]));
 	}
 
 	/// <summary>
@@ -88,33 +66,39 @@ public partial class PauseMenu : Control
 	/// <param name="type"></param>
 	/// <param name="value"></param>
 	public void ChangeVolume(string type, float value) {
+		AudioManager.ChangeVolume(type, value);
 		switch (type)
 		{
 			case "music":
 				// Scale volume quadratically if larger than 1, and normally otherwise.
-				AudioServer.SetBusVolumeDb(AudioManager.musicAudioBusIndex, Mathf.LinearToDb(value >= 1 ? value * value : value));
 				MusicVolumeSlider.Value = value;
-				volumes[0] = value;
 				MusicVolumeContainer.GetNode<RichTextLabel>("Control/Amount").Text = $"[center]{Mathf.Abs(value)}[/center]";
 				break;
 			case "sfx":
 				// Scale volume quadratically if larger than 1, and normally otherwise.
-				AudioServer.SetBusVolumeDb(AudioManager.SFXAudioBusIndex, Mathf.LinearToDb(value >= 1 ? value * value : value));
 				SFXVolumeSlider.Value = value;
-				volumes[1] = value;
 				SFXVolumeContainer.GetNode<RichTextLabel>("Control/Amount").Text = $"[center]{Mathf.Abs(value)}[/center]";
 				break;
 			case "voice":
 				// Scale volume quadratically if larger than 1, and normally otherwise.
-				AudioServer.SetBusVolumeDb(AudioManager.voiceAudioBusIndex, Mathf.LinearToDb(value >= 1 ? value * value : value));
 				VoiceVolumeSlider.Value = value;
-				volumes[2] = value;
 				VoiceVolumeContainer.GetNode<RichTextLabel>("Control/Amount").Text = $"[center]{Mathf.Abs(value)}[/center]";
 				break;
 			default:
 				break;
 		}	
 	}
+
+	/// <summary>
+	/// Load settings for the game.
+	/// </summary>
+	public void LoadSettings() {
+		ChangeVolume("music", AudioManager.MusicVolume);
+		ChangeVolume("sfx", AudioManager.SFXVolume);
+		ChangeVolume("voice", AudioManager.VoiceVolume);
+		ChangeMute(AudioManager.allVolumeMuted);
+	}
+
 
 	void OnResumeButtonPressed() {
 		GameManager.TogglePause(GameManager.GAME_PAUSE_MODE_NEG);
@@ -125,8 +109,8 @@ public partial class PauseMenu : Control
 	}
 	
 	void OnQuitButtonPressed() {
-		GameManager.SaveGameData();
-		GetTree().Quit();
+		GameManager gm = new();
+		gm.SaveAndQuit(this);
 	}
 
 	void OnMuteButtonToggled(bool button_pressed) {

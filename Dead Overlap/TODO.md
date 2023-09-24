@@ -97,3 +97,24 @@ i'm gonna do what i want
 	- [ ] Adora not present until spoken to all other characters once
 		- [ ] Lock Adora's house until spoken to all other characters, then going to station to collect warrant
 		- [ ] Explosives found at the house
+
+- [x] Replace all Interactable and RoomTrigger classes with an ActionTrigger
+	- [x] Centre
+		- [x] Office
+	- [x] East
+		- [x] Shack
+	- [x] West
+	- [x] North
+		- [x] Market
+		- [x] Station
+	- [x] South
+		- [x] Adora's house
+
+
+- [x] Saving data
+	- [x] Saving player data (position, facing direction, notes, missions)
+	- [ ] Saving NPC data (dialogue spoken)
+	- [x] Saving settings
+	- [ ] Saving data to user://
+	- [ ] Storing data in binary format (wait until finished; doing this now makes it annoying to debug)
+- [x] Title screen
